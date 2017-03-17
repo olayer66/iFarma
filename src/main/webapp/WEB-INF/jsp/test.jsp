@@ -11,6 +11,6 @@
 </head>
 <body>
 	<%@ include file="../jspf/header.jspf" %>
-	Esto es una página de prueba.
+	Esto es una página de prueba. echa para probar que sube bien a github
 </body>
 </html>
