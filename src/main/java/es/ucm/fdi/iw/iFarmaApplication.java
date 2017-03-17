@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IwbaseApplication {
+public class iFarmaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IwbaseApplication.class, args);
+		SpringApplication.run(iFarmaApplication.class, args);
 	}
 }

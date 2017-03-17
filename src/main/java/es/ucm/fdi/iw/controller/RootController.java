@@ -8,7 +8,7 @@ public class RootController {
 
 	@GetMapping({"/", "/index"})
 	String root() {
-		return "test";
+		return "index";
 	}
 	
 }
