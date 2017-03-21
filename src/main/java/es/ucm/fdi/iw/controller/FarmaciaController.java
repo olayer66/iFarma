@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FarmaciaController {
 	
 	@GetMapping({"/farmacia", "/farmacia/pedidos"})
-	String listadoPacientesAction() {
+	String pedidosAction() {
 		return "farmacia/pedidos";
 	}
 	
 	
 	@RequestMapping("/farmacia/stock")
-	String detallePacienteAction() {
+	String stockAction() {
 		return "farmacia/stock";
 	}
 	@RequestMapping("/farmacia/pedido")
-	String detallePacienteAction() {
+	String pedidoAction() {
 		return "farmacia/pedido";
 	}
 }
