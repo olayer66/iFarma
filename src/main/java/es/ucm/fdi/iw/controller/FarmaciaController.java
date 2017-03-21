@@ -12,6 +12,7 @@ public class FarmaciaController {
 		return "pedidos";
 	}
 	
+	
 	@RequestMapping("/farmacia/stock")
 	String detallePacienteAction() {
 		return "stock";
