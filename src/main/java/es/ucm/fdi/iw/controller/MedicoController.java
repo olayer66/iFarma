@@ -9,11 +9,21 @@ public class MedicoController {
 	
 	@GetMapping({"/medico", "/medico/listado-pacientes"})
 	String listadoPacientesAction() {
-		return "listadoPacientes";
+		return "medico/listadoPacientes";
 	}
 	
+	@RequestMapping("/medico/nuevo-paciente")
+	String nuevoPacienteAction() {
+		return "medico/nuevoPaciente";
+	}
+
 	@RequestMapping("/medico/detalle-paciente")
 	String detallePacienteAction() {
-		return "detallePaciente";
+		return "medico/detallePaciente";
+	}
+	
+	@RequestMapping("/medico/feedback")
+	String feedbackAction() {
+		return "medico/feedback";
 	}
 }
