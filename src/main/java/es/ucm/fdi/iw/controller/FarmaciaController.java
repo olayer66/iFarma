@@ -9,16 +9,16 @@ public class FarmaciaController {
 	
 	@GetMapping({"/farmacia", "/farmacia/pedidos"})
 	String listadoPacientesAction() {
-		return "pedidos";
+		return "farmacia/pedidos";
 	}
 	
 	
 	@RequestMapping("/farmacia/stock")
 	String detallePacienteAction() {
-		return "stock";
+		return "farmacia/stock";
 	}
 	@RequestMapping("/farmacia/pedido")
 	String detallePacienteAction() {
-		return "pedido";
+		return "farmacia/pedido";
 	}
 }
