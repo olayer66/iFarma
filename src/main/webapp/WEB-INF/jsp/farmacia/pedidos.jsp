@@ -3,12 +3,13 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../jspf/headerFarmacia.jspf" %>
+<%@ include file="../../jspf/headerFarmacia.jspf" %>
 
 
-<%@ include file="../jspf/navbarFarmacia.jspf" %>
+<%@ include file="../../jspf/navbarFarmacia.jspf" %>
 
   <div class="container">
+        <div class="row">
            <div id="pedidos">
                <div>
                   <h2>Tabla de pedidos</h2>
@@ -103,8 +104,9 @@
                <!-- fin tabla -->
               </div>
             </div>
-        
+     	   </div>
         
         <hr>
 
-<%@ include file="../jspf/footer.jspf" %>
+
+<%@ include file="../../jspf/footerFarmacia.jspf" %>

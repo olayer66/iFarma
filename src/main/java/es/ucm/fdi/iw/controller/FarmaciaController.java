@@ -22,9 +22,9 @@ public class FarmaciaController {
 		return "farmacia/pedido";
 	}
 	
-	//para probar una cosa
+
 /*	@RequestMapping("/farmacia/farmacia")
-	String pedidoAction() {
+	String farmaciaAction() {
 		return "farmacia/farmacia";
 	}*/
 }

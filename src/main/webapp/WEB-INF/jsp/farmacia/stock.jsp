@@ -3,10 +3,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../jspf/headerFarmacia.jspf" %>
+<%@ include file="../../jspf/headerFarmacia.jspf" %>
 
 
-<%@ include file="../jspf/navbarFarmacia.jspf" %>
+<%@ include file="../../jspf/navbarFarmacia.jspf" %>
 
   <div class="container">
           <!-- ________________TABLE: STOOOOOOCKS___________________________ -->
@@ -897,4 +897,4 @@
         
         <hr>
 
-<%@ include file="../jspf/footer.jspf" %>
+<%@ include file="../../jspf/footerFarmacia.jspf" %>
