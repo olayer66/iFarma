@@ -252,21 +252,7 @@
                     </span>
                     </div>
                    </td> 
-                </tr>
-                <tr>
-                  <td>Gecko</td>
-                  <td>Firefox 1.5</td>
-                  <td>Win 98+ / OSX.2+</td>
-                  <td>1.8</td>
-                  <td>A</td>
-                  <td><div class="input-group input-group-sm">
-                    <input type="text" class="form-control">
-                    <span class="input-group-btn">
-                     <button type="button" class="btn btn-info btn-flat">Añadir</button>
-                    </span>
-                    </div>
-                   </td> 
-                </tr>
+                </tr>            
                 <tr>
                   <td>Gecko</td>
                   <td>Firefox 2.0</td>
