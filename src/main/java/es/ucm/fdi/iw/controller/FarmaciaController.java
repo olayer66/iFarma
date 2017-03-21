@@ -21,4 +21,10 @@ public class FarmaciaController {
 	String pedidoAction() {
 		return "farmacia/pedido";
 	}
+	
+	//para probar una cosa
+/*	@RequestMapping("/farmacia/farmacia")
+	String pedidoAction() {
+		return "farmacia/farmacia";
+	}*/
 }
