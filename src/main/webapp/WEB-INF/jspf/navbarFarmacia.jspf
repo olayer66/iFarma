@@ -18,7 +18,7 @@
 	                    <a href="/farmacia/pedidos">Lista de pedidos</a>
 	                </li>
 	                <li>
-	                    <a href="stock">Nuevo Paciente</a>
+	                    <a href="/farmacia/stock">Stock</a>
 	                </li>
            		 </ul>
 
