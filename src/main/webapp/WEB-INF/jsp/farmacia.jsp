@@ -46,7 +46,7 @@
                   </thead>
                   <tbody>
                   <tr>
-                    <td><a href="pedido.html">OR9842</a></td>
+                    <td><a href="pedido.jsp">OR9842</a></td>
                     <td>Pepe botica</td>
                     <td>22/05/2016</td>
                     <td><span class="label label-success">Enviado</span></td>
@@ -64,7 +64,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pedido.html">OR1848</a></td>
+                    <td><a href="pedido.jsp">OR1848</a></td>
                     <td>Ronaldo santos</td>
                      <td>22/05/2016</td>
                     <td><span class="label label-warning">Pendiente</span></td>
@@ -82,7 +82,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pedido.html">OR7429</a></td>
+                    <td><a href="pedido.jsp">OR7429</a></td>
                     <td>Jose luis perales</td>
                      <td>22/05/2016</td>
                     <td><span class="label label-danger">Entregado</span></td>
@@ -100,7 +100,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td><a href="pedido.html">OR7429</a></td>
+                    <td><a href="pedido.jsp">OR7429</a></td>
                     <td>Conchita velascp</td>
                      <td>22/05/2016</td>
                     <td><span class="label label-info">En proceso</span></td>
