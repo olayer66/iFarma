@@ -3,13 +3,14 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../jspf/header.jspf" %>
+<%@ include file="../../jspf/header.jspf" %>
 
 
-<%@ include file="../jspf/navbarFarmacia.jspf" %>
+<%@ include file="../../jspf/navbarFarmacia.jspf" %>
 
     <!-- Page Content -->
     <div class="container">
+     <div class="row">
 
     <!-- Main content -->
     <section class="invoice">
@@ -160,7 +161,8 @@
         <!-- /.col -->
       </div>
       <!-- /.row -->
+     </div>
        
     	 <hr>
 
-<%@ include file="../jspf/footer.jspf" %>
+<%@ include file="../../jspf/footer.jspf" %>

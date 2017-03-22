@@ -9,18 +9,18 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-            <a class="navbar-brand" href="index.html"><img src="images/logo1.png" alt="Inicio"></a>
+             <a class="navbar-brand" href="/index"><img src="/static/img/logo1.png" alt="Inicio"></a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a data-toggle="tab" href="#pedidos">Pedidos</a>
-                    </li>
-                    <li>
-                        <a data-toggle="tab" href="#stock">Stock</a>
-                    </li>
-                </ul>
+    				<li>
+	                    <a href="/farmacia/pedidos">Lista de pedidos</a>
+	                </li>
+	                <li>
+	                    <a href="/farmacia/stock">Stock</a>
+	                </li>
+           		 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">

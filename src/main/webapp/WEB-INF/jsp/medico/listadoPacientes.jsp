@@ -17,6 +17,7 @@
 				<th>Edad</th>
 				<th>Peso</th>
 				<th>Altura</th>
+				<th>Medicamentos</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
@@ -27,9 +28,10 @@
 				<td>27</td>
 				<td>74</td>
 				<td>1,76</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -38,9 +40,10 @@
 				<td>36</td>
 				<td>87</td>
 				<td>1,83</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -49,9 +52,10 @@
 				<td>62</td>
 				<td>65</td>
 				<td>1,57</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -60,9 +64,10 @@
 				<td>72</td>
 				<td>61</td>
 				<td>1,69</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -71,9 +76,10 @@
 				<td>58</td>
 				<td>82</td>
 				<td>1,65</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -82,9 +88,10 @@
 				<td>37</td>
 				<td>62</td>
 				<td>1,70</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -93,9 +100,10 @@
 				<td>36</td>
 				<td>58</td>
 				<td>1,68</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -104,9 +112,10 @@
 				<td>27</td>
 				<td>74</td>
 				<td>1,76</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -115,9 +124,10 @@
 				<td>36</td>
 				<td>87</td>
 				<td>1,83</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -126,9 +136,10 @@
 				<td>62</td>
 				<td>65</td>
 				<td>1,57</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -137,9 +148,10 @@
 				<td>72</td>
 				<td>61</td>
 				<td>1,69</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -148,9 +160,10 @@
 				<td>58</td>
 				<td>82</td>
 				<td>1,65</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -159,9 +172,10 @@
 				<td>37</td>
 				<td>62</td>
 				<td>1,70</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 			<tr>
@@ -170,9 +184,10 @@
 				<td>36</td>
 				<td>58</td>
 				<td>1,68</td>
+				<td><span class="badge">0</span></td>
 				<td>
 					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger">Eliminar</a>
+					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 				</td>
 			</tr>
 		</tbody>
