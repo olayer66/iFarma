@@ -10,27 +10,146 @@
             <!--Inicio-->
             <div id="index" class="tab-pane fade in active">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Alertas</h1>
-                    <div class="col-lg-6">
-	                    <h2>Altas de medicos</h2>
-	                    <h3>Tiene <strong>3</strong> altas de medicos pendientes de verificar</h3>
-	                    <p>Para verificar a un medico de cabecera debera seguir los siguientes pasos.</p>
-	                    <ol>
-	                    	<li>Comprobar los datos del medico en la web del colegio de medicina</li>
-	                    	<li>Contactar con el medico para confirmar su solicitud de acceso</li>
-	                    	<li>Confirmar el acceso en la ventana de <span>Altas medicos</span></li>
-	                    </ol>
-                    </div>
-                    <div class="col-lg-6">
-	                    <h2>Altas de farmacias</h2>
-	                    <h3>Tiene <strong>8</strong> altas de farmacias pendientes de verificar</h3>
-	                    <p>Para verificar una farmacia debera seguir los siguientes pasos.</p>
-	                    <ol>
-	                    	<li>Comprobar los datos del farmaceutico abscrito a la farmacia en el colegio de farmacia</li>
-	                    	<li>Contactar con el farmaceutico para confirmar su solicitud de acceso</li>
-	                    	<li>Confirmar el acceso en la ventana de <span>Altas farmacias</span></li>
-	                    </ol>
-                    </div>
+                     <div id="medicamentos">
+                   
+	                 	<h2 class="page-header">Medicamentos    <a href="/admin/nuevoMedicamento" class="btn btn-default">Añadir</a></h2>
+	                    
+	                    <div>
+	                        <table id="tablaMedicamento" class="table table-bordered table-striped">
+	                            <thead>
+	                                <tr>
+	                                  <th>Nombre del medicamento</th>
+	                                  <th>Uso</th>
+	                                  <th>Cantidad</th>
+	                                  <th>Precio</th>
+	                                  <th>Accion<th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr>
+	                                	<td>Ibuprofeno</td>
+		                                <td>Dolores</td>
+		                                <td>24</td>
+		                                <td>3.30</td>
+		                                <td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+		                                <td>Paracetamol</td>
+		                                <td>Mareos</td>
+		                                <td>24</td>
+		                                <td>2.50</td>
+		                                <td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                             		<td>Acarbosa Tarbis</td>
+	                                 	<td>Embarazo</td>
+	                                 	<td>15</td>
+	                                 	<td>10.90</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Agua oxigenada</td>
+	                                 	<td>Herias</td>
+	                                 	<td>1 L</td>
+	                                 	<td>1.05</td>
+	                                	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Ebastel</td>
+	                                 	<td>Alergia</td>
+	                                 	<td>20</td>
+	                                 	<td>8.65</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Zariten</td>
+	                                 	<td>Alergia</td>
+	                                 	<td>24</td>
+	                                 	<td>15.00</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Efferalgan</td>
+	                                 	<td>Dolores</td>
+	                                 	<td>24</td>
+	                                 	<td>2.75</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Azitromicina qualigen</td>
+	                                 	<td>Gripe</td>
+	                                 	<td>3</td>
+	                                 	<td>51.35</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Betadine</td>
+	                                 	<td>Heridas</td>
+	                                 	<td>50 Ml</td>
+	                                 	<td>7.75</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Shur Breath</td>
+	                                 	<td>Alitosis</td>
+	                                 	<td>28</td>
+	                                 	<td>13.90</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Optrex</td>
+	                                 	<td>Conjuntivitis</td>
+	                                 	<td>10 Ml</td>
+	                                 	<td>3.90</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                                <tr>
+	                                 	<td>Fortasec</td>
+	                                 	<td>Diarrea</td>
+	                                 	<td>24</td>
+	                                 	<td>8.81</td>
+	                                 	<td>
+											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+										</td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                </div>
                 </div>
             </div>
        	</div>
