@@ -16,6 +16,8 @@
 <script src="/static/js/bootstrap.js"></script>
 <!--datepicker-->
 <script src="/static/js/datepicker.js"></script>
+<!--datetables-->
+<script src="/static/js/datetables.js"></script>
 <!-- js propio -->
 <script src="/static/js/main.js"></script>
 

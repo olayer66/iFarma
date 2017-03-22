@@ -4,21 +4,37 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<h1>Iw-Base</h1>
-
-Este es un leeme.html de ejemplo, pensado para que lo modifiques para tu proyecto. Cambia el encabezado (h1), y lista los integrantes de tu grupo, y en general actualízalo para hacerlo tuyo.
-
+<h1>iFarma</h1>
 <h2>Integrantes</h2>
-
 <ul>
-    <li>María Ejémplez Pérez</li>
-    <li>José Pérez Ejémplez</li>
+    <li>Jose Luis Sanchez Garcia</li>
+    <li>Alvaro Navas Sanchez</li>
+	<li>Carlos Marron Diaz</li>
+	<li>David Labrador</li>
 </ul>
 
 <h2>Proyecto</h2>
 
-Copia y pega aquí el texto de la última versión de proyecto.
-
+<h3>¿Que es?</h3>
+<p>Una aplicación web que permite la realización de pedidos farmacéuticos de manera autónoma también permitiendo el seguimiento del paciente por el médico de cabecera.</p>
+<h3>¿Por qué es útil?</h3>
+<p>Con esta aplicación se facilita la compra de los medicamentos a los usuarios y el seguimiento de las tomas del medicamento. También es útil ya que facilita un método de consulta con el medico si la necesidad de ir a la consulta.</p>
+<h3>¿A quién está destinada?</h3>
+<p>Los principales usuarios a los que está destinada la aplicación son.</p>
+<ul>
+	<li>Los pacientes que podrán tener un lugar donde poder tener feedback con su médico de cabecera sin necesidad de ir a consulta.</li>
+	<li>Las farmacias que mediante la aplicación podrán aumentar su negocio mediante los pedidos que le realicen.</li>
+	<li>Los médicos de cabecera para el seguimiento de sus pacientes.</li>
+</ul>
+<h3>¿Cómo Funciona?</h3>
+<ul>
+	<li>El médico es el encargado de dar de alta un paciente, y el que rellena su ficha para encargar su medicación, a la cual tendrán acceso, tanto farmacéuticos como el propio paciente, pero sólo podrá ser modificada por el médico.</li>
+	<li>La farmacia que tramitará el pedido será elegida a la hora de dar de alta al paciente, entre las existentes en el sistema, se pondrán de acuerdo el médico y el paciente para elegir la más conveniente. El farmacéutico será el encargado de tener listas las medicinas del pedido y de proporcionarle al paciente el día que le toque.</li>
+	<li>El usuario verá la medicación que debe tomar, y aunque esta se actualice automáticamente con el paso del tiempo, podrá modificarla en el caso de que se le haya olvidado alguna toma. También tendrá a su disposición un sistema de feedback con su médico pudiendo decirle cómo está reaccionando al tratamiento sin necesidad de ir a consulta.</li>
+	<li>El administrador/es de la web serán los encargados de administrar la base de datos de los medicamentos (añadir nuevos, borrar aquellos que estén descalagodados, etc). también tiene la función de comprobar y dar el ok a las altas de farmacias (comprobar el nº de farmacéutico del titular de la misma, así como el resto de datos) y de los médicos (comprobar el nº de colegiado y los datos del mismo en el colegio de médicos).</li>
+	<li>Los pedidos de medicamentos se realizarán de forma automática cuando este esté por debajo de porcentaje mínimo (24 horas de tratamiento, por ejemplo).</li>
+	<li>Los medicamentos estarán detallados en una BBDD con su información (contenido, prospecto, etc).</li>
+</ul>
 <h2>Comentarios al profesor</h2>
 
 Este es el único sitio de tu entrega en el que debes poner comentarios "al profesor" (en otros sitios, se trataría de comentarios "al desarrollador" o "al cliente"). ¡Aprovecha"
@@ -27,17 +43,21 @@ Este es el único sitio de tu entrega en el que debes poner comentarios "al prof
 
 Detalla aquí tus vistas. Usa enlaces a localhost:8080/ (SIN nombre de proyecto; correspondientes a arrancar la aplicación en modo spring-boot desde STS) para enlazar cada vista.
 <ul>
-    <li><a href="localhost:8080/">vista principal</a> - descripción muy corta de la vista
+    <li><a href="localhost:8080/">vista principal</a> - Vista principal de la web</li>
+    <li><a href="localhost:8080/paciente">vista paciente</a> - Vista espcifica para el paciente </li>
+    <li><a href="localhost:8080/medico">vista medico</a> - Vista espcifica para el medico</li>
+    <li><a href="localhost:8080/farmacia">vista farmacia</a> - Vista espcifica para la farmacia</li>
+    <li><a href="localhost:8080/administrador">vista farmacia</a> - Vista para la administracion del sitio</li>
 </ul>
 
 <h2>Recursos</h2>
 
-Esto es un listado de todos los recursos externos utilizados (es decir: no escritos por los desarrolladors ni incluidos en la plantilla del profesor).
+Esto es un listado de todos los recursos externos utilizados (es decir: no escritos por los desarrolladores ni incluidos en la plantilla del profesor).
 
 <ul>
-    <li><a href="localhost:8080/spring.jpg">imagen de primavera</a> (<a href="https://en.wikipedia.org/wiki/Spring_(season)#/media/File:Camino_entre_el_bosque_de_cerezos_en_flor.jpg">
-            CC-BY-SA</a>) - usada para logotipo
-    <li><a href="https://code.jquery.com/jquery-3.1.1.min.js">JQuery</a> (<a href="https://jquery.org/license/">MIT/Apache</a>) - librería js para simplificar la aplicación de comportamientos		
+    <li><a href="https://code.jquery.com/jquery-3.1.1.min.js">JQuery</a> (<a href="https://jquery.org/license/">MIT/Apache</a>) - librería js para simplificar la aplicación de comportamientos</li>	
+    <li><a href="http://getbootstrap.com/">Bootstrap</a> (<a href="https://github.com/twbs/bootstrap/blob/master/LICENSE">MIT/Apache</a>) - librería css html y js para realizar diseño web</li>
+    <li><a href="https://bootstrap-datepicker.readthedocs.io/en/latest/">Bootstrap-datepicker</a> (<a href="https://github.com/uxsolutions/bootstrap-datepicker/blob/master/LICENSE">MIT/Apache</a>) - Libreria que añade la funcion de datepicker para la captura de fechas</li>	
 </ul>
 </body>
 </html>

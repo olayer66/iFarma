@@ -10,5 +10,4 @@ public class RootController {
 	String root() {
 		return "index";
 	}
-	
 }
