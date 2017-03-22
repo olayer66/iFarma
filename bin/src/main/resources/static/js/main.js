@@ -53,22 +53,6 @@ $('document').ready(function(){
         "info": true,
         "autoWidth": false
       });
-      $('#tablaPedidosPc').DataTable({
-          "paging": true,
-          "lengthChange": true,
-          "searching": true,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
-      $('#tablaTratamiento').DataTable({
-          "paging": true,
-          "lengthChange": true,
-          "searching": true,
-          "ordering": true,
-          "info": true,
-          "autoWidth": false
-        });
 });
 
 
