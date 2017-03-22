@@ -10,27 +10,46 @@
             <!--Inicio-->
             <div id="index" class="tab-pane fade in active">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Alertas</h1>
-                    <div class="col-lg-6">
-	                    <h2>Altas de medicos</h2>
-	                    <h3>Tiene <strong>3</strong> altas de medicos pendientes de verificar</h3>
-	                    <p>Para verificar a un medico de cabecera debera seguir los siguientes pasos.</p>
-	                    <ol>
-	                    	<li>Comprobar los datos del medico en la web del colegio de medicina</li>
-	                    	<li>Contactar con el medico para confirmar su solicitud de acceso</li>
-	                    	<li>Confirmar el acceso en la ventana de <span>Altas medicos</span></li>
-	                    </ol>
-                    </div>
-                    <div class="col-lg-6">
-	                    <h2>Altas de farmacias</h2>
-	                    <h3>Tiene <strong>8</strong> altas de farmacias pendientes de verificar</h3>
-	                    <p>Para verificar una farmacia debera seguir los siguientes pasos.</p>
-	                    <ol>
-	                    	<li>Comprobar los datos del farmaceutico abscrito a la farmacia en el colegio de farmacia</li>
-	                    	<li>Contactar con el farmaceutico para confirmar su solicitud de acceso</li>
-	                    	<li>Confirmar el acceso en la ventana de <span>Altas farmacias</span></li>
-	                    </ol>
-                    </div>
+                    <h1 class="page-header">Detalle alta farmacia</h1>
+                    <div class="col-lg-4">
+	                    <div class="panel panel-default">
+	                    	<h3>Datos farmacia</h3>
+							<div class="panel-body">
+								<h4>Nombre: Farmacia Paqui</h4>
+								<h4>Direccion: c/falsa 123</h4>
+								<h4>Telefono: 916853225</h4>
+								<h4>Localidad: Algete</h4>
+								<h4>Provincia: Madrid</h4>
+								<h4>Cod.Postal: 28852</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+	                    <div class="panel panel-default">
+	                    	<h3>Datos farmaceutico</h3>
+							<div class="panel-body">
+								<h4>Nombre: Francisca</h4>
+								<h4>Apellidos: Sanchez Perez</h4>
+								<h4>Nº Colegiado: 45524554747</h4>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<div class="panel panel-default">
+	                    	<h3>Notas</h3>
+							<div class="panel-body">
+								<textarea class="form-control" rows="5" id="comment"></textarea>
+							</div>
+						</div>
+	                    <div class="panel panel-default">
+	                    	<h3>Respuesta</h3>
+							<div class="panel-body">
+								<div class="btn btn-success">Aceptar</div>
+								<div class="btn btn-primary">Posponer</div>
+								<div class="btn btn-danger">Denegar</div>
+							</div>
+						</div>
+					</div>
                 </div>
             </div>
        	</div>

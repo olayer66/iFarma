@@ -69,6 +69,22 @@ $('document').ready(function(){
           "info": true,
           "autoWidth": false
         });
+      $('#tablaAltaFarmacias').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
+      $('#tablaAltaMedicos').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
 });
 
 

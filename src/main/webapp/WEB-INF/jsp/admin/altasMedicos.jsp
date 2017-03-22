@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-12">
 		    <h1 class="page-header">Altas de medicos</h1>
-		    <table id="tablaPedidos" class="table table-bordered table-striped">
+		    <table id="tablaAltaMedicos" class="table table-bordered table-striped">
                <thead>
                   <tr>
                     <th>ID Solicitud</th>

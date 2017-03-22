@@ -1,2 +1,2 @@
-# iw-base
-Proyecto base para IW 2016-17
+# iFarma
+Proyecto iFarma para IW 2016-17
