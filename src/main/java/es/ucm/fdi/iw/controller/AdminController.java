@@ -33,4 +33,10 @@ public class AdminController {
 	String detallateAltaFarmaciaAction() {
 		return "admin/detalleAltaFarmacia";
 	}
+	@RequestMapping("/admin/nuevoMedicamento")
+	String nuevoMedicamentoAction() {
+		return "/admin/nuevoMedicamento";
+	}
+	
+	
 }
