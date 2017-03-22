@@ -12,13 +12,25 @@ public class AdminController {
 		return "admin/admin";
 	}
 	
-	@RequestMapping("/admin/altas-medicos")
-	String nuevoPacienteAction() {
+	@RequestMapping("/admin/altasMedicos")
+	String altasMedicosAction() {
 		return "admin/altasMedicos";
 	}
 
-	@RequestMapping("/admin/altas-farmacias")
-	String detallePacienteAction() {
+	@RequestMapping("/admin/altasFarmacias")
+	String altaFarmaciasAction() {
 		return "admin/altasFarmacias";
+	}
+	@RequestMapping("/admin/gestionMedicamentos")
+	String gestionMedicamentosAction() {
+		return "admin/gestionMedicamentos";
+	}
+	@RequestMapping("/admin/detalleAltaMedico")
+	String detalleAltaMedicoAction() {
+		return "admin/detalleAltaMedico";
+	}
+	@RequestMapping("/admin/detalleAltaFarmacia")
+	String detallateAltaFarmaciaAction() {
+		return "admin/detalleAltaFarmacia";
 	}
 }
