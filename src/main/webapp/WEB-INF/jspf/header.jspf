@@ -15,5 +15,5 @@
     <link href="/static/css/3-col-portfolio.css" rel="stylesheet">
     <!-- Include Bootstrap Datepicker -->
     <link href="/static/css/datepicker.css" rel="stylesheet">
-    <link href="/static/css/datetables.css" rel="stylesheet">
+    <link href="/static/css/datatables.css" rel="stylesheet">
 </head>

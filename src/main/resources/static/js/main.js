@@ -37,6 +37,22 @@ $('document').ready(function(){
         if(codigo==="" || codigo===undefined || codigo===null)
             alert("Codigo no valido");
     });
+    $('#tablaStock').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false
+      });
+      $('#tablaPedidos').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false
+      });
 });
 
 
