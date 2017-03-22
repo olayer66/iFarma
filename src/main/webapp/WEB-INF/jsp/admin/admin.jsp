@@ -10,7 +10,7 @@
 		    <h1 class="page-header">Alertas</h1>
 		    <div class="col-lg-6">
 		     <h2>Altas de medicos</h2>
-		     <h3>Tiene <strong>3</strong> altas de medicos pendientes de verificar</h3>
+		     <h3>Tiene <strong class="alerta">3</strong> altas de medicos pendientes de verificar</h3>
 		     <p>Para verificar a un medico de cabecera debera seguir los siguientes pasos.</p>
 		     <ol>
 		     	<li>Comprobar los datos del medico en la web del colegio de medicina</li>
@@ -20,7 +20,7 @@
 		    </div>
 		    <div class="col-lg-6">
 		     <h2>Altas de farmacias</h2>
-		     <h3>Tiene <strong>8</strong> altas de farmacias pendientes de verificar</h3>
+		     <h3>Tiene <strong  class="alerta">8</strong> altas de farmacias pendientes de verificar</h3>
 		     <p>Para verificar una farmacia debera seguir los siguientes pasos.</p>
 		     <ol>
 		     	<li>Comprobar los datos del farmaceutico abscrito a la farmacia en el colegio de farmacia</li>

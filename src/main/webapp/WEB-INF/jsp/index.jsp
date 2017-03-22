@@ -61,7 +61,7 @@
                             <label for="contLoginMedico">Contraseña:</label>
                             <input type="password" name="contLoginMedico" class="form-control" id="contLoginMedico">
                         </div>
-                        <a class="btn btn-default center-block"  id="btnLoginMedico" href="medico.html">Inciar sesión</a>
+                        <a class="btn btn-default center-block"  id="btnLoginMedico" href="/medico/listado-pacientes">Inciar sesión</a>
                     </div>
                 </form>
             </div>
@@ -81,7 +81,7 @@
                             <label for="contLoginPaciente">Contraseña:</label>
                             <input type="password" name="contLoginPaciente" class="form-control" id="contLoginPaciente">
                         </div>
-                        <a class="btn btn-default center-block"  id="btnLoginPaciente" href="paciente.html">Inciar sesión</a>
+                        <a class="btn btn-default center-block"  id="btnLoginPaciente" href="/paciente">Inciar sesión</a>
                     </div>
                 </form>
             </div>
@@ -101,7 +101,7 @@
                             <label for="contLoginFarmacia">Contraseña:</label>
                             <input type="password" name="contLoginFarmacia" class="form-control" id="contLoginFarmacia">
                         </div>
-                        <a class="btn btn-default center-block"  id="btnLoginFarmacia" href="farmacia.html">Inciar sesión</a>
+                        <a class="btn btn-default center-block"  id="btnLoginFarmacia" href="/farmacia/pedidos">Inciar sesión</a>
                     </div>
                 </form>
             </div>
