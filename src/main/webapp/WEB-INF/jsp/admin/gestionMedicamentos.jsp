@@ -22,7 +22,7 @@
 	                                  <th>Uso</th>
 	                                  <th>Cantidad</th>
 	                                  <th>Precio</th>
-	                                  <th>Accion<th>
+	                                  <th>Accion</th>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
