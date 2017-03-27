@@ -15,19 +15,18 @@ import javax.persistence.OneToMany;
 
 @Entity
 //Peticiones a la tabla
-@NamedQueries({
-	//CREAR
-	
+@NamedQueries({	
 	//BORRAR
 	@NamedQuery(name="borrarMensaje",
 		query="delete from Mensaje m where m.ID= :IDMensaje"),
 	//ACTUALIZAR
-	
+	@NamedQuery(name="actualizarLeido",
+		query="update Mensaje m set m.leido=true where m.ID= :IDMensaje"),
 	//SELECT
     @NamedQuery(name="unMensaje",
-        query="select m from Mensaje m where m.ID=:idParam"),    
+        query="select m from Mensaje m where m.ID=:IDMensaje"),    
     @NamedQuery(name="NumMensajesNoLeidos",
-    	query="select m from Mensaje m where m.IDDestinatario=:IDDest and m.leido=false"),
+    	query="select count(m) from Mensaje m where m.IDDestinatario=:IDDest and m.leido=false"),
     @NamedQuery(name="mensajesRecibidosPaciente",
         query="select m from Mensaje m where m.IDDestinatario=:IDPaciente"),
     @NamedQuery(name="mensajesRecibidosMedico",
@@ -35,7 +34,7 @@ import javax.persistence.OneToMany;
     @NamedQuery(name="mensajesUnPaciente",
 		query="select m from Mensaje m where m.IDDestinatario=:IDMedico and m.IDRemitente=:IDPaciente"),
     @NamedQuery(name="mensajesPorFecha",
-		query="select m from Mensaje m where m.IDDestinatario=:IDDest and mfechaMensaje=:fecha"),
+		query="select m from Mensaje m where m.IDDestinatario=:IDDest and mfechaMensaje=:fecha")
 })
 public class Mensaje {
 	//Campos de la tabla
