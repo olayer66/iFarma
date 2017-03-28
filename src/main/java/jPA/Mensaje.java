@@ -2,9 +2,11 @@ package jPA;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
 //Imports basicos para JPA
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -13,18 +15,18 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-@Entity
+@Entity (name="mensajes")
 //Peticiones a la tabla
 @NamedQueries({	
 	//BORRAR
 	@NamedQuery(name="borrarMensaje",
-		query="delete from Mensaje m where m.ID= :IDMensaje"),
+		query="delete from Mensaje m where m.ID_Mensaje= :IDMensaje"),
 	//ACTUALIZAR
 	@NamedQuery(name="actualizarLeido",
-		query="update Mensaje m set m.leido=true where m.ID= :IDMensaje"),
+		query="update Mensaje m set m.leido=true where m.ID_Mensaje= :IDMensaje"),
 	//SELECT
     @NamedQuery(name="unMensaje",
-        query="select m from Mensaje m where m.ID=:IDMensaje"),    
+        query="select m from Mensaje m where m.ID_Mensaje=:IDMensaje"),    
     @NamedQuery(name="NumMensajesNoLeidos",
     	query="select count(m) from Mensaje m where m.IDDestinatario=:IDDest and m.leido=false"),
     @NamedQuery(name="mensajesRecibidosPaciente",
@@ -37,24 +39,36 @@ import javax.persistence.OneToMany;
 		query="select m from Mensaje m where m.IDDestinatario=:IDDest and mfechaMensaje=:fecha")
 })
 public class Mensaje {
-	//Campos de la tabla
-	private long ID;
+	
+	//ID
+	@Id
+	@Column(name = "ID_Mensaje", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private long IDMensaje;
+	
+	//Si esta leido por parte del destinatario
 	private boolean leido;
+	
+	// ID del remitente y el destinatario
+	@Column(name = "ID_Remitente", nullable = false)
 	private long IDRemitente;
+	@Column(name = "ID_Destinatario", nullable = false)
 	private long IDDestinatario;
+	
+	//Cuerpo del mensaje
+	@Column(name = "fecha_Mensaje", nullable = false)
 	private Date fechaMensaje;
+	@Column(name = "asunto", nullable = false)
 	private String asunto;
+	@Column(name = "mensaje", nullable = false)
 	private String mensaje;
 	
 	//Getters y Setters de los campos de la tabla
-	
-	@Id
-	@GeneratedValue
-	public long getID() {
-		return ID;
+	public long getIDMensaje() {
+		return IDMensaje;
 	}
-	public void setID(long iD) {
-		ID = iD;
+	public void setIDMensaje(long iDMensaje) {
+		IDMensaje = iDMensaje;
 	}
 	public boolean isLeido() {
 		return leido;
@@ -92,5 +106,4 @@ public class Mensaje {
 	public void setFechaMensaje(Date fechaMensaje) {
 		this.fechaMensaje = fechaMensaje;
 	}
-	
 }
