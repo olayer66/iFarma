@@ -6,9 +6,6 @@ import javax.persistence.Column;
 //Imports basicos para JPA
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -18,12 +15,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.validator.cfg.defs.EmailDef;
-
 @Entity
-@Table(name = "pacientes", uniqueConstraints = {
-@UniqueConstraint(columnNames = "ID_Paciente")
-})
+@Table(name = "pacientes",
+	   uniqueConstraints = {
+		   @UniqueConstraint(columnNames = "ID_Usuario")
+	})
 //Peticiones a la tabla
 @NamedQueries({	
 	//BORRAR
@@ -36,22 +32,8 @@ import org.hibernate.validator.cfg.defs.EmailDef;
     	query="select p from Paciente p where p.IDPaciente=:IDPaciente")   
 
 })
-public class Paciente implements Serializable {
+public class Paciente extends Usuario implements Serializable {
 	private static final long serialVersionUID = 2117067448004216461L;
-	
-	//datos del paciente
-	@Id
-	@Column(name = "ID_Paciente", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDPaciente;
-	@Column(name = "nombre", nullable = false)
-	private String nombre;
-	@Column(name = "apellidos", nullable = false)
-	private String apellidos;
-	@Column(name = "email", nullable = false)
-	private EmailDef email;
-	@Column(name = "telefono", nullable = false)
-	private String telefono;
 	
 	//direccion de envio de pedidos
 	@Column(name = "direccion", nullable = false)
@@ -98,36 +80,6 @@ public class Paciente implements Serializable {
 	private String fechaCadTarjeta;
 	
 	//Getters y Setters de los campos de la tabla
-	public long getIDPaciente() {
-		return IDPaciente;
-	}
-	public void setIDPaciente(long iDPaciente) {
-		IDPaciente = iDPaciente;
-	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getApellidos() {
-		return apellidos;
-	}
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
-	}
-	public EmailDef getEmail() {
-		return email;
-	}
-	public void setEmail(EmailDef email) {
-		this.email = email;
-	}
-	public String getTelefono() {
-		return telefono;
-	}
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
-	}
 	public String getDireccion() {
 		return direccion;
 	}

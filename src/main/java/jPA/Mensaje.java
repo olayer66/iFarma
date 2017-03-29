@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -52,11 +54,13 @@ public class Mensaje implements Serializable {
 	//Si esta leido por parte del destinatario
 	private boolean leido;
 	
-	// ID del remitente y el destinatario
-	@Column(name = "ID_Remitente", nullable = false)
-	private long IDRemitente;
-	@Column(name = "ID_Destinatario", nullable = false)
-	private long IDDestinatario;
+	//remitente y destinatario
+	@ManyToOne(optional=false)
+    @JoinColumn(name="remitente",referencedColumnName="ID_Usuario")
+	private Usuario remitente;
+	@ManyToOne(optional=false)
+    @JoinColumn(name="destinatario",referencedColumnName="ID_Usuario")
+	private Usuario destinatario;
 	
 	//Cuerpo del mensaje
 	@Column(name = "fecha_Mensaje", nullable = false)
@@ -79,17 +83,17 @@ public class Mensaje implements Serializable {
 	public void setLeido(boolean leido) {
 		this.leido = leido;
 	}
-	public long getIDRemitente() {
-		return IDRemitente;
+	public Usuario getRemitente() {
+		return remitente;
 	}
-	public void setIDRemitente(long iDRemitente) {
-		IDRemitente = iDRemitente;
+	public void setRemitente(Usuario remitente) {
+		this.remitente = remitente;
 	}
-	public long getIDDestinatario() {
-		return IDDestinatario;
+	public Usuario getDestinatario() {
+		return destinatario;
 	}
-	public void setIDDestinatario(long iDDestinatario) {
-		IDDestinatario = iDDestinatario;
+	public void setDestinatario(Usuario destinatario) {
+		this.destinatario = destinatario;
 	}
 	public String getAsunto() {
 		return asunto;
