@@ -1,9 +1,7 @@
 package jPA;
 
-import java.sql.Date;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 //Imports basicos para JPA
 import javax.persistence.Entity;
@@ -17,12 +15,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.cfg.defs.EmailDef;
 
-@Entity (name="pacientes")
+@Entity
+@Table(name = "pacientes", uniqueConstraints = {
+@UniqueConstraint(columnNames = "ID_Paciente")
+})
 //Peticiones a la tabla
 @NamedQueries({	
 	//BORRAR
@@ -35,7 +36,9 @@ import org.hibernate.validator.cfg.defs.EmailDef;
     	query="select p from Paciente p where p.IDPaciente=:IDPaciente")   
 
 })
-public class Paciente {
+public class Paciente implements Serializable {
+	private static final long serialVersionUID = 2117067448004216461L;
+	
 	//datos del paciente
 	@Id
 	@Column(name = "ID_Paciente", nullable = false)
@@ -49,6 +52,7 @@ public class Paciente {
 	private EmailDef email;
 	@Column(name = "telefono", nullable = false)
 	private String telefono;
+	
 	//direccion de envio de pedidos
 	@Column(name = "direccion", nullable = false)
 	private String direccion;
@@ -60,10 +64,12 @@ public class Paciente {
 	private String provincia;
 	@Column(name = "com_Autonoma", nullable = false)
 	private String comAutonona;
-	//medico de cabecera (1/1)
+	
+	//medico de cabecera (N/1)
 	@ManyToOne(optional=false)
     @JoinColumn(name="ID_Medico",referencedColumnName="ID_Medico")
 	private Medico medCabecera;
+	
 	//Lista de medicamentos del tratamiento (N/M)
 	@ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="Tratamientos",
@@ -73,13 +79,16 @@ public class Paciente {
             @JoinColumn(name="ID_Medicamento", referencedColumnName="ID_Medicamento")
     )
 	private ArrayList<Medicamento> Tratamiento;
+	
 	//Farmamcia de referencia
 	@ManyToOne(optional=false)
     @JoinColumn(name="ID_Farmacia",referencedColumnName="ID_Farmacia")
 	private Farmacia IDFarmacia;
+	
 	//forma de pago
 	@Column(name = "forma_Pago", nullable = false)
 	private int formaPago;
+	
 	//datos tarjeta (si forma de pago es tarjeta)
 	@Column(name = "num_Tarjeta", nullable = false)
 	private long numTarjeta;
@@ -87,8 +96,108 @@ public class Paciente {
 	private int codSegTarjeta;
 	@Column(name = "fecha_Cad_Tarjeta", nullable = false)
 	private String fechaCadTarjeta;
-	//Listado de mensajes
-	@OneToMany(mappedBy="pacientes",targetEntity=Mensaje.class,fetch=FetchType.EAGER)
-	private ArrayList<Mensaje> mensajes;
 	
+	//Getters y Setters de los campos de la tabla
+	public long getIDPaciente() {
+		return IDPaciente;
+	}
+	public void setIDPaciente(long iDPaciente) {
+		IDPaciente = iDPaciente;
+	}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	public String getApellidos() {
+		return apellidos;
+	}
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+	public EmailDef getEmail() {
+		return email;
+	}
+	public void setEmail(EmailDef email) {
+		this.email = email;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public String getCiudad() {
+		return ciudad;
+	}
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+	public String getCodPostal() {
+		return codPostal;
+	}
+	public void setCodPostal(String codPostal) {
+		this.codPostal = codPostal;
+	}
+	public String getProvincia() {
+		return provincia;
+	}
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+	public String getComAutonona() {
+		return comAutonona;
+	}
+	public void setComAutonona(String comAutonona) {
+		this.comAutonona = comAutonona;
+	}
+	public Medico getMedCabecera() {
+		return medCabecera;
+	}
+	public void setMedCabecera(Medico medCabecera) {
+		this.medCabecera = medCabecera;
+	}
+	public ArrayList<Medicamento> getTratamiento() {
+		return Tratamiento;
+	}
+	public void setTratamiento(ArrayList<Medicamento> tratamiento) {
+		Tratamiento = tratamiento;
+	}
+	public Farmacia getIDFarmacia() {
+		return IDFarmacia;
+	}
+	public void setIDFarmacia(Farmacia iDFarmacia) {
+		IDFarmacia = iDFarmacia;
+	}
+	public int getFormaPago() {
+		return formaPago;
+	}
+	public void setFormaPago(int formaPago) {
+		this.formaPago = formaPago;
+	}
+	public long getNumTarjeta() {
+		return numTarjeta;
+	}
+	public void setNumTarjeta(long numTarjeta) {
+		this.numTarjeta = numTarjeta;
+	}
+	public int getCodSegTarjeta() {
+		return codSegTarjeta;
+	}
+	public void setCodSegTarjeta(int codSegTarjeta) {
+		this.codSegTarjeta = codSegTarjeta;
+	}
+	public String getFechaCadTarjeta() {
+		return fechaCadTarjeta;
+	}
+	public void setFechaCadTarjeta(String fechaCadTarjeta) {
+		this.fechaCadTarjeta = fechaCadTarjeta;
+	}	
 }
