@@ -1,13 +1,17 @@
 package jPA;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -58,4 +62,12 @@ public class Farmacia implements Serializable {
 	private Farmaceutico duenio;
 	
 	//Stock de la farmacia (N/M)
+	@ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name="stocks",
+            joinColumns=
+            @JoinColumn(name="ID_Farmacia", referencedColumnName="ID_Farmacia"),
+      inverseJoinColumns=
+            @JoinColumn(name="ID_Medicamento", referencedColumnName="ID_Medicamento")
+    )
+	private ArrayList<Medicamento> stock;
 }

@@ -56,7 +56,7 @@ public class Paciente extends Usuario implements Serializable {
 	@ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="Tratamientos",
             joinColumns=
-            @JoinColumn(name="ID_Paciente", referencedColumnName="ID_Paciente"),
+            @JoinColumn(name="ID_Usuario", referencedColumnName="ID_Usuario"),
       inverseJoinColumns=
             @JoinColumn(name="ID_Medicamento", referencedColumnName="ID_Medicamento")
     )
