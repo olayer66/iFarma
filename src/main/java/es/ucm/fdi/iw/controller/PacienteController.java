@@ -29,5 +29,9 @@ public class PacienteController {
 	String feedbackDrAction() {
 		return "paciente/feedbackDR";
 	}
+	@RequestMapping("/paciente/verPedidos")
+	String pedidoAction() {
+		return "paciente/verPedidos";
+	}
 
 }
