@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <!--FEEDBACK-->
+        <!--FEEDBACK -->
     
                 <div id="feedbackDR">
                     <div>    

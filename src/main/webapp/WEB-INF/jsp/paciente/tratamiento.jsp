@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
     
-        <!--TRATAMIENTOS-->
+        <!--TRATAMIENTOS -->
         
                 <div id="tratamiento">
                    

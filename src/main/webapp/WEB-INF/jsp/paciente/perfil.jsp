@@ -8,7 +8,7 @@
     <div class="row">
         
     
-    <!--PERFIL-->
+    <!--PERFIL -->
     
                 <div  id="perfil" >
                 <h2 class="page-header">Mi Perfil</h2>

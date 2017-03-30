@@ -45,7 +45,7 @@
                     <a data-toggle="tab" class="btn btn-default" id="btnNuevaFarmacia" href="#nuevaFarmacia">Inscribirse</a>
                 </div>
             </div>
-            <!--Login del medico-->
+            <!--Login del medico -->
             <div id="loginMedico" class="tab-pane fade">
                 <div class="col-lg-12">
                     <h1 class="page-header">Iniciar sesion</h1>
