@@ -22,15 +22,6 @@ import javax.persistence.UniqueConstraint;
 })
 //Peticiones a la tabla
 @NamedQueries({	
-	//BORRAR
-	@NamedQuery(name="borrarMensaje",
-		query="delete from Mensaje m where m.ID_Mensaje= :IDMensaje"),
-	//ACTUALIZAR
-	@NamedQuery(name="actualizarLeido",
-		query="update Mensaje m set m.leido=true where m.ID_Mensaje= :IDMensaje"),
-	//SELECT
-    @NamedQuery(name="unMensaje",
-        query="select m from Mensaje m where m.ID_Mensaje=:IDMensaje"),    
     @NamedQuery(name="NumMensajesNoLeidos",
     	query="select count(m) from Mensaje m where m.IDDestinatario=:IDDest and m.leido=false"),
     @NamedQuery(name="mensajesRecibidosPaciente",

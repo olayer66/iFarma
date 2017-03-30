@@ -5,16 +5,14 @@ import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -45,6 +43,8 @@ public class Farmacia implements Serializable {
 	private long IDFarmacia;
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
+	@Column(name = "telefono", nullable = false)
+	private String telefono;
 	@Column(name = "direccion", nullable = false)
 	private String direccion;
 	@Column(name = "ciudad", nullable = false)
@@ -61,13 +61,90 @@ public class Farmacia implements Serializable {
     @JoinColumn(name="duenio",referencedColumnName="num_Col_Farmaceutico")
 	private Farmaceutico duenio;
 	
-	//Stock de la farmacia (N/M)
-	@ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="stocks",
-            joinColumns=
-            @JoinColumn(name="ID_Farmacia", referencedColumnName="ID_Farmacia"),
-      inverseJoinColumns=
-            @JoinColumn(name="ID_Medicamento", referencedColumnName="ID_Medicamento")
-    )
-	private ArrayList<Medicamento> stock;
+	//Stock de la farmacia (N/1)
+	@OneToMany(mappedBy="ExistenciaMedicamento")
+	private ArrayList<ExistenciaMedicamento> stock;
+
+	//getters y setters
+	public long getIDFarmacia() {
+		return IDFarmacia;
+	}
+
+	public void setIDFarmacia(long iDFarmacia) {
+		IDFarmacia = iDFarmacia;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public String getCodPostal() {
+		return codPostal;
+	}
+
+	public void setCodPostal(String codPostal) {
+		this.codPostal = codPostal;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getComAutonona() {
+		return comAutonona;
+	}
+
+	public void setComAutonona(String comAutonona) {
+		this.comAutonona = comAutonona;
+	}
+
+	public Farmaceutico getDuenio() {
+		return duenio;
+	}
+
+	public void setDuenio(Farmaceutico duenio) {
+		this.duenio = duenio;
+	}
+
+	public ArrayList<ExistenciaMedicamento> getStock() {
+		return stock;
+	}
+
+	public void setStock(ArrayList<ExistenciaMedicamento> stock) {
+		this.stock = stock;
+	}
+	
+	
 }

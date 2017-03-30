@@ -16,12 +16,35 @@ import javax.persistence.UniqueConstraint;
 		})
 public class Medico  extends Usuario implements Serializable {
 	private static final long serialVersionUID = 9190127841629484829L;
+	
 	@Column(name = "num_Col_Medico", nullable = false)
 	private String numColMedico;
-	@Column(name = "especialidad", nullable = false)
-	private String especialidad;
 	@Column(name = "centro_Trabajo", nullable = false)
 	private String centroTrabajo;
+	
+	//Lista de pacientes del medico
 	@OneToMany(mappedBy="ID_Usuario")
 	private ArrayList<Paciente> pacientes;
+	
+	//getters y setters
+	public String getNumColMedico() {
+		return numColMedico;
+	}
+	public void setNumColMedico(String numColMedico) {
+		this.numColMedico = numColMedico;
+	}
+	public String getCentroTrabajo() {
+		return centroTrabajo;
+	}
+	public void setCentroTrabajo(String centroTrabajo) {
+		this.centroTrabajo = centroTrabajo;
+	}
+	public ArrayList<Paciente> getPacientes() {
+		return pacientes;
+	}
+	public void setPacientes(ArrayList<Paciente> pacientes) {
+		this.pacientes = pacientes;
+	}
+	
+	
 }
