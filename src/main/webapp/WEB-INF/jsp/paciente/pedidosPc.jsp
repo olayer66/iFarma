@@ -26,32 +26,32 @@
                                 <tr>
                                     <td><a href="/paciente/verPedidos">751140</a></td>
                                     <td>21/04/2017</td>
-                                    <td><span class="label label-warning" style="font-size: 20px">PENDIENTE</span></td>
+                                    <td><span class="label label-warning" >PENDIENTE</span></td>
                                 </tr>
                                 <tr>
                                     <td><a href="/paciente/verPedidos">015102</a></td>
                                     <td>22/03/2017</td>
-                                    <td><span class="label label-success" style="font-size: 20px">EN RUTA</span></td>
+                                    <td><span class="label label-success" >EN RUTA</span></td>
                                 </tr>
                                 <tr>
                                     <td><a href="/paciente/verPedidos">501485</a></td>
                                     <td>20/02/2017</td>
-                                    <td><span class="label label-primary" style="font-size: 20px">ENTREGADO</span></td>
+                                    <td><span class="label label-primary" >ENTREGADO</span></td>
                                 </tr>
                                 <tr>
                                     <td><a href="/paciente/verPedidos">369852</a></td>
                                     <td>15/02/2017</td>
-                                    <td><span class="label label-danger" style="font-size: 20px">CANCELADO</span></td>
+                                    <td><span class="label label-danger" >CANCELADO</span></td>
                                 </tr>
                                 <tr>
                                     <td><a href="/paciente/verPedidos">151545</a></td>
                                     <td>22/01/2017</td>
-                                    <td><span class="label label-primary" style="font-size: 20px">ENTREGADO</span></td>
+                                    <td><span class="label label-primary" >ENTREGADO</span></td>
                                 </tr>
                                 <tr>
                                     <td><a href="/paciente/verPedidos">985632</a></td>
                                     <td>18/12/2016</td>
-                                    <td><span class="label label-primary" style="font-size: 20px">ENTREGADO</span></td>
+                                    <td><span class="label label-primary" >ENTREGADO</span></td>
                                 </tr>
                             </tbody>
                         </table>
