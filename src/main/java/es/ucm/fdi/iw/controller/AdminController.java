@@ -5,43 +5,43 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/admin/")
 public class AdminController {
 	
-	@GetMapping("/")
+	@GetMapping("")
 	String listadoPacientesAction() {
 		return "admin/loginAdmin";
 	}
 	
-	@RequestMapping("/admin")
+	@RequestMapping("admin")
 	String adminAction() {
 		return "admin/admin";
 	}
 	
-	@RequestMapping("/altasMedicos")
+	@RequestMapping("altasMedicos")
 	String altasMedicosAction() {
 		return "admin/altasMedicos";
 	}
 
-	@RequestMapping("/altasFarmacias")
+	@RequestMapping("altasFarmacias")
 	String altaFarmaciasAction() {
 		return "admin/altasFarmacias";
 	}
-	@RequestMapping("/gestionMedicamentos")
+	@RequestMapping("gestionMedicamentos")
 	String gestionMedicamentosAction() {
 		return "admin/gestionMedicamentos";
 	}
-	@RequestMapping("/detalleAltaMedico")
+	@RequestMapping("detalleAltaMedico")
 	String detalleAltaMedicoAction() {
 		return "admin/detalleAltaMedico";
 	}
-	@RequestMapping("/detalleAltaFarmacia")
+	@RequestMapping("detalleAltaFarmacia")
 	String detalleAltaFarmaciaAction() {
 		return "admin/detalleAltaFarmacia";
 	}
-	@RequestMapping("/nuevoMedicamento")
+	@RequestMapping("nuevoMedicamento")
 	String nuevoMedicamentoAction() {
-		return "/admin/nuevoMedicamento";
+		return "admin/nuevoMedicamento";
 	}
 	
 	

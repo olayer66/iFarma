@@ -6,7 +6,7 @@
 <%@ include file="../../jspf/header.jspf" %>
 
 
-<%@ include file="../../jspf/navbarFarmacia.jspf" %>
+<%@ include file="../../jspf/navbarPaciente.jspf" %>
 
     <!-- Page Content -->
     <div class="container">
@@ -144,20 +144,6 @@
           </div>
         </div>
         <!-- /.col -->
-         <div class="col-xs-6">
-            <h2>Modificar estado del pedido: </h2>
-            <div class="btn-group">
-                              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                               Action <span class="caret"></span>
-                              </button>
-                               <ul class="dropdown-menu">
-                               <li><a href="#">Pendiente</a></li>
-                               <li><a href="#">En proceso</a></li>
-                               <li><a href="#">Enviado</a></li>
-                               <li><a href="#">Entregado</a></li>
-                             </ul>
-             </div>
-        </div>
         <hr>
       </div>
       <!-- /.row -->
