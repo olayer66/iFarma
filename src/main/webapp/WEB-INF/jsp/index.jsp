@@ -81,7 +81,7 @@
                             <label for="contLoginPaciente">Contraseña:</label>
                             <input type="password" name="contLoginPaciente" class="form-control" id="contLoginPaciente">
                         </div>
-                        <a class="btn btn-default center-block"  id="btnLoginPaciente" href="/paciente">Inciar sesión</a>
+                        <a class="btn btn-default center-block"  id="btnLoginPaciente" href="/paciente/tratamiento">Inciar sesión</a>
                     </div>
                 </form>
             </div>

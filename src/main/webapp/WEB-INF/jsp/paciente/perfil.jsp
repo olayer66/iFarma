@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <h2 class="page-header">Mi Farmacia    <a href="/paciente" class="btn btn-default">Cambiar</a></h2>
+                    <h2 class="page-header">Mi Farmacia    <a href="/paciente/tratamiento" class="btn btn-default">Cambiar</a></h2>
                     <div class="row">
                         <div class="col-lg-2">
                             <img src="/static/img/farmacia.jpg"width="150" height="150">

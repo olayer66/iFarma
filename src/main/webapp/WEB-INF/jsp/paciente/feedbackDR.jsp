@@ -35,7 +35,7 @@
                                 <label>Feedback</label>   
                                 <textarea rows="3" name="Feedback" class="form-control" id ="FeedbackPc"></textarea>
                             </div> 
-                            <a class="btn btn-default center-block"  id="btnFeedbackDR" href="/paciente">Enviar</a>
+                            <a class="btn btn-default center-block"  id="btnFeedbackDR" href="/paciente/tratamiento">Enviar</a>
                         </div>
                     </form>     
                 </div>
