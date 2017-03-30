@@ -1,4 +1,4 @@
-package jPA;
+package jpa;
 
 import java.io.Serializable;
 import java.sql.Date;

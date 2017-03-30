@@ -1,4 +1,4 @@
-package jPA;
+package jpa;
 
 import java.util.ArrayList;
 //Imports de JPA

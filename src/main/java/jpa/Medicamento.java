@@ -1,4 +1,4 @@
-package jPA;
+package jpa;
 
 public class Medicamento {
 

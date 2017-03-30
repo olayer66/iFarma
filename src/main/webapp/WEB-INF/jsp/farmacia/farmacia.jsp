@@ -14,13 +14,13 @@
         <!-- ____________________BOTONES-PEDIDOS-STOCK_____________________________
         <div id =botonesFarmacia class="tab-pane in active">
             <h2>Pedidos</h2>
-             <a data-toggle="tab" href="#pedidos">
+             <a data-toggle="tab" href="/farmacia/pedidos">
                 <img src="images/pedidos.png" alt="Pedidos" width="200" height="200">
               </a>
          
 
             <h2>Stock</h2>
-              <a data-toggle="tab" href="#stock">
+              <a data-toggle="tab" href="/farmacia/stock">
                   <img src="images/stock.png" alt="Stock" width="200" height="200">
              </a>
         </div>
