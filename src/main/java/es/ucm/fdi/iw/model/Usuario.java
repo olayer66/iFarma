@@ -1,6 +1,6 @@
-package jpa;
+package es.ucm.fdi.iw.model;
 
-import java.util.ArrayList;
+import java.util.List;
 //Imports de JPA
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -28,9 +28,9 @@ public class Usuario {
 	
 	//Mensajes
 	@OneToMany(mappedBy="destinatario")
-	private ArrayList<Mensaje> mensajesRecibidos;
+	private List<Mensaje> mensajesRecibidos;
 	@OneToMany(mappedBy="remitente")
-	private ArrayList<Mensaje> mensajesEnviados;
+	private List<Mensaje> mensajesEnviados;
 	
 	//Getters y setters de la entidad
 	public long getIDUsuario() {
@@ -63,16 +63,16 @@ public class Usuario {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	public ArrayList<Mensaje> getMensajesRecibidos() {
+	public List<Mensaje> getMensajesRecibidos() {
 		return mensajesRecibidos;
 	}
-	public void setMensajesRecibidos(ArrayList<Mensaje> mensajesRecibidos) {
+	public void setMensajesRecibidos(List<Mensaje> mensajesRecibidos) {
 		this.mensajesRecibidos = mensajesRecibidos;
 	}
-	public ArrayList<Mensaje> getMensajesEnviados() {
+	public List<Mensaje> getMensajesEnviados() {
 		return mensajesEnviados;
 	}
-	public void setMensajesEnviados(ArrayList<Mensaje> mensajesEnviados) {
+	public void setMensajesEnviados(List<Mensaje> mensajesEnviados) {
 		this.mensajesEnviados = mensajesEnviados;
 	}
 	

@@ -1,4 +1,4 @@
-package jpa;
+package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
 

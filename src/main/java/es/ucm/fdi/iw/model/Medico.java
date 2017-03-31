@@ -1,7 +1,7 @@
-package jpa;
+package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,7 +24,7 @@ public class Medico  extends Usuario implements Serializable {
 	
 	//Lista de pacientes del medico
 	@OneToMany(mappedBy="ID_Usuario")
-	private ArrayList<Paciente> pacientes;
+	private List<Paciente> pacientes;
 	
 	//getters y setters
 	public String getNumColMedico() {
@@ -39,10 +39,10 @@ public class Medico  extends Usuario implements Serializable {
 	public void setCentroTrabajo(String centroTrabajo) {
 		this.centroTrabajo = centroTrabajo;
 	}
-	public ArrayList<Paciente> getPacientes() {
+	public List<Paciente> getPacientes() {
 		return pacientes;
 	}
-	public void setPacientes(ArrayList<Paciente> pacientes) {
+	public void setPacientes(List<Paciente> pacientes) {
 		this.pacientes = pacientes;
 	}
 	

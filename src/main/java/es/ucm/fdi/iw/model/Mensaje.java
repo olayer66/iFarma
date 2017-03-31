@@ -1,4 +1,4 @@
-package jpa;
+package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
 import java.sql.Date;
@@ -46,11 +46,11 @@ public class Mensaje implements Serializable {
 	private boolean leido;
 	
 	//remitente y destinatario
-	@ManyToOne(optional=false)
-    @JoinColumn(name="remitente",referencedColumnName="ID_Usuario")
+	@ManyToOne(targetEntity=Medicamento.class,optional=false)
+    @JoinColumn(name="remitente")
 	private Usuario remitente;
-	@ManyToOne(optional=false)
-    @JoinColumn(name="destinatario",referencedColumnName="ID_Usuario")
+	@ManyToOne(targetEntity=Medicamento.class,optional=false)
+    @JoinColumn(name="destinatario")
 	private Usuario destinatario;
 	
 	//Cuerpo del mensaje

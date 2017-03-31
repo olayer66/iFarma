@@ -1,7 +1,7 @@
-package jpa;
+package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 //Imports basicos para JPA
 import javax.persistence.Entity;
@@ -60,7 +60,7 @@ public class Paciente extends Usuario implements Serializable {
       inverseJoinColumns=
             @JoinColumn(name="ID_Medicamento", referencedColumnName="ID_Medicamento")
     )
-	private ArrayList<Medicamento> Tratamiento;
+	private List<Medicamento> Tratamiento;
 	
 	//Farmamcia de referencia
 	@ManyToOne(optional=false)
@@ -116,10 +116,10 @@ public class Paciente extends Usuario implements Serializable {
 	public void setMedCabecera(Medico medCabecera) {
 		this.medCabecera = medCabecera;
 	}
-	public ArrayList<Medicamento> getTratamiento() {
+	public List<Medicamento> getTratamiento() {
 		return Tratamiento;
 	}
-	public void setTratamiento(ArrayList<Medicamento> tratamiento) {
+	public void setTratamiento(List<Medicamento> tratamiento) {
 		Tratamiento = tratamiento;
 	}
 	public Farmacia getIDFarmacia() {

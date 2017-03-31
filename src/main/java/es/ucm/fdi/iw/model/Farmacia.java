@@ -1,7 +1,7 @@
-package jpa;
+package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -63,7 +63,7 @@ public class Farmacia implements Serializable {
 	
 	//Stock de la farmacia (N/1)
 	@OneToMany(mappedBy="ExistenciaMedicamento")
-	private ArrayList<ExistenciaMedicamento> stock;
+	private List<ExistenciaMedicamento> stock;
 
 	//getters y setters
 	public long getIDFarmacia() {
@@ -138,11 +138,11 @@ public class Farmacia implements Serializable {
 		this.duenio = duenio;
 	}
 
-	public ArrayList<ExistenciaMedicamento> getStock() {
+	public List<ExistenciaMedicamento> getStock() {
 		return stock;
 	}
 
-	public void setStock(ArrayList<ExistenciaMedicamento> stock) {
+	public void setStock(List<ExistenciaMedicamento> stock) {
 		this.stock = stock;
 	}
 	

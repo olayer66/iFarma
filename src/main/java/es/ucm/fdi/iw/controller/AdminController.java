@@ -1,7 +1,10 @@
 package es.ucm.fdi.iw.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -43,6 +46,24 @@ public class AdminController {
 	String nuevoMedicamentoAction() {
 		return "admin/nuevoMedicamento";
 	}
-	
+	@GetMapping("/login/{u}/{c}")
+	String login(@PathVariable String usuario,@PathVariable String contra, HttpSession s)
+	{
+		if(usuario.equals("admin") && contra.equals("1234"))
+		{
+			s.setAttribute("usuario", usuario);
+			return "admin/admin";
+		}
+		else
+		{
+			return "redirect:index";
+		}
+	}
+	@GetMapping("/logout")
+	String login(HttpSession s)
+	{
+		s.invalidate();
+		return "redirect:index";
+	}
 	
 }
