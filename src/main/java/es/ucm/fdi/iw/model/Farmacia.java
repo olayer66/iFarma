@@ -58,15 +58,15 @@ public class Farmacia implements Serializable {
 	
 	//Dueño de la farmacia (N/1)
 	@ManyToOne(optional=false)
-    @JoinColumn(name="duenio",referencedColumnName="num_col_farmaceutico")
+    @JoinColumn(name="duenio")
 	private Farmaceutico duenio;
 	
 	//Listado de clientes
-	@OneToMany(mappedBy="pacientes")
+	@OneToMany(mappedBy="farmaciaReferencia")
 	private List<Paciente> listaClientes;
 	
 	//Stock de la farmacia (N/1)
-	@OneToMany(mappedBy="ExistenciaMedicamento")
+	@OneToMany(mappedBy="farmacia")
 	private List<ExistenciaMedicamento> stock;
 
 	//getters y setters

@@ -6,19 +6,23 @@ import javax.persistence.Column;
 //Imports basicos para JPA
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "pacientes",
 	   uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "id_usuario")
+		   @UniqueConstraint(columnNames = "id_paciente")
 	})
 //Peticiones a la tabla
 @NamedQueries({	
@@ -32,9 +36,17 @@ import javax.persistence.UniqueConstraint;
     	query="select p from Paciente p where p.IDPaciente=:IDPaciente")   
 
 })
-public class Paciente extends Usuario implements Serializable {
+public class Paciente implements Serializable {
 	private static final long serialVersionUID = 2117067448004216461L;
+
+	@Id
+	@Column(name = "id_paciente", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private long IDPaciente;
 	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_usuario")
+	private Usuario usuario;
 	//direccion de envio de pedidos
 	@Column(name = "direccion", nullable = false)
 	private String direccion;
@@ -49,14 +61,14 @@ public class Paciente extends Usuario implements Serializable {
 	
 	//medico de cabecera (N/1)
 	@ManyToOne(optional=false)
-    @JoinColumn(name="id_usuario",referencedColumnName="id_usuario")
+    @JoinColumn(name="medCabecera")
 	private Medico medCabecera;
 	
 	//Lista de medicamentos del tratamiento (N/M)
 	@ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="tratamientos",
             joinColumns=
-            @JoinColumn(name="id_usuario", referencedColumnName="id_usuario"),
+            @JoinColumn(name="id_usuario", referencedColumnName="id_paciente"),
       inverseJoinColumns=
             @JoinColumn(name="id_medicamento", referencedColumnName="id_medicamento")
     )
@@ -64,7 +76,7 @@ public class Paciente extends Usuario implements Serializable {
 	
 	//Farmamcia de referencia
 	@ManyToOne(optional=false)
-    @JoinColumn(name="id_farmacia",referencedColumnName="id_farmacia")
+    @JoinColumn(name="farmaciaReferencia",referencedColumnName="id_farmacia")
 	private Farmacia farmaciaReferencia;
 	
 	//forma de pago

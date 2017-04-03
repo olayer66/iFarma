@@ -1,0 +1,26 @@
+Frances-->castellano								
+===================================================================
+code_identifiant_de_specialite--> id_medicamento	
+
+Dénomination du médicament-->descripcion
+
+Forme pharmaceutique-->forma_administracion
+
+Voies d'administration--> via_administracion
+
+Statut administratif de l’autorisation de mise sur le marché --> estado_administravivo
+
+Type de procédure d'autorisation de mise sur le marché-->tipo_autorizacion
+
+Etat de commercialisation --> estado_comercial
+
+date_d_amm --> fecha_AMM
+
+statutbdm -->estado_bdm
+
+numero_de_l_autorisation_europeenne-->num_aut_europeo
+
+titulaire --> titular
+
+Surveillance renforcée --> vigilancia_reforzada
+

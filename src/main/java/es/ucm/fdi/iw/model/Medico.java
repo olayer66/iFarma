@@ -5,17 +5,32 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "medicos", 
 	   uniqueConstraints = {
-			   @UniqueConstraint(columnNames = "id_usuario")
+			   @UniqueConstraint(columnNames = "id_medico")
 		})
-public class Medico  extends Usuario implements Serializable {
+public class Medico implements Serializable {
 	private static final long serialVersionUID = 9190127841629484829L;
+	
+	@Id
+	@Column(name = "id_medico", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private long IDMedico;
+	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="id_usuario")
+	private Usuario usuario;
 	
 	@Column(name = "num_col_medico", nullable = false)
 	private String numColMedico;
@@ -23,7 +38,7 @@ public class Medico  extends Usuario implements Serializable {
 	private String centroTrabajo;
 	
 	//Lista de pacientes del medico
-	@OneToMany(mappedBy="id_usuario")
+	@OneToMany(mappedBy="medCabecera")
 	private List<Paciente> pacientes;
 	
 	//getters y setters

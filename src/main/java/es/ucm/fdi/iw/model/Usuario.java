@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -16,15 +14,17 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.validator.cfg.defs.EmailDef;
 
 @Entity
-@Table(name = "usuario", uniqueConstraints = {
-@UniqueConstraint(columnNames = "id_usuario")})
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Table(name = "usuarios", 
+uniqueConstraints = {
+		   @UniqueConstraint(columnNames = "id_usuario")
+	})
 public class Usuario {
-	//datos del usuario
+
 	@Id
 	@Column(name = "id_usuario", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long IDUsuario;
+	//datos del usuario
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	@Column(name = "apellidos", nullable = false)
@@ -41,12 +41,6 @@ public class Usuario {
 	private List<Mensaje> mensajesEnviados;
 	
 	//Getters y setters de la entidad
-	public long getIDUsuario() {
-		return IDUsuario;
-	}
-	public void setIDUsuario(long iDUsuario) {
-		IDUsuario = iDUsuario;
-	}
 	public String getNombre() {
 		return nombre;
 	}
@@ -82,6 +76,12 @@ public class Usuario {
 	}
 	public void setMensajesEnviados(List<Mensaje> mensajesEnviados) {
 		this.mensajesEnviados = mensajesEnviados;
+	}
+	public long getIDUsuario() {
+		return IDUsuario;
+	}
+	public void setIDUsuario(long iDUsuario) {
+		IDUsuario = iDUsuario;
 	}
 	
 }

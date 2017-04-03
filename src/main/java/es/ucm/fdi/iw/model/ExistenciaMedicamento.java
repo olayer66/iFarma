@@ -31,11 +31,11 @@ public class ExistenciaMedicamento implements Serializable {
 	@Column(name = "id_existencia", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long IDExistencia;
-	@ManyToOne(targetEntity=Medicamento.class,optional=false)
-	@JoinColumn(name="id_farmacia")
-	private Farmacia farmacia;
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
 	private Medicamento medicamento;
+	@ManyToOne
+	@JoinColumn(name="farmacia")
+	private Farmacia farmacia;
 	@Column(name = "cantidad", nullable = false)
 	private int cantidad;
 	@Column(name = "fecha_caducidad", nullable = false)

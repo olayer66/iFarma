@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -22,16 +21,7 @@ import javax.persistence.UniqueConstraint;
 })
 //Peticiones a la tabla
 @NamedQueries({	
-    @NamedQuery(name="NumMensajesNoLeidos",
-    	query="select count(m) from Mensaje m where m.IDDestinatario=:IDDest and m.leido=false"),
-    @NamedQuery(name="mensajesRecibidosPaciente",
-        query="select m from Mensaje m where m.IDDestinatario=:IDPaciente"),
-    @NamedQuery(name="mensajesRecibidosMedico",
-    	query="select m from Mensaje m where m.IDDestinatario=:IDMedico"),
-    @NamedQuery(name="mensajesUnPaciente",
-		query="select m from Mensaje m where m.IDDestinatario=:IDMedico and m.IDRemitente=:IDPaciente"),
-    @NamedQuery(name="mensajesPorFecha",
-		query="select m from Mensaje m where m.IDDestinatario=:IDDest and mfechaMensaje=:fecha")
+
 })
 public class Mensaje implements Serializable {
 	private static final long serialVersionUID = -5547637084846310049L;
@@ -46,10 +36,10 @@ public class Mensaje implements Serializable {
 	private boolean leido;
 	
 	//remitente y destinatario
-	@ManyToOne(targetEntity=Usuario.class,optional=false)
+	@ManyToOne
     @JoinColumn(name="remitente")
 	private Usuario remitente;
-	@ManyToOne(targetEntity=Usuario.class,optional=false)
+	@ManyToOne
     @JoinColumn(name="destinatario")
 	private Usuario destinatario;
 	
