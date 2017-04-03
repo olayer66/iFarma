@@ -19,7 +19,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "farmacias",
 	   uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "ID_Usuario")
+		   @UniqueConstraint(columnNames = "id_farmacia")
 	})
 //Peticiones a la tabla
 @NamedQueries({	
@@ -38,7 +38,7 @@ public class Farmacia implements Serializable {
 	
 	//Datos de una farmacia
 	@Id
-	@Column(name = "ID_Farmacia", nullable = false)
+	@Column(name = "id_farmacia", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long IDFarmacia;
 	@Column(name = "nombre", nullable = false)
@@ -58,7 +58,7 @@ public class Farmacia implements Serializable {
 	
 	//Dueño de la farmacia (N/1)
 	@ManyToOne(optional=false)
-    @JoinColumn(name="duenio",referencedColumnName="num_Col_Farmaceutico")
+    @JoinColumn(name="duenio",referencedColumnName="num_col_farmaceutico")
 	private Farmaceutico duenio;
 	
 	//Stock de la farmacia (N/1)

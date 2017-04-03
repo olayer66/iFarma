@@ -18,7 +18,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "mensajes", uniqueConstraints = {
-@UniqueConstraint(columnNames = "ID_Mensaje")
+@UniqueConstraint(columnNames = "id_mensaje")
 })
 //Peticiones a la tabla
 @NamedQueries({	
@@ -38,7 +38,7 @@ public class Mensaje implements Serializable {
 	
 	//ID
 	@Id
-	@Column(name = "ID_Mensaje", nullable = false)
+	@Column(name = "id_mensaje", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long IDMensaje;
 	
@@ -46,15 +46,15 @@ public class Mensaje implements Serializable {
 	private boolean leido;
 	
 	//remitente y destinatario
-	@ManyToOne(targetEntity=Medicamento.class,optional=false)
+	@ManyToOne(targetEntity=Usuario.class,optional=false)
     @JoinColumn(name="remitente")
 	private Usuario remitente;
-	@ManyToOne(targetEntity=Medicamento.class,optional=false)
+	@ManyToOne(targetEntity=Usuario.class,optional=false)
     @JoinColumn(name="destinatario")
 	private Usuario destinatario;
 	
 	//Cuerpo del mensaje
-	@Column(name = "fecha_Mensaje", nullable = false)
+	@Column(name = "fecha_mensaje", nullable = false)
 	private Date fechaMensaje;
 	@Column(name = "asunto", nullable = false)
 	private String asunto;

@@ -12,18 +12,18 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "medicos", 
 	   uniqueConstraints = {
-			   @UniqueConstraint(columnNames = "ID_Usuario")
+			   @UniqueConstraint(columnNames = "id_usuario")
 		})
 public class Medico  extends Usuario implements Serializable {
 	private static final long serialVersionUID = 9190127841629484829L;
 	
-	@Column(name = "num_Col_Medico", nullable = false)
+	@Column(name = "num_col_medico", nullable = false)
 	private String numColMedico;
-	@Column(name = "centro_Trabajo", nullable = false)
+	@Column(name = "centro_trabajo", nullable = false)
 	private String centroTrabajo;
 	
 	//Lista de pacientes del medico
-	@OneToMany(mappedBy="ID_Usuario")
+	@OneToMany(mappedBy="id_usuario")
 	private List<Paciente> pacientes;
 	
 	//getters y setters
