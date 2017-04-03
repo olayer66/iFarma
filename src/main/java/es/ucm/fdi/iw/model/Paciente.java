@@ -18,7 +18,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "pacientes",
 	   uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "ID_Usuario")
+		   @UniqueConstraint(columnNames = "id_usuario")
 	})
 //Peticiones a la tabla
 @NamedQueries({	
@@ -49,34 +49,34 @@ public class Paciente extends Usuario implements Serializable {
 	
 	//medico de cabecera (N/1)
 	@ManyToOne(optional=false)
-    @JoinColumn(name="ID_Medico",referencedColumnName="ID_Medico")
+    @JoinColumn(name="id_usuario",referencedColumnName="id_usuario")
 	private Medico medCabecera;
 	
 	//Lista de medicamentos del tratamiento (N/M)
 	@ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="Tratamientos",
+    @JoinTable(name="tratamientos",
             joinColumns=
-            @JoinColumn(name="ID_Usuario", referencedColumnName="ID_Usuario"),
+            @JoinColumn(name="id_usuario", referencedColumnName="id_usuario"),
       inverseJoinColumns=
-            @JoinColumn(name="ID_Medicamento", referencedColumnName="ID_Medicamento")
+            @JoinColumn(name="id_medicamento", referencedColumnName="id_medicamento")
     )
 	private List<Medicamento> Tratamiento;
 	
 	//Farmamcia de referencia
 	@ManyToOne(optional=false)
-    @JoinColumn(name="ID_Farmacia",referencedColumnName="ID_Farmacia")
-	private Farmacia IDFarmacia;
+    @JoinColumn(name="id_farmacia",referencedColumnName="id_farmacia")
+	private Farmacia farmaciaReferencia;
 	
 	//forma de pago
-	@Column(name = "forma_Pago", nullable = false)
+	@Column(name = "forma_pago", nullable = false)
 	private int formaPago;
 	
 	//datos tarjeta (si forma de pago es tarjeta)
-	@Column(name = "num_Tarjeta", nullable = false)
+	@Column(name = "num_tarjeta", nullable = false)
 	private long numTarjeta;
-	@Column(name = "cod_Seg_Tarjeta", nullable = false)
+	@Column(name = "cod_seg_tarjeta", nullable = false)
 	private int codSegTarjeta;
-	@Column(name = "fecha_Cad_Tarjeta", nullable = false)
+	@Column(name = "fecha_cad_tarjeta", nullable = false)
 	private String fechaCadTarjeta;
 	
 	//Getters y Setters de los campos de la tabla
@@ -122,11 +122,11 @@ public class Paciente extends Usuario implements Serializable {
 	public void setTratamiento(List<Medicamento> tratamiento) {
 		Tratamiento = tratamiento;
 	}
-	public Farmacia getIDFarmacia() {
-		return IDFarmacia;
+	public Farmacia getFarmaciaReferencia() {
+		return farmaciaReferencia;
 	}
-	public void setIDFarmacia(Farmacia iDFarmacia) {
-		IDFarmacia = iDFarmacia;
+	public void setFarmaciaReferencia(Farmacia farmaciaReferencia) {
+		this.farmaciaReferencia = farmaciaReferencia;
 	}
 	public int getFormaPago() {
 		return formaPago;

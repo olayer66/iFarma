@@ -3,18 +3,26 @@ package es.ucm.fdi.iw.model;
 import java.util.List;
 //Imports de JPA
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import org.hibernate.validator.cfg.defs.EmailDef;
 
-@MappedSuperclass
+@Entity
+@Table(name = "usuario", uniqueConstraints = {
+@UniqueConstraint(columnNames = "id_usuario")})
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public class Usuario {
 	//datos del usuario
 	@Id
-	@Column(name = "ID_Usuario", nullable = false)
+	@Column(name = "id_usuario", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long IDUsuario;
 	@Column(name = "nombre", nullable = false)
