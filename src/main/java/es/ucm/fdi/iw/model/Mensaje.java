@@ -33,6 +33,7 @@ public class Mensaje implements Serializable {
 	private long IDMensaje;
 	
 	//Si esta leido por parte del destinatario
+	@Column (name="leido",nullable = false)
 	private boolean leido;
 	
 	//remitente y destinatario

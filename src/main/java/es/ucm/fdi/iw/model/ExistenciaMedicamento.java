@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "existencia_medicamento",
+@Table(name = "existencias",
 	   uniqueConstraints = {
 		   @UniqueConstraint(columnNames = "id_existencia")
 	})

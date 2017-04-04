@@ -26,11 +26,6 @@ import javax.persistence.UniqueConstraint;
 	})
 //Peticiones a la tabla
 @NamedQueries({	
-	//BORRAR
-	@NamedQuery(name="borrarPaciente",
-		query="delete from Paciente p where p.IDPaciente= :IDPaciente"),
-	//ACTUALIZAR
-	
 	//SELECT
 	@NamedQuery(name="paciente",
     	query="select p from Paciente p where p.IDPaciente=:IDPaciente")   

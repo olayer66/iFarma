@@ -23,12 +23,6 @@ import javax.persistence.UniqueConstraint;
 	})
 //Peticiones a la tabla
 @NamedQueries({	
-	//BORRAR
-	@NamedQuery(name="borrarFarmacia",
-		query="delete from Farmacia f where f.IDFarmacia=:IDFarmacia"),
-	//ACTUALIZAR
-	
-	//SELECT
 	@NamedQuery(name="farmacia",
   	query="select p from Farmacia f where f.IDFarmacia=:IDFarmacia")   
 

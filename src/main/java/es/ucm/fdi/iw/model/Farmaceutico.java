@@ -30,6 +30,7 @@ public class Farmaceutico implements Serializable{
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
+	
 	@Column(name = "num_col_farmaceutico", nullable = false)
 	private String numColFarmaceutico;
 	//Lista de farmacias que le pertenecen

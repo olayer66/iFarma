@@ -2,13 +2,110 @@
 <!DOCTYPE hibernate-mapping PUBLIC
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
- <hibernate-mapping package="org.hibernate.tutorial.domain">
-
+ <hibernate-mapping package="es.ucm.fdi.iw.model">
+	<!-- Entidad usuario -->
     <class name="Usuario" table="usuarios">
         <id name="IDUsuario" column="id_usuario">
             <generator class="native"/>
         </id>
         <property name="nombre"/>
+        <property name="apellidos"/>
+        <property name="email"/>
+        <property name="telefono"/>
+        <property name="mensajesRecibidos"/>
+        <property name="mensajesEnviados"/>
     </class>
-
+    <!-- Entidad paciente -->
+    <class name="Paciente" table="pacientes">
+    	<id name="IDPaciente" column="id_paciente">
+            <generator class="native"/>
+        </id>
+        <property name="usuario"/>
+        <property name="direccion"/>
+        <property name="ciudad"/>
+        <property name="codPostal"/>
+        <property name="provincia"/>
+        <property name="comAutonoma"/>
+        <property name="medCabecera"/>
+        <property name="tratamiento"/>
+        <property name="farmaciaReferencia"/>
+        <property name="formaPago"/>
+        <property name="numTarjeta"/>
+        <property name="codSegTarjeta"/>
+        <property name="fechaCadTarjeta"/>
+    </class>
+    <!-- Entidad medico -->
+    <class name="Medico" table="medicos">
+    	<id name="IDMedico" column="id_medico">
+            <generator class="native"/>
+        </id>
+        <property name="usuario"/>
+        <property name="numColMedico"/>
+        <property name="centroTrabajo"/>
+        <property name="pacientes"/>
+    </class>
+    <!-- Entidad farmaceutico -->
+    <class name="Farmaceutico" table="farmaceuticos">
+    	<id name="IDFarmaceutico" column="id_farmaceutico">
+            <generator class="native"/>
+        </id>
+        <property name="usuario"/>
+        <property name="numColFarmaceutico"/>
+        <property name="farmaciasPropias"/>
+    </class>
+    <!-- Entidad mensaje -->
+    <class name="Mensaje" table="mensajes">
+    	<id name="IDMensaje" column="id_mensaje">
+            <generator class="native"/>
+        </id>
+        <property name="leido"/>
+        <property name="remitente"/>
+        <property name="destinatario"/>
+        <property name="fechaMensaje"/>
+        <property name="cabecera"/>
+        <property name="mensaje"/>
+    </class>
+    <!-- Entidad farmacia -->
+    <class name="Farmacia" table="farmacias">
+    	<id name="IDFarmacia" column="id_farmacia">
+            <generator class="native"/>
+        </id>
+        <property name="nombre"/>
+        <property name="telefono"/>
+        <property name="direccion"/>
+        <property name="ciudad"/>
+        <property name="codPostal"/>
+        <property name="provincia"/>
+        <property name="comAutonoma"/>
+        <property name="duenio"/>
+        <property name="listaClientes"/>
+        <property name="stock"/>
+    </class>
+    <!-- Entidad medicamento -->
+    <class name="Medicamento" table="medicamentos">
+    	<id name="IDMedicamento" column="id_medicamento">
+            <generator class="native"/>
+        </id>
+        <property name="descripcion"/>
+        <property name="formaAdministracion"/>
+        <property name="viaAdministracion"/>
+        <property name="estadoAdministracion"/>
+        <property name="tipoAutorizacion"/>
+        <property name="estadoComercial"/>
+        <property name="fechaAMM"/>
+        <property name="estadoBDM"/>
+        <property name="numAutEuropeo"/>
+        <property name="titular"/>
+        <property name="vigilanciaReforzada"/>
+    </class>
+    <class name="existenciaMedicamento" table="existencias">
+    	<id name="IDExistencia" column="id_existencia">
+            <generator class="native"/>
+        </id>
+        <property name="medicamento"/>
+        <property name="farmacia"/>
+        <property name="cantidad"/>
+        <property name="fechaCaducidad"/>
+        
+    </class>
 </hibernate-mapping>
