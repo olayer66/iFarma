@@ -62,7 +62,7 @@
         <property name="remitente"/>
         <property name="destinatario"/>
         <property name="fechaMensaje"/>
-        <property name="cabecera"/>
+        <property name="asunto"/>
         <property name="mensaje"/>
     </class>
     <!-- Entidad farmacia -->
@@ -89,7 +89,7 @@
         <property name="descripcion"/>
         <property name="formaAdministracion"/>
         <property name="viaAdministracion"/>
-        <property name="estadoAdministracion"/>
+        <property name="estadoAdministrativo"/>
         <property name="tipoAutorizacion"/>
         <property name="estadoComercial"/>
         <property name="fechaAMM"/>
@@ -98,7 +98,7 @@
         <property name="titular"/>
         <property name="vigilanciaReforzada"/>
     </class>
-    <class name="existenciaMedicamento" table="existencias">
+    <class name="ExistenciaMedicamento" table="existencias">
     	<id name="IDExistencia" column="id_existencia">
             <generator class="native"/>
         </id>

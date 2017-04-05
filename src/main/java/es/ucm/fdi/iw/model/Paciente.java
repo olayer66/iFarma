@@ -52,7 +52,7 @@ public class Paciente implements Serializable {
 	@Column(name = "provincia", nullable = false)
 	private String provincia;
 	@Column(name = "com_Autonoma", nullable = false)
-	private String comAutonona;
+	private String comAutonoma;
 	
 	//medico de cabecera (N/1)
 	@ManyToOne(optional=false)
@@ -111,11 +111,11 @@ public class Paciente implements Serializable {
 	public void setProvincia(String provincia) {
 		this.provincia = provincia;
 	}
-	public String getComAutonona() {
-		return comAutonona;
+	public String getComAutonoma() {
+		return comAutonoma;
 	}
-	public void setComAutonona(String comAutonona) {
-		this.comAutonona = comAutonona;
+	public void setComAutonona(String comAutonoma) {
+		this.comAutonoma = comAutonoma;
 	}
 	public Medico getMedCabecera() {
 		return medCabecera;

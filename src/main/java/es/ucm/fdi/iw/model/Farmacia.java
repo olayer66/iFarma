@@ -48,7 +48,7 @@ public class Farmacia implements Serializable {
 	@Column(name = "provincia", nullable = false)
 	private String provincia;
 	@Column(name = "com_Autonoma", nullable = false)
-	private String comAutonona;
+	private String comAutonoma;
 	
 	//Dueño de la farmacia (N/1)
 	@ManyToOne(optional=false)
@@ -120,12 +120,12 @@ public class Farmacia implements Serializable {
 		this.provincia = provincia;
 	}
 
-	public String getComAutonona() {
-		return comAutonona;
+	public String getComAutonoma() {
+		return comAutonoma;
 	}
 
-	public void setComAutonona(String comAutonona) {
-		this.comAutonona = comAutonona;
+	public void setComAutonoma(String comAutonoma) {
+		this.comAutonoma = comAutonoma;
 	}
 
 	public Farmaceutico getDuenio() {
