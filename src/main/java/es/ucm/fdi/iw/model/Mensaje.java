@@ -19,10 +19,6 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "mensajes", uniqueConstraints = {
 @UniqueConstraint(columnNames = "id_mensaje")
 })
-//Peticiones a la tabla
-@NamedQueries({	
-
-})
 public class Mensaje implements Serializable {
 	private static final long serialVersionUID = -5547637084846310049L;
 	

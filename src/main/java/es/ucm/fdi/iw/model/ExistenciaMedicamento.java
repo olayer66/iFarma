@@ -21,10 +21,6 @@ import javax.persistence.UniqueConstraint;
 	   uniqueConstraints = {
 		   @UniqueConstraint(columnNames = "id_existencia")
 	})
-//Peticiones a la tabla
-@NamedQueries({	 
-
-})
 public class ExistenciaMedicamento implements Serializable {
 	private static final long serialVersionUID = 4000356623437817386L;
 	@Id

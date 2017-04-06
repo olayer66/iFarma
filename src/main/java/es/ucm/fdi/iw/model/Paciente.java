@@ -26,10 +26,6 @@ import javax.persistence.UniqueConstraint;
 	})
 //Peticiones a la tabla
 @NamedQueries({	
-	//SELECT
-	@NamedQuery(name="paciente",
-    	query="select p from Paciente p where p.IDPaciente=:IDPaciente")   
-
 })
 public class Paciente implements Serializable {
 	private static final long serialVersionUID = 2117067448004216461L;

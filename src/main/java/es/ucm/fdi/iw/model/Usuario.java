@@ -30,7 +30,7 @@ public class Usuario {
 	@Column(name = "apellidos", nullable = false)
 	private String apellidos;
 	@Column(name = "email", nullable = false)
-	private EmailDef email;
+	private String email;
 	@Column(name = "telefono", nullable = false)
 	private String telefono;
 	
@@ -53,10 +53,10 @@ public class Usuario {
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
-	public EmailDef getEmail() {
+	public String getEmail() {
 		return email;
 	}
-	public void setEmail(EmailDef email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	public String getTelefono() {

@@ -21,12 +21,6 @@ import javax.persistence.UniqueConstraint;
 	   uniqueConstraints = {
 		   @UniqueConstraint(columnNames = "id_farmacia")
 	})
-//Peticiones a la tabla
-@NamedQueries({	
-	@NamedQuery(name="farmacia",
-  	query="select p from Farmacia f where f.IDFarmacia=:IDFarmacia")   
-
-})
 public class Farmacia implements Serializable {
 	private static final long serialVersionUID = 3729954187317206752L;
 	
