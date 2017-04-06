@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.model;
 
+import java.io.Serializable;
 import java.util.List;
 //Imports de JPA
 import javax.persistence.Column;
@@ -11,15 +12,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.validator.cfg.defs.EmailDef;
-
 @Entity
 @Table(name = "usuarios", 
 uniqueConstraints = {
 		   @UniqueConstraint(columnNames = "id_usuario")
 	})
-public class Usuario {
-
+public class Usuario implements Serializable {
+	private static final long serialVersionUID = 3918714646456852426L;
+	
 	@Id
 	@Column(name = "id_usuario", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,6 +33,12 @@ public class Usuario {
 	private String email;
 	@Column(name = "telefono", nullable = false)
 	private String telefono;
+	
+	//Usuario y contraseña para le login del usuario
+	@Column(name = "usuario", nullable = false)
+	private String usuario;
+	@Column(name = "contra", nullable = false)
+	private String contrasenia;
 	
 	//Mensajes
 	@OneToMany(mappedBy="destinatario")
@@ -83,5 +89,16 @@ public class Usuario {
 	public void setIDUsuario(long iDUsuario) {
 		IDUsuario = iDUsuario;
 	}
-	
+	public String getUsuario() {
+		return usuario;
+	}
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
+	public String getContrasenia() {
+		return contrasenia;
+	}
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
 }

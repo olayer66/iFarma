@@ -10,7 +10,7 @@
              <h1 class="page-header">Iniciar sesion</h1>
              <h1><small>Por favor inicie sesion para acceder al sistema de administracion.</small></h1>
          </div>
-         <form >
+         <form method="post" action = "/admin/login">
              <div class="col-md-4 portfolio-item">
                  <div class="form-group">
                      <label for="usuLoginAdmin">Usuario:</label>
@@ -20,7 +20,9 @@
                      <label for="contLoginAdmin">Contraseña:</label>
                      <input type="password" name="contLoginAdmin" class="form-control" id="contLoginAdmin">
                  </div>
-                 <a class="btn btn-default center-block"  id="btnLoginAdmin" href="/admin/login/admin/1234">Inciar sesión</a>
+                 <div class="form-group">
+                     <input type="submit" value="Inciar sesion" class="form-control">
+                 </div>
              </div>
          </form>
 	</div>

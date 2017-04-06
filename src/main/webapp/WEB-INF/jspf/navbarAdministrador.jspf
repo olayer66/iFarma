@@ -32,7 +32,7 @@
 
                     <ul class="dropdown-menu">
                         <li><a href="#">Editar perfil</a></li>
-                        <li><a href="/">Cerrar sesión</a></li>
+                        <li><a href="/admin/logout">Cerrar sesión</a></li>
                     </ul>
                 </li>
             </ul>
