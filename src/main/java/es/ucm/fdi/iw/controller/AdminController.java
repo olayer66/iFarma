@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,8 @@ public class AdminController {
 
 	
 	@GetMapping("")
-	String listadoPacientesAction() {
+	String pantallaLoginAction(Model model) {
+		model.addAttribute("login", new Login());
 		return "admin/loginAdmin";
 	}
 	
@@ -59,9 +61,9 @@ public class AdminController {
 		return "admin/nuevoMedicamento";
 	}
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	String login(@ModelAttribute("SpringWeb")Login login, HttpSession sesion)
+	String login(@ModelAttribute("login")Login login,Model model, HttpSession sesion)
 	{
-		if(login.login())
+		if(login.login("admin"))
 		{
 			sesion.setAttribute("usuario", login.getUsuario());
 			log.info("El administrador "+login.getUsuario() +" se ha logeado");

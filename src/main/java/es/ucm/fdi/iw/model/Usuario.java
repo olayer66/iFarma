@@ -34,6 +34,9 @@ public class Usuario implements Serializable {
 	@Column(name = "telefono", nullable = false)
 	private String telefono;
 	
+	//Tipo de usuario
+	@Column(name = "tipo", nullable = false)
+	private String tipo;
 	//Usuario y contraseña para le login del usuario
 	@Column(name = "usuario", nullable = false)
 	private String usuario;

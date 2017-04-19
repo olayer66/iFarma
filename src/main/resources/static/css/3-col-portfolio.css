@@ -18,3 +18,19 @@ footer {
 .alerta{
 	color:red;
 }
+footer a:link{
+	color:#333;
+	text-decoration: nome;
+}
+footer a:hover{
+	color:#333;
+	text-decoration: underline;
+}
+footer a:visited{
+	color:#333;
+	text-decoration: nome;
+}
+footer a:active{
+	color:#333;
+	text-decoration: nome;
+}
