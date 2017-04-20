@@ -10,11 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -55,15 +53,9 @@ public class Paciente implements Serializable {
     @JoinColumn(name="medCabecera")
 	private Medico medCabecera;
 	
-	//Lista de medicamentos del tratamiento (N/M)
-	@ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="tratamientos",
-            joinColumns=
-            @JoinColumn(name="id_usuario", referencedColumnName="id_paciente"),
-      inverseJoinColumns=
-            @JoinColumn(name="id_medicamento", referencedColumnName="id_medicamento")
-    )
-	private List<Medicamento> Tratamiento;
+	//Lista de medicamentos del tratamiento (1/N)
+	@OneToMany(mappedBy="paciente")
+	private List<Tratamiento> tratamiento;
 	
 	//Farmamcia de referencia
 	@ManyToOne(optional=false)
@@ -119,11 +111,11 @@ public class Paciente implements Serializable {
 	public void setMedCabecera(Medico medCabecera) {
 		this.medCabecera = medCabecera;
 	}
-	public List<Medicamento> getTratamiento() {
-		return Tratamiento;
+	public List<Tratamiento> getTratamiento() {
+		return tratamiento;
 	}
-	public void setTratamiento(List<Medicamento> tratamiento) {
-		Tratamiento = tratamiento;
+	public void setTratamiento(List<Tratamiento> tratamiento) {
+		this.tratamiento = tratamiento;
 	}
 	public Farmacia getFarmaciaReferencia() {
 		return farmaciaReferencia;

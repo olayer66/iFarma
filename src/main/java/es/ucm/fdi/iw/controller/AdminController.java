@@ -3,10 +3,12 @@ package es.ucm.fdi.iw.controller;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,18 +63,25 @@ public class AdminController {
 		return "admin/nuevoMedicamento";
 	}
 	@RequestMapping(value="/login", method = RequestMethod.POST)
-	String login(@ModelAttribute("login")Login login,Model model, HttpSession sesion)
+	String login(@ModelAttribute("login")@Valid Login login,Model model, BindingResult bindingResult, HttpSession sesion)
 	{
-		if(login.login("admin"))
+		if(bindingResult.hasErrors())
 		{
-			sesion.setAttribute("usuario", login.getUsuario());
-			log.info("El administrador "+login.getUsuario() +" se ha logeado");
-			return "admin/admin";		
+			return "admin/loginAdmin";
 		}
 		else
 		{
-			log.error("Error en el login");
-			return "redirect:/index";
+			if(login.hasRole("admin"))
+			{
+				sesion.setAttribute("usuario", login.getUsuario());
+				log.info("El administrador "+login.getUsuario() +" se ha logeado");
+				return "admin/admin";		
+			}
+			else
+			{
+				log.error("Error en el login");
+				return "redirect:/index";
+			}
 		}
 	}
 	@GetMapping("/logout")

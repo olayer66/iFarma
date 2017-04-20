@@ -34,6 +34,10 @@ public class Usuario implements Serializable {
 	@Column(name = "telefono", nullable = false)
 	private String telefono;
 	
+	//Estado del usuario(validacion,activo,baneado,inactivo)
+	@Column(name = "estado", nullable = false)
+	private String estado;
+	
 	//Tipo de usuario
 	@Column(name = "tipo", nullable = false)
 	private String tipo;
