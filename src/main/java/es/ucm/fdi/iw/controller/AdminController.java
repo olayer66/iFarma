@@ -19,24 +19,23 @@ import es.ucm.fdi.iw.login.Login;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	private static final Logger log = Logger.getLogger(AdminController.class);
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	
 	@GetMapping("")
 	String pantallaLoginAction(Model model) {
 		model.addAttribute("login", new Login());
 		return "admin/loginAdmin";
 	}
-	
+
 	@RequestMapping("admin")
 	String adminAction() {
 		return "admin/admin";
 	}
-	
+
 	@RequestMapping("altasMedicos")
 	String altasMedicosAction() {
 		return "admin/altasMedicos";
@@ -46,50 +45,50 @@ public class AdminController {
 	String altaFarmaciasAction() {
 		return "admin/altasFarmacias";
 	}
+
 	@RequestMapping("gestionMedicamentos")
 	String gestionMedicamentosAction() {
 		return "admin/gestionMedicamentos";
 	}
+
 	@RequestMapping("detalleAltaMedico")
 	String detalleAltaMedicoAction() {
 		return "admin/detalleAltaMedico";
 	}
+
 	@RequestMapping("detalleAltaFarmacia")
 	String detalleAltaFarmaciaAction() {
 		return "admin/detalleAltaFarmacia";
 	}
+
 	@RequestMapping("nuevoMedicamento")
 	String nuevoMedicamentoAction() {
 		return "admin/nuevoMedicamento";
 	}
-	@RequestMapping(value="/login", method = RequestMethod.POST)
-	String login(@ModelAttribute("login")@Valid Login login,Model model, BindingResult bindingResult, HttpSession sesion)
-	{
-		if(bindingResult.hasErrors())
-		{
+
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	String login(@ModelAttribute("login") @Valid Login login, BindingResult bindingResult, Model model,
+			HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			log.error("Paso por aqui");
 			return "admin/loginAdmin";
-		}
-		else
-		{
-			if(login.hasRole("admin"))
-			{
+		} else {
+			if (login.hasRole("admin")) {
 				sesion.setAttribute("usuario", login.getUsuario());
-				log.info("El administrador "+login.getUsuario() +" se ha logeado");
-				return "admin/admin";		
-			}
-			else
-			{
+				log.info("El administrador " + login.getUsuario() + " se ha logeado");
+				return "admin/admin";
+			} else {
 				log.error("Error en el login");
 				return "redirect:/index";
 			}
 		}
 	}
+
 	@GetMapping("/logout")
-	String login(HttpSession sesion)
-	{
+	String login(HttpSession sesion) {
 		sesion.invalidate();
 		log.info("Sesion finalizada");
 		return "redirect:/index";
 	}
-	
+
 }

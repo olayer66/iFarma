@@ -1,17 +1,18 @@
 package es.ucm.fdi.iw.login;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.apache.log4j.Logger;
-import javax.validation.constraints.*;
 
 
 public class Login {
 
-	@NotNull
-	@Pattern(regexp = "{A-Za-z}*")
+	@Size(min=1,message = "El campo esta vacio")
+	@Pattern(regexp = "[A-Za-z]*",message = "El usuario no puede contener numeros ni caracteres especiales")
 	private String usuario;
-	@NotNull
-	@Size(min=4,max=8)
-	@Pattern(regexp = "{A-Za-z0-9}*")
+	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
+	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraeña no puede contener caracteres especiales")
 	private String contrasenia;
 	private static final Logger log = Logger.getLogger(Login.class);
 

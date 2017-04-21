@@ -20,10 +20,12 @@
 	                 <div class="form-group">
 	                     <label for="usuario">Usuario:</label>
 	                     <sf:input path="usuario" />
+	                     <p><sf:errors path="usuario" cssClass="error"/></p>
 	                 </div>
 	                 <div class="form-group">
 	                     <label for="contrasenia">Contraseña:</label>
 	                     <sf:password path="contrasenia" />
+	                     <p><sf:errors path="contrasenia" cssClass="error"/></p>
 	                 </div>
 	                 <div class="form-group">
 	                     <input type="submit" value="Inciar sesion" class="form-control">

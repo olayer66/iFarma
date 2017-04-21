@@ -34,3 +34,6 @@ footer a:active{
 	color:#333;
 	text-decoration: nome;
 }
+.error {
+	color: #ff0000;
+}
