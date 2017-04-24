@@ -45,67 +45,6 @@
                     <a data-toggle="tab" class="btn btn-default" id="btnNuevaFarmacia" href="#nuevaFarmacia">Inscribirse</a>
                 </div>
             </div>
-            <!--Login del medico -->
-            <div id="loginMedico" class="tab-pane fade">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Iniciar sesion</h1>
-                    <h1><small>Por favor inicie sesion para acceder al sistema de gestion medica.</small></h1>
-                </div>
-                <form>
-                    <div class="col-md-4 portfolio-item">
-                        <div class="form-group">
-                            <label for="numColMedico">Nº colegiado:</label>
-                            <input type="text" class="form-control" id="numColMedico">
-                        </div>
-                        <div class="form-group">
-                            <label for="contLoginMedico">Contraseña:</label>
-                            <input type="password" name="contLoginMedico" class="form-control" id="contLoginMedico">
-                        </div>
-                        <a class="btn btn-default center-block"  id="btnLoginMedico" href="/medico/listado-pacientes">Inciar sesión</a>
-                    </div>
-                </form>
-            </div>
-            <!--Login del Paciente-->
-            <div id="loginPaciente" class="tab-pane fade">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Iniciar sesion</h1>
-                    <h1><small>Por favor inicie sesion para acceder al sistema de gestion para pacientes.</small></h1>
-                </div>
-                <form>
-                    <div class="col-md-4 portfolio-item">
-                        <div class="form-group">
-                            <label for="usuLoginPaciente">Usuario:</label>
-                            <input type="text" class="form-control" id="usuLoginPaciente">
-                        </div>
-                        <div class="form-group">
-                            <label for="contLoginPaciente">Contraseña:</label>
-                            <input type="password" name="contLoginPaciente" class="form-control" id="contLoginPaciente">
-                        </div>
-                        <a class="btn btn-default center-block"  id="btnLoginPaciente" href="/paciente/tratamiento">Inciar sesión</a>
-                    </div>
-                </form>
-            </div>
-            <!--Login de la Farmacia-->
-            <div id="loginFarmacia" class="tab-pane fade">
-                 <div class="col-lg-12">
-                    <h1 class="page-header">Iniciar sesion</h1>
-                    <h1><small>Por favor inicie sesion para acceder al sistema de gestion farmaceutico.</small></h1>
-                </div>
-                 <form>
-                    <div class="col-md-4 portfolio-item">
-                        <div class="form-group">
-                            <label for="nomLoginFarmacia">Farmacia:</label>
-                            <input type="text" class="form-control" id="nomLoginFarmacia">
-                        </div>
-                        <div class="form-group">
-                            <label for="contLoginFarmacia">Contraseña:</label>
-                            <input type="password" name="contLoginFarmacia" class="form-control" id="contLoginFarmacia">
-                        </div>
-                        <a class="btn btn-default center-block"  id="btnLoginFarmacia" href="/farmacia/pedidos">Inciar sesión</a>
-                    </div>
-                </form>
-            </div>
-            <!--Nuevo paciente-->
             <div id="nuevoPaciente" class="tab-pane fade">
                 <div class="col-lg-12">
                     <h1 class="page-header">Nuevo paciente</h1>

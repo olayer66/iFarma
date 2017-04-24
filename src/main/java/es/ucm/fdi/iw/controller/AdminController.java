@@ -65,6 +65,7 @@ public class AdminController {
 	String nuevoMedicamentoAction() {
 		return "admin/nuevoMedicamento";
 	}
+	
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	String login(@ModelAttribute("login") @Valid Login login, BindingResult bindingResult, Model model,
