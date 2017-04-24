@@ -48,6 +48,10 @@ public class Paciente implements Serializable {
 	@Column(name = "com_Autonoma", nullable = false)
 	private String comAutonoma;
 	
+	//Codigo para la confirmacion del paciente
+	@Column(name = "codigo_aut", nullable = false)
+	private String codigoAut;
+	
 	//medico de cabecera (N/1)
 	@ManyToOne(optional=false)
     @JoinColumn(name="medCabecera")
@@ -62,16 +66,16 @@ public class Paciente implements Serializable {
     @JoinColumn(name="farmaciaReferencia",referencedColumnName="id_farmacia")
 	private Farmacia farmaciaReferencia;
 	
-	//forma de pago
+	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)
 	@Column(name = "forma_pago", nullable = false)
 	private int formaPago;
 	
 	//datos tarjeta (si forma de pago es tarjeta)
-	@Column(name = "num_tarjeta", nullable = false)
+	@Column(name = "num_tarjeta", nullable = true)
 	private long numTarjeta;
-	@Column(name = "cod_seg_tarjeta", nullable = false)
+	@Column(name = "cod_seg_tarjeta", nullable = true)
 	private int codSegTarjeta;
-	@Column(name = "fecha_cad_tarjeta", nullable = false)
+	@Column(name = "fecha_cad_tarjeta", nullable = true)
 	private String fechaCadTarjeta;
 	
 	//Getters y Setters de los campos de la tabla
