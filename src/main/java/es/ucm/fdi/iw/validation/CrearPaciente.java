@@ -7,11 +7,11 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.apache.log4j.Logger;
 
-public class Paciente {
+public class CrearPaciente {
 	//logger
 	private static final Logger log = Logger.getLogger(Login.class);
 	
-	//variables ha validar
+	//variables a validar
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "[A-Za-z]*",message = "El nombre no puede contener numeros ni caracteres especiales")
 	private String nombre;
@@ -36,7 +36,7 @@ public class Paciente {
 		//Insercion de los datos basicos del paciente por parte del medico
 		generarCodAuteticacion();
 		
-		//Introducimos en la BBDD
+		//Introducimos en la BBDD(hay que meter el medico, el estado, el codigo de validacion y el tipo tambien)
 		
 		return true;
 	}
