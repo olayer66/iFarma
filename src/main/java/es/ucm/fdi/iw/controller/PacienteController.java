@@ -30,7 +30,18 @@ public class PacienteController {
 		model.addAttribute("login", new Login());
 		return "paciente/loginPaciente";
 	}
-	
+	@RequestMapping("modificarPaciente")
+	String modificarpacienteAction() {
+		return "paciente/modificarPaciente";
+	}
+	@RequestMapping("cambiarPassword")
+	String cambiarPasswordAction() {
+		return "paciente/cambiarPassword";
+	}
+	@RequestMapping("modificarPago")
+	String modificarpagoAction() {
+		return "paciente/modificarPago";
+	}
 	@RequestMapping({"pedidosPc"})
 	String pedidosPcAction() {
 		return "paciente/pedidosPc";

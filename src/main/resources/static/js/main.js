@@ -16,17 +16,17 @@ $('document').ready(function(){
         $('#eventForm').formValidation('revalidateField', 'date');
     });
     $('input[type=radio][name=formaPago]').change(function() {
-        if (this.value == 'p') {
+        if (this.value == '0') {
             $("#pagoEfectivo").hide();
             $("#pagoTarjeta").hide();
             $("#pagoPayPal").show();
         }
-        else if (this.value == 't') {
+        else if (this.value == '1') {
             $("#pagoEfectivo").hide();
             $("#pagoTarjeta").show();
             $("#pagoPayPal").hide();
         }
-        else if (this.value == 'e') {
+        else if (this.value == '2') {
             $("#pagoEfectivo").show();
             $("#pagoTarjeta").hide();
             $("#pagoPayPal").hide();
