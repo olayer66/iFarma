@@ -37,15 +37,15 @@ public class Paciente implements Serializable {
 	@JoinColumn(name="id_usuario")
 	private Usuario usuario;
 	//direccion de envio de pedidos
-	@Column(name = "direccion", nullable = false)
+	@Column(name = "direccion", nullable = true)
 	private String direccion;
-	@Column(name = "ciudad", nullable = false)
+	@Column(name = "ciudad", nullable = true)
 	private String ciudad;
-	@Column(name = "cod_Postal", nullable = false)
+	@Column(name = "cod_Postal", nullable = true)
 	private String codPostal;
-	@Column(name = "provincia", nullable = false)
+	@Column(name = "provincia", nullable = true)
 	private String provincia;
-	@Column(name = "com_Autonoma", nullable = false)
+	@Column(name = "com_Autonoma", nullable = true)
 	private String comAutonoma;
 	
 	//Codigo para la confirmacion del paciente
@@ -62,12 +62,12 @@ public class Paciente implements Serializable {
 	private List<Tratamiento> tratamiento;
 	
 	//Farmamcia de referencia
-	@ManyToOne(optional=false)
+	@ManyToOne(optional=true)
     @JoinColumn(name="farmaciaReferencia",referencedColumnName="id_farmacia")
 	private Farmacia farmaciaReferencia;
 	
 	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)
-	@Column(name = "forma_pago", nullable = false)
+	@Column(name = "forma_pago", nullable = true)
 	private int formaPago;
 	
 	//datos tarjeta (si forma de pago es tarjeta)
