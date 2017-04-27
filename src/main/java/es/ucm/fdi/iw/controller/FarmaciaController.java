@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.validation.Login;
+import es.ucm.fdi.iw.validation.Medico;
 
 @Controller
 @RequestMapping("/farmacia")
@@ -45,6 +47,11 @@ public class FarmaciaController {
 		return "farmacia/pedidos";
 	}
 	
+	@RequestMapping("nuevoFarmaceutico")
+	String nuevoFarmaceuticoAction(Model model) {
+		model.addAttribute("nuevo", new Farmaceutico());
+		return "farmacia/nuevoFarmaceutico";
+	}
 	
 	@RequestMapping("stock")
 	String stockAction() {
@@ -79,6 +86,18 @@ public class FarmaciaController {
 		}
 	}
 
+	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
+	String login(@ModelAttribute("nuevo") @Valid Farmaceutico nuevo, BindingResult bindingResult, Model model,
+			HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			log.error("Paso por aqui");
+			return "farmacia/nuevoFermaceutico";
+		} else {
+			log.info("Paciente validado");
+			return "redirect:/index";
+		}
+	}
+	
 	@GetMapping("/logout")
 	String login(HttpSession sesion) {
 		sesion.invalidate();

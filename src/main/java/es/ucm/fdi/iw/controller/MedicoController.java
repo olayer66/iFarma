@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.ucm.fdi.iw.validation.Login;
+import es.ucm.fdi.iw.validation.Medico;
+import es.ucm.fdi.iw.validation.ValidarPaciente;
 
 @Controller
 @RequestMapping("/medico")
@@ -39,7 +41,11 @@ public class MedicoController {
 	String nuevoPacienteAction() {
 		return "medico/nuevoPaciente";
 	}
-
+	@RequestMapping("nuevoMedico")
+	String nuevoMedicoAction(Model model) {
+		model.addAttribute("nuevo", new Medico());
+		return "medico/nuevoMedico";
+	}
 	@RequestMapping("detalle-paciente")
 	String detallePacienteAction() {
 		return "medico/detallePaciente";
@@ -66,7 +72,17 @@ public class MedicoController {
 			}
 		}
 	}
-
+	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
+	String login(@ModelAttribute("nuevo") @Valid Medico nuevo, BindingResult bindingResult, Model model,
+			HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			log.error("Paso por aqui");
+			return "medico/nuevoMedico";
+		} else {
+			log.info("Paciente validado");
+			return "redirect:/index";
+		}
+	}
 	@GetMapping("/logout")
 	String login(HttpSession sesion) {
 		sesion.invalidate();

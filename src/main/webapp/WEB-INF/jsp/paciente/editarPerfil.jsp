@@ -57,13 +57,13 @@
 							<label for="usuario">Usuario:</label> <sf:input path="text" class="form-control" id="usuario"/>
 						</div>
 						<div class="form-group">
-							<label for="contrasenia">Contraseña antigua:</label> <sf:input path="text" class="form-control" id="contrasenia"/>
+							<label for="contrasenia">Contraseña antigua:</label> <sf:password path="password" class="form-control" id="contrasenia"/>
 						</div>					
 						<div class="form-group">
-							<label for="newcontrasenia">Contraseña nueva:</label> <sf:input path="text" class="form-control" id="newcontrasenia"/>
+							<label for="newcontrasenia">Contraseña nueva:</label> <sf:password path="password" class="form-control" id="newcontrasenia"/>
 						</div>
 						<div class="form-group">
-							<label for="newcontraseniarep">Repetir nueva contraseña:</label> <sf:input path="text" class="form-control" id="newcontraseniarep"/>
+							<label for="newcontraseniarep">Repetir nueva contraseña:</label> <sf:password path="password" class="form-control" id="newcontraseniarep"/>
 						</div>
                     </div>
                     <!--forma de pago-->
@@ -79,7 +79,7 @@
 	                        <div id="pagoTarjeta">
 	                             <div class="form-group">
 	                                <label for="numTarjeta">Numero tarjeta:</label>
-	                               <sf:input path="password" class="form-control" id="numTarjeta"/>
+	                               <sf:input path="text" class="form-control" id="numTarjeta"/>
 	                            </div>
 	                             <div class="form-group">
 	                                <label for="codSegTarjeta">CVC:</label>
