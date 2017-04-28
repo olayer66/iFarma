@@ -3,11 +3,26 @@ package es.ucm.fdi.iw.validation;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class ValidarPaciente {
 	
+	//Datos que no se tocan
+	@NotEmpty(message = "El campo esta vacio")
+	@Pattern(regexp = "[A-Za-z]*",message = "El nombre no puede contener numeros ni caracteres especiales")
+	private String nombre;
+	@NotEmpty(message = "El campo esta vacio")
+	@Pattern(regexp = "[A-Za-z\n]*",message = "los apellidos no pueden contener numeros ni caracteres especiales")	
+	private String apellidos;
+	@NotEmpty(message = "El campo esta vacio")
+	@Email(message = "La direccion email no es correcta")
+	private String email;
+	@NotEmpty(message = "El campo esta vacio")
+	@Pattern(regexp = "[0-9]*",message = "El telefono ha de ser numerico")
+	private String telefono;
+
 	//Datos de usuario
 	@NotEmpty(message = "El campo esta vacio")
 	@Size(min=3)

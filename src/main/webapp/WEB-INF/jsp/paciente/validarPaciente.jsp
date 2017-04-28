@@ -19,19 +19,35 @@
         <sf:form modelAttribute="validar" action="${formUrl}">
 			<fieldset>
             <!--Datos del usuario-->
-            	<div class="col-md-4 portfolio-item">
+            	<div class="col-md-3 portfolio-item">
                 	<h3>Datos personales</h3>
 	                <div class="form-group">
 	                    <label for="nombre">Nombre:</label>
-	                    <sf:input path="text" value="" class="form-control" id="nombre"/>
+	                    <sf:input path="nombre" value="" class="form-control" id="nombre" disabled="disabled"/>
 	                </div>
 	                <div class="form-group">
 	                    <label for="apellidos">Apellidos:</label>
-	                    <sf:input path=" value="" class="form-control" id="apellidos"/>
+	                    <sf:input path="apellidos" value="" class="form-control" id="apellidos" disabled="disabled"/>
+	                </div>
+	                <div class="form-group">
+                        <label for="email">Email:</label>
+                        <sf:input path="email" class="form-control" id="email" disabled="disabled"/>
+                   </div>
+                    <div class="form-group">
+                        <label for="Telefono">Telefono:</label>
+                        <sf:input path="telefono" class="form-control" id="Telefono" disabled="disabled"/>
+                   </div>   
+            	</div>
+            	<!-- Direccion -->
+            	<div class="col-md-3 portfolio-item">
+                	<h3>Datos personales</h3>
+	                <div class="form-group">
+	                    <label for="direccion">Direccion:</label>
+	                    <sf:input path="direccion" value="" class="form-control" id="nombre" disabled="disabled"/>
 	                </div>
             	</div>
 	            <!--contraseña-->
-	            <div class="col-md-4 portfolio-item">
+	            <div class="col-md-3 portfolio-item">
 	                <h3>Contraseña</h3>
 	                <div class="form-group">
 	                    <label for="contrasenia">Contraseña:</label>
@@ -39,13 +55,13 @@
 	                </div>
 	                <div class="form-group">
 	                    <label for="contraseniaRep">Repetir:</label>
-	                    <sf:password path="password" class="form-control" id="contraseniaRep"/>
+	                    <sf:password path="contraseniaRep" class="form-control" id="contraseniaRep"/>
 	                </div>
 	            </div>
 	            <!--forma de pago-->
-	            <div class="col-md-4 portfolio-item">
+	            <div class="col-md-3 portfolio-item">
 	                <h3>Forma de pago</h3>
-	                <label class="radio-inline"><sf:checkbox path="formaPago" value="0" disabled="disabled"/>PayPal</label>
+	                <label class="radio-inline"><sf:checkbox path="formaPago" value="0"/>PayPal</label>
 	                <label class="radio-inline"><sf:checkbox path="formaPago" value="1"/>Tarjeta</label>
 	                <label class="radio-inline"><sf:checkbox path="formaPago" value="2"/>Contrareembolso</label>
 	                <div id="pagoPayPal">
@@ -55,15 +71,15 @@
 	                <div id="pagoTarjeta">
 	                     <div class="form-group">
 	                        	<label for="numTarjeta">Numero tarjeta:</label>
-	                        	<sf:input path="text" class="form-control" id="numTarjeta"/>
+	                        	<sf:input path="numTarjeta" class="form-control" id="numTarjeta"/>
 	                     </div>
 	                     <div class="form-group">
 	                         <label for="codSegTarjeta">CVC:</label>
-	                         <sf:input path="text" class="form-control" id="codSegTarjeta"/>
+	                         <sf:input path="codSegTarjeta" class="form-control" id="codSegTarjeta"/>
 	                     </div>
 	                    <div class="form-group">
 	                         <label for="fechaCadTarjeta">Fecha Cad::</label>
-	                         <sf:input path="date" class="form-control" id="fechaCadTarjeta"/>
+	                         <sf:input path="fechaCadTarjeta" class="form-control" id="fechaCadTarjeta"/>
 	                    </div>
 	                </div>
 	                <div id="pagoEfectivo">

@@ -23,7 +23,7 @@
                </p>
                <label>Codigo:</label>
                <input type="text" name="codigo" id="codNuevoPaciente">
-               <a data-toggle="tab" class="btn btn-default"  id="btnNuevoPaciente" href="/paciente/validarPaciente">Inscribirse</a>
+               <a class="btn btn-default"  id="btnNuevoPaciente" href="/paciente/validarPaciente">Inscribirse</a>
            </div>
            <div class="col-md-4 portfolio-item">
                <img class="img-responsive" src="/static/img/banner-med.jpg">
@@ -31,7 +31,7 @@
                <p>
                    Si quieres registrarte como medico pulsa el siguiente boton.
                </p>
-               <a data-toggle="tab" class="btn btn-default" id="btnNuevoMedico" href="/medico/nuevoMedico">Inscribirse</a>
+               <a class="btn btn-default" id="btnNuevoMedico" href="/medico/nuevoMedico">Inscribirse</a>
            </div>
            <div class="col-md-4 portfolio-item">
                <img class="img-responsive" src="/static/img/banner-far.jpg">
@@ -39,7 +39,7 @@
                <p>
                    Bienvenido si eres farmaceutico y quieres unirte a nuestra red de suministradores pulsa en el siguiente boton.
                </p>
-               <a data-toggle="tab" class="btn btn-default" id="btnNuevaFarmacia" href="/farmacia/nuevaFarmacia">Inscribirse</a>
+               <a class="btn btn-default" id="btnNuevaFarmacia" href="/farmacia/nuevoFarmaceutico">Inscribirse</a>
           </div>
     </div>      
 </div>

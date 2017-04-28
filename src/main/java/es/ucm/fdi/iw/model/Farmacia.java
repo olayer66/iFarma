@@ -10,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -41,7 +39,8 @@ public class Farmacia implements Serializable {
 	private String codPostal;
 	@Column(name = "provincia", nullable = false)
 	private String provincia;
-
+	@Column(name = "com_Autonoma", nullable = true)
+	private String comAutonoma;
 	
 	//Dueño de la farmacia (N/1)
 	@ManyToOne(optional=false)
