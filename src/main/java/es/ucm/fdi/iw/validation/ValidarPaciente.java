@@ -53,16 +53,16 @@ public class ValidarPaciente {
 	
 	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)
 	@NotEmpty(message = "El campo esta vacio")
-	private int formaPago;	
+	private String formaPago;	
 	
 	//datos tarjeta (si forma de pago es tarjeta)
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "[0-9]*",message = "El nº de tarjeta ha de ser numerico")
-	private long numTarjeta;
+	private String numTarjeta;
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "[0-9]*",message = "El codigo de seguridad ha de ser numerico")
 	@Size(min=3,max=3,message="El codigo de seguridad ha de tener tres digitos")
-	private int codSegTarjeta;
+	private String codSegTarjeta;
 	@NotEmpty(message = "El campo esta vacio")
 	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String fechaCadTarjeta;
@@ -73,9 +73,42 @@ public class ValidarPaciente {
 		return true;	
 	}
 	//Getters y setters
+	
 	public String getUsuario() {
 		return usuario;
 	}
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
@@ -121,24 +154,30 @@ public class ValidarPaciente {
 	public void setComAutonoma(String comAutonoma) {
 		this.comAutonoma = comAutonoma;
 	}
-	public int getFormaPago() {
+	public String getFormaPago() {
 		return formaPago;
 	}
-	public void setFormaPago(int formaPago) {
+
+	public void setFormaPago(String formaPago) {
 		this.formaPago = formaPago;
 	}
-	public long getNumTarjeta() {
+
+	public String getNumTarjeta() {
 		return numTarjeta;
 	}
-	public void setNumTarjeta(long numTarjeta) {
+
+	public void setNumTarjeta(String numTarjeta) {
 		this.numTarjeta = numTarjeta;
 	}
-	public int getCodSegTarjeta() {
+
+	public String getCodSegTarjeta() {
 		return codSegTarjeta;
 	}
-	public void setCodSegTarjeta(int codSegTarjeta) {
+
+	public void setCodSegTarjeta(String codSegTarjeta) {
 		this.codSegTarjeta = codSegTarjeta;
 	}
+
 	public String getFechaCadTarjeta() {
 		return fechaCadTarjeta;
 	}

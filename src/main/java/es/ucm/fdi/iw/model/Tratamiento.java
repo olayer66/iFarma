@@ -42,12 +42,19 @@ public class Tratamiento implements Serializable {
 	//duracion en dias del tratamiento
 	@Column(name = "fecha_fin_tratamiento", nullable = false)
 	private Date fechaFinTratamiento;
-	//numero de (pastillas,grageas,etc) por cada toma
+	//numero de pastillas tomadas
 	@Column(name = "num_dosis", nullable = true)
 	private String numDosis;
-	//tiempo entre dosis (cada 8 horas, 1 al dia, etc)
+	//tiempo entre dosis (cada 8 horas, 1 al dia, etc)//en horas
 	@Column(name = "perioicidad", nullable = false)
 	private String perioicidad;
+	//Numero restante de tomas del dia
+	@Column(name = "num_dosis_dia", nullable = false)
+	private String numDosisDia;
+	//fecha del dia acutal para el calculo de las tomas
+	@Column(name = "fecha_actual", nullable = false)
+	private Date fechaActual;
+	
 	
 	//getters y setters
 	public long getIDTratamiento() {
