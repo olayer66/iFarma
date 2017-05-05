@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.ucm.fdi.iw.validation.Farmaceutico;
-import es.ucm.fdi.iw.validation.Login;
-import es.ucm.fdi.iw.validation.Medico;
 
 @Controller
 @RequestMapping("/farmacia")
@@ -28,9 +26,8 @@ public class FarmaciaController {
 	private EntityManager entityManager;
 	
 	@GetMapping("")
-	String pantallaLoginAction(Model model) {
-		model.addAttribute("login", new Login());
-		return "farmacia/loginFarmacia";
+	String pantallaLoginAction() {
+		return "farmacia/farmaceutico";
 	}
 	
 	@RequestMapping("farmaceutico")
@@ -65,27 +62,7 @@ public class FarmaciaController {
 	String modificarfarmaciaAction() {
 		return "farmacia/modificarFarmacia";
 	}
-
-
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	String login(@ModelAttribute("login") @Valid Login login, BindingResult bindingResult, Model model,
-			HttpSession sesion) {
-		if (bindingResult.hasErrors()) {
-			log.error("Paso por aqui");
-			return "farmacia/loginFarmacia";
-		} else {
-			if (login.hasRole("farmaceutico")) {
-				sesion.setAttribute("usuario", login.getUsuario());
-				log.info("El farmaceutico " + login.getUsuario() + " se ha logeado");
-				return "farmacia/farmaceutico";
-			} else {
-				log.error("Error en el login");
-				return "redirect:/index";
-			}
-		}
-	}
-
+	
 	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
 	String login(@ModelAttribute("nuevo") @Valid Farmaceutico nuevo, BindingResult bindingResult, Model model,
 			HttpSession sesion) {
@@ -97,15 +74,4 @@ public class FarmaciaController {
 			return "redirect:/index";
 		}
 	}
-	
-	@GetMapping("/logout")
-	String login(HttpSession sesion) {
-		sesion.invalidate();
-		log.info("Sesion finalizada");
-		return "redirect:/index";
-	}
-/*	@RequestMapping("/farmacia/farmacia")
-	String farmaciaAction() {
-		return "farmacia/farmacia";
-	}*/
 }

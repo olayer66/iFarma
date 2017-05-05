@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.ucm.fdi.iw.validation.Login;
 import es.ucm.fdi.iw.validation.Medico;
-import es.ucm.fdi.iw.validation.ValidarPaciente;
 
 @Controller
 @RequestMapping("/medico")
@@ -29,8 +28,7 @@ public class MedicoController {
 	
 	@GetMapping("")
 	String pantallaLoginAction(Model model) {
-		model.addAttribute("login", new Login());
-		return "medico/loginMedico";
+		return "medico/listadoPacientes";
 	}
 	@GetMapping({"listado-pacientes"})
 	String listadoPacientesAction() {

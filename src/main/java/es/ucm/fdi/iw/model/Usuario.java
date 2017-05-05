@@ -39,8 +39,8 @@ public class Usuario implements Serializable {
 	private int estado;
 	
 	//Tipo de usuario
-	@Column(name = "tipo", nullable = false)
-	private String tipo;
+	@Column(name = "role", nullable = false)
+	private String role;
 	//Usuario y contraseña para le login del usuario
 	@Column(name = "usuario", nullable = true)
 	private String usuario;
@@ -108,4 +108,17 @@ public class Usuario implements Serializable {
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
+	public int getEstado() {
+		return estado;
+	}
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 }

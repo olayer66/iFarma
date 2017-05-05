@@ -10,15 +10,9 @@
             <a class="navbar-brand" href="/index"><img src="/static/img/logo1.png" alt="Inicio"></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbar-right">
                 <li>
-                  <a href="/paciente">Pacientes</a>
-                </li>
-                <li>
-                    <a href="/medico">Medicos</a>
-                </li>
-                <li>
-                    <a href="/farmacia">Farmacias</a>
+                  <a href="/login">Iniciar sesión</a>
                 </li>
             </ul>
         </div>
