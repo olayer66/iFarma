@@ -3,7 +3,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <%@ include file="../jspf/header.jspf"%>
-
 <%@ include file="../jspf/navbarLoginAdmin.jspf"%>
 
 <div class="container">
@@ -14,22 +13,34 @@
          </div>
 	</div>
 	<div class="row">
-		<div class="col-lg-6">
-			<form action="/login" method="post">               
-		        <fieldset>
-		            <legend>Please Login</legend>
-		            <label for="username">Username</label>
-		            <input type="text" id="username" name="username"/>        
-		            <label for="password">Password</label>
-		            <input type="password" id="password" name="password"/>
-		            
-		            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		            
-		            <div class="form-actions">
-		                <button type="submit" class="btn">Log in</button>
-		            </div>
-		        </fieldset>
-			</form>
+		<div class="col-lg-4">
+			<c:url var="loginUrl" value="/login" />
+            <form action="${loginUrl}" method="post" class="form-horizontal">
+                <c:if test="${param.error != null}">
+                    <div class="alert alert-danger">
+                        <p>Nombre de usuario o contraseña incorrectos.</p>
+                    </div>
+                </c:if>
+                <c:if test="${param.logout != null}">
+                    <div class="alert alert-success">
+                        <p>Se ha cerrado la sesion correctamente.</p>
+                    </div>
+                </c:if>
+                <div class="input-group input-sm">
+                    <label class="input-group-addon" for="username"><i class="fa fa-user"></i></label>
+                    <input type="text" class="form-control" id="username" name="ssoId" placeholder="Introducir usuario" required>
+                </div>
+                <div class="input-group input-sm">
+                    <label class="input-group-addon" for="password"><i class="fa fa-lock"></i></label> 
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Introducir contraseña" required>
+                </div>
+                <input type="hidden" name="${_csrf.parameterName}"   value="${_csrf.token}" />
+                     
+                <div class="form-actions">
+                    <input type="submit"
+                        class="btn btn-block btn-primary btn-default" value="Iniciar sesion">
+                </div>
+            </form>
 		</div>
 	</div>
 </div>

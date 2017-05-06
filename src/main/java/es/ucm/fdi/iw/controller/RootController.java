@@ -62,11 +62,17 @@ public class RootController {
 		return "/login";
 	}
 
-	@GetMapping("/logout")
+	@RequestMapping("/logout")
 	String login(HttpSession sesion) {
 		sesion.invalidate();
 		log.info("Sesion finalizada");
 		return "redirect:/index";
+	}
+	@RequestMapping("/denegado")
+	String accesoDenegado(HttpSession sesion) {
+		sesion.invalidate();
+		log.warn("Acceso no permitido");
+		return "/denegado";
 	}
 
 }

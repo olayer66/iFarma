@@ -19,13 +19,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
         		.antMatchers("/static/**", "/logout", "/403","/index","/").permitAll()
-				.mvcMatchers("/admin").hasRole("administrador")
-        		.antMatchers("/admin/**").hasRole("administrador")
+				.mvcMatchers("/admin").hasRole("ADMIN")
+        		.antMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
 				.permitAll()
 	            .loginPage("/login")
+	            .usernameParameter("ssoId").passwordParameter("password")
+	            .and().csrf()
+	            .and().exceptionHandling().accessDeniedPage("/denegado")
 	            .and()
 			.logout()
 				.logoutUrl("admin/logout")
@@ -44,13 +47,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public void configureGlobal(AuthenticationManagerBuilder auth) 
 			throws Exception {
 		auth.inMemoryAuthentication()
-				.withUser("admin").password("1234").roles("administrador")
+				.withUser("admin").password("1234").roles("ADMIN")
 				.and()
-				.withUser("paco").password("1234").roles("paciente")
+				.withUser("paco").password("1234").roles("PAC")
 				.and()
-				.withUser("juan").password("1234").roles("medico")
+				.withUser("juan").password("1234").roles("MED")
 				.and()
-				.withUser("antonio").password("1234").roles("farmacia");
+				.withUser("antonio").password("1234").roles("FAR");
 	}
 
 	
