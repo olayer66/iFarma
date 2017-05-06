@@ -11,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller	
 public class RootController {
@@ -30,10 +31,10 @@ public class RootController {
 		return ((User)principal).getAuthorities().contains(a);
 	}
 	
-	@GetMapping("login")
+	@RequestMapping("/login")
 	String login(HttpSession sesion, Principal principal) {
 		
-		if(hasAuthority(principal, "administrador"))
+		/*if(hasAuthority(principal, "administrador"))
 		{
 			log.info("logeado como adminsitrador");
 			return "redirect:/admin";
@@ -57,7 +58,8 @@ public class RootController {
 		{
 			log.error("Role no reconocido");
 			return "redirect:/index";
-		}
+		}*/
+		return "/login";
 	}
 
 	@GetMapping("/logout")
