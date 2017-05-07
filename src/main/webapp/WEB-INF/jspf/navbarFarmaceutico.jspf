@@ -28,7 +28,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#">Configuración</a></li>
                             <li><a href="/farmacia/modificarFarmaceutico">Editar perfil</a></li>
-                            <li><a href="/">Cerrar sesión</a></li>
+                            <li><a href="/logout">Cerrar sesión</a></li>
                         </ul>
                     </li>
                 </ul>

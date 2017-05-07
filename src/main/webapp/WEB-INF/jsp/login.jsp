@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <%@ include file="../jspf/header.jspf"%>
-<%@ include file="../jspf/navbarLoginAdmin.jspf"%>
+<%@ include file="../jspf/navbarLogin.jspf"%>
 
 <div class="container">
     <div class="row">

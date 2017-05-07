@@ -34,7 +34,7 @@
                             <li><a href="#">Configuración</a></li>
                             <li><a href="/farmacia/modificarFarmacia">Editar perfil farmacia</a></li>
 							<li><a href="/farmacia/modificarFarmaceutico">Editar perfil farmaceutico</a></li>
-                            <li><a href="/">Cerrar sesión</a></li>
+                            <li><a href="/logout">Cerrar sesión</a></li>
                         </ul>
                     </li>
                 </ul>
