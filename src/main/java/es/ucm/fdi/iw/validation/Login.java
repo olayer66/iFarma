@@ -16,17 +16,17 @@ public class Login {
 	private String contrasenia;
 	private static final Logger log = Logger.getLogger(Login.class);
 
-	public boolean hasRole(String role) {
+	public String hasRole() {
 		if (usuario != null && contrasenia != null) {
 			if (usuario.equals("admin") && contrasenia.equals("1234")) {
 				log.info("Inicio de sesion correcto");
-				return true;
+				return "PAC";
 			} else {
 				log.warn("Fallo en el inicio de sesion");
-				return false;
+				return "";
 			}
 		} else {
-			return false;
+			return "";
 		}
 	}
 

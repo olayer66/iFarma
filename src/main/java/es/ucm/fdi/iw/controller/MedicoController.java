@@ -27,7 +27,7 @@ public class MedicoController {
 	private EntityManager entityManager;
 	
 	@GetMapping("")
-	String pantallaLoginAction(Model model) {
+	String indexAction() {
 		return "medico/listadoPacientes";
 	}
 	@GetMapping({"listado-pacientes"})
@@ -52,23 +52,6 @@ public class MedicoController {
 	@RequestMapping("feedback")
 	String feedbackAction() {
 		return "medico/feedback";
-	}
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	String login(@ModelAttribute("login") @Valid Login login, BindingResult bindingResult, Model model,
-			HttpSession sesion) {
-		if (bindingResult.hasErrors()) {
-			log.error("Paso por aqui");
-			return "medico/loginMedico";
-		} else {
-			if (login.hasRole("medico")) {
-				sesion.setAttribute("usuario", login.getUsuario());
-				log.info("El administrador " + login.getUsuario() + " se ha logeado");
-				return "/medico/listadoPacientes";
-			} else {
-				log.error("Error en el login");
-				return "redirect:/index";
-			}
-		}
 	}
 	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
 	String login(@ModelAttribute("nuevo") @Valid Medico nuevo, BindingResult bindingResult, Model model,
