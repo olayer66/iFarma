@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import es.ucm.fdi.parser.parserMedicamentos;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -53,6 +55,11 @@ public class AdminController {
 
 	@RequestMapping("nuevoMedicamento")
 	String nuevoMedicamentoAction() {
+		return "admin/nuevoMedicamento";
+	}
+	@RequestMapping("insMedicmaentos")
+	String insertarMedicamentos() {
+		new parserMedicamentos("/static/json/medicamentos.json");
 		return "admin/nuevoMedicamento";
 	}
 }
