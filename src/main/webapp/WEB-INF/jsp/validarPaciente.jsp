@@ -3,10 +3,10 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../../jspf/header.jspf" %>
+<%@ include file="../jspf/header.jspf" %>
 
 
-<%@ include file="../../jspf/navbar.jspf" %>
+<%@ include file="../jspf/navbar.jspf" %>
 
 <div class="container">
     <div class="row">
@@ -16,7 +16,7 @@
             <h1><small>Por favor compruebe los datos y rellene los que falten</small></h1>
         </div>
      </div>
-     <s:url var="formUrl" value="/paciente/validar" />
+     <s:url var="formUrl" value="/validarPacienteSubmit" />
      <sf:form modelAttribute="validar" action="${formUrl}">
 	 <fieldset>
      <div class="row">   
@@ -125,4 +125,4 @@
 	  </sf:form>
 </div>
 
-<%@ include file="../../jspf/footer.jspf"%>
+<%@ include file="../jspf/footer.jspf"%>

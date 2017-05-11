@@ -18,24 +18,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "pacientes",
-	   uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "id_paciente")
-	})
+@Table(name = "pacientes")
 //Peticiones a la tabla
 @NamedQueries({	
 })
-public class Paciente implements Serializable {
+public class Paciente extends Usuario {
 	private static final long serialVersionUID = 2117067448004216461L;
 
-	@Id
-	@Column(name = "id_paciente", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDPaciente;
-	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_usuario")
-	private Usuario usuario;
 	//direccion de envio de pedidos
 	@Column(name = "direccion", nullable = true)
 	private String direccion;

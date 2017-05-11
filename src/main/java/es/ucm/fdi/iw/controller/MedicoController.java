@@ -52,17 +52,6 @@ public class MedicoController {
 	String feedbackAction() {
 		return "medico/feedback";
 	}
-	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
-	String login(@ModelAttribute("nuevo") @Valid Medico nuevo, BindingResult bindingResult, Model model,
-			HttpSession sesion) {
-		if (bindingResult.hasErrors()) {
-			log.error("Paso por aqui");
-			return "medico/nuevoMedico";
-		} else {
-			log.info("Paciente validado");
-			return "redirect:/index";
-		}
-	}
 	@GetMapping("/logout")
 	String login(HttpSession sesion) {
 		sesion.invalidate();

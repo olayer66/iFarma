@@ -3,29 +3,27 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="../../jspf/header.jspf" %>
+<%@ include file="../jspf/header.jspf" %>
 
 
-<%@ include file="../../jspf/navbar.jspf" %>
+<%@ include file="../jspf/navbar.jspf" %>
 
 <div class="container">
-    <div class="row">
-	    <div class="container">
 	<!--Inicio-->
     <div class="row">
     	<div class="col-lg-12">
-            <h1 class="page-header">Nuevo farmaceutico</h1>
+            <h1 class="page-header">Nuevo Medico</h1>
             <h1><small>Rellene el siguiente formulario.</small></h1>
         </div>
     </div>
      <!--Nueva farmacia-->
     <div class="row">
-        <s:url var="formUrl" value="/farmacia/nuevo" />
+        <s:url var="formUrl" value="/nuevoMedicoSubmit" />
    		<sf:form modelAttribute="nuevo" action="${formUrl}">
 			<fieldset>
                    <!--Datos del medico-->
                <div class="col-md-6 portfolio-item">
-                   <h3>Datos farmaceutico</h3>
+                   <h3>Datos medico</h3>
                    <div class="form-group">
                         <label for="nombre">Nombre:</label>
                         <sf:input path="nombre" class="form-control" id="nombre"/>
@@ -35,8 +33,12 @@
                         <sf:input path="apellidos" class="form-control" id="apellidos"/>
                    </div>
                    <div class="form-group">
-                        <label for="numColFarmaceutico">Numero colegiado:</label>
-                        <sf:input path="numColFarmaceutico" class="form-control" id="numColFarmaceutico"/>
+                        <label for="numColMedico">Numero colegiado:</label>
+                        <sf:input path="numColMedico" class="form-control" id="numColMedico"/>
+                   </div>
+                   <div class="form-group">
+                        <label for="centroTrabajo">centro Trabajo:</label>
+                        <sf:input path="centroTrabajo" class="form-control" id="centroTrabajo"/>
                    </div>
                     <div class="form-group">
                         <label for="email">Email:</label>
@@ -70,4 +72,4 @@
 	 </div>
 </div>
 
-<%@ include file="../../jspf/footer.jspf"%>
+<%@ include file="../jspf/footer.jspf"%>

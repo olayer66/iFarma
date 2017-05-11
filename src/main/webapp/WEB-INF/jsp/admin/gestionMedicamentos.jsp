@@ -12,7 +12,10 @@
                 <div class="col-lg-12">
                      <div id="medicamentos">
                    
-	                 	<h2 class="page-header">Medicamentos    <a href="/admin/nuevoMedicamento" class="btn btn-default">Añadir</a></h2>
+	                 	<h2 class="page-header">Medicamentos    
+	                 	<a href="/admin/nuevoMedicamento" class="btn btn-default">Añadir</a>
+	                 	<a href="/admin/insMedicmaentos" class="btn btn-default">Cargar fichero</a>
+	                 	</h2>
 	                    
 	                    <div>
 	                        <table id="tablaMedicamento" class="table table-bordered table-striped">

@@ -2,6 +2,7 @@ package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
 import java.util.List;
+
 //Imports de JPA
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,17 +14,18 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "usuarios", 
-uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "id_usuario")
-	})
+@Table(name = "usuarios")
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 3918714646456852426L;
 	
+	public Usuario() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Id
-	@Column(name = "id_usuario", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDUsuario;
+	private long id;
+	
 	//datos del usuario
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
@@ -90,11 +92,11 @@ public class Usuario implements Serializable {
 	public void setMensajesEnviados(List<Mensaje> mensajesEnviados) {
 		this.mensajesEnviados = mensajesEnviados;
 	}
-	public long getIDUsuario() {
-		return IDUsuario;
+	public long getId() {
+		return id;
 	}
-	public void setIDUsuario(long iDUsuario) {
-		IDUsuario = iDUsuario;
+	public void setId(long iDUsuario) {
+		id = iDUsuario;
 	}
 	public String getUsuario() {
 		return usuario;

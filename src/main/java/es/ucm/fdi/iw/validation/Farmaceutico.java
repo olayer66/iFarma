@@ -32,6 +32,11 @@ public class Farmaceutico {
 	@Pattern(regexp = "[0-9]*",message = "El numero de colegiado ha de ser numerico")
 	private String numColFarmaceutico;
 	
+	public void insertar()
+	{
+		
+	}
+	
 	//variables de insercion
 	private final String tipo="farmaceutico";
 	private final int estado=0;

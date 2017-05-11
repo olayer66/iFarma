@@ -44,12 +44,6 @@ public class FarmaciaController {
 		return "farmacia/pedidos";
 	}
 	
-	@RequestMapping("nuevoFarmaceutico")
-	String nuevoFarmaceuticoAction(Model model) {
-		model.addAttribute("nuevo", new Farmaceutico());
-		return "farmacia/nuevoFarmaceutico";
-	}
-	
 	@RequestMapping("stock")
 	String stockAction() {
 		return "farmacia/stock";
@@ -61,17 +55,5 @@ public class FarmaciaController {
 	@RequestMapping("modificarFarmacia")
 	String modificarfarmaciaAction() {
 		return "farmacia/modificarFarmacia";
-	}
-	
-	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
-	String login(@ModelAttribute("nuevo") @Valid Farmaceutico nuevo, BindingResult bindingResult, Model model,
-			HttpSession sesion) {
-		if (bindingResult.hasErrors()) {
-			log.error("Paso por aqui");
-			return "farmacia/nuevoFermaceutico";
-		} else {
-			log.info("Paciente validado");
-			return "redirect:/index";
-		}
 	}
 }

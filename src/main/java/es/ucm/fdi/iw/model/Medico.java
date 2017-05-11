@@ -1,6 +1,5 @@
 package es.ucm.fdi.iw.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,21 +15,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "medicos", 
-	   uniqueConstraints = {
-			   @UniqueConstraint(columnNames = "id_medico")
-		})
-public class Medico implements Serializable {
+@Table(name = "medicos")
+public class Medico extends Usuario {
 	private static final long serialVersionUID = 9190127841629484829L;
-	
-	@Id
-	@Column(name = "id_medico", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDMedico;
-	
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_usuario")
-	private Usuario usuario;
 	
 	@Column(name = "num_col_medico", nullable = false)
 	private String numColMedico;
