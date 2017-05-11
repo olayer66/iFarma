@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.validation.Medico;
 
 @Controller
@@ -52,6 +53,12 @@ public class MedicoController {
 	String feedbackAction() {
 		return "medico/feedback";
 	}
+	
+	@RequestMapping(value = "feedback/nuevo", method = RequestMethod.POST)
+	String nuevoFeedbackAction(@ModelAttribute("crearFeedback") @Valid Mensaje mensaje, BindingResult bindingResult, HttpSession sesion) {
+		return "medico/feedback";
+	}
+	
 	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
 	String login(@ModelAttribute("nuevo") @Valid Medico nuevo, BindingResult bindingResult, Model model,
 			HttpSession sesion) {

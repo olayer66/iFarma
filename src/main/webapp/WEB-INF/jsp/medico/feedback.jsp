@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <%@ include file="../../jspf/header.jspf" %>
 
@@ -10,6 +11,11 @@
 
     <div class="col-lg-2">
         <ul class="nav nav-pills nav-stacked">
+            <button class="btn btn-default btn-block" data-toggle="modal" data-target="#redactarMensaje">
+                Redactar
+            </button>
+            <br>
+
             <li class="active">
                 <a data-toggle="tab" href="#inbox">
                     Recibidos <span class="badge pull-right">4</span>
@@ -145,6 +151,42 @@
             <div id="trash" class="tab-pane fade">
                 <table class="table table-hover table-striped">
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="redactarMensaje" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Redactar mensaje</h4>
+            </div>
+
+            <div class="modal-body">
+                <sf:form modelAttribute="crearFeedback" action="/medico/feedback/nuevo">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <sf:input path="destinatario" class="form-control" placeholder="Para:" value="">
+                            <p><sf:errors path="destinatario" cssClass="error"/></p>
+                        </div>
+                        <div class="form-group">
+                            <sf:input path="asunto" class="form-control" placeholder="Asunto:" value="">
+                            <p><sf:errors path="asunto" cssClass="error"/></p>
+                        </div>
+                        <div class="form-group">
+                            <sf:textarea path="mensaje" class="form-control" style="height: 250px" placeholder="Mensaje..."></sf:textarea>
+                            <p><sf:errors path="mensaje" cssClass="error"/></p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Enviar</button>
+                </sf:form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
