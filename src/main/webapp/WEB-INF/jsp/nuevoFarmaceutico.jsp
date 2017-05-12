@@ -9,6 +9,8 @@
 <%@ include file="../jspf/navbar.jspf" %>
 
 <div class="container">
+    <div class="row">
+	    <div class="container">
 	<!--Inicio-->
     <div class="row">
     	<div class="col-lg-12">
@@ -18,7 +20,7 @@
     </div>
      <!--Nueva farmacia-->
     <div class="row">
-        <s:url var="formUrl" value="/nuevoFarmaceuticoSubmit" />
+        <s:url var="formUrl" value="/nuevoFarmacueticosubmit" />
    		<sf:form modelAttribute="nuevo" action="${formUrl}">
 			<fieldset>
                    <!--Datos del medico-->

@@ -4,6 +4,12 @@ import java.io.File;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * Uses constructor parameter as base for file-writing operations.
+ * Can create missing intermediate directories. 
+ *  
+ * @author mfreire
+ */
 public class LocalData {    	    
 	private static Log log = LogFactory.getLog(LocalData.class);
 

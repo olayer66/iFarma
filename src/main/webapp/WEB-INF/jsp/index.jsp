@@ -1,5 +1,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
@@ -21,9 +23,20 @@
                <p>
                    Si deseas registrarte como paciente deberas tener el codigo proporcionado por tu medico de cabecera y pulsar el siguiente boton.
                </p>
-               <label>Codigo:</label>
-               <input type="text" name="codigo" id="codNuevoPaciente">
-               <a class="btn btn-default"  id="btnNuevoPaciente" href="/paciente/validarPaciente">Inscribirse</a>
+               <s:url var="formUrl" value="/validarCodigo" />
+			   <sf:form modelAttribute="control" action="${formUrl}" class="form-inline">
+					<fieldset>
+						<label>Codigo:</label>
+						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+	               			<sf:input path="codigo" class="form-control" id="codigo"/>  	
+	               					
+               			</div>
+               			<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+               				<input type="submit" class="btn btn-primary" value="Validar">
+               			</div>
+               			<p><sf:errors path="codigo" cssClass="error"/></p>
+               		</fieldset>
+               </sf:form>
            </div>
            <div class="col-md-4 portfolio-item">
                <img class="img-responsive" src="/static/img/banner-med.jpg">
@@ -31,7 +44,7 @@
                <p>
                    Si quieres registrarte como medico pulsa el siguiente boton.
                </p>
-               <a class="btn btn-default" id="btnNuevoMedico" href="/medico/nuevoMedico">Inscribirse</a>
+               <a class="btn btn-default" id="btnNuevoMedico" href="/nuevoMedico">Inscribirse</a>
            </div>
            <div class="col-md-4 portfolio-item">
                <img class="img-responsive" src="/static/img/banner-far.jpg">
@@ -39,7 +52,7 @@
                <p>
                    Bienvenido si eres farmaceutico y quieres unirte a nuestra red de suministradores pulsa en el siguiente boton.
                </p>
-               <a class="btn btn-default" id="btnNuevaFarmacia" href="/farmacia/nuevoFarmaceutico">Inscribirse</a>
+               <a class="btn btn-default" id="btnNuevaFarmacia" href="/nuevoFarmaceutico">Inscribirse</a>
           </div>
     </div>      
 </div>

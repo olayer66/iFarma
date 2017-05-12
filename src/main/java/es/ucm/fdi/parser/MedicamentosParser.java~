@@ -12,16 +12,14 @@ import org.json.JSONObject;
 import es.ucm.fdi.iw.model.Medicamento;
 
 
-public class parserMedicamentos {
+public class MedicamentosParser {
 	
-	public parserMedicamentos(String fichero,EntityManager manager)
+	public MedicamentosParser(String fichero,EntityManager manager)
 	{
-		if(!fichero.equals(""))
+/*		if(!fichero.equals(""))
 		{
 			try {
-				manager.getTransaction().begin();
 				cargar(fichero, manager);
-				manager.getTransaction().commit();
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -30,6 +28,7 @@ public class parserMedicamentos {
 	
 	private void cargar(String fichero, EntityManager em) throws FileNotFoundException
 	{
+		em.getTransaction().begin();
 		String jsonStr;
 		try {
 			Medicamento medicamento=new Medicamento();
@@ -49,11 +48,12 @@ public class parserMedicamentos {
                em.persist(medicamento);
                 
             }
+			em.getTransaction().commit();
         } catch (Exception e) {
             // JSON Parsing error
             e.printStackTrace();
         }
-	}
+*/	}
 	
 
 }
