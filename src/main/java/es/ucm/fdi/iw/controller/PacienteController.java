@@ -45,11 +45,6 @@ public class PacienteController {
 	String pedidosPcAction() {
 		return "paciente/pedidosPc";
 	}
-	@RequestMapping("validarPaciente")
-	String validarPacienteAction(Model model) {
-		model.addAttribute("validar", new ValidarPaciente());
-		return "paciente/validarPaciente";
-	}
 	@RequestMapping("tratamiento")
 	String tratamientoAction() {
 		return "paciente/tratamiento";
@@ -66,15 +61,5 @@ public class PacienteController {
 	String pedidoAction() {
 		return "paciente/verPedidos";
 	}
-	@RequestMapping(value = "/validar", method = RequestMethod.POST)
-	String login(@ModelAttribute("validar") @Valid ValidarPaciente validar, BindingResult bindingResult, Model model,
-			HttpSession sesion) {
-		if (bindingResult.hasErrors()) {
-			log.error("Paso por aqui");
-			return "paciente/validarPaciente";
-		} else {
-			log.info("Paciente validado");
-			return "redirect:/index";
-		}
-	}
+	
 }

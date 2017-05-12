@@ -33,7 +33,7 @@ public class Tratamiento implements Serializable {
 	
 	//Paciente al que pertenece
 	@ManyToOne(optional=false)
-    @JoinColumn(name="paciente",referencedColumnName="id_paciente")
+    @JoinColumn(name="paciente",referencedColumnName="id")
 	private Paciente paciente;
 	//Medicamento
 	@OneToOne(fetch=FetchType.LAZY)

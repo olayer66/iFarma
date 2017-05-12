@@ -26,7 +26,7 @@ public class Medicamento implements Serializable{
 	@Column(name = "laboratorio", nullable = false)
 	private String laboratorio;
 	@Column(name = "precio", nullable = false)
-	private float precio;
+	private double precio;
 	
 	//getters y setters
 	public long getIDMedicamento() {
@@ -53,10 +53,10 @@ public class Medicamento implements Serializable{
 	public void setLaboratorio(String laboratorio) {
 		this.laboratorio = laboratorio;
 	}
-	public float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
-	public void setPrecio(float precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 }
