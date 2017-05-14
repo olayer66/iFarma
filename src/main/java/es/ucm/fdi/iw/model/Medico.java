@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "medicos")
 public class Medico extends Usuario {
 	private static final long serialVersionUID = 9190127841629484829L;
 	

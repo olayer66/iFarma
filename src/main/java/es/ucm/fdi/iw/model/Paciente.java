@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "pacientes")
 //Peticiones a la tabla
 @NamedQueries({	
 })

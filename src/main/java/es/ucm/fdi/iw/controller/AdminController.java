@@ -1,6 +1,8 @@
 package es.ucm.fdi.iw.controller;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +20,7 @@ public class AdminController {
 
 	private static final Logger log = Logger.getLogger(AdminController.class);
 
-	@Autowired
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 
 	@GetMapping("")
@@ -62,14 +64,13 @@ public class AdminController {
 	}
 	
 	@RequestMapping("insMedicmaentos")
-	@Transactional
 	String insertarMedicamentos() {
 		new MedicamentosParser("/static/json/medicamentos.json", entityManager);
 		return "admin/nuevoMedicamento";
 	}
 	
-	@RequestMapping("m")
 	@Transactional
+	@RequestMapping("m")
 	String insertarMedicamento() {
 		Medicamento m = new Medicamento();
 		m.setDescripcion("pastilla");
@@ -77,6 +78,7 @@ public class AdminController {
 		m.setNombre("penicilina");
 		m.setPrecio(100);
 		entityManager.persist(m);
-		return "admin/nuevoMedicamento";
+		log .info("medicamento insertado correctamente");
+		return "admin/admin";
 	}
 }
