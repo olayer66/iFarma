@@ -1,8 +1,13 @@
 package es.ucm.fdi.iw.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +48,13 @@ public class AdminController {
 		return "admin/altasFarmacias";
 	}
 
+	
 	@RequestMapping("gestionMedicamentos")
-	String gestionMedicamentosAction() {
+	String gestionMedicamentosAction(HttpSession sesion) {
+		List<Medicamento> listaMed;
+		TypedQuery<Medicamento> query= entityManager.createNamedQuery("Medicamento.findAll", Medicamento.class);
+		listaMed=query.getResultList();
+		sesion.setAttribute("listaMed", listaMed);
 		return "admin/gestionMedicamentos";
 	}
 
@@ -77,7 +87,6 @@ public class AdminController {
 		m.setLaboratorio("merk");
 		m.setNombre("penicilina");
 		m.setPrecio(100);
-		entityManager.persist(m);
 		log .info("medicamento insertado correctamente");
 		return "admin/admin";
 	}

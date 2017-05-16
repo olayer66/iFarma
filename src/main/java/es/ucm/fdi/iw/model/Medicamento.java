@@ -8,10 +8,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 @Entity
 @Table(name = "medicamentos", uniqueConstraints = {
 @UniqueConstraint(columnNames = "id_medicamento")
 })
+@NamedQueries({
+    @NamedQuery(name="Medicamento.findAll",
+                query="SELECT m FROM medicamentos m"),
+    @NamedQuery(name="Medicamento.findByName",
+                query="SELECT m FROM mediamentos m WHERE m.name = :name"),
+}) 
 public class Medicamento implements Serializable{
 	private static final long serialVersionUID = -5418658586012238577L;
 	
