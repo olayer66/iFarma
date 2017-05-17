@@ -21,134 +21,26 @@
 	                        <table id="tablaMedicamento" class="table table-bordered table-striped">
 	                            <thead>
 	                                <tr>
-	                                  <th>Nombre del medicamento</th>
-	                                  <th>Uso</th>
-	                                  <th>Cantidad</th>
+	                                  <th>Nombre</th>
+	                                  <th>Laboratorio</th>
+	                                  <th>Descripcion</th>
 	                                  <th>Precio</th>
 	                                  <th>Accion</th>
 	                                </tr>
 	                            </thead>
 	                            <tbody>
+	                            <c:forEach var="medicamento" items="${listaMed}">
 	                                <tr>
-	                                	<td>Ibuprofeno</td>
-		                                <td>Dolores</td>
-		                                <td>24</td>
-		                                <td>3.30</td>
+	                                	<td>${medicamento.nombre}</td>
+		                                <td>${medicamento.laboratorio}</td>
+		                                <td>${medicamento.descripcion}</td>
+		                                <td>${medicamento.precio}€</td>
 		                                <td>
 											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
 											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
 										</td>
 	                                </tr>
-	                                <tr>
-		                                <td>Paracetamol</td>
-		                                <td>Mareos</td>
-		                                <td>24</td>
-		                                <td>2.50</td>
-		                                <td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                             		<td>Acarbosa Tarbis</td>
-	                                 	<td>Embarazo</td>
-	                                 	<td>15</td>
-	                                 	<td>10.90</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Agua oxigenada</td>
-	                                 	<td>Herias</td>
-	                                 	<td>1 L</td>
-	                                 	<td>1.05</td>
-	                                	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Ebastel</td>
-	                                 	<td>Alergia</td>
-	                                 	<td>20</td>
-	                                 	<td>8.65</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Zariten</td>
-	                                 	<td>Alergia</td>
-	                                 	<td>24</td>
-	                                 	<td>15.00</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Efferalgan</td>
-	                                 	<td>Dolores</td>
-	                                 	<td>24</td>
-	                                 	<td>2.75</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Azitromicina qualigen</td>
-	                                 	<td>Gripe</td>
-	                                 	<td>3</td>
-	                                 	<td>51.35</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Betadine</td>
-	                                 	<td>Heridas</td>
-	                                 	<td>50 Ml</td>
-	                                 	<td>7.75</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Shur Breath</td>
-	                                 	<td>Alitosis</td>
-	                                 	<td>28</td>
-	                                 	<td>13.90</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Optrex</td>
-	                                 	<td>Conjuntivitis</td>
-	                                 	<td>10 Ml</td>
-	                                 	<td>3.90</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
-	                                <tr>
-	                                 	<td>Fortasec</td>
-	                                 	<td>Diarrea</td>
-	                                 	<td>24</td>
-	                                 	<td>8.81</td>
-	                                 	<td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-										</td>
-	                                </tr>
+	                              </c:forEach>  
 	                            </tbody>
 	                        </table>
 	                    </div>
