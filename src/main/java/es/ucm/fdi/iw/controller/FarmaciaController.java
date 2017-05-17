@@ -24,7 +24,7 @@ public class FarmaciaController {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@GetMapping("")
 	String pantallaLoginAction() {
 		return "farmacia/farmaceutico";

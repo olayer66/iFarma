@@ -36,6 +36,8 @@ public class MedicoController {
 	
 	@RequestMapping("nuevo-paciente")
 	String nuevoPacienteAction() {
+		
+	
 		return "medico/nuevoPaciente";
 	}
 	@RequestMapping("nuevoMedico")
@@ -47,7 +49,7 @@ public class MedicoController {
 	String detallePacienteAction() {
 		return "medico/detallePaciente";
 	}
-	
+
 	@RequestMapping("feedback")
 	String feedbackAction() {
 		return "medico/feedback";
