@@ -77,7 +77,11 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		<dependency>
+		    <groupId>net.minidev</groupId>
+		    <artifactId>json-smart</artifactId>
+		    <version>1.0.6.3</version>
+		</dependency>
 		<!-- Json -->
 		<dependency>
 		    <groupId>org.codehaus.jackson</groupId> 

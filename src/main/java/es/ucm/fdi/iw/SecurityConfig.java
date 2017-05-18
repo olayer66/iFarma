@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-        		.antMatchers("/static/**", "/logout", "/403","/index","/", "/admin/insMedicmaentos",
+        		.antMatchers("/static/**", "/logout", "/403","/index","/",
         				"/nuevoFarmaceutico",
         				"/nuevoMedico",
         				"/validarPaciente",
@@ -86,5 +86,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean(name="localData")
     public LocalData getLocalData() {
     	return new LocalData(new File(env.getProperty("es.ucm.fdi.base-path")));
-    }    
+    } 
 }

@@ -1,56 +1,57 @@
 package es.ucm.fdi.parser;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import javax.persistence.EntityManager;
 
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
+
 import es.ucm.fdi.iw.model.Medicamento;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import net.minidev.json.parser.JSONParser;
+import net.minidev.json.parser.ParseException;
 
-
+@Repository
 public class MedicamentosParser {
-	
-	public MedicamentosParser(String fichero,EntityManager manager)
+	private static final Logger log = Logger.getLogger(MedicamentosParser.class);
+	private EntityManager em;
+	public MedicamentosParser(String fichero)
 	{
-/*		if(!fichero.equals(""))
+		
+		if(!fichero.equals(""))
 		{
 			try {
-				cargar(fichero, manager);
-			} catch (FileNotFoundException e) {
+				cargar(fichero);
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 	
-	private void cargar(String fichero, EntityManager em) throws FileNotFoundException
+	private void cargar(String fichero) throws IOException
 	{
-		em.getTransaction().begin();
-		String jsonStr;
+		JSONParser parser = new JSONParser();
+		Medicamento medicamento=new Medicamento();
 		try {
-			Medicamento medicamento=new Medicamento();
-			jsonStr = new String(Files.readAllBytes(Paths.get(fichero)), "UTF-8");
-		
-            JSONObject rootObject = new JSONObject(jsonStr); // Parse the JSON to a JSONObject
-            JSONArray rows = rootObject.getJSONArray("rows"); // Get all JSONArray rows
-            
-            for(int i=0; i < rows.length(); i++) { // Loop over each each row
-                //medicamento.s
-                JSONObject row = rows.getJSONObject(i); // Get row object
-                medicamento.setIDMedicamento(row.getLong("id"));
-                medicamento.setNombre(row.getString("nombre"));
-                medicamento.setDescripcion(row.getString("descripcion"));
-                medicamento.setLaboratorio(row.getString("laboratorio"));
-                medicamento.setPrecio(Double.parseDouble(row.getString("precio")));
-               em.persist(medicamento);
-                
+			log.info("Paso aqui");
+			JSONArray a = (JSONArray) parser.parse(new String(Files.readAllBytes(Paths.get(fichero))));
+            for(Object o : a) { // Loop over each each row
+            	JSONObject row = (JSONObject) o;
+                medicamento.setNombre((String) row.get("nombre"));
+                medicamento.setDescripcion((String) row.get("descripcion"));
+                medicamento.setLaboratorio((String) row.get("laboratorio"));
+                medicamento.setPrecio(Double.parseDouble((String) row.get("precio")));
+                log.info("Persisto");
+                em.persist(medicamento);     
             }
-			em.getTransaction().commit();
-        } catch (Exception e) {
-            // JSON Parsing error
-            e.printStackTrace();
+        } catch (ParseException e) {
+        	throw new IOException(e.getMessage());
         }
-*/	}
+	}
 	
 
 }

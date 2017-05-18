@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../../jspf/header.jspf"%>
 
 <%@ include file="../../jspf/navbarAdministrador.jspf"%>
@@ -14,7 +14,7 @@
                    
 	                 	<h2 class="page-header">Medicamentos    
 	                 	<a href="/admin/nuevoMedicamento" class="btn btn-default">Añadir</a>
-	                 	<a href="/admin/insMedicmaentos" class="btn btn-default">Cargar fichero</a>
+	                 	<a href="/admin/insMedicamentos" class="btn btn-default">Cargar fichero</a>
 	                 	</h2>
 	                    
 	                    <div>

@@ -1,6 +1,5 @@
 package es.ucm.fdi.iw.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,7 +9,6 @@ import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,65 +27,67 @@ public class AdminController {
 	private EntityManager entityManager;
 
 	@GetMapping("")
-	String pantallaLoginAction() {
+	public String pantallaLoginAction() {
 		return "admin/admin";
 	}
 
 	@RequestMapping("admin")
-	String adminAction() {
+	public String adminAction() {
 		return "admin/admin";
 	}
 
 	@RequestMapping("altasMedicos")
-	String altasMedicosAction() {
+	public String altasMedicosAction() {
 		return "admin/altasMedicos";
 	}
 
 	@RequestMapping("altasFarmacias")
-	String altaFarmaciasAction() {
+	public String altaFarmaciasAction() {
 		return "admin/altasFarmacias";
 	}
 
 	
 	@RequestMapping("gestionMedicamentos")
-	String gestionMedicamentosAction(HttpSession sesion) {
+	public String gestionMedicamentosAction(HttpSession sesion) {
 		List<Medicamento> listaMed;
 		TypedQuery<Medicamento> query= entityManager.createNamedQuery("Medicamento.findAll", Medicamento.class);
 		listaMed=query.getResultList();
+		log.info("tamaño salida:" + listaMed.size());
 		sesion.setAttribute("listaMed", listaMed);
 		return "admin/gestionMedicamentos";
 	}
 
 	@RequestMapping("detalleAltaMedico")
-	String detalleAltaMedicoAction() {
+	public String detalleAltaMedicoAction() {
 		return "admin/detalleAltaMedico";
 	}
 
 	@RequestMapping("detalleAltaFarmacia")
-	String detalleAltaFarmaciaAction() {
+	public String detalleAltaFarmaciaAction() {
 		return "admin/detalleAltaFarmacia";
 	}
 
 	@RequestMapping("nuevoMedicamento")
-	String nuevoMedicamentoAction() {
+	public String nuevoMedicamentoAction() {
 		return "admin/nuevoMedicamento";
 	}
-	
-	@RequestMapping("insMedicmaentos")
-	String insertarMedicamentos() {
-		new MedicamentosParser("/static/json/medicamentos.json", entityManager);
-		return "admin/nuevoMedicamento";
+	@Transactional
+	@RequestMapping("insMedicamentos")
+	public String insertarMedicamentos() {
+		new MedicamentosParser("/home/hlocal/iFarma/src/main/resources/static/json/medicamentos.json");
+		return "admin/gestionMedicamentos";
 	}
 	
 	@Transactional
 	@RequestMapping("m")
-	String insertarMedicamento() {
+	public String insertarMedicamento() {
 		Medicamento m = new Medicamento();
 		m.setDescripcion("pastilla");
 		m.setLaboratorio("merk");
 		m.setNombre("penicilina");
 		m.setPrecio(100);
+		entityManager.persist(m);
 		log .info("medicamento insertado correctamente");
-		return "admin/admin";
+		return "admin/gestionMedicamentos";
 	}
 }
