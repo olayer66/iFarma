@@ -1,5 +1,7 @@
 package es.ucm.fdi.iw.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -73,8 +75,10 @@ public class AdminController {
 	}
 	@Transactional
 	@RequestMapping("insMedicamentos")
-	public String insertarMedicamentos() {
-		new MedicamentosParser("/home/hlocal/iFarma/src/main/resources/static/json/medicamentos.json");
+	public String insertarMedicamentos() throws IOException {
+		MedicamentosParser.carga(
+				new File("/home/hlocal/iFarma/src/main/resources/static/json/medicamentos.json"),
+				entityManager);
 		return "admin/gestionMedicamentos";
 	}
 	

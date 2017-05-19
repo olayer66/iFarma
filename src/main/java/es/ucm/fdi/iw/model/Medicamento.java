@@ -23,7 +23,7 @@ public class Medicamento implements Serializable{
 	@Id
 	@Column(name = "id_medicamento", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDMedicamento;
+	private long id;
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	@Column(name = "descripcion", nullable = false)
@@ -34,11 +34,11 @@ public class Medicamento implements Serializable{
 	private double precio;
 	
 	//getters y setters
-	public long getIDMedicamento() {
-		return IDMedicamento;
+	public long getId() {
+		return id;
 	}
-	public void setIDMedicamento(long iDMedicamento) {
-		IDMedicamento = iDMedicamento;
+	public void setId(long iDMedicamento) {
+		id = iDMedicamento;
 	}
 	public String getNombre() {
 		return nombre;
