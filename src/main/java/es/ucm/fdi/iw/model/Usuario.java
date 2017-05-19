@@ -13,11 +13,17 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) //Esto divide las tablas por herencia.(paciente,medico,farmaceutico) y las organiza por el id de usuario.
 @Table(name = "usuarios")
+@NamedQueries({
+    @NamedQuery(name="Usuario.countMED",
+                query="SELECT COUNT(u) FROM Usuario u WHERE u.estado=0 AND u.role=:tiporole"),
+
+}) 
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 3918714646456852426L;
 	

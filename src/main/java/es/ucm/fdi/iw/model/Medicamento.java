@@ -15,7 +15,7 @@ import org.hibernate.annotations.NamedQuery;
     @NamedQuery(name="Medicamento.findAll",
                 query="SELECT m FROM Medicamento m"),
     @NamedQuery(name="Medicamento.findByName",
-                query="SELECT m FROM Medicamento m WHERE m.nombre = :nombre"),
+                query="SELECT m FROM Medicamento m WHERE m.nombre = :nombre")
 }) 
 public class Medicamento implements Serializable{
 	private static final long serialVersionUID = -5418658586012238577L;

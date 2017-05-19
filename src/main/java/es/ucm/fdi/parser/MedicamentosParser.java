@@ -16,15 +16,12 @@ public class MedicamentosParser {
 	
 	public static void carga(File fichero, EntityManager em) throws IOException {
 		try {
-			String json = new String(Files.readAllBytes(fichero.toPath()));			
-			log.info("Cadena cargada");
-			
+			String json = new String(Files.readAllBytes(fichero.toPath()));						
 			ObjectMapper mapper = new ObjectMapper();
 			Medicamento[] ms = mapper.readValue(json, Medicamento[].class);
-			log.info("JSON valido: tengo " + ms.length + " medicamentos!");
+			log.info("Se han cargado " + ms.length + " medicamentos");
 			
             for (Medicamento m : ms) {                 
-                log.info("Persisto");
                 m.setId(0);
                 em.persist(m);
             }

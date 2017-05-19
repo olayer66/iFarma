@@ -12,13 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
-@Table(name = "farmacias",
-	   uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "id_farmacia")
-	})
+@Table(name = "farmacias")
+@NamedQueries({
+    @NamedQuery(name="Farmacia.countFARMA",
+                query="SELECT COUNT(f) FROM Farmacia f WHERE f.estado=0")
+})
 public class Farmacia implements Serializable {
 	private static final long serialVersionUID = 3729954187317206752L;
 	
@@ -26,7 +29,7 @@ public class Farmacia implements Serializable {
 	@Id
 	@Column(name = "id_farmacia", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDFarmacia;
+	private long id;
 	@Column(name = "nombre", nullable = false)
 	private String nombre;
 	@Column(name = "telefono", nullable = false)
@@ -42,6 +45,11 @@ public class Farmacia implements Serializable {
 	@Column(name = "com_Autonoma", nullable = true)
 	private String comAutonoma;
 	
+	//Estado de la farmacia (0=validacion,1=activo,2=inactivo(borrado logico))
+	@Column(name = "estado", nullable = false)
+	private int estado;
+	
+	
 	//Dueño de la farmacia (N/1)
 	@ManyToOne(optional=false)
     @JoinColumn(name="duenio")
@@ -56,12 +64,12 @@ public class Farmacia implements Serializable {
 	private List<ExistenciaMedicamento> stock;
 
 	//getters y setters
-	public long getIDFarmacia() {
-		return IDFarmacia;
+	public long getId() {
+		return id;
 	}
 
-	public void setIDFarmacia(long iDFarmacia) {
-		IDFarmacia = iDFarmacia;
+	public void setId(long iDFarmacia) {
+		id= iDFarmacia;
 	}
 
 	public String getNombre() {
@@ -127,6 +135,30 @@ public class Farmacia implements Serializable {
 
 	public void setStock(List<ExistenciaMedicamento> stock) {
 		this.stock = stock;
+	}
+
+	public String getComAutonoma() {
+		return comAutonoma;
+	}
+
+	public void setComAutonoma(String comAutonoma) {
+		this.comAutonoma = comAutonoma;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public List<Paciente> getListaClientes() {
+		return listaClientes;
+	}
+
+	public void setListaClientes(List<Paciente> listaClientes) {
+		this.listaClientes = listaClientes;
 	}
 	
 	

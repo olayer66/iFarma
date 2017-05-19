@@ -30,7 +30,7 @@ public class AdminController {
 
 	@GetMapping("")
 	public String pantallaLoginAction() {
-		return "admin/admin";
+		return "redirect:/admin/admin";
 	}
 
 	@RequestMapping("admin")
@@ -68,7 +68,12 @@ public class AdminController {
 	public String detalleAltaFarmaciaAction() {
 		return "admin/detalleAltaFarmacia";
 	}
-
+	
+	@RequestMapping("detalleAltaFarmaceutico")
+	public String detalleAltaFarmaceuticoAction() {
+		return "admin/detalleAltaFarmaceutico";
+	}
+	
 	@RequestMapping("nuevoMedicamento")
 	public String nuevoMedicamentoAction() {
 		return "admin/nuevoMedicamento";
@@ -79,19 +84,6 @@ public class AdminController {
 		MedicamentosParser.carga(
 				new File("/home/hlocal/iFarma/src/main/resources/static/json/medicamentos.json"),
 				entityManager);
-		return "admin/gestionMedicamentos";
-	}
-	
-	@Transactional
-	@RequestMapping("m")
-	public String insertarMedicamento() {
-		Medicamento m = new Medicamento();
-		m.setDescripcion("pastilla");
-		m.setLaboratorio("merk");
-		m.setNombre("penicilina");
-		m.setPrecio(100);
-		entityManager.persist(m);
-		log .info("medicamento insertado correctamente");
 		return "admin/gestionMedicamentos";
 	}
 }
