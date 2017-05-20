@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
@@ -40,7 +41,7 @@ public class FarmaciaController {
 	}
 	
 	@RequestMapping("farmaceutico")
-	public String farmaceuticoAction(@PathVariable("id") String id, 
+	public String farmaceuticoAction(@RequestParam("id") long id, 
 			HttpServletResponse response ,HttpSession sesion) {
 		
 		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class, id);//no estoy seguro de que id necesito
