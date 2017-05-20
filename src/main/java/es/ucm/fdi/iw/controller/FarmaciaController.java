@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,9 +40,10 @@ public class FarmaciaController {
 	}
 	
 	@RequestMapping("farmaceutico")
-	public String farmaceuticoAction(HttpSession sesion) {
+	public String farmaceuticoAction(@PathVariable("id") String id, 
+			HttpServletResponse response ,HttpSession sesion) {
 		
-		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class, 0);//no estoy seguro de que id necesito
+		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class, id);//no estoy seguro de que id necesito
 		List<Farmacia> listaFar = farmaceutico.getFarmaciasPropias();
 
 		log.info("tamaño salida:" + listaFar.size());
