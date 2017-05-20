@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,9 +18,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
-import es.ucm.fdi.iw.validation.Farmaceutico;
+
 
 @Controller
 @RequestMapping("/farmacia")
@@ -37,9 +39,10 @@ public class FarmaciaController {
 	
 	@RequestMapping("farmaceutico")
 	public String farmaceuticoAction(HttpSession sesion) {
-		List<Farmacia> listaFar;
-		TypedQuery<Farmacia> query= entityManager.createNamedQuery("Farmaceutico.misFarmacias", Farmacia.class);
-		listaFar=query.getResultList();
+		
+		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class, 0);//no estoy seguro de que id necesito
+		List<Farmacia> listaFar = farmaceutico.getFarmaciasPropias();
+
 		log.info("tamaño salida:" + listaFar.size());
 		sesion.setAttribute("listaMed", listaFar);
 		return "farmacia/farmaceutico";

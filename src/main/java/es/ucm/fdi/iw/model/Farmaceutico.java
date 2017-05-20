@@ -12,10 +12,7 @@ import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name="Farmaceutico.misFarmacias",
-                query="SELECT f FROM Farmacia f WHERE f.duenio = :id")
-}) 
+
 public class Farmaceutico extends Usuario {
 	private static final long serialVersionUID = -6791548916804839L;
 	
