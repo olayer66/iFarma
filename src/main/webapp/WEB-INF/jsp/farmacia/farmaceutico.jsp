@@ -1,9 +1,5 @@
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
 <%@ include file="../../jspf/header.jspf"%>
 
 
@@ -18,8 +14,7 @@
 					<h2>Mis Farmacias</h2>
 				</div>
 				<div>
-					<table id="tablaFarmacias"
-						class="table table-bordered table-striped">
+					<table id="tablaFarmacias" class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th>Nombre de Farmacia</th>
@@ -27,14 +22,12 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td><a href=/farmacia/pedidos>Farmacias Venancio</a></td>
-								<td><strong class="alerta">8</strong></td>
-							</tr>
-							<tr>
-								<td><a href="/farmacia/pedidos">Farmacias Venancio 2</a></td>
-								<td><strong class="alerta">0</strong></td>
-							</tr>
+							 <c:forEach var="farmacia" items="${listaFar}">
+							   <tr>
+									<td><a href=/farmacia/pedidos>${farmacia.nombre}</a></td>
+									<td><strong class="alerta">7</strong></td>
+		                        </tr>	
+							</c:forEach>
 						</tbody>
 					</table>
 					</div>

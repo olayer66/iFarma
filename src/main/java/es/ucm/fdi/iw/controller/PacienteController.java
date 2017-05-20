@@ -26,39 +26,39 @@ public class PacienteController {
 	private EntityManager entityManager;
 	
 	@GetMapping("")
-	String pantallaLoginAction(Model model) {
+	public String pantallaLoginAction(Model model) {
 		return "paciente/tratamiento";
 	}
 	@RequestMapping("modificarPaciente")
-	String modificarpacienteAction() {
+	public String modificarpacienteAction() {
 		return "paciente/modificarPaciente";
 	}
 	@RequestMapping("cambiarPassword")
-	String cambiarPasswordAction() {
+	public String cambiarPasswordAction() {
 		return "paciente/cambiarPassword";
 	}
 	@RequestMapping("modificarPago")
-	String modificarpagoAction() {
+	public String modificarpagoAction() {
 		return "paciente/modificarPago";
 	}
 	@RequestMapping({"pedidosPc"})
-	String pedidosPcAction() {
+	public String pedidosPcAction() {
 		return "paciente/pedidosPc";
 	}
 	@RequestMapping("tratamiento")
-	String tratamientoAction() {
+	public String tratamientoAction() {
 		return "paciente/tratamiento";
 	}
 	@RequestMapping("perfil")
-	String perfilAction() {
+	public String perfilAction() {
 		return "paciente/perfil";
 	}
 	@RequestMapping("feedbackDR")
-	String feedbackDrAction() {
+	public String feedbackDrAction() {
 		return "paciente/feedbackDR";
 	}
 	@RequestMapping("verPedidos")
-	String pedidoAction() {
+	public String pedidoAction() {
 		return "paciente/verPedidos";
 	}
 	

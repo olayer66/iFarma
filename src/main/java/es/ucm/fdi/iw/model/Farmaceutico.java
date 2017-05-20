@@ -1,24 +1,27 @@
 package es.ucm.fdi.iw.model;
 
-import java.io.Serializable;
-import java.util.List;
 
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
 
 @Entity
+@NamedQueries({
+    @NamedQuery(name="Farmaceutico.misFarmacias",
+                query="SELECT f FROM Farmacia f WHERE f.duenio = :id")
+}) 
 public class Farmaceutico extends Usuario {
 	private static final long serialVersionUID = -6791548916804839L;
-		
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+	private long id;
 	@Column(name = "num_col_farmaceutico", nullable = false)
 	private String numColFarmaceutico;
 	//Lista de farmacias que le pertenecen

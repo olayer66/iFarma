@@ -26,34 +26,34 @@ public class MedicoController {
 	private EntityManager entityManager;
 	
 	@GetMapping("")
-	String indexAction() {
+	public String indexAction() {
 		return "medico/listadoPacientes";
 	}
 	@GetMapping({"listado-pacientes"})
-	String listadoPacientesAction() {
+	public String listadoPacientesAction() {
 		return "medico/listadoPacientes";
 	}
 	
 	@RequestMapping("nuevo-paciente")
-	String nuevoPacienteAction() {
+	public String nuevoPacienteAction() {
 		return "medico/nuevoPaciente";
 	}
 	@RequestMapping("nuevoMedico")
-	String nuevoMedicoAction(Model model) {
+	public String nuevoMedicoAction(Model model) {
 		model.addAttribute("nuevo", new Medico());
 		return "medico/nuevoMedico";
 	}
 	@RequestMapping("detalle-paciente")
-	String detallePacienteAction() {
+	public String detallePacienteAction() {
 		return "medico/detallePaciente";
 	}
 	
 	@RequestMapping("feedback")
-	String feedbackAction() {
+	public String feedbackAction() {
 		return "medico/feedback";
 	}
 	@GetMapping("/logout")
-	String login(HttpSession sesion) {
+	public String login(HttpSession sesion) {
 		sesion.invalidate();
 		log.info("Sesion finalizada");
 		return "redirect:/index";

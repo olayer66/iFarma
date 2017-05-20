@@ -1,7 +1,10 @@
 package es.ucm.fdi.iw.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -14,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.ucm.fdi.iw.model.Farmacia;
+import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.validation.Farmaceutico;
 
 @Controller
@@ -26,34 +31,39 @@ public class FarmaciaController {
 	private EntityManager entityManager;
 	
 	@GetMapping("")
-	String pantallaLoginAction() {
+	public String pantallaLoginAction() {
 		return "farmacia/farmaceutico";
 	}
 	
 	@RequestMapping("farmaceutico")
-	String farmaceuticoAction() {
+	public String farmaceuticoAction(HttpSession sesion) {
+		List<Farmacia> listaFar;
+		TypedQuery<Farmacia> query= entityManager.createNamedQuery("Farmaceutico.misFarmacias", Farmacia.class);
+		listaFar=query.getResultList();
+		log.info("tamaño salida:" + listaFar.size());
+		sesion.setAttribute("listaMed", listaFar);
 		return "farmacia/farmaceutico";
 	}
 	@RequestMapping("modificarFarmaceutico")
-	String modificarfarmaceuticoAction() {
+	public String modificarfarmaceuticoAction() {
 		return "farmacia/modificarFarmaceutico";
 	}
 	
 	@GetMapping({"farmacia", "pedidos"})
-	String pedidosAction() {
+	public String pedidosAction() {
 		return "farmacia/pedidos";
 	}
 	
 	@RequestMapping("stock")
-	String stockAction() {
+	public String stockAction() {
 		return "farmacia/stock";
 	}
 	@RequestMapping("pedido")
-	String pedidoAction() {
+	public String pedidoAction() {
 		return "farmacia/pedido";
 	}
 	@RequestMapping("modificarFarmacia")
-	String modificarfarmaciaAction() {
+	public String modificarfarmaciaAction() {
 		return "farmacia/modificarFarmacia";
 	}
 }

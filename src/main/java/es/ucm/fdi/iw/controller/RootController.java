@@ -31,23 +31,23 @@ public class RootController {
 	private EntityManager entityManager;
 
 	@RequestMapping({"","/", "/index"})
-	String root(Model model) {
+	public String root(Model model) {
 		model.addAttribute("control", new Codigo());
 		return "index";
 	}
 	@RequestMapping("/login")
-	String login(HttpSession sesion, Principal principal) {
+	public String login(HttpSession sesion, Principal principal) {
 		return "/login";
 	}
 
 	@RequestMapping("/logout")
-	String login(HttpSession sesion) {
+	public String login(HttpSession sesion) {
 		sesion.invalidate();
 		log.info("Sesion finalizada");
 		return "redirect:/index";
 	}
 	@RequestMapping("/volverdenegado")
-	String denegadovolver(HttpSession sesion) {
+	public String denegadovolver(HttpSession sesion) {
 		String role=getRole();
 		String url=null;
 		log.info("Role: " +role);
@@ -65,7 +65,7 @@ public class RootController {
 		return url;
 	}
 	@RequestMapping("/denegado")
-	String accesoDenegado(HttpSession sesion) {
+	public String accesoDenegado(HttpSession sesion) {
 		sesion.invalidate();
 		log.warn("Acceso no permitido");
 		return "/denegado";
@@ -79,7 +79,7 @@ public class RootController {
     }
 	//Validar el codigo de acceso del paciente
 	@RequestMapping(value = "/validarCodigo", method = RequestMethod.POST)
-	String validarCodigo(@ModelAttribute("control") @Valid Codigo codigo, BindingResult bindingResult,Model model) {
+	public String validarCodigo(@ModelAttribute("control") @Valid Codigo codigo, BindingResult bindingResult,Model model) {
 		if (bindingResult.hasErrors()) {
 			log.error("Paso por aqui");
 			return "index";
@@ -91,12 +91,12 @@ public class RootController {
 	
 	//validacion del paciente
 		@RequestMapping("validarPaciente")
-		String validarPacienteAction(Model model) {
+		public 	String validarPacienteAction(Model model) {
 			model.addAttribute("validar", new ValidarPaciente());
 			return "validarPaciente";
 		}
 		@RequestMapping(value = "/validarPacienteSubmit", method = RequestMethod.POST)
-		String login(@ModelAttribute("validar") @Valid ValidarPaciente validar, BindingResult bindingResult, Model model,
+		public 	String login(@ModelAttribute("validar") @Valid ValidarPaciente validar, BindingResult bindingResult, Model model,
 				HttpSession sesion) {
 			if (bindingResult.hasErrors()) {
 				log.error("Paso por aqui");
@@ -109,12 +109,12 @@ public class RootController {
 		
 		//crear un nuevo medico
 		@RequestMapping("nuevoMedico")
-		String nuevoMedicoAction(Model model) {
+		public 	String nuevoMedicoAction(Model model) {
 			model.addAttribute("nuevo", new Medico());
 			return "nuevoMedico";
 		}
 		@RequestMapping(value = "/nuevoMedicoSubmit", method = RequestMethod.POST)
-		String login(@ModelAttribute("nuevo") @Valid Medico nuevo, BindingResult bindingResult, Model model,
+		public String login(@ModelAttribute("nuevo") @Valid Medico nuevo, BindingResult bindingResult, Model model,
 				HttpSession sesion) {
 			if (bindingResult.hasErrors()) {
 				log.error("Paso por aqui");
@@ -127,12 +127,12 @@ public class RootController {
 		
 		//nuevo farmaceutico
 		@RequestMapping("/nuevoFarmaceutico")
-		String nuevoFarmaceuticoAction(Model model) {
+		public String nuevoFarmaceuticoAction(Model model) {
 			model.addAttribute("nuevo", new Farmaceutico());
 			return "nuevoFarmaceutico";
 		}
 		@RequestMapping(value = "/nuevoFarmacueticosubmit", method = RequestMethod.POST)
-		String login(@ModelAttribute("nuevo") @Valid Farmaceutico nuevo, BindingResult bindingResult, Model model,
+		public 	String login(@ModelAttribute("nuevo") @Valid Farmaceutico nuevo, BindingResult bindingResult, Model model,
 				HttpSession sesion) {
 			if (bindingResult.hasErrors()) {
 				log.error("Paso por aqui");
