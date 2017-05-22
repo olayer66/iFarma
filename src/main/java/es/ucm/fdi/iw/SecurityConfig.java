@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-        		.antMatchers("/static/**", "/logout", "/403","/index","/",
+        		.antMatchers("/static/**", "/logout", "/403","/index","/","/mm",
         				"/nuevoFarmaceutico",
         				"/nuevoMedico",
         				"/validarPaciente",
@@ -53,10 +53,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	            .permitAll();
 	}
 	
-	/*@Bean
+	@Bean
 	public IwUserDetailsService springDataUserDetailsService() {
 		return new IwUserDetailsService();
-	}*/
+	}
 	
 	//contraseñas cifradas
 	@Bean
@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
-	//Si eliminas el "Bean" anterior, esto funciona sin BD ni nada:
+	/*//Si eliminas el "Bean" anterior, esto funciona sin BD ni nada:
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) 
 			throws Exception {
@@ -78,7 +78,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.withUser("antonio").password("1234").roles("FAR");
 	}
-
+*/
 	
 	@Autowired
 	private Environment env;

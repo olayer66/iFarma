@@ -1,5 +1,8 @@
 package es.ucm.fdi.iw.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.io.IOException;
 import java.security.Principal;
 
 import javax.persistence.EntityManager;
@@ -10,13 +13,18 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import es.ucm.fdi.iw.validation.Farmaceutico;
+import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.validation.Codigo;
 import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.validation.Medico;
@@ -31,7 +39,8 @@ public class RootController {
 	private EntityManager entityManager;
 
 	@RequestMapping({"","/", "/index"})
-	public String root(Model model) {
+	public String root(Model model, Principal principal) {
+	//	log.info(principal.getName() + " de tipo " + principal.getClass());	
 		model.addAttribute("control", new Codigo());
 		return "index";
 	}
@@ -141,6 +150,87 @@ public class RootController {
 				log.info("Paciente validado");
 				return "redirect:/index";
 			}
+		}
+		@Transactional
+		@RequestMapping("mm")
+		public @ResponseBody String addFarmaceutico() throws IOException {
+		
+
+			//dos farmaceuticos
+			es.ucm.fdi.iw.model.Farmaceutico f = new es.ucm.fdi.iw.model.Farmaceutico(); 
+			
+			f.setApellidos("hernandez");
+			f.setContrasenia(new BCryptPasswordEncoder().encode("1234"));
+			f.setEmail("hoeli@gmail.com");
+			f.setEstado(1);
+			f.setNombre("antoniio");
+			f.setNumColFarmaceutico("5523155");
+			f.setRole("FAR");
+			f.setTelefono("64266666");
+			f.setUsuario("farma1");
+			//f.setFarmaciasPropias();
+			entityManager.persist(f);
+
+			
+			es.ucm.fdi.iw.model.Farmaceutico f1 = new es.ucm.fdi.iw.model.Farmaceutico(); 
+			
+			f1.setApellidos("hernandez");
+			f1.setContrasenia(new BCryptPasswordEncoder().encode("1234"));
+			f1.setEmail("holi@gmail.com");
+			f1.setEstado(1);
+			f1.setNombre("antunez");
+			f1.setNumColFarmaceutico("554455");
+			f1.setRole("FAR");
+			f1.setTelefono("696666666");
+			f1.setUsuario("farma2");
+			//f.setFarmaciasPropias();
+			entityManager.persist(f1);
+
+			
+			es.ucm.fdi.iw.model.Usuario f2 = new es.ucm.fdi.iw.model.Usuario();
+			//un admin
+			f2.setUsuario("admin");
+			f2.setContrasenia(new BCryptPasswordEncoder().encode("1234"));
+			f2.setRole("ADMIN");	
+			f2.setEstado(1);
+			f2.setEmail("ddd@dd.com");
+			f2.setApellidos("doming");
+			f2.setNombre("holi");
+			f2.setTelefono("33222222");
+			entityManager.persist(f2);
+			
+			es.ucm.fdi.iw.model.Farmacia f3 = new es.ucm.fdi.iw.model.Farmacia(); 
+			f3.setCiudad("mAdr");
+			f3.setCodPostal("555");
+			f3.setComAutonoma("madrid");
+			f3.setDireccion("going to hell n3");
+			f3.setDuenio(f1);
+			f3.setNombre("farmacias number 1 pepito");
+			f3.setProvincia("madrid");
+			f3.setTelefono("6666");
+			f3.setEstado(1);
+			entityManager.persist(f3);
+			
+			es.ucm.fdi.iw.model.Farmacia f4 = new es.ucm.fdi.iw.model.Farmacia(); 
+			f4.setCiudad("mAdr");
+			f4.setCodPostal("555");
+			f4.setComAutonoma("madrid");
+			f4.setDireccion("going to hell n3");
+			f4.setDuenio(f1);
+			f4.setNombre("farmacias number 2 pepito DOOOOSUIAE");
+			f4.setProvincia("madrid");
+			f4.setTelefono("6666");
+			f4.setEstado(1);
+			entityManager.persist(f4);
+
+			List<es.ucm.fdi.iw.model.Farmacia> l = new ArrayList<es.ucm.fdi.iw.model.Farmacia>();
+			l.add(f3);
+			l.add(f4);
+			f1.setFarmaciasPropias(l);
+			entityManager.persist(f1);
+
+			
+			return "/";
 		}
 		
 		

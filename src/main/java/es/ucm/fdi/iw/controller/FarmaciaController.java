@@ -1,5 +1,7 @@
 package es.ucm.fdi.iw.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
 
@@ -11,7 +13,11 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.authentication.PasswordEncoderParser;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +26,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
+import es.ucm.fdi.parser.MedicamentosParser;
 
 
 @Controller
@@ -35,20 +44,22 @@ public class FarmaciaController {
 	@PersistenceContext
 	private EntityManager entityManager;
 	
+	@Autowired
+	private LocalData localData;
+	
 	@GetMapping("")
 	public String pantallaLoginAction() {
 		return "farmacia/farmaceutico";
 	}
 	
 	@RequestMapping("farmaceutico")
-	public String farmaceuticoAction(@RequestParam("id") long id, 
-			HttpServletResponse response ,HttpSession sesion) {
-		
-		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class, id);//no estoy seguro de que id necesito
+	public String farmaceuticoAction(HttpSession sesion) {
+		Long id2=(long) 2;
+		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class,id2);//no estoy seguro de que id necesito
 		List<Farmacia> listaFar = farmaceutico.getFarmaciasPropias();
 
 		log.info("tamaño salida:" + listaFar.size());
-		sesion.setAttribute("listaMed", listaFar);
+		sesion.setAttribute("listaFar", listaFar);
 		return "farmacia/farmaceutico";
 	}
 	@RequestMapping("modificarFarmaceutico")
@@ -73,4 +84,5 @@ public class FarmaciaController {
 	public String modificarfarmaciaAction() {
 		return "farmacia/modificarFarmacia";
 	}
+	
 }

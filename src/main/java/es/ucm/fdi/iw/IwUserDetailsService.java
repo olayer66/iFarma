@@ -28,7 +28,7 @@ public class IwUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username){
     	try {
 	        Usuario u = entityManager.createQuery(
-	        		"from Usuario where usuario = :usuario", Usuario.class)
+	        		"FROM Usuario WHERE usuario = :usuario", Usuario.class)
 	                            .setParameter("usuario", username)
 	                            .getSingleResult();
 	        // build UserDetails object
