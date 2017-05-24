@@ -15,6 +15,8 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.authentication.PasswordEncoderParser;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +34,7 @@ import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
+import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.parser.MedicamentosParser;
 
 
@@ -54,8 +57,14 @@ public class FarmaciaController {
 	
 	@RequestMapping("farmaceutico")
 	public String farmaceuticoAction(HttpSession sesion) {
-		Long id2=(long) 2;
-		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class,id2);//no estoy seguro de que id necesito
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		
+		Farmaceutico farmaceutico = entityManager.createQuery(
+        		"FROM Farmaceutico WHERE usuario = :usuario", Farmaceutico.class)
+                            .setParameter("usuario", username)
+                            .getSingleResult();
+		
+		//no estoy seguro de que id necesito
 		List<Farmacia> listaFar = farmaceutico.getFarmaciasPropias();
 
 		log.info("tamaño salida:" + listaFar.size());
