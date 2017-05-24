@@ -26,7 +26,7 @@ public class ExistenciaMedicamento implements Serializable {
 	@Id
 	@Column(name = "id_existencia", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDExistencia;
+	private long id;
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
 	private Medicamento medicamento;
 	@ManyToOne
@@ -39,12 +39,10 @@ public class ExistenciaMedicamento implements Serializable {
 	
 	
 	//getters y setters
-	public long getIDExistencia() {
-		return IDExistencia;
+	public long getId() {
+		return id;
 	}
-	public void setIDExistencia(long iDExistencia) {
-		IDExistencia = iDExistencia;
-	}
+
 	public Medicamento getMedicamento() {
 		return medicamento;
 	}
@@ -63,5 +61,7 @@ public class ExistenciaMedicamento implements Serializable {
 	public void setFechaCaducidad(Date fechaCaducidad) {
 		this.fechaCaducidad = fechaCaducidad;
 	}
-	
+	public void setFarmacia(Farmacia f){
+		this.farmacia=f;
+	}
 }

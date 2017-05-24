@@ -2,8 +2,10 @@ package es.ucm.fdi.iw.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.sql.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,11 +26,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.validation.Farmaceutico;
+import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.Farmacia;
+import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.validation.Codigo;
 import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.validation.Medico;
 import es.ucm.fdi.iw.validation.ValidarPaciente;
+import es.ucm.fdi.parser.MedicamentosParser;
 
 @Controller	
 public class RootController {
@@ -155,7 +160,9 @@ public class RootController {
 		@RequestMapping("mm")
 		public @ResponseBody String addFarmaceutico() throws IOException {
 		
-
+			MedicamentosParser.carga(
+					new File("C:/Users/Tauslet/Documents/workspace-sts-3.8.3.RELEASE/IFarma/src/main/resources/static/json/medicamentos.json"),
+					entityManager);
 			//dos farmaceuticos
 			es.ucm.fdi.iw.model.Farmaceutico f = new es.ucm.fdi.iw.model.Farmaceutico(); 
 			
@@ -198,7 +205,7 @@ public class RootController {
 			f2.setNombre("holi");
 			f2.setTelefono("33222222");
 			entityManager.persist(f2);
-			
+			//farmacia1
 			es.ucm.fdi.iw.model.Farmacia f3 = new es.ucm.fdi.iw.model.Farmacia(); 
 			f3.setCiudad("mAdr");
 			f3.setCodPostal("555");
@@ -210,7 +217,7 @@ public class RootController {
 			f3.setTelefono("6666");
 			f3.setEstado(1);
 			entityManager.persist(f3);
-			
+			//farmacia2
 			es.ucm.fdi.iw.model.Farmacia f4 = new es.ucm.fdi.iw.model.Farmacia(); 
 			f4.setCiudad("mAdr");
 			f4.setCodPostal("555");
@@ -222,12 +229,56 @@ public class RootController {
 			f4.setTelefono("6666");
 			f4.setEstado(1);
 			entityManager.persist(f4);
-
+			
+	//añadir faracias a farmaceutico2
 			List<es.ucm.fdi.iw.model.Farmacia> l = new ArrayList<es.ucm.fdi.iw.model.Farmacia>();
 			l.add(f3);
 			l.add(f4);
 			f1.setFarmaciasPropias(l);
 			entityManager.persist(f1);
+			
+			//añadir stock a farmacia1 
+			es.ucm.fdi.iw.model.ExistenciaMedicamento ex = new es.ucm.fdi.iw.model.ExistenciaMedicamento(); 
+			es.ucm.fdi.iw.model.ExistenciaMedicamento ex2 = new es.ucm.fdi.iw.model.ExistenciaMedicamento(); 
+			es.ucm.fdi.iw.model.ExistenciaMedicamento ex3 = new es.ucm.fdi.iw.model.ExistenciaMedicamento();
+			es.ucm.fdi.iw.model.Medicamento Md1 = entityManager.createQuery(
+	        		"FROM Medicamento WHERE nombre = :nombre", Medicamento.class)
+	                            .setParameter("nombre", "AAS")
+	                            .getSingleResult();
+			es.ucm.fdi.iw.model.Medicamento Md2 = entityManager.createQuery(
+	        		"FROM Medicamento WHERE nombre = :nombre", Medicamento.class)
+	                            .setParameter("nombre", "ACETENSIL")
+	                            .getSingleResult();
+			es.ucm.fdi.iw.model.Medicamento Md3 = entityManager.createQuery(
+	        		"FROM Medicamento WHERE nombre = :nombre", Medicamento.class)
+	                            .setParameter("nombre", "ACFOL")
+	                            .getSingleResult();
+			List<ExistenciaMedicamento> listaStock= new ArrayList<ExistenciaMedicamento>();
+			ex.setCantidad(5);
+			ex.setFechaCaducidad(new Date(10, 04, 2030));
+			ex.setMedicamento(Md1);
+			ex.setFarmacia(f3);
+			
+			entityManager.persist(ex);
+			ex2.setFarmacia(f3);
+			ex2.setCantidad(4);
+			ex2.setFechaCaducidad(new Date(10, 04, 2021));
+			ex2.setMedicamento(Md2);
+			entityManager.persist(ex2);
+			ex3.setFarmacia(f3);
+			ex3.setCantidad(3);
+			ex3.setFechaCaducidad(new Date(10, 04, 2019));
+			ex3.setMedicamento(Md3);
+			entityManager.persist(ex3);
+			listaStock.add(ex);
+			listaStock.add(ex2);
+			listaStock.add(ex3);
+			
+			
+			
+			
+			f3.setStock(listaStock);
+			entityManager.persist(f3);
 
 			
 			return "/";
