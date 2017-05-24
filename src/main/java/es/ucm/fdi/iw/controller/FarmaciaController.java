@@ -1,38 +1,24 @@
 package es.ucm.fdi.iw.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.security.Principal;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.config.authentication.PasswordEncoderParser;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.LocalData;
 import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
-import es.ucm.fdi.iw.model.Medicamento;
-import es.ucm.fdi.parser.MedicamentosParser;
+import es.ucm.fdi.iw.model.Usuario;
 
 
 @Controller
@@ -54,14 +40,18 @@ public class FarmaciaController {
 	
 	@RequestMapping("farmaceutico")
 	public String farmaceuticoAction(HttpSession sesion) {
-		Long id2=(long) 2;
-		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class,id2);//no estoy seguro de que id necesito
-		List<Farmacia> listaFar = farmaceutico.getFarmaciasPropias();
+		
+		Usuario u =(Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	
 
+		Farmaceutico farmaceutico = (Farmaceutico)entityManager.find(Farmaceutico.class,2);//no estoy seguro de que id necesito
+		List<Farmacia> listaFar = farmaceutico.getFarmaciasPropias();
+		
 		log.info("tamaño salida:" + listaFar.size());
 		sesion.setAttribute("listaFar", listaFar);
 		return "farmacia/farmaceutico";
 	}
+	
 	@RequestMapping("modificarFarmaceutico")
 	public String modificarfarmaceuticoAction() {
 		return "farmacia/modificarFarmaceutico";

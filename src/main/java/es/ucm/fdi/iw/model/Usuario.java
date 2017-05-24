@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 //Imports de JPA
@@ -15,7 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
-
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.User;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) //Esto divide las tablas por herencia.(paciente,medico,farmaceutico) y las organiza por el id de usuario.
 @Table(name = "usuarios")
@@ -24,12 +27,17 @@ import org.hibernate.annotations.NamedQuery;
                 query="SELECT COUNT(u) FROM Usuario u WHERE u.estado=0 AND u.role=:tiporole"),
 
 }) 
-public class Usuario implements Serializable {
+public class Usuario extends User{
 	private static final long serialVersionUID = 3918714646456852426L;
 	
-	public Usuario() {
-		// TODO Auto-generated constructor stub
-	}
+	public Usuario(String username, String password,
+            Collection<? extends GrantedAuthority> authorities) {
+        super(username, password, authorities);
+        this.usuario=username;
+        this.contrasenia=password;
+
+    }
+
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -108,13 +116,13 @@ public class Usuario implements Serializable {
 		id = iDUsuario;
 	}
 	public String getUsuario() {
-		return usuario;
+		return super.getUsername();
 	}
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
 	public String getContrasenia() {
-		return contrasenia;
+		return super.getPassword();
 	}
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
@@ -131,5 +139,9 @@ public class Usuario implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public  Collection<GrantedAuthority> getAuth(){
+		return super.getAuthorities();
+	}
 	
+
 }

@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.model;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,8 +15,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.security.core.GrantedAuthority;
+
 @Entity
 public class Medico extends Usuario {
+	public Medico(String username, String password,
+			Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, authorities);
+		// TODO Auto-generated constructor stub
+	}
 	private static final long serialVersionUID = 9190127841629484829L;
 	
 	@Column(name = "num_col_medico", nullable = false)

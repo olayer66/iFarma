@@ -12,6 +12,7 @@ import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -155,48 +156,51 @@ public class RootController {
 		@RequestMapping("mm")
 		public @ResponseBody String addFarmaceutico() throws IOException {
 		
-
-			//dos farmaceuticos
-			es.ucm.fdi.iw.model.Farmaceutico f = new es.ucm.fdi.iw.model.Farmaceutico(); 
+			//farmaceutico1
+			ArrayList<SimpleGrantedAuthority> roles = new ArrayList<>();
+        	roles.add(new SimpleGrantedAuthority("ROLE_" + "FAR"));
+			es.ucm.fdi.iw.model.Farmaceutico f = new es.ucm.fdi.iw.model.Farmaceutico("farma1",new BCryptPasswordEncoder().encode("1234"),roles); 
 			
 			f.setApellidos("hernandez");
-			f.setContrasenia(new BCryptPasswordEncoder().encode("1234"));
 			f.setEmail("hoeli@gmail.com");
 			f.setEstado(1);
+			f.setRole("FAR");
 			f.setNombre("antoniio");
 			f.setNumColFarmaceutico("5523155");
-			f.setRole("FAR");
 			f.setTelefono("64266666");
-			f.setUsuario("farma1");
 			//f.setFarmaciasPropias();
 			entityManager.persist(f);
 
 			
-			es.ucm.fdi.iw.model.Farmaceutico f1 = new es.ucm.fdi.iw.model.Farmaceutico(); 
+			ArrayList<SimpleGrantedAuthority> roles2 = new ArrayList<>();
+        	roles.add(new SimpleGrantedAuthority("ROLE_" + "FAR"));
+			es.ucm.fdi.iw.model.Farmaceutico f1 = new es.ucm.fdi.iw.model.Farmaceutico("farma2",new BCryptPasswordEncoder().encode("1234"),roles2); 
 			
 			f1.setApellidos("hernandez");
 			f1.setContrasenia(new BCryptPasswordEncoder().encode("1234"));
 			f1.setEmail("holi@gmail.com");
 			f1.setEstado(1);
+			f1.setRole("FAR");
 			f1.setNombre("antunez");
 			f1.setNumColFarmaceutico("554455");
-			f1.setRole("FAR");
 			f1.setTelefono("696666666");
 			f1.setUsuario("farma2");
 			//f.setFarmaciasPropias();
 			entityManager.persist(f1);
 
 			
-			es.ucm.fdi.iw.model.Usuario f2 = new es.ucm.fdi.iw.model.Usuario();
+			
+			
+			ArrayList<SimpleGrantedAuthority> roles3 = new ArrayList<>();
+        	roles.add(new SimpleGrantedAuthority("ROLE_" + "ADMIN"));
+			es.ucm.fdi.iw.model.Usuario f2 = new es.ucm.fdi.iw.model.Usuario("admin",new BCryptPasswordEncoder().encode("1234"),roles3);
 			//un admin
-			f2.setUsuario("admin");
-			f2.setContrasenia(new BCryptPasswordEncoder().encode("1234"));
-			f2.setRole("ADMIN");	
 			f2.setEstado(1);
 			f2.setEmail("ddd@dd.com");
 			f2.setApellidos("doming");
 			f2.setNombre("holi");
 			f2.setTelefono("33222222");
+			f2.setRole("ADMIN");
 			entityManager.persist(f2);
 			
 			es.ucm.fdi.iw.model.Farmacia f3 = new es.ucm.fdi.iw.model.Farmacia(); 

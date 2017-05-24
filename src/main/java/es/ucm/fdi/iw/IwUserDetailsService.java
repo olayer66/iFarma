@@ -24,7 +24,9 @@ public class IwUserDetailsService implements UserDetailsService {
     public void setEntityManager(EntityManager em){
         this.entityManager = em;
     }
-
+    
+    
+    @Override
     public UserDetails loadUserByUsername(String username){
     	try {
 	        Usuario u = entityManager.createQuery(
@@ -40,5 +42,5 @@ public class IwUserDetailsService implements UserDetailsService {
     		log.info("No such user: " + username);
     		return null;
     	}
-    }
+}
 }

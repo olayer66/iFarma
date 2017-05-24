@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.Column;
 //Imports basicos para JPA
@@ -17,11 +18,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.security.core.GrantedAuthority;
+
 @Entity
 //Peticiones a la tabla
 @NamedQueries({	
 })
 public class Paciente extends Usuario {
+	public Paciente(String username, String password,
+			Collection<? extends GrantedAuthority> authorities) {
+		super(username, password, authorities);
+		// TODO Auto-generated constructor stub
+	}
 	private static final long serialVersionUID = 2117067448004216461L;
 
 	//direccion de envio de pedidos
