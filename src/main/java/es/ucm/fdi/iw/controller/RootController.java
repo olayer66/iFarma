@@ -161,7 +161,7 @@ public class RootController {
 		public @ResponseBody String addFarmaceutico() throws IOException {
 		
 			MedicamentosParser.carga(
-					new File("C:/Users/Tauslet/Documents/workspace-sts-3.8.3.RELEASE/IFarma/src/main/resources/static/json/medicamentos.json"),
+					new File("/home/hlocal/sts/proyectos/IFarma/src/main/resources/static/json/medicamentos.json"),
 					entityManager);
 			//dos farmaceuticos
 			es.ucm.fdi.iw.model.Farmaceutico f = new es.ucm.fdi.iw.model.Farmaceutico(); 
@@ -241,6 +241,10 @@ public class RootController {
 			es.ucm.fdi.iw.model.ExistenciaMedicamento ex = new es.ucm.fdi.iw.model.ExistenciaMedicamento(); 
 			es.ucm.fdi.iw.model.ExistenciaMedicamento ex2 = new es.ucm.fdi.iw.model.ExistenciaMedicamento(); 
 			es.ucm.fdi.iw.model.ExistenciaMedicamento ex3 = new es.ucm.fdi.iw.model.ExistenciaMedicamento();
+			
+			List<Medicamento> ms = (List<Medicamento>)entityManager.createQuery("select m from Medicamento m").getResultList();
+			log.info("Total medicamentos: " + ms.size());
+			
 			es.ucm.fdi.iw.model.Medicamento Md1 = entityManager.createQuery(
 	        		"FROM Medicamento WHERE nombre = :nombre", Medicamento.class)
 	                            .setParameter("nombre", "AAS")

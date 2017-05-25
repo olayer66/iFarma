@@ -24,7 +24,7 @@
 						<tbody>
 							 <c:forEach var="farmacia" items="${listaFar}">
 							   <tr>
-									<td><a href=/farmacia/pedidos>${farmacia.nombre}</a></td>
+									<td><a href=/farmacia/stock?id=${farmacia.id}>${farmacia.nombre}</a></td>
 									<td><strong class="alerta">7</strong></td>
 		                        </tr>	
 							</c:forEach>

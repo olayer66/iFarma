@@ -17,10 +17,10 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
     				<li>
-	                    <a href="/farmacia/pedidos">Lista de pedidos</a>
+	                    <a href="/farmacia/pedidos?id=${idFarmacia}">Lista de pedidos</a>
 	                </li>
 	                <li>
-	                    <a href="/farmacia/stock">Stock</a>
+	                    <a href="/farmacia/stock?id=${idFarmacia}">Stock</a>
 	                </li>
            		 </ul>
 
