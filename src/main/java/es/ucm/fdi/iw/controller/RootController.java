@@ -161,7 +161,7 @@ public class RootController {
 		public @ResponseBody String addFarmaceutico() throws IOException {
 		
 			MedicamentosParser.carga(
-					new File("C:/Users/Tauslet/Documents/workspace-sts-3.8.3.RELEASE/IFarma/src/main/resources/static/json/medicamentos.json"),
+					new File("/home/hlocal/iFarma/src/main/resources/static/json/medicamentos.json"),
 					entityManager);
 			//dos farmaceuticos
 			es.ucm.fdi.iw.model.Farmaceutico f = new es.ucm.fdi.iw.model.Farmaceutico(); 

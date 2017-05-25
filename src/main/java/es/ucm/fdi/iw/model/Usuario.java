@@ -20,7 +20,7 @@ import org.hibernate.annotations.NamedQuery;
 @Inheritance(strategy = InheritanceType.JOINED) //Esto divide las tablas por herencia.(paciente,medico,farmaceutico) y las organiza por el id de usuario.
 @Table(name = "usuarios")
 @NamedQueries({
-    @NamedQuery(name="Usuario.countMED",
+    @NamedQuery(name="Usuario.count",
                 query="SELECT COUNT(u) FROM Usuario u WHERE u.estado=0 AND u.role=:tiporole"),
 
 }) 

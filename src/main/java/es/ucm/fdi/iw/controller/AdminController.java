@@ -34,7 +34,18 @@ public class AdminController {
 	}
 
 	@RequestMapping("admin")
-	public String adminAction() {
+	public String adminAction(HttpSession sesion) {
+		Long petFarmaceutico;
+		Long petMedico;
+		Long petFarmacia;
+		
+		petFarmaceutico=(Long) entityManager.createNamedQuery("Usuario.count").setParameter("tiporole", "FAR").getSingleResult();
+		petMedico=(Long) entityManager.createNamedQuery("Usuario.count").setParameter("tiporole", "MED").getSingleResult();
+		petFarmacia=(Long) entityManager.createNamedQuery("Farmacia.countFARMA").getSingleResult();
+		
+		sesion.setAttribute("petFarmaceutico", petFarmaceutico);
+		sesion.setAttribute("petMedico", petMedico);
+		sesion.setAttribute("petFarmacia", petFarmacia);
 		return "admin/admin";
 	}
 
@@ -84,6 +95,6 @@ public class AdminController {
 		MedicamentosParser.carga(
 				new File("/home/hlocal/iFarma/src/main/resources/static/json/medicamentos.json"),
 				entityManager);
-		return "admin/gestionMedicamentos";
+		return "redirect:/admin/gestionMedicamentos";
 	}
 }
