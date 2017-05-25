@@ -57,7 +57,8 @@ public class FarmaciaController {
 	}
 	
 	@RequestMapping("farmaceutico")
-	public String farmaceuticoAction(HttpSession sesion) {
+	public String farmaceuticoAction(HttpSession sesion, Model model) {
+		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Farmaceutico farmaceutico = entityManager.createQuery(
@@ -70,6 +71,7 @@ public class FarmaciaController {
 
 		log.info("tamaño salida:" + listaFar.size());
 		sesion.setAttribute("listaFar", listaFar);
+
 		return "farmacia/farmaceutico";
 	}
 	@RequestMapping("modificarFarmaceutico")
@@ -78,12 +80,34 @@ public class FarmaciaController {
 	}
 	
 	@GetMapping({"farmacia", "pedidos"})
-	public String pedidosAction(HttpSession sesion) {
+	public String pedidosAction( HttpSession sesion,@RequestParam long id,Model model) {
+		model.addAttribute("idFarmacia", id);
+		/*String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Farmaceutico farmaceutico = entityManager.createQuery(
+        		"FROM Farmaceutico WHERE usuario = :usuario", Farmaceutico.class)
+                            .setParameter("usuario", username)
+                            .getSingleResult();
+		
+		Farmacia f = entityManager.find(Farmacia.class, id);
+				
+		if (f == null || f.getDuenio()!=farmaceutico){
+			log.info("Acceso denegado");
+		}else{
+			List<pedidos> listapedr = f.getPedidos();
+
+			log.info("tamaño salida:" + listaPed.size());
+			sesion.setAttribute("listaFar", listaPed);
+			
+		}
+
+			*/
+			
 		return "farmacia/pedidos";
 	}
 	
 	@RequestMapping("stock") //lo voy a probar primero con medicamentos, luego con inventarios
-	public String stockAction(HttpSession sesion) {
+	public String stockAction(@RequestParam long id, HttpSession sesion, Model model) {
+		model.addAttribute("idFarmacia", id);
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Farmaceutico farmaceutico = entityManager.createQuery(
@@ -91,18 +115,18 @@ public class FarmaciaController {
                             .setParameter("usuario", username)
                             .getSingleResult();
 		
-		//no estoy seguro de que id necesito
-		List<Farmacia> listaFar = farmaceutico.getFarmaciasPropias();
-		log.info("tamaño salida listafar:" + listaFar.size());
-		//aqui necesitariamos saber en cual de las dos farmacias hemos clicado
-		//int farmaciaActual=0;
-		Farmacia farmacia =listaFar.get(0);
-		List<ExistenciaMedicamento> miStock= farmacia.getStock();
-		log.info("tamaño salida mistock:" + miStock.size());
-		Farmacia farmacia2 =listaFar.get(1);
-		List<ExistenciaMedicamento> miStock2= farmacia2.getStock();
-		log.info("tamaño salida mistock2:" + miStock2.size());
-		sesion.setAttribute("miStock", miStock);
+
+		Farmacia farmacia = entityManager.find(Farmacia.class, id);
+		if (farmacia == null || farmacia.getDuenio()!=farmaceutico){
+			log.info("Acceso denegado");
+		}else{
+			List<ExistenciaMedicamento> miStock= farmacia.getStock();
+			log.info("tamaño salida mistock:" + miStock.size());
+			sesion.setAttribute("miStock", miStock);
+			
+
+		}
+		
 		return "farmacia/stock";
 	}
 	@RequestMapping("pedido")
