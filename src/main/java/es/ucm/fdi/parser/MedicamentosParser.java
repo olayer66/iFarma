@@ -14,9 +14,8 @@ import es.ucm.fdi.iw.model.Medicamento;
 public class MedicamentosParser {
 	private static final Logger log = Logger.getLogger(MedicamentosParser.class);	
 	
-	public static void carga(File fichero, EntityManager em) throws IOException {
+	public static void carga(String json, EntityManager em) throws IOException {
 		try {
-			String json = new String(Files.readAllBytes(fichero.toPath()));						
 			ObjectMapper mapper = new ObjectMapper();
 			Medicamento[] ms = mapper.readValue(json, Medicamento[].class);
 			log.info("Se han cargado " + ms.length + " medicamentos");

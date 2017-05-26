@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-        		.antMatchers("/static/**", "/logout", "/403","/index","/","/mm",
+        		.antMatchers("/static/**", "/logout", "/403","/index","/",
         				"/nuevoFarmaceutico",
         				"/nuevoMedico",
         				"/validarPaciente",

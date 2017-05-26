@@ -1,7 +1,7 @@
 package es.ucm.fdi.iw.controller;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,12 +10,15 @@ import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.parser.MedicamentosParser;
 
@@ -55,7 +58,12 @@ public class AdminController {
 	}
 
 	@RequestMapping("altasFarmacias")
-	public String altaFarmaciasAction() {
+	public String altaFarmaciasAction(HttpSession sesion) {
+		List<Farmacia> listaFarmacia;
+		TypedQuery<Farmacia> query= entityManager.createNamedQuery("Farmacia.findValidar", Farmacia.class);
+		listaFarmacia=query.getResultList();
+		log.warn("contador de farmacias: "+listaFarmacia.size());
+		sesion.setAttribute("listaFarmacia", listaFarmacia);
 		return "admin/altasFarmacias";
 	}
 
@@ -76,12 +84,12 @@ public class AdminController {
 	}
 
 	@RequestMapping("detalleAltaFarmacia")
-	public String detalleAltaFarmaciaAction() {
+	public String detalleAltaFarmaciaAction(@RequestParam("id") Long id) {
 		return "admin/detalleAltaFarmacia";
 	}
 	
 	@RequestMapping("detalleAltaFarmaceutico")
-	public String detalleAltaFarmaceuticoAction() {
+	public String detalleAltaFarmaceuticoAction(@RequestParam("id") Long id) {
 		return "admin/detalleAltaFarmaceutico";
 	}
 	
@@ -92,8 +100,9 @@ public class AdminController {
 	@Transactional
 	@RequestMapping("insMedicamentos")
 	public String insertarMedicamentos() throws IOException {
-		MedicamentosParser.carga(
-				new File("/home/hlocal/iFarma/src/main/resources/static/json/medicamentos.json"),
+		InputStream dataStream = getClass().getResourceAsStream(
+				"/static/json/medicamentos.json");
+		MedicamentosParser.carga(new String(IOUtils.toByteArray(dataStream)),
 				entityManager);
 		return "redirect:/admin/gestionMedicamentos";
 	}
