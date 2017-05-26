@@ -7,7 +7,7 @@ public class Mensaje {
 	private static final Logger log = Logger.getLogger(Login.class);
 	
 	@NotEmpty(message = "El campo esta vacio")
-	private String remitente;
+	private String destinatario;
 	
 	@NotEmpty(message = "El campo esta vacio")	
 	private String asunto;
@@ -15,12 +15,12 @@ public class Mensaje {
 	@NotEmpty(message = "El campo esta vacio")
 	private String mensaje;
 
-	public String getRemitente() {
-		return remitente;
+	public String getDestinatario() {
+		return destinatario;
 	}
 
-	public void setRemitente(String remitente) {
-		this.remitente = remitente;
+	public void setDestinatario(String destinatario) {
+		this.destinatario = destinatario;
 	}
 
 	public String getAsunto() {

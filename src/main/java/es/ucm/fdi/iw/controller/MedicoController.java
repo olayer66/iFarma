@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import es.ucm.fdi.iw.model.Mensaje;
+import es.ucm.fdi.iw.validation.Mensaje;
 import es.ucm.fdi.iw.validation.Medico;
 
 @Controller
@@ -22,10 +22,10 @@ import es.ucm.fdi.iw.validation.Medico;
 public class MedicoController {
 
 	private static final Logger log = Logger.getLogger(MedicoController.class);
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
-	
+
 	@GetMapping("")
 	public String indexAction() {
 		return "medico/listadoPacientes";
@@ -34,7 +34,7 @@ public class MedicoController {
 	public String listadoPacientesAction() {
 		return "medico/listadoPacientes";
 	}
-	
+
 	@RequestMapping("nuevo-paciente")
 	public String nuevoPacienteAction() {
 		return "medico/nuevoPaciente";
@@ -48,20 +48,24 @@ public class MedicoController {
 	public String detallePacienteAction() {
 		return "medico/detallePaciente";
 	}
-	
+
 	@RequestMapping("feedback")
-	public String feedbackAction() {
+	String feedbackAction(Model model) {
+		Mensaje mensaje = new Mensaje();
+		model.addAttribute("mensaje", mensaje);
+
 		return "medico/feedback";
 	}
-	
-	@RequestMapping(value = "feedback/nuevo", method = RequestMethod.POST)
-	String nuevoFeedbackAction(@ModelAttribute("crearFeedback") @Valid Mensaje mensaje, BindingResult bindingResult, HttpSession sesion) {
-		return "medico/feedback";
+
+	@RequestMapping(value = "/feedback/nuevo", method = RequestMethod.POST)
+	String nuevoFeedbackAction(@ModelAttribute("mensaje") @Valid Mensaje mensaje, BindingResult bindingResult, Model model, HttpSession sesion) {
+		// TODO: Persistir mensaje
+		return "redirect:/feedback";
 	}
-	
+
 	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
 	String login(@ModelAttribute("nuevo") @Valid Medico nuevo, BindingResult bindingResult, Model model,
-			HttpSession sesion) {
+		HttpSession sesion) {
 		if (bindingResult.hasErrors()) {
 			log.error("Paso por aqui");
 			return "medico/nuevoMedico";

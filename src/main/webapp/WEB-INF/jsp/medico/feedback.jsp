@@ -165,14 +165,14 @@
             </div>
 
             <div class="modal-body">
-                <sf:form modelAttribute="crearFeedback" action="/medico/feedback/nuevo">
+                <sf:form method="POST" modelAttribute="mensaje" action="/medico/feedback/nuevo">
                     <div class="box-body">
                         <div class="form-group">
-                            <sf:input path="destinatario" class="form-control" placeholder="Para:" value="">
+                            <sf:input path="destinatario" class="form-control" placeholder="Para:" value="" />
                             <p><sf:errors path="destinatario" cssClass="error"/></p>
                         </div>
                         <div class="form-group">
-                            <sf:input path="asunto" class="form-control" placeholder="Asunto:" value="">
+                            <sf:input path="asunto" class="form-control" placeholder="Asunto:" value="" />
                             <p><sf:errors path="asunto" cssClass="error"/></p>
                         </div>
                         <div class="form-group">
