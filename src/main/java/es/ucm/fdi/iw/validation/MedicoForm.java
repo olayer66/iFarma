@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class Medico {
+public class MedicoForm {
 	//logger
 		private static final Logger log = Logger.getLogger(Login.class);
 		

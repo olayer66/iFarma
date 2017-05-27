@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
+import org.springframework.util.StringUtils;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) //Esto divide las tablas por herencia.(paciente,medico,farmaceutico) y las organiza por el id de usuario.
@@ -131,5 +132,8 @@ public class Usuario implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
+	public String toString() {
+		return StringUtils.capitalize(this.nombre) + " " 
+				+ StringUtils.capitalize(this.apellidos);
+	}
 }

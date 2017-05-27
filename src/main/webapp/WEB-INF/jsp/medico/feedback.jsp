@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="../../jspf/header.jspf" %>
 
@@ -41,6 +42,7 @@
 
     <div class="col-lg-10">
         <div class="tab-content">
+			<!-- Recibidos -->
             <div id="inbox" class="tab-pane fade in active">
                 <table class="table table-hover table-striped">
                     <tbody>
@@ -128,11 +130,25 @@
                 </table>
             </div>
 
+			<!-- Enviados -->
             <div id="sent" class="tab-pane fade">
                 <table class="table table-hover table-striped">
+					<tbody>
+	                	<c:forEach items="${medico.mensajesEnviados}" var="mensaje">
+	                		<tr>
+	                            <td><input type="checkbox"></td>
+	                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
+	                            <td class="mailbox-name"><a href="#">${mensaje.destinatario}</a></td>
+	                            <td class="mailbox-subject">${mensaje.asunto}</td>
+	                            <td class="mailbox-attachment"></td>
+	                            <td class="mailbox-date">${mensaje.fechaMensaje}</td>
+	                        </tr>
+						</c:forEach>
+					</tbody>
                 </table>
             </div>
 
+			<!-- Borradores -->
             <div id="draft" class="tab-pane fade">
                 <table class="table table-hover table-striped">
                     <tbody>
@@ -148,10 +164,12 @@
                 </table>
             </div>
 
+			<!-- Eliminados -->
             <div id="trash" class="tab-pane fade">
                 <table class="table table-hover table-striped">
                 </table>
             </div>
+            <!-- Final -->
         </div>
     </div>
 </div>
@@ -168,7 +186,10 @@
                 <sf:form method="POST" modelAttribute="mensaje" action="/medico/feedback/nuevo">
                     <div class="box-body">
                         <div class="form-group">
-                            <sf:input path="destinatario" class="form-control" placeholder="Para:" value="" />
+							<sf:select  path="destinatario" class="form-control">
+								<sf:option value="">Destinatario...</sf:option>
+								<sf:options items="${medico.pacientes}" itemValue="id"></sf:options>
+							</sf:select>
                             <p><sf:errors path="destinatario" cssClass="error"/></p>
                         </div>
                         <div class="form-group">
@@ -193,3 +214,12 @@
 </div>
 
 <%@ include file="../../jspf/footer.jspf" %>
+
+
+<c:if test="${error}">
+	<script>
+		 $(function () {
+			 $('#redactarMensaje').modal('show'); 
+		 });
+	</script>
+</c:if>

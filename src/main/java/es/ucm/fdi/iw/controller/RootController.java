@@ -31,7 +31,7 @@ import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.validation.Codigo;
 import es.ucm.fdi.iw.validation.Farmaceutico;
-import es.ucm.fdi.iw.validation.Medico;
+import es.ucm.fdi.iw.validation.MedicoForm;
 import es.ucm.fdi.iw.validation.ValidarPaciente;
 import es.ucm.fdi.parser.MedicamentosParser;
 
@@ -124,11 +124,11 @@ public class RootController {
 		//crear un nuevo medico
 		@RequestMapping("nuevoMedico")
 		public 	String nuevoMedicoAction(Model model) {
-			model.addAttribute("nuevo", new Medico());
+			model.addAttribute("nuevo", new MedicoForm());
 			return "nuevoMedico";
 		}
 		@RequestMapping(value = "/nuevoMedicoSubmit", method = RequestMethod.POST)
-		public String login(@ModelAttribute("nuevo") @Valid Medico nuevo, BindingResult bindingResult, Model model,
+		public String login(@ModelAttribute("nuevo") @Valid MedicoForm nuevo, BindingResult bindingResult, Model model,
 				HttpSession sesion) {
 			if (bindingResult.hasErrors()) {
 				log.error("Paso por aqui");

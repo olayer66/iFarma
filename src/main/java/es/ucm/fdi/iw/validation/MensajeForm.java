@@ -3,7 +3,7 @@ package es.ucm.fdi.iw.validation;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class Mensaje {
+public class MensajeForm {
 	private static final Logger log = Logger.getLogger(Login.class);
 	
 	@NotEmpty(message = "El campo esta vacio")
