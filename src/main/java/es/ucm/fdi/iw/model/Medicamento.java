@@ -64,4 +64,7 @@ public class Medicamento implements Serializable{
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+	public String toString() {
+		return this.nombre + " - " + this.descripcion + " [" + this.laboratorio + "]";
+	}
 }

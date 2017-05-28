@@ -1,7 +1,6 @@
 package es.ucm.fdi.iw.controller;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +24,7 @@ import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.validation.MedicoForm;
 import es.ucm.fdi.iw.validation.MensajeForm;
+import es.ucm.fdi.iw.validation.TratamientoForm;
 
 @Controller
 @RequestMapping("/medico")
@@ -54,9 +54,26 @@ public class MedicoController {
 		
 		return "medico/nuevoMedico";
 	}
-	@RequestMapping("detalle-paciente")
-	public String detallePacienteAction() {
+	@RequestMapping("/detalle-paciente")
+	public String detallePacienteAction(Model model, HttpSession sesion) {
+		model.addAttribute("form", new TratamientoForm());
+		model.addAttribute("paciente", this.getLoggedUser(sesion).getPacientes().get(0));
+		model.addAttribute("medicamentos", entityManager.createQuery("FROM Medicamento").getResultList());
+		
 		return "medico/detallePaciente";
+	}
+	
+	@Transactional
+	@RequestMapping(value = "/tratamiento/nuevo", method = RequestMethod.POST)
+	String nuevoTratamientoAction(@ModelAttribute("form") @Valid TratamientoForm form, BindingResult bindingResult, Model model, HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("error", true);
+			model.addAttribute("form", form);
+
+			return "medico/detallePaciente";
+		}
+		
+		return "redirect:/medico/detalle-paciente";
 	}
 
 	@RequestMapping("feedback")
