@@ -16,4 +16,5 @@
     <!-- Include Bootstrap Datepicker -->
     <link href="/static/css/datepicker.css" rel="stylesheet">
     <link href="/static/css/datatables.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
 </head>

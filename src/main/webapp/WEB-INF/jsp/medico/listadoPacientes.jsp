@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ include file="../../jspf/header.jspf" %>
 
@@ -14,182 +16,28 @@
 			<tr>
 				<th>Nombre</th>
 				<th>Apellidos</th>
-				<th>Edad</th>
-				<th>Peso</th>
-				<th>Altura</th>
-				<th>Medicamentos</th>
+				<th>Teléfono</th>
+				<th>Email</th>
+				<th>Ciudad</th>
+				<th>Tratamientos</th>
 				<th>Acciones</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Placido</td>
-				<td>Olego Da Silva</td>
-				<td>27</td>
-				<td>74</td>
-				<td>1,76</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Juan Pedro</td>
-				<td>Torrado Muñoz</td>
-				<td>36</td>
-				<td>87</td>
-				<td>1,83</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Maria Clara</td>
-				<td>Nadal Gome-Perez</td>
-				<td>62</td>
-				<td>65</td>
-				<td>1,57</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Tomás</td>
-				<td>Serrano Hernandez</td>
-				<td>72</td>
-				<td>61</td>
-				<td>1,69</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Maruja</td>
-				<td>Gomez Blanco</td>
-				<td>58</td>
-				<td>82</td>
-				<td>1,65</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Gerrado</td>
-				<td>Torrico Delgado</td>
-				<td>37</td>
-				<td>62</td>
-				<td>1,70</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Julia</td>
-				<td>León Pérez</td>
-				<td>36</td>
-				<td>58</td>
-				<td>1,68</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Placido</td>
-				<td>Olego Da Silva</td>
-				<td>27</td>
-				<td>74</td>
-				<td>1,76</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Juan Pedro</td>
-				<td>Torrado Muñoz</td>
-				<td>36</td>
-				<td>87</td>
-				<td>1,83</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Maria Clara</td>
-				<td>Nadal Gome-Perez</td>
-				<td>62</td>
-				<td>65</td>
-				<td>1,57</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Tomás</td>
-				<td>Serrano Hernandez</td>
-				<td>72</td>
-				<td>61</td>
-				<td>1,69</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Maruja</td>
-				<td>Gomez Blanco</td>
-				<td>58</td>
-				<td>82</td>
-				<td>1,65</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Gerrado</td>
-				<td>Torrico Delgado</td>
-				<td>37</td>
-				<td>62</td>
-				<td>1,70</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Julia</td>
-				<td>León Pérez</td>
-				<td>36</td>
-				<td>58</td>
-				<td>1,68</td>
-				<td><span class="badge">0</span></td>
-				<td>
-					<a href="/medico/detalle-paciente" class="btn btn-sm btn-success">Ver Paciente</a>
-					<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
-				</td>
-			</tr>
+			<c:forEach items="${medico.pacientes}" var="paciente">
+				<tr>
+					<td>${paciente.nombre}</td>
+					<td>${paciente.apellidos}</td>
+					<td>${paciente.telefono}</td>
+					<td>${paciente.email}</td>
+					<td>${paciente.ciudad}</td>
+					<td><span class="badge">${fn:length(paciente.tratamiento)}</span></td>
+					<td>
+						<a href="/medico/detalle-paciente/${paciente.id}" class="btn btn-sm btn-success">Ver Paciente</a>
+						<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+					</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>

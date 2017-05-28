@@ -22,7 +22,7 @@ import javax.persistence.UniqueConstraint;
 		   @UniqueConstraint(columnNames = "id_tratamiento")
 	})
 //Peticiones a la tabla
-@NamedQueries({	
+@NamedQueries({
 })
 public class Tratamiento implements Serializable {
 	private static final long serialVersionUID = -8662915238597958222L;
@@ -30,7 +30,7 @@ public class Tratamiento implements Serializable {
 	@Column(name = "id_tratamiento", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long IDTratamiento;
-	
+
 	//Paciente al que pertenece
 	@ManyToOne(optional=false)
     @JoinColumn(name="paciente",referencedColumnName="id")
@@ -39,23 +39,20 @@ public class Tratamiento implements Serializable {
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="id_medicamento")
 	private Medicamento medicamento;
-	//duracion en dias del tratamiento
-	@Column(name = "fecha_fin_tratamiento", nullable = false)
-	private Date fechaFinTratamiento;
+	@Column(name = "fecha_inicio", nullable = false)
+	private Date fechaInicio;
+	@Column(name = "fecha_fin", nullable = false)
+	private Date fechaFin;
 	//numero de pastillas tomadas
 	@Column(name = "num_dosis", nullable = true)
-	private String numDosis;
+	private Integer numDosis;
 	//tiempo entre dosis (cada 8 horas, 1 al dia, etc)//en horas
 	@Column(name = "perioicidad", nullable = false)
 	private String perioicidad;
 	//Numero restante de tomas del dia
 	@Column(name = "num_dosis_dia", nullable = false)
-	private String numDosisDia;
-	//fecha del dia acutal para el calculo de las tomas
-	@Column(name = "fecha_actual", nullable = false)
-	private Date fechaActual;
-	
-	
+	private Integer numDosisDia;
+
 	//getters y setters
 	public long getIDTratamiento() {
 		return IDTratamiento;
@@ -63,11 +60,17 @@ public class Tratamiento implements Serializable {
 	public void setIDTratamiento(long iDTratamiento) {
 		IDTratamiento = iDTratamiento;
 	}
-	public String getNumDosis() {
+	public Integer getNumDosis() {
 		return numDosis;
 	}
-	public void setNumDosis(String numDosis) {
+	public void setNumDosis(Integer numDosis) {
 		this.numDosis = numDosis;
+	}
+	public Integer getNumDosisDia() {
+		return numDosisDia;
+	}
+	public void setNumDosisDia(Integer numDosisDia) {
+		this.numDosisDia = numDosisDia;
 	}
 	public String getPerioicidad() {
 		return perioicidad;
@@ -81,11 +84,17 @@ public class Tratamiento implements Serializable {
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
-	public Date getFechaFinTratamiento() {
-		return fechaFinTratamiento;
+	public Date getFechaInicio() {
+		return fechaInicio;
 	}
-	public void setFechaFinTratamiento(Date fechaFinTratamiento) {
-		this.fechaFinTratamiento = fechaFinTratamiento;
+	public void setFechaInicio(Date fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+	public Date getFechaFin() {
+		return fechaFin;
+	}
+	public void setFechaFin(Date fechaFinTratamiento) {
+		this.fechaFin = fechaFinTratamiento;
 	}
 	public Medicamento getMedicamento() {
 		return medicamento;

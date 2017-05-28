@@ -1,29 +1,37 @@
 package es.ucm.fdi.iw.validation;
 
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class TratamientoForm {
 	private static final Logger log = Logger.getLogger(Login.class);
-	
+
 	@NotEmpty(message = "El campo esta vacio")
 	private String paciente;
-	
-	@NotEmpty(message = "El campo esta vacio")	
+
+	@NotEmpty(message = "El campo esta vacio")
 	private String medicamento;
-	
+
+	@NotEmpty(message = "El campo esta vacio")
+	private String fechaInicio;
+
 	@NotEmpty(message = "El campo esta vacio")
 	private String fechaFin;
-	
-	@NotEmpty(message = "El campo esta vacio")
-	private String numDosis;
-	
+
+	@NotNull(message = "El campo esta vacio")
+	@Digits(message = "El cambio debe ser un valor numérico", fraction = 0, integer = 1)
+	private Integer numDosis;
+
 	@NotEmpty(message = "El campo esta vacio")
 	private String periodicidad;
-	
-	@NotEmpty(message = "El campo esta vacio")
+
 	private String comentario;
 
 	public String getComentario() {
@@ -50,19 +58,51 @@ public class TratamientoForm {
 		this.medicamento = medicamento;
 	}
 
+	public String getFechaInicio() {
+		return this.fechaInicio;
+	}
+
+	public Date getFechaInicioFormateada() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+			return new Date(format.parse(this.fechaInicio).getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
 	public String getFechaFin() {
-		return fechaFin;
+		return this.fechaFin;
+	}
+
+	public Date getFechaFinFormateada() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+			return new Date(format.parse(this.fechaFin).getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
 
-	public String getNumDosis() {
+	public Integer getNumDosis() {
 		return numDosis;
 	}
 
-	public void setNumDosis(String numDosis) {
+	public void setNumDosis(Integer numDosis) {
 		this.numDosis = numDosis;
 	}
 

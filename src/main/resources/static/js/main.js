@@ -1,10 +1,14 @@
-/* 
+/*
  * Funciones basicas para la web
  */
 //Funcion principal
-$('document').ready(function(){
-    
+$(function () {
     console.log("DOM inicializado");
+
+    $('[data-modal-show-on-error="true"]').each(function () {
+        $(this).modal('show');
+    });
+
     $("#pagoEfectivo").hide();
     $("#pagoTarjeta").hide();
     $("#pagoPayPal").hide();
@@ -94,5 +98,3 @@ $('document').ready(function(){
           "autoWidth": false
         });
 });
-
-

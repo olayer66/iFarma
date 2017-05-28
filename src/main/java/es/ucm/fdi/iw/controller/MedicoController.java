@@ -1,10 +1,10 @@
 package es.ucm.fdi.iw.controller;
 
 import java.sql.Date;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -16,12 +16,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.model.Paciente;
+import es.ucm.fdi.iw.model.Tratamiento;
 import es.ucm.fdi.iw.validation.MedicoForm;
 import es.ucm.fdi.iw.validation.MensajeForm;
 import es.ucm.fdi.iw.validation.TratamientoForm;
@@ -29,7 +32,6 @@ import es.ucm.fdi.iw.validation.TratamientoForm;
 @Controller
 @RequestMapping("/medico")
 public class MedicoController {
-
 	private static final Logger log = Logger.getLogger(MedicoController.class);
 
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
@@ -37,10 +39,13 @@ public class MedicoController {
 
 	@GetMapping("")
 	public String indexAction() {
-		return "medico/listadoPacientes";
+		return "redirect:/medico/listado-pacientes";
 	}
+
 	@GetMapping({"listado-pacientes"})
-	public String listadoPacientesAction() {
+	public String listadoPacientesAction(Model model, HttpSession sesion) {
+		model.addAttribute("medico", this.getLoggedUser(sesion));
+
 		return "medico/listadoPacientes";
 	}
 
@@ -48,39 +53,56 @@ public class MedicoController {
 	public String nuevoPacienteAction() {
 		return "medico/nuevoPaciente";
 	}
+
 	@RequestMapping("nuevoMedico")
 	public String nuevoMedicoAction(Model model) {
 		model.addAttribute("nuevo", new MedicoForm());
-		
+
 		return "medico/nuevoMedico";
 	}
-	@RequestMapping("/detalle-paciente")
-	public String detallePacienteAction(Model model, HttpSession sesion) {
-		model.addAttribute("form", new TratamientoForm());
-		model.addAttribute("paciente", this.getLoggedUser(sesion).getPacientes().get(0));
-		model.addAttribute("medicamentos", entityManager.createQuery("FROM Medicamento").getResultList());
-		
-		return "medico/detallePaciente";
-	}
-	
-	@Transactional
-	@RequestMapping(value = "/tratamiento/nuevo", method = RequestMethod.POST)
-	String nuevoTratamientoAction(@ModelAttribute("form") @Valid TratamientoForm form, BindingResult bindingResult, Model model, HttpSession sesion) {
-		if (bindingResult.hasErrors()) {
-			model.addAttribute("error", true);
-			model.addAttribute("form", form);
 
-			return "medico/detallePaciente";
+	@Transactional
+	@RequestMapping("/detalle-paciente/{id}")
+	public String detallePacienteAction(@PathVariable("id") final Long id, @ModelAttribute("form") @Valid TratamientoForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
+		Paciente paciente = entityManager.find(Paciente.class, id);
+
+		if (!this.getLoggedUser(sesion).getPacientes().contains(paciente)) {
+			return "redirect:/denegado";
 		}
-		
-		return "redirect:/medico/detalle-paciente";
+
+		model.addAttribute("paciente", paciente);
+		model.addAttribute("medicamentos", entityManager.createQuery("FROM Medicamento").getResultList());
+
+		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
+			model.addAttribute("form", new TratamientoForm());
+		}
+
+		if (request.getMethod().equals("POST")) {
+			if (bindingResult.hasErrors()) {
+				model.addAttribute("error", true);
+			} else {
+				Tratamiento tratamiento = new Tratamiento();
+
+				tratamiento.setMedicamento(entityManager.find(Medicamento.class, Long.parseLong(form.getMedicamento())));
+				tratamiento.setFechaInicio(form.getFechaInicioFormateada());
+				tratamiento.setFechaFin(form.getFechaFinFormateada());
+				tratamiento.setPerioicidad(form.getPeriodicidad());
+				tratamiento.setNumDosis(form.getNumDosis());
+				tratamiento.setPaciente(paciente);
+
+				paciente.getTratamiento().add(tratamiento);
+				entityManager.persist(paciente);
+			}
+		}
+
+		return "/medico/detallePaciente";
 	}
 
 	@RequestMapping("feedback")
 	String feedbackAction(Model model, HttpSession sesion) {
 		Medico medico = this.getLoggedUser(sesion);
 		MensajeForm mensaje = new MensajeForm();
-		
+
 		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("medico", medico);
 
@@ -96,19 +118,19 @@ public class MedicoController {
 
 			return "medico/feedback";
 		}
-		
+
 		Mensaje mensaje = new Mensaje();
 		mensaje.setAsunto(form.getAsunto());
 		mensaje.setMensaje(form.getMensaje());
 		mensaje.setDestinatario(entityManager.find(Paciente.class, Long.parseLong(form.getDestinatario())));
 		mensaje.setRemitente(this.getLoggedUser(sesion));
 		mensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
-		
+
 		Medico medico = this.getLoggedUser(sesion);
 		medico.getMensajesEnviados().add(mensaje);
-		
+
 		entityManager.persist(medico);
-		
+
 		return "redirect:/medico/feedback";
 	}
 
@@ -130,21 +152,21 @@ public class MedicoController {
 		log.info("Sesion finalizada");
 		return "redirect:/index";
 	}
-	
+
 	private Medico getLoggedUser(HttpSession sesion) {
 		Medico medico;
-		
+
 		if ((medico = (Medico) sesion.getAttribute("medico")) == null) {
 			String username = SecurityContextHolder.getContext().getAuthentication().getName();
-			
+
 			medico = entityManager
 					.createQuery("FROM Medico WHERE usuario = :usuario", Medico.class)
 					.setParameter("usuario", username)
 					.getSingleResult();
-			
+
 			sesion.setAttribute("medico", medico);
 		}
-		
+
 		return medico;
 	}
 }
