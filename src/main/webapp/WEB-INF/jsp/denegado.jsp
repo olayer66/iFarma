@@ -8,9 +8,9 @@
     	<div class="col-lg-12">
              <h1 class="page-header">Acceso denegado</h1>
              <h1><small>No tiene permisos para acceder a esta seccion.</small></h1>
-             <a class="btn btn-default" id="btnDenegadoVolver" href="/volverdenegado">Volver</a>
+             <button class="btn btn-default" onclick="history.back()">Volver</button>
         </div>
 	</div>
 </div>
+
 <%@ include file="../jspf/footer.jspf" %>
-</html>
