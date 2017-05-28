@@ -3,7 +3,7 @@ INSERT INTO USUARIOS VALUES(5,'hernandez','$2a$10$F8rUd7mDFhRKICVfT4B2oust7oAWHB
 INSERT INTO USUARIOS VALUES(3,'doming','$2a$10$CJHtFWSb5P2UM.jndYcvaO.V5lpgsULtnpDuYYXJbfZxfzblfTFFe','ddd@dd.com',1,'holi','ADMIN','33222222','admin')
 INSERT INTO USUARIOS VALUES(2, 'gordo porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',0, 'paco', 'MED', '91685336', 'medico')
 INSERT INTO USUARIOS VALUES(1, 'Gordo Porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',1, 'Paco', 'PAC', '91685336', 'paciente')
-INSERT INTO USUARIOS VALUES(6, 'Fuma Porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'porras@algo.com',1, 'Juan', 'PAC', '916541254', 'paciente')
+INSERT INTO USUARIOS VALUES(6, 'Fuma Porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'porras@algo.com',1, 'Juan', 'PAC', '916541254', 'paciente2')
 
 INSERT INTO MEDICO VALUES ( 'C.S La alameda', '12/12/200057', 2)
 
