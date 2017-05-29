@@ -1,7 +1,11 @@
 package es.ucm.fdi.iw.controller;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -14,6 +18,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import es.ucm.fdi.iw.model.Farmacia;
+import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.validation.ValidarPaciente;
 
 @Controller
@@ -22,7 +28,7 @@ public class PacienteController {
 	
 	private static final Logger log = Logger.getLogger(PacienteController.class);
 	
-	@PersistenceContext
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 	
 	@GetMapping("")
@@ -53,13 +59,18 @@ public class PacienteController {
 	public String perfilAction() {
 		return "paciente/perfil";
 	}
-	@RequestMapping("feedbackDR")
-	public String feedbackDrAction() {
-		return "paciente/feedbackDR";
-	}
 	@RequestMapping("verPedidos")
 	public String pedidoAction() {
 		return "paciente/verPedidos";
+	}
+	@RequestMapping("feedbackDR")
+	public String feedbackDRAction(HttpSession sesion) {
+		List<Mensaje> listMensajes;
+		TypedQuery<Mensaje> query= entityManager.createNamedQuery("Mensaje.extraerMensaje", Mensaje.class);
+		listMensajes=query.getResultList();
+		log.warn("contador de mensajes leidos: "+listMensajes.size());
+		sesion.setAttribute("listMensajes", listMensajes);
+		return "paciente/feedbackDR";
 	}
 	
 }

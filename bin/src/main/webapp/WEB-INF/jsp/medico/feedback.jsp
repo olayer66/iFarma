@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ include file="../../jspf/header.jspf"%>
 
-<%@ include file="../../jspf/navbarPaciente.jspf"%>
+<%@ include file="../../jspf/header.jspf" %>
+
+<%@ include file="../../jspf/navbarMedico.jspf"%>
 
 <div class="container">
     <h2>Feedback Pacientes</h2>
@@ -45,8 +46,7 @@
             <div id="inbox" class="tab-pane fade in active">
                 <table class="table table-hover table-striped">
                     <tbody>
-                       <c:forEach var = "mensaje" items="${listMensajes}">
-                       <tr>
+                        <tr>
                             <td><input type="checkbox"></td>
                             <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
                             <td class="mailbox-name"><a href="#">Placido Olego Da Silva</a></td>
@@ -54,7 +54,78 @@
                             <td class="mailbox-attachment"></td>
                             <td class="mailbox-date">5 mins ago</td>
                         </tr>
-                      </c:forEach>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star-empty" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Juan Pedro Torrado Muñoz</a></td>
+                            <td class="mailbox-subject"><b>Consulta</b> - Consulta sobre como proceder con la toma...</td>
+                            <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                            <td class="mailbox-date">28 mins ago</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star-empty" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Maria Clara Nadal Gome-Perez</a></td>
+                            <td class="mailbox-subject"><b>Consulta</b> - Consulta sobre como proceder con la toma...</td>
+                            <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                            <td class="mailbox-date">11 hours ago</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Tomás Serrano Hernandez</a></td>
+                            <td class="mailbox-subject"><b>Toma olvidada</b> - El paciente olvidó la toma...</td>
+                            <td class="mailbox-attachment"></td>
+                            <td class="mailbox-date">2 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star-empty" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Maruja Gomez Blanco</a></td>
+                            <td class="mailbox-subject"><b>Consulta</b> - Consulta sobre como proceder con la toma...</td>
+                            <td class="mailbox-attachment"></td>
+                            <td class="mailbox-date">2 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star-empty" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Gerrado Torrico Delgado</a></td>
+                            <td class="mailbox-subject"><b>Consulta</b> - Consulta sobre como proceder con la toma...</td>
+                            <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                            <td class="mailbox-date">4 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Julia León Pérez</a></td>
+                            <td class="mailbox-subject"><b>Toma olvidada</b> - El paciente olvidó la toma...</td>
+                            <td class="mailbox-attachment"></td>
+                            <td class="mailbox-date">12 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star-empty" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Placido Olego Da Silva</a></td>
+                            <td class="mailbox-subject"><b>Consulta</b> - Consulta sobre como proceder con la toma...</td>
+                            <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                            <td class="mailbox-date">12 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Juan Pedro Torrado Muñoz</a></td>
+                            <td class="mailbox-subject"><b>Toma olvidada</b> - El paciente olvidó la toma...</td>
+                            <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                            <td class="mailbox-date">14 days ago</td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Maria Clara Nadal Gome-Perez</a></td>
+                            <td class="mailbox-subject"><b>Toma olvidada</b> - El paciente olvidó la toma...</td>
+                            <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                            <td class="mailbox-date">15 days ago</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
