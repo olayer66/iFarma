@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.model.ExistenciaMedicamento;
+import es.ucm.fdi.iw.model.ExistenciaPedido;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Paciente;
@@ -162,33 +163,76 @@ public class RootController {
 		@RequestMapping("mm")//PARA PRUEBAS. NO BORRAR.
 		public @ResponseBody String mm() throws IOException{
 			Farmacia f= entityManager.find(Farmacia.class, (long)2);
-			Paciente pac= entityManager.find(Paciente.class, (long)2);
+			Paciente pac= entityManager.find(Paciente.class, (long)1);
 			Medicamento m= entityManager.find(Medicamento.class, (long)7024491);
 			Medicamento m2= entityManager.find(Medicamento.class, (long)9676384);
 			Medicamento m3= entityManager.find(Medicamento.class, (long)7098249);
-			ExistenciaMedicamento ex = new ExistenciaMedicamento() ;
+			//EXISTENCIAS PEDIDO //NO PUEDE HABER DOS EXISTENCIAS CON EL MISMO MEDICAMENTO EN EL MISMO PEDIDO, PERO SI EN DISTINTOS
+			ExistenciaPedido ex = new ExistenciaPedido() ;
 			ex.setCantidad(5);
-			ex.setFarmacia(f);
 			ex.setMedicamento(m);
 			ex.setFechaCaducidad(new Date(5, 12, 2017));
-			ExistenciaMedicamento ex2 = new ExistenciaMedicamento() ;
+			
+			ExistenciaPedido ex2 = new ExistenciaPedido() ;
 			ex2.setCantidad(5);
-			ex2.setFarmacia(f);
 			ex2.setMedicamento(m2);
 			ex2.setFechaCaducidad(new Date(5, 12, 2017));
-			ExistenciaMedicamento ex3 = new ExistenciaMedicamento() ;
+			
+			ExistenciaPedido ex3 = new ExistenciaPedido() ;
 			ex3.setCantidad(5);
-			ex3.setFarmacia(f);
 			ex3.setMedicamento(m3);
 			ex3.setFechaCaducidad(new Date(5, 12, 2017));
+			
+			ExistenciaPedido ex4 = new ExistenciaPedido() ;
+			ex4.setCantidad(15);
+			ex4.setMedicamento(m2);
+			ex4.setFechaCaducidad(new Date(5, 12, 2017));
+			
+			ExistenciaPedido ex5 = new ExistenciaPedido() ;
+			ex5.setCantidad(2);
+			ex5.setMedicamento(m3);
+			ex5.setFechaCaducidad(new Date(5, 12, 2017));
+			
 			entityManager.persist(ex);
 			entityManager.persist(ex2);
 			entityManager.persist(ex3);
+			entityManager.persist(ex4);
+			entityManager.persist(ex5);
 
-			List<ExistenciaMedicamento> listaExis = new ArrayList<ExistenciaMedicamento>();
+			
+			ExistenciaMedicamento exm = new ExistenciaMedicamento() ;
+			exm.setCantidad(10);
+			exm.setMedicamento(m);
+			exm.setFechaCaducidad(new Date(5, 12, 2017));
+			exm.setFarmacia(f);
+			
+			ExistenciaMedicamento exm2 = new ExistenciaMedicamento() ;
+			exm2.setCantidad(10);
+			exm2.setMedicamento(m2);
+			exm2.setFechaCaducidad(new Date(5, 12, 2017));
+			exm2.setFarmacia(f);
+			
+			ExistenciaMedicamento exm3 = new ExistenciaMedicamento() ;
+			exm3.setCantidad(10);
+			exm3.setMedicamento(m3);
+			exm3.setFarmacia(f);
+			exm3.setFechaCaducidad(new Date(5, 12, 2017));
+			entityManager.persist(exm);
+			entityManager.persist(exm2);
+			entityManager.persist(exm3);
+			
+			
+			
+			
+			
+
+			List<ExistenciaPedido> listaExis = new ArrayList<ExistenciaPedido>();
+			List<ExistenciaPedido> listaExis2 = new ArrayList<ExistenciaPedido>();
 			listaExis.add(ex);
 			listaExis.add(ex2);
 			listaExis.add(ex3);
+			listaExis2.add(ex4);
+			listaExis2.add(ex5);
 			
 			Pedidos p = new Pedidos();
 			p.setEstadoPedido(0);
@@ -198,15 +242,26 @@ public class RootController {
 			p.setPaciente(pac);
 			
 			Pedidos p2 = new Pedidos();
-			listaExis.remove(0);
 			p2.setEstadoPedido(0);
-			p2.setExistenciasPedido(listaExis);
+			p2.setExistenciasPedido(listaExis2);
 			p2.setFarmacia(f);
 			p2.setFechaPedido(new Date(9, 12, 2017));
 			p2.setPaciente(pac);
 			
 			entityManager.persist(p);
 			entityManager.persist(p2);
+			
+			ex.setPedido(p);
+			ex2.setPedido(p);
+			ex3.setPedido(p);
+			ex4.setPedido(p2);
+			ex5.setPedido(p2);
+			
+			entityManager.persist(ex);
+			entityManager.persist(ex2);
+			entityManager.persist(ex3);
+			entityManager.persist(ex4);
+			entityManager.persist(ex5);
 			
 			return "redirect:/index";
 			

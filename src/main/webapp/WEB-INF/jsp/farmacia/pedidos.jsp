@@ -28,7 +28,7 @@
                   <tbody>
                   <c:forEach var="pedidos" items="${listaPed}">
                   <tr>
-					<td><a href=/farmacia/pedido?id=${pedidos.id}>${pedidos.id}</a></td>
+					<td><a href=/farmacia/pedido?id=${pedidos.id}&idFarmacia=${idFarmacia}>${pedidos.id}</a></td>
                     <td>${pedidos.id}</td>
                     <td>${pedidos.fechaPedido}</td>
                     <td><span class="label label-success">${pedidos.estadoPedido}</span></td>

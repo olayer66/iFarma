@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
@@ -37,9 +38,8 @@ public class Pedidos implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="paciente")
 	private Paciente paciente;
-	@OneToMany
-	@JoinColumn(name="existencias_pedido")
-	private List<ExistenciaMedicamento> existenciasPedido;
+	@OneToMany(mappedBy="pedido")
+	private List<ExistenciaPedido> existenciasPedido;
 	@Column(name = "fecha_Pedido", nullable = false)
 	private Date fechaPedido;
 	@Column(name = "estado_Pedido", nullable = false)
@@ -56,13 +56,19 @@ public class Pedidos implements Serializable {
 	public Paciente getPaciente() {
 		return paciente;
 	}
+	public long getPacienteID() {
+		return paciente.getId();
+	}
+	public long getFarmaciaID() {
+		return farmacia.getId();
+	}
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
-	public List<ExistenciaMedicamento> getExistenciasPedido() {
+	public List<ExistenciaPedido> getExistenciasPedido() {
 		return existenciasPedido;
 	}
-	public void setExistenciasPedido(List<ExistenciaMedicamento> existenciasPedido) {
+	public void setExistenciasPedido(List<ExistenciaPedido> existenciasPedido) {
 		this.existenciasPedido = existenciasPedido;
 	}
 	public Date getFechaPedido() {
@@ -77,7 +83,54 @@ public class Pedidos implements Serializable {
 	public void setEstadoPedido(int estadoPedido) {
 		this.estadoPedido = estadoPedido;
 	}
+	public double getPrecioTotal() {
+		
+		double suma=0;
+		for(ExistenciaPedido m :existenciasPedido){
+			for (int i=0; i< m.getCantidad();i++) {
+				suma=suma +m.getMedicamento().getPrecio();
+			}
+		}
+
+		return suma;
+	}
+	public boolean realizarPedido() {
+		boolean exito=true;
+		if (estadoPedido ==0){
+			for(ExistenciaPedido ePed :existenciasPedido){
+				for (ExistenciaMedicamento eMed : farmacia.getStock()) {
+					if (ePed.getMedicamento() == eMed.getMedicamento()){
+						if(ePed.getCantidad()<= eMed.getCantidad()){//si hay menos pedido que stock
+							
+						}else{
+							exito=false;
+						}
+					}
+				}
+			}	
+		}else{
+			exito=false;
+		}
+		if(exito){
+			realizo();
+		}
+		
+		return exito;
+	}
 	
-	
-	
+		private void realizo(){
+			List<ExistenciaMedicamento> listaStock =  farmacia.getStock();
+			
+				for(ExistenciaPedido ePed :existenciasPedido){
+					for (ExistenciaMedicamento eMed :listaStock) {
+						if (ePed.getMedicamento() == eMed.getMedicamento()){
+							eMed.setCantidad(eMed.getCantidad()-ePed.getCantidad());//quito del stock las cantidades del pedido
+						}
+					}	
+				}
+				
+				estadoPedido=1;//entregado
+				farmacia.setStock(listaStock);
+				
+		}
 }

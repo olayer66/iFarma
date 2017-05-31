@@ -54,6 +54,11 @@ public class Paciente extends Usuario {
     @JoinColumn(name="farmaciaReferencia",referencedColumnName="id_farmacia")
 	private Farmacia farmaciaReferencia;
 	
+	
+	//Lista de pedidos
+	@OneToMany(mappedBy="paciente")
+	private List<Pedidos> listaPedidos;
+	
 	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)
 	@Column(name = "forma_pago", nullable = true)
 	private int formaPago;

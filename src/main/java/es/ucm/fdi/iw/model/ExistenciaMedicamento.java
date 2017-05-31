@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "existencias",
+@Table(name = "existencias_medicamento",
 	   uniqueConstraints = {
 		   @UniqueConstraint(columnNames = "id_existencia")
 	})
@@ -63,5 +63,13 @@ public class ExistenciaMedicamento implements Serializable {
 	}
 	public void setFarmacia(Farmacia f){
 		this.farmacia=f;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+	public Farmacia getFarmacia() {
+		return farmacia;
 	}
 }
