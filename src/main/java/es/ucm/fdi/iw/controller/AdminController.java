@@ -15,7 +15,9 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.ucm.fdi.iw.model.Farmacia;
@@ -83,14 +85,23 @@ public class AdminController {
 		return "admin/detalleAltaMedico";
 	}
 
-	@RequestMapping("detalleAltaFarmacia")
+	@RequestMapping("detalleAltaFarmaceutico")
 	public String detalleAltaFarmaciaAction(@RequestParam("id") Long id) {
 		return "admin/detalleAltaFarmacia";
 	}
 	
-	@RequestMapping("detalleAltaFarmaceutico")
-	public String detalleAltaFarmaceuticoAction(@RequestParam("id") Long id) {
-		return "admin/detalleAltaFarmaceutico";
+	@RequestMapping(value="detalleAltaFarmacia/{id}", method=RequestMethod.GET)
+	public String detalleAltaFarmaceuticoAction(@PathVariable Long id, HttpSession sesion) {
+		Farmacia farmacia;
+		farmacia=entityManager.createNamedQuery("Farmacia.findById", Farmacia.class).setParameter("id", id).getSingleResult();
+		sesion.setAttribute("detalleFarmacia", farmacia);
+		return "admin/detalleAltaFarmacia";
+	}
+	//aceptar o denegar peticiones
+	@RequestMapping(value="aceptarPeticion/{tipo}/{id}", method=RequestMethod.GET)
+	public String aceptarPeticionAction(@PathVariable("tipo") String tipo,@PathVariable("id") Long id, HttpSession sesion) {
+		
+		return "admin/detalleAltaFarmacia";
 	}
 	
 	@RequestMapping("nuevoMedicamento")

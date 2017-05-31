@@ -22,7 +22,9 @@ import org.hibernate.annotations.NamedQuery;
     @NamedQuery(name="Farmacia.countFARMA",
                 query="SELECT COUNT(f) FROM Farmacia f WHERE f.estado=0"),
     @NamedQuery(name="Farmacia.findValidar",
-    query="SELECT f FROM Farmacia f WHERE f.estado=0")
+    query="SELECT f FROM Farmacia f WHERE f.estado=0"),
+    @NamedQuery(name="Farmacia.findById",
+    			query="SELECT f FROM Farmacia f WHERE f.id=:id")
 })
 public class Farmacia implements Serializable {
 	private static final long serialVersionUID = 3729954187317206752L;

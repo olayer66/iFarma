@@ -11,43 +11,34 @@
             <div id="index" class="tab-pane fade in active">
                 <div class="col-lg-12">
                     <h1 class="page-header">Detalle alta farmacia</h1>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
 	                    <div class="panel panel-default">
-	                    	<h3>Datos farmacia</h3>
+	                    	<h2>Datos farmacia</h2>
 							<div class="panel-body">
-								<h4>Nombre: Farmacia Paqui</h4>
-								<h4>Direccion: c/falsa 123</h4>
-								<h4>Telefono: 916853225</h4>
-								<h4>Localidad: Algete</h4>
-								<h4>Provincia: Madrid</h4>
-								<h4>Cod.Postal: 28852</h4>
+								<h4><strong>Nombre:</strong> ${detalleFarmacia.nombre}</h4>
+								<h4><strong>Direccion:</strong> ${detalleFarmacia.direccion}</h4>
+								<h4><strong>Telefono:</strong> ${detalleFarmacia.telefono}</h4>
+								<h4><strong>Localidad:</strong> ${detalleFarmacia.ciudad}</h4>
+								<h4><strong>Provincia:</strong> ${detalleFarmacia.provincia}</h4>
+								<h4><strong>Comunidad autonoma:</strong> ${detalleFarmacia.comAutonoma}</h4>
+								<h4><strong>Codigo Postal:</strong> ${detalleFarmacia.codPostal}</h4>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-6">
 	                    <div class="panel panel-default">
-	                    	<h3>Datos farmaceutico</h3>
+	                    	<h2>Datos farmaceutico</h2>
 							<div class="panel-body">
-								<h4>Nombre: Francisca</h4>
-								<h4>Apellidos: Sanchez Perez</h4>
-								<h4>Nº Colegiado: 45524554747</h4>
+								<h4><strong>Nombre:</strong> ${detalleFarmacia.duenio.nombre}</h4>
+								<h4><strong>Apellidos:</strong> ${detalleFarmacia.duenio.apellidos}</h4>
+								<h4><strong>Nº Colegiado:</strong> ${detalleFarmacia.duenio.numColFarmaceutico}</h4>
+								<h4><strong>Email:</strong> ${detalleFarmacia.duenio.email}</h4>
+								<h4><strong>Telefono:</strong> ${detalleFarmacia.duenio.telefono}</h4>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-4">
-						<div class="panel panel-default">
-	                    	<h3>Notas</h3>
-							<div class="panel-body">
-								<textarea class="form-control" rows="5" id="comment"></textarea>
-							</div>
-						</div>
-	                    <div class="panel panel-default">
-	                    	<h3>Respuesta</h3>
-							<div class="panel-body">
-								<div class="btn btn-success">Aceptar</div>
-								<div class="btn btn-primary">Posponer</div>
-								<div class="btn btn-danger">Denegar</div>
-							</div>
+						<div class="panel-body">
+							<a href="/admin/aceptarPeticion/farma/${detalleFarmacia.id}"><div class="btn btn-success">Aceptar</div></a>
+							<a href="/admin/denegarPeticion/farma/${detalleFarmacia.id}"><div class="btn btn-danger">Denegar</div></a>
 						</div>
 					</div>
                 </div>
