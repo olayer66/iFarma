@@ -35,6 +35,7 @@ import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
+import es.ucm.fdi.iw.model.Pedidos;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.parser.MedicamentosParser;
 
@@ -53,7 +54,7 @@ public class FarmaciaController {
 	
 	@GetMapping("")
 	public String pantallaLoginAction() {
-		return "farmacia/farmaceutico";
+		return "redirect:/farmacia/farmaceutico";
 	}
 	
 	@RequestMapping("farmaceutico")
@@ -70,7 +71,7 @@ public class FarmaciaController {
 		List<Farmacia> listaFar = farmaceutico.getFarmaciasPropias();
 
 		log.info("tamaño salida:" + listaFar.size());
-		sesion.setAttribute("listaFar", listaFar);
+		model.addAttribute("listaFar", listaFar);
 
 		return "farmacia/farmaceutico";
 	}
@@ -82,7 +83,7 @@ public class FarmaciaController {
 	@GetMapping({"farmacia", "pedidos"})
 	public String pedidosAction( HttpSession sesion,@RequestParam long id,Model model) {
 		model.addAttribute("idFarmacia", id);
-		/*String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Farmaceutico farmaceutico = entityManager.createQuery(
         		"FROM Farmaceutico WHERE usuario = :usuario", Farmaceutico.class)
                             .setParameter("usuario", username)
@@ -93,14 +94,13 @@ public class FarmaciaController {
 		if (f == null || f.getDuenio()!=farmaceutico){
 			log.info("Acceso denegado");
 		}else{
-			List<pedidos> listapedr = f.getPedidos();
+			List<Pedidos> listaped = f.getListaPedidos();
 
-			log.info("tamaño salida:" + listaPed.size());
-			sesion.setAttribute("listaFar", listaPed);
+			log.info("tamaño salida:" + listaped.size());
+			model.addAttribute("listaPed", listaped);
 			
 		}
-
-			*/
+		
 			
 		return "farmacia/pedidos";
 	}
@@ -122,8 +122,7 @@ public class FarmaciaController {
 		}else{
 			List<ExistenciaMedicamento> miStock= farmacia.getStock();
 			log.info("tamaño salida mistock:" + miStock.size());
-			sesion.setAttribute("miStock", miStock);
-			
+			model.addAttribute("miStock", miStock);
 
 		}
 		

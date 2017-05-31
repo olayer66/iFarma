@@ -29,6 +29,8 @@ import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
+import es.ucm.fdi.iw.model.Paciente;
+import es.ucm.fdi.iw.model.Pedidos;
 import es.ucm.fdi.iw.validation.Codigo;
 import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.validation.MedicoForm;
@@ -155,5 +157,58 @@ public class RootController {
 				log.info("Paciente validado");
 				return "redirect:/index";
 			}
-		}		
+		}	
+		@Transactional
+		@RequestMapping("mm")//PARA PRUEBAS. NO BORRAR.
+		public @ResponseBody String mm() throws IOException{
+			Farmacia f= entityManager.find(Farmacia.class, (long)2);
+			Paciente pac= entityManager.find(Paciente.class, (long)2);
+			Medicamento m= entityManager.find(Medicamento.class, (long)7024491);
+			Medicamento m2= entityManager.find(Medicamento.class, (long)9676384);
+			Medicamento m3= entityManager.find(Medicamento.class, (long)7098249);
+			ExistenciaMedicamento ex = new ExistenciaMedicamento() ;
+			ex.setCantidad(5);
+			ex.setFarmacia(f);
+			ex.setMedicamento(m);
+			ex.setFechaCaducidad(new Date(5, 12, 2017));
+			ExistenciaMedicamento ex2 = new ExistenciaMedicamento() ;
+			ex2.setCantidad(5);
+			ex2.setFarmacia(f);
+			ex2.setMedicamento(m2);
+			ex2.setFechaCaducidad(new Date(5, 12, 2017));
+			ExistenciaMedicamento ex3 = new ExistenciaMedicamento() ;
+			ex3.setCantidad(5);
+			ex3.setFarmacia(f);
+			ex3.setMedicamento(m3);
+			ex3.setFechaCaducidad(new Date(5, 12, 2017));
+			entityManager.persist(ex);
+			entityManager.persist(ex2);
+			entityManager.persist(ex3);
+
+			List<ExistenciaMedicamento> listaExis = new ArrayList<ExistenciaMedicamento>();
+			listaExis.add(ex);
+			listaExis.add(ex2);
+			listaExis.add(ex3);
+			
+			Pedidos p = new Pedidos();
+			p.setEstadoPedido(0);
+			p.setExistenciasPedido(listaExis);
+			p.setFarmacia(f);
+			p.setFechaPedido(new Date(5, 12, 2017));
+			p.setPaciente(pac);
+			
+			Pedidos p2 = new Pedidos();
+			listaExis.remove(0);
+			p2.setEstadoPedido(0);
+			p2.setExistenciasPedido(listaExis);
+			p2.setFarmacia(f);
+			p2.setFechaPedido(new Date(9, 12, 2017));
+			p2.setPaciente(pac);
+			
+			entityManager.persist(p);
+			entityManager.persist(p2);
+			
+			return "redirect:/index";
+			
+		}	
 }

@@ -58,8 +58,8 @@ public class Farmacia implements Serializable {
 	private Farmaceutico duenio;
 	
 	//Listado de clientes // la farmacia no tiene un listado de pacientes, solo tiene pedidos
-	@OneToMany(mappedBy="farmaciaReferencia")
-	private List<Paciente> listaClientes;
+	@OneToMany(mappedBy="farmacia")
+	private List<Pedidos> listaPedidos;
 	
 	//Stock de la farmacia (N/1)
 	@OneToMany(mappedBy="farmacia")
@@ -155,12 +155,12 @@ public class Farmacia implements Serializable {
 		this.estado = estado;
 	}
 
-	public List<Paciente> getListaClientes() {
-		return listaClientes;
+	public List<Pedidos> getListaPedidos() {
+		return listaPedidos;
 	}
 
-	public void setListaClientes(List<Paciente> listaClientes) {
-		this.listaClientes = listaClientes;
+	public void setListaPedidos(List<Pedidos> listaPedidos) {
+		this.listaPedidos = listaPedidos;
 	}
 	
 	
