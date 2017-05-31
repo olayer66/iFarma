@@ -28,3 +28,6 @@ INSERT INTO TRATAMIENTOS VALUES (3, '2017-05-28', '2018-06-04', 6, 1, '4 horas',
 --INSERT INTO EXISTENCIAS VALUES (1 , 6527634,'2018-11-20', 2 , 334);
 --INSERT INTO EXISTENCIAS VALUES (2 , 9676384,'2018-11-20' ,2, 1040);
 --INSERT INTO EXISTENCIAS VALUES (3, 7098249,'2018-11-20' , 2, 789);
+
+INSERT INTO MENSAJES VALUES ( 1, 'EnfermedadDsdPaciente', '2017-05-28', true, 'Esto es una prueba de mensaje', 2, 1 )
+INSERT INTO MENSAJES VALUES ( 2, 'EnfermedadDsdMedico', '2017-05-28', true, 'Esto es una prueba de mensaje', 1, 2 )

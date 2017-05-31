@@ -27,11 +27,6 @@
                 </a>
             </li>
             <li>
-                <a data-toggle="tab" href="#draft">
-                    Borradores <span class="badge pull-right">1</span>
-                </a>
-            </li>
-            <li>
                 <a data-toggle="tab" href="#trash">
                     Papelera
                 </a>
@@ -45,14 +40,14 @@
             <div id="inbox" class="tab-pane fade in active">
                 <table class="table table-hover table-striped">
                     <tbody>
-                       <c:forEach var = "mensaje" items="${listMensajes}">
+                       <c:forEach var = "mensaje" items="${paciente.mensajesRecibidos}"  >
                        <tr>
                             <td><input type="checkbox"></td>
                             <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
-                            <td class="mailbox-name"><a href="#">Placido Olego Da Silva</a></td>
-                            <td class="mailbox-subject"><b>Toma olvidada</b> - El paciente olvidó la toma...</td>
+                            <td class="mailbox-name"><a href="#">${mensaje.remitente.nombre}</a></td>
+                            <td class="mailbox-subject"><b>${mensaje.asunto}</b>${mensaje.mensaje}</td>
                             <td class="mailbox-attachment"></td>
-                            <td class="mailbox-date">5 mins ago</td>
+                            <td class="mailbox-date">${mensaje.fechaMensaje}</td>
                         </tr>
                       </c:forEach>
                     </tbody>
@@ -63,33 +58,17 @@
             <div id="sent" class="tab-pane fade">
                 <table class="table table-hover table-striped">
 					<tbody>
-	                	<c:forEach items="${medico.mensajesEnviados}" var="mensaje">
+	                	<c:forEach var="mensaje" items="${paciente.mensajesEnviados}" >
 	                		<tr>
 	                            <td><input type="checkbox"></td>
 	                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
-	                            <td class="mailbox-name"><a href="#">${mensaje.destinatario}</a></td>
+	                            <td class="mailbox-name"><a href="#">${mensaje.destinatario.nombre}</a></td>
 	                            <td class="mailbox-subject">${mensaje.asunto}</td>
 	                            <td class="mailbox-attachment"></td>
 	                            <td class="mailbox-date">${mensaje.fechaMensaje}</td>
 	                        </tr>
 						</c:forEach>
 					</tbody>
-                </table>
-            </div>
-
-			<!-- Borradores -->
-            <div id="draft" class="tab-pane fade">
-                <table class="table table-hover table-striped">
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
-                            <td class="mailbox-name"><a href="#">Placido Olego Da Silva</a></td>
-                            <td class="mailbox-subject"><b>Toma olvidada</b> - El paciente olvidó la toma...</td>
-                            <td class="mailbox-attachment"></td>
-                            <td class="mailbox-date">5 mins ago</td>
-                        </tr>
-                    </tbody>
                 </table>
             </div>
 
@@ -117,7 +96,7 @@
                         <div class="form-group">
 							<sf:select  path="destinatario" class="form-control">
 								<sf:option value="">Destinatario...</sf:option>
-								<sf:options items="${medico.pacientes}" itemValue="id"></sf:options>
+								<sf:options items="${paciente.medCabecera}" itemValue="id"></sf:options>
 							</sf:select>
                             <p><sf:errors path="destinatario" cssClass="error"/></p>
                         </div>

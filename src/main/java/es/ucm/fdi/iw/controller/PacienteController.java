@@ -1,25 +1,33 @@
 package es.ucm.fdi.iw.controller;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import es.ucm.fdi.iw.model.Farmacia;
+import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Mensaje;
+import es.ucm.fdi.iw.model.Paciente;
+import es.ucm.fdi.iw.validation.MensajeForm;
 import es.ucm.fdi.iw.validation.ValidarPaciente;
 
 @Controller
@@ -64,13 +72,55 @@ public class PacienteController {
 		return "paciente/verPedidos";
 	}
 	@RequestMapping("feedbackDR")
-	public String feedbackDRAction(HttpSession sesion) {
-		List<Mensaje> listMensajes;
-		TypedQuery<Mensaje> query= entityManager.createNamedQuery("Mensaje.extraerMensaje", Mensaje.class);
-		listMensajes=query.getResultList();
-		log.warn("contador de mensajes leidos: "+listMensajes.size());
-		sesion.setAttribute("listMensajes", listMensajes);
+	String feedbackDRAction(Model model, HttpSession sesion) {
+		Paciente paciente = this.getLoggedUser(sesion);
+		MensajeForm mensaje = new MensajeForm();
+
+		model.addAttribute("mensaje", mensaje);
+		model.addAttribute("paciente", paciente);
+
 		return "paciente/feedbackDR";
+	}
+
+	@Transactional
+	@RequestMapping(value = "/feedbackDR/nuevo", method = RequestMethod.POST)
+	String nuevoFeedbackDRAction(@ModelAttribute("mensaje") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("error", true);
+			model.addAttribute("mensaje", form);
+
+			return "medico/feedback";
+		}
+
+		Mensaje mensaje = new Mensaje();
+		mensaje.setAsunto(form.getAsunto());
+		mensaje.setMensaje(form.getMensaje());
+		mensaje.setDestinatario(entityManager.find(Medico.class, Long.parseLong(form.getDestinatario())));
+		mensaje.setRemitente(this.getLoggedUser(sesion));
+		mensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
+
+		Paciente paciente = this.getLoggedUser(sesion);
+		paciente.getMensajesEnviados().add(mensaje);
+
+		entityManager.persist(paciente);
+
+		return "redirect:/paciente/feedbackDR";
+	}
+	private Paciente getLoggedUser(HttpSession sesion) {
+		Paciente paciente;
+
+		if ((paciente = (Paciente) sesion.getAttribute("paciente")) == null) {
+			String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+			paciente = entityManager
+					.createQuery("FROM Paciente WHERE usuario = :usuario", Paciente.class)
+					.setParameter("usuario", username)
+					.getSingleResult();
+
+			sesion.setAttribute("paciente", paciente);
+		}
+
+		return paciente;
 	}
 	
 }
