@@ -10,8 +10,13 @@ INSERT INTO MEDICO VALUES ( 'C.S La alameda', '12/12/200057', 2)
 INSERT INTO FARMACEUTICO VALUES ( '12/15/20007', 4)
 INSERT INTO FARMACEUTICO VALUES ( '14/04/25447', 5)
 
+<<<<<<< HEAD
 INSERT INTO FARMACIAS VALUES ( 1, 'Madrid', '28045', 'Madrid', 'calle falsa 1234', null , 0 , 'farmacia Bonita' , 'madrid', '916752335')
 INSERT INTO FARMACIAS VALUES ( 2, 'Pinto', '28475', 'Madrid', 'calle nueva 1234', null, 0 , 'farmacia Fea' , 'madrid', '916321447')
+=======
+INSERT INTO FARMACIAS VALUES ( 1, 'Madrid', '28003', 'Madrid', 'Calle preciados 23', 1, 'Farmacia bonita', 'Madrid', '916572256', 5)
+INSERT INTO FARMACIAS VALUES ( 2, 'Pinto', '28845', 'Madrid', 'calle Falsa 1235', 1, 'Farmacia Fea', 'Madrid', '9163574448', 5)
+>>>>>>> 606c9b33927317758c8933be54352b3ded649ab8
 
 INSERT INTO PACIENTE VALUES ( 'Pinto', '28845',324, '011452247', 'Madrid', 'Calle falsa 1234', '05/19', 0, 47558226334, 'Madrid', 1, 2)
 INSERT INTO PACIENTE VALUES ( 'Coslada', '28845',324, '011452247', 'Madrid', 'Calle falsa 1234', '05/19', 0, 47558226334, 'Madrid', 6, 2)

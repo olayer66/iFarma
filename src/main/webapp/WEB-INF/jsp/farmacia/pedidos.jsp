@@ -31,7 +31,7 @@
 					<td><a href=/farmacia/pedido?id=${pedidos.id}&idFarmacia=${idFarmacia}>${pedidos.id}</a></td>
                     <td>${pedidos.id}</td>
                     <td>${pedidos.fechaPedido}</td>
-                    <td><span class="label label-success">${pedidos.estadoPedido}</span></td>
+                    <td><span class="label label-success">${pedidos.estadoPedido==0 ? 'Pendiente' : 'Entrergado'}</span></td>
                     <td> <div class="btn-group">
                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           Action <span class="caret"></span>
