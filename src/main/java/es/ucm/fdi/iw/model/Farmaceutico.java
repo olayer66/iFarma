@@ -1,10 +1,7 @@
 package es.ucm.fdi.iw.model;
 
-<<<<<<< HEAD
-=======
 
 import java.util.ArrayList;
->>>>>>> 606c9b33927317758c8933be54352b3ded649ab8
 import java.util.List;
 
 import javax.persistence.CascadeType;
