@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,8 +22,8 @@ import org.hibernate.annotations.NamedQuery;
                 query="SELECT COUNT(f) FROM Farmacia f WHERE f.estado=0"),
     @NamedQuery(name="Farmacia.findValidar",
     query="SELECT f FROM Farmacia f WHERE f.estado=0"),
-    @NamedQuery(name="Farmacia.findById",
-    			query="SELECT f FROM Farmacia f WHERE f.id=:id")
+    @NamedQuery(name="Farmacia.updateEstado", 
+    			query="UPDATE Farmacia f SET f.estado=1 WHERE f.id=:id")
 })
 public class Farmacia implements Serializable {
 	private static final long serialVersionUID = 3729954187317206752L;
@@ -55,8 +54,6 @@ public class Farmacia implements Serializable {
 	
 	
 	//Dueño de la farmacia (N/1)
-	@ManyToOne(optional=false)
-    @JoinColumn(name="duenio")
 	private Farmaceutico duenio;
 	
 	//Listado de clientes // la farmacia no tiene un listado de pacientes, solo tiene pedidos
@@ -124,7 +121,7 @@ public class Farmacia implements Serializable {
 		this.provincia = provincia;
 	}
 
-
+	@ManyToOne(targetEntity=Farmaceutico.class)
 	public Farmaceutico getDuenio() {
 		return duenio;
 	}

@@ -1,15 +1,15 @@
 package es.ucm.fdi.iw.model;
 
-
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 
 @Entity
 
@@ -22,7 +22,8 @@ public class Farmaceutico extends Usuario {
 	@Column(name = "num_col_farmaceutico", nullable = false)
 	private String numColFarmaceutico;
 	//Lista de farmacias que le pertenecen
-	@OneToMany(mappedBy="duenio")
+	@OneToMany(targetEntity=Farmacia.class, cascade=CascadeType.REMOVE)
+	@JoinColumn(name="duenio")
 	private List<Farmacia> farmaciasPropias;
 	
 	//getters y setters
@@ -32,6 +33,7 @@ public class Farmaceutico extends Usuario {
 	public void setNumColFarmaceutico(String numColFarmaceutico) {
 		this.numColFarmaceutico = numColFarmaceutico;
 	}
+
 	public List<Farmacia> getFarmaciasPropias() {
 		return farmaciasPropias;
 	}

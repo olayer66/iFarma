@@ -37,8 +37,8 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							<a href="/admin/aceptarPeticion/farma/${detalleFarmacia.id}"><div class="btn btn-success">Aceptar</div></a>
-							<a href="/admin/denegarPeticion/farma/${detalleFarmacia.id}"><div class="btn btn-danger">Denegar</div></a>
+							<a href="/admin/aceptarPeticion/FARMA/${detalleFarmacia.id}"><div class="btn btn-success">Aceptar</div></a>
+							<a href="/admin/denegarPeticion/FARMA/${detalleFarmacia.id}"><div class="btn btn-danger">Denegar</div></a>
 						</div>
 					</div>
                 </div>
