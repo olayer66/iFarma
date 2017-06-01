@@ -174,7 +174,7 @@
     </div>
 </div>
 
-<div id="redactarMensaje" class="modal fade" role="dialog">
+<div id="redactarMensaje" class="modal fade" role="dialog" data-modal-show-on-error="${error}">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
@@ -214,12 +214,3 @@
 </div>
 
 <%@ include file="../../jspf/footer.jspf" %>
-
-
-<c:if test="${error}">
-	<script>
-		 $(function () {
-			 $('#redactarMensaje').modal('show'); 
-		 });
-	</script>
-</c:if>
