@@ -164,6 +164,18 @@ public class Farmacia implements Serializable {
 	public void setListaPedidos(List<Pedidos> listaPedidos) {
 		this.listaPedidos = listaPedidos;
 	}
+	public int getCountPedidosPendientes(){
+		int n=0;
+		
+		for (Pedidos p : listaPedidos){
+			if (p.getEstadoPedido()==0){
+				n++;
+			}
+		}
+		
+		
+		return n;
+	}
 	
 	
 }

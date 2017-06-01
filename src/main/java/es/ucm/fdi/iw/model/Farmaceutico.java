@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -34,6 +35,19 @@ public class Farmaceutico extends Usuario {
 	}
 	public List<Farmacia> getFarmaciasPropias() {
 		return farmaciasPropias;
+	}
+	public List<Farmacia> getFarmaciasActivas() {
+		 List<Farmacia> activas = new ArrayList<Farmacia>();
+		for(Farmacia f :farmaciasPropias ){
+			
+			if(f.getEstado()==1){
+				activas.add(f);
+			}
+		}
+		
+		
+		
+		return activas;
 	}
 	public void setFarmaciasPropias(List<Farmacia> farmaciasPropias) {
 		this.farmaciasPropias = farmaciasPropias;
