@@ -13,8 +13,8 @@ INSERT INTO FARMACEUTICO VALUES ( '14/04/25447', 5)
 INSERT INTO FARMACIAS VALUES ( 1, 'Madrid', '28045', 'Madrid', 'calle falsa 1234', null , 0 , 'farmacia Bonita' , 'madrid', '916752335')
 INSERT INTO FARMACIAS VALUES ( 2, 'Pinto', '28475', 'Madrid', 'calle nueva 1234', null, 0 , 'farmacia Fea' , 'madrid', '916321447')
 
-INSERT INTO PACIENTE VALUES ( 'Pinto', '28845',324, '011452247', 'Madrid', 'Calle falsa 1234', '05/19', 0, 47558226334, 'Madrid', 1, 2)
-INSERT INTO PACIENTE VALUES ( 'Coslada', '28845',324, '011452247', 'Madrid', 'Calle falsa 1234', '05/19', 0, 47558226334, 'Madrid', 6, 2)
+INSERT INTO PACIENTE VALUES ( 'Coslada', '28822',324, '011452247', 'Madrid', 'Calle falsa 1234', '05/19', 0, null, 47558226334,'Madrid', 1)
+INSERT INTO PACIENTE VALUES ( 'Madrid', '28045',324, '011452247', 'Madrid', 'Calle nula 23', '06/18', 0, null, 25547888544,'Madrid', 6)
 
 INSERT INTO MEDICAMENTOS VALUES (6527634, '400 MG 30 SOBRES', 'ZAMBON', 'ESPIDIFEN', 4.62);
 INSERT INTO MEDICAMENTOS VALUES (7024491, '500 MG 20 COMPRIMIDOS', 'BAYER', 'ASPIRINA', 3.36);

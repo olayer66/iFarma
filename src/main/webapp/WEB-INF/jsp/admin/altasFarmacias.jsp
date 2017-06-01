@@ -14,16 +14,18 @@
                     <th>Farmacia</th>
                     <th>Nombre Farmaceutico</th>
                     <th>Nº Colegiado</th>
-                    <th>Telefono</th>        
+                    <th>Telefono</th>
+                    <th>Detalles</th>        
                   </tr>
                </thead>
                   <tbody>
                   <c:forEach var="farmacia" items="${listaFarmacia}">
 	                  <tr>
-	                    <td><a href="/admin/detalleAltaFarmacia/${farmacia.id}" target="blank">${farmacia.nombre}</a></td>
-	                    <td>${farmacia.duenio.nombre}</td>
+	                    <td>${farmacia.nombre}</td>
+	                    <td>${farmacia.duenio.nombre} ${farmacia.duenio.apellidos}</td>
 	                    <td>${farmacia.duenio.numColFarmaceutico}</td>
 	                    <td>${farmacia.telefono}</td>
+	                    <td><a href="/admin/detalleAltaFarmacia/${farmacia.id}" class="btn btn-default">Ver detalle</a></td>
 	                  </tr>
                   </c:forEach>
                 </tbody>

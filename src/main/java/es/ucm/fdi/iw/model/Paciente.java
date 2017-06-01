@@ -2,11 +2,9 @@ package es.ucm.fdi.iw.model;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 //Imports basicos para JPA
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
@@ -35,8 +33,6 @@ public class Paciente extends Usuario {
 	private String codigoAut;
 	
 	//medico de cabecera (N/1)
-	@ManyToOne(optional=false)
-    @JoinColumn(name="medCabecera")
 	private Medico medCabecera;
 	
 	//Lista de medicamentos del tratamiento (1/N)
@@ -91,6 +87,7 @@ public class Paciente extends Usuario {
 	public void setComAutonona(String comAutonoma) {
 		this.comAutonoma = comAutonoma;
 	}
+	@ManyToOne(targetEntity=Medico.class)
 	public Medico getMedCabecera() {
 		return medCabecera;
 	}

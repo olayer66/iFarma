@@ -23,7 +23,8 @@ import org.springframework.util.StringUtils;
 @NamedQueries({
     @NamedQuery(name="Usuario.count",
                 query="SELECT COUNT(u) FROM Usuario u WHERE u.estado=0 AND u.role=:tiporole"),
-    @NamedQuery(name="Usuario.updateEstado",query="UPDATE Usuario u SET u.estado=1 WHERE u.id=:id")
+    @NamedQuery(name="Medico.findValidar",
+    			query="SELECT m FROM Medico m WHERE m.estado=0")
 
 }) 
 public class Usuario implements Serializable {

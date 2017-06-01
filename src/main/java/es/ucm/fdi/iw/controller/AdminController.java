@@ -34,12 +34,13 @@ public class AdminController {
 
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
-
+	
+	/*-----PAGINA PRICIPAL-------*/
+	//Pagina principal
 	@GetMapping("")
 	public String pantallaLoginAction() {
 		return "redirect:/admin/admin";
 	}
-
 	@RequestMapping("admin")
 	public String adminAction(HttpSession sesion) {
 		Long petFarmaceutico;
@@ -55,12 +56,39 @@ public class AdminController {
 		sesion.setAttribute("petFarmacia", petFarmacia);
 		return "admin/admin";
 	}
-
+	
+	/*-----PETICIONES DE MEDICOS-----*/
+	//Lista de peticiones de medicos
 	@RequestMapping("altasMedicos")
-	public String altasMedicosAction() {
+	public String altasMedicosAction(HttpSession sesion) {
+		List<Medico> listaMedico;
+		TypedQuery<Medico> query= entityManager.createNamedQuery("Medico.findValidar", Medico.class);
+		listaMedico=query.getResultList();
+		sesion.setAttribute("listaMedico", listaMedico);
 		return "admin/altasMedicos";
 	}
-
+	//Detalle de la peticion de un medico
+	@RequestMapping(value="detalleAltaMedico/{id}", method=RequestMethod.GET)
+	public String detalleAltaMedicoAction(@PathVariable Long id, HttpSession sesion) {
+		Medico medico;
+		medico= entityManager.find(Medico.class, id);
+		sesion.setAttribute("detalleMedico", medico);
+		return "admin/detalleAltaMedico";
+	}
+	/*-----PETICIONES DE UN FARMACEUTICO------*/
+	//Lista de peticiones de farmaceuticos
+	@RequestMapping("altasFarmaceuticos")
+	public String altasFarmaceuticosAction() {
+		return "admin/altasFarmaceuticos";
+	}
+	//Detalle de la peticion de un farmaceutico
+	@RequestMapping("detalleAltaFarmaceutico")
+	public String detalleAltaFarmaciaAction(@RequestParam("id") Long id) {
+		return "admin/detalleAltaFarmaceutico";
+	}
+	
+	/*-----ALTAS DE FARMACIAS-------*/
+	//Listado de farmacias con peticion
 	@RequestMapping("altasFarmacias")
 	public String altaFarmaciasAction(HttpSession sesion) {
 		List<Farmacia> listaFarmacia;
@@ -70,28 +98,7 @@ public class AdminController {
 		sesion.setAttribute("listaFarmacia", listaFarmacia);
 		return "admin/altasFarmacias";
 	}
-
-	
-	@RequestMapping("gestionMedicamentos")
-	public String gestionMedicamentosAction(HttpSession sesion) {
-		List<Medicamento> listaMed;
-		TypedQuery<Medicamento> query= entityManager.createNamedQuery("Medicamento.findAll", Medicamento.class);
-		listaMed=query.getResultList();
-		log.info("tamaño salida:" + listaMed.size());
-		sesion.setAttribute("listaMed", listaMed);
-		return "admin/gestionMedicamentos";
-	}
-
-	@RequestMapping("detalleAltaMedico")
-	public String detalleAltaMedicoAction() {
-		return "admin/detalleAltaMedico";
-	}
-
-	@RequestMapping("detalleAltaFarmaceutico")
-	public String detalleAltaFarmaciaAction(@RequestParam("id") Long id) {
-		return "admin/detalleAltaFarmacia";
-	}
-	
+	//Detalle de la peticion de una farmacia
 	@RequestMapping(value="detalleAltaFarmacia/{id}", method=RequestMethod.GET)
 	public String detalleAltaFarmaceuticoAction(@PathVariable Long id, HttpSession sesion) {
 		Farmacia farmacia;
@@ -99,6 +106,7 @@ public class AdminController {
 		sesion.setAttribute("detalleFarmacia", farmacia);
 		return "admin/detalleAltaFarmacia";
 	}
+	/*------ACEPTAR Y DENEGAR PETICIONES DE ACCESO-------*/
 	//aceptar peticiones
 	@Transactional
 	@RequestMapping(value="aceptarPeticion/{tipo}/{id}", method=RequestMethod.GET)
@@ -128,7 +136,7 @@ public class AdminController {
 	//Denegar peticiones
 	@Transactional
 	@RequestMapping(value="denegarPeticion/{tipo}/{id}", method=RequestMethod.GET)
-	public String denegarPeticionAction(@PathVariable("tipo") String tipo,@PathVariable("id") Long id, HttpSession sesion) {
+	public String denegarPeticionAction(@PathVariable("tipo") String tipo,@PathVariable("id") long id, HttpSession sesion) {
 		
 		switch(tipo)
 		{
@@ -146,10 +154,23 @@ public class AdminController {
 		}
 	}
 	
+	/*-----------MEDICAMENTOS----------*/
+	//Mostrar el listado de medicamentos
+	@RequestMapping("gestionMedicamentos")
+	public String gestionMedicamentosAction(HttpSession sesion) {
+		List<Medicamento> listaMed;
+		TypedQuery<Medicamento> query= entityManager.createNamedQuery("Medicamento.findAll", Medicamento.class);
+		listaMed=query.getResultList();
+		log.info("tamaño salida:" + listaMed.size());
+		sesion.setAttribute("listaMed", listaMed);
+		return "admin/gestionMedicamentos";
+	}
+	//Añadir un nuevo medicamento
 	@RequestMapping("nuevoMedicamento")
 	public String nuevoMedicamentoAction() {
 		return "admin/nuevoMedicamento";
 	}
+	//Importar los medicamntos de la BBDD
 	@Transactional
 	@RequestMapping("insMedicamentos")
 	public String insertarMedicamentos() throws IOException {
