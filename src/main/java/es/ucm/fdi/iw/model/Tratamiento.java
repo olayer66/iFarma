@@ -9,35 +9,26 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "tratamientos",
-	   uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "id_tratamiento")
-	})
-//Peticiones a la tabla
 @NamedQueries({
 })
 public class Tratamiento implements Serializable {
 	private static final long serialVersionUID = -8662915238597958222L;
 	@Id
-	@Column(name = "id_tratamiento", nullable = false)
+	@Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDTratamiento;
+	private long id;
 
 	//Paciente al que pertenece
-	@ManyToOne(optional=false)
-    @JoinColumn(name="paciente",referencedColumnName="id")
+	@ManyToOne(targetEntity=Paciente.class)
 	private Paciente paciente;
+	
 	//Medicamento
 	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="id_medicamento")
 	private Medicamento medicamento;
 	@Column(name = "fecha_inicio", nullable = false)
 	private Date fechaInicio;
@@ -54,11 +45,11 @@ public class Tratamiento implements Serializable {
 	private Integer numDosisDia;
 
 	//getters y setters
-	public long getIDTratamiento() {
-		return IDTratamiento;
+	public long getId() {
+		return id;
 	}
-	public void setIDTratamiento(long iDTratamiento) {
-		IDTratamiento = iDTratamiento;
+	public void setId(long id) {
+		this.id=id;
 	}
 	public Integer getNumDosis() {
 		return numDosis;

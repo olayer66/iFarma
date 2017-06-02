@@ -23,7 +23,6 @@ import org.springframework.util.StringUtils;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED) //Esto divide las tablas por herencia.(paciente,medico,farmaceutico) y las organiza por el id de usuario.
-@Table(name = "usuarios")
 @NamedQueries({
     @NamedQuery(name="Usuario.count",
                 query="SELECT COUNT(u) FROM Usuario u WHERE u.estado=0 AND u.role=:tiporole"),

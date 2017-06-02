@@ -6,11 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 @Entity
-@Table(name = "medicamentos")
 @NamedQueries({
     @NamedQuery(name="Medicamento.findAll",
                 query="SELECT m FROM Medicamento m"),

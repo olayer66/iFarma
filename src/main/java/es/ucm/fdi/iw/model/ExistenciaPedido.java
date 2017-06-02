@@ -5,22 +5,12 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "existencias_pedido",
-uniqueConstraints = {
-	   @UniqueConstraint(columnNames = "id_existencia")
-})
 public class ExistenciaPedido implements Serializable {
 	
 
@@ -29,16 +19,15 @@ public class ExistenciaPedido implements Serializable {
 	@Column(name = "id_existencia", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@ManyToOne
-	private Medicamento medicamento;
 	@Column(name = "cantidad", nullable = false)
 	private int cantidad;
 	@Column(name = "fecha_caducidad", nullable = false)
 	private Date fechaCaducidad;
-	@ManyToOne
-	@JoinColumn(name="pedido")
-	private Pedidos pedido;
 	
+	@ManyToOne(targetEntity=Pedidos.class)
+	private Pedidos pedido;
+	@ManyToOne(targetEntity=Medicamento.class)
+	private Medicamento medicamento;
 	
 	//getters y setters
 	public long getId() {

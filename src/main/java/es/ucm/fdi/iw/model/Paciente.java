@@ -5,16 +5,16 @@ import java.util.List;
 import javax.persistence.Column;
 //Imports basicos para JPA
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+
 @Entity
-@Table
 @OnDelete(action = OnDeleteAction.CASCADE)
 //Peticiones a la tabla
 @NamedQueries({	
@@ -43,12 +43,14 @@ public class Paciente extends Usuario {
 	private Medico medCabecera;
 	
 	//Lista de medicamentos del tratamiento (1/N)
-	@OneToMany(mappedBy="paciente")
+	@OneToMany(targetEntity=Tratamiento.class)
+	@JoinColumn(name="paciente_id")
 	private List<Tratamiento> tratamiento;
 	
 
 	//Lista de pedidos
-	@OneToMany(mappedBy="paciente")
+	@OneToMany(targetEntity=Pedidos.class)
+	@JoinColumn(name="paciente_id")
 	private List<Pedidos> listaPedidos;
 	
 	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)

@@ -6,18 +6,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
 public class Pedidos implements Serializable {
@@ -28,15 +22,16 @@ public class Pedidos implements Serializable {
 	@Column(name = "id_pedido", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
 	@ManyToOne(targetEntity=Farmacia.class)
-	@JoinColumn(name="farmacia")
 	private Farmacia farmacia;
 	@ManyToOne(targetEntity=Paciente.class)
-	@JoinColumn(name="paciente")
 	private Paciente paciente;
+	
 	@OneToMany(targetEntity=ExistenciaPedido.class)
-	@JoinColumn(name="existencia_pedido_id")
+	@JoinColumn(name="pedido_id")
 	private List<ExistenciaPedido> existenciasPedido;
+	
 	@Column(name = "fecha_Pedido", nullable = false)
 	private Date fechaPedido;
 	@Column(name = "estado_Pedido", nullable = false)

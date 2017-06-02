@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,7 +51,8 @@ public class FarmaciaController {
                             .getSingleResult();
 		
 		//no estoy seguro de que id necesito
-		List<Farmacia> listaFar = farmaceutico.getFarmaciasActivas();
+		//List<Farmacia> listaFar = farmaceutico.getFarmaciasActivas();
+		List<Farmacia> listaFar = new ArrayList<>();
 		
 		log.info("tamaño salida:" + listaFar.size());
 		model.addAttribute("listaFar", listaFar);

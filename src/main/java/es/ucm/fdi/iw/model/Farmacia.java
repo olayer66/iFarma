@@ -11,13 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
 @Entity
-@Table(name = "farmacias")
 @NamedQueries({
     @NamedQuery(name="Farmacia.countFARMA",
                 query="SELECT COUNT(f) FROM Farmacia f WHERE f.estado=0"),
@@ -64,6 +62,7 @@ public class Farmacia implements Serializable {
 	
 	//Stock de la farmacia (N/1)
 	@OneToMany(targetEntity=ExistenciaMedicamento.class)
+	@JoinColumn(name="farmacia_id")
 	private List<ExistenciaMedicamento> stock;
 
 	//getters y setters

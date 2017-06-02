@@ -9,18 +9,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "existencias_medicamento",
-	   uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "id_existencia")
-	})
 public class ExistenciaMedicamento implements Serializable {
 	private static final long serialVersionUID = 4000356623437817386L;
 	@Id
@@ -29,9 +21,10 @@ public class ExistenciaMedicamento implements Serializable {
 	private long id;
 	@OneToOne(optional = false, fetch = FetchType.LAZY)
 	private Medicamento medicamento;
-	@ManyToOne
-	@JoinColumn(name="farmacia")
+	
+	@ManyToOne(targetEntity=Farmacia.class)
 	private Farmacia farmacia;
+	
 	@Column(name = "cantidad", nullable = false)
 	private int cantidad;
 	@Column(name = "fecha_caducidad", nullable = false)
