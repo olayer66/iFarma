@@ -23,20 +23,18 @@ public class Mensaje implements Serializable {
 	
 	//ID
 	@Id
-	@Column(name = "id_mensaje", nullable = false)
+	@Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long IDMensaje;
+	private long id;
 	
 	//Si esta leido por parte del destinatario
 	@Column (name="leido",nullable = false)
 	private boolean leido;
 	
 	//remitente y destinatario
-	@ManyToOne
-    @JoinColumn(name="remitente")
+	@ManyToOne(targetEntity=Usuario.class)
 	private Usuario remitente;
-	@ManyToOne
-    @JoinColumn(name="destinatario")
+	@ManyToOne(targetEntity=Usuario.class)
 	private Usuario destinatario;
 	
 	//Cuerpo del mensaje
@@ -48,11 +46,11 @@ public class Mensaje implements Serializable {
 	private String mensaje;
 	
 	//Getters y Setters de los campos de la tabla
-	public long getIDMensaje() {
-		return IDMensaje;
+	public long getid() {
+		return id;
 	}
-	public void setIDMensaje(long iDMensaje) {
-		IDMensaje = iDMensaje;
+	public void setIDMensaje(long id) {
+		this.id = id;
 	}
 	public boolean isLeido() {
 		return leido;

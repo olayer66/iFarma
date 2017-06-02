@@ -1,8 +1,10 @@
 package es.ucm.fdi.iw.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 //Imports de JPA
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.NamedQueries;
@@ -30,42 +34,40 @@ import org.springframework.util.StringUtils;
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 3918714646456852426L;
 	
-	public Usuario() {
-		// TODO Auto-generated constructor stub
-	}
-	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	protected long id;
 	
 	//datos del usuario
 	@Column(name = "nombre", nullable = false)
-	private String nombre;
+	protected String nombre;
 	@Column(name = "apellidos", nullable = false)
-	private String apellidos;
+	protected String apellidos;
 	@Column(name = "email", nullable = false)
-	private String email;
+	protected String email;
 	@Column(name = "telefono", nullable = false)
-	private String telefono;
+	protected String telefono;
 	
 	//Estado del usuario(0=validacion,1=activo,2=inactivo(borrado logico))
 	@Column(name = "estado", nullable = false)
-	private int estado;
+	protected int estado;
 	
 	//Tipo de usuario
 	@Column(name = "role", nullable = false)
-	private String role;
+	protected String role;
 	//Usuario y contraseña para le login del usuario
-	@Column(name = "usuario", nullable = true)
-	private String usuario;
+	@Column(name = "username", nullable = false, unique = true)
+	protected String usuario;
 	@Column(name = "contra", nullable = true)
-	private String contrasenia;
+	protected String contrasenia;
 	
 	//Mensajes
-	@OneToMany(mappedBy="destinatario")
-	private List<Mensaje> mensajesRecibidos;
-	@OneToMany(mappedBy="remitente")
-	private List<Mensaje> mensajesEnviados;
+	@OneToMany(targetEntity=Mensaje.class, cascade=CascadeType.REMOVE)
+	@JoinColumn(name="destinatario_id")
+	protected List<Mensaje> mensajesRecibidos= new ArrayList<>();
+	@OneToMany(targetEntity=Mensaje.class, cascade=CascadeType.REMOVE)
+	@JoinColumn(name="remitente_id")
+	protected List<Mensaje> mensajesEnviados= new ArrayList<>();
 	
 	//Getters y setters de la entidad
 	public String getNombre() {

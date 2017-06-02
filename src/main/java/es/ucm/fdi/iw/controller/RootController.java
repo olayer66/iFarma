@@ -1,11 +1,10 @@
 package es.ucm.fdi.iw.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +14,6 @@ import javax.validation.Valid;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -25,18 +23,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
+import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
 import es.ucm.fdi.iw.validation.Codigo;
 import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.validation.MedicoForm;
 import es.ucm.fdi.iw.validation.ValidarPaciente;
-import es.ucm.fdi.parser.MedicamentosParser;
 
 @Controller	
 public class RootController {
@@ -47,11 +44,35 @@ public class RootController {
 	private EntityManager entityManager;
 
 	@RequestMapping({"","/", "/index"})
+	@Transactional
+	@ResponseBody
 	public String root(Model model, Principal principal) {
+		Medico m = new Medico();
+/*
+ * 		m.setUsuario("m1");
+		m.setContrasenia("c1");
+		m.setNombre("p");
+		m.setApellidos("a");
+		m.setCentroTrabajo("c");
+		m.setEstado(0);
+		m.setEmail("e");
+		m.setNumColMedico("123");
+		m.setRole("R");
+		m.setTelefono("123");
+		entityManager.persist(m);
+				
+		entityManager.flush();
+ */
+		m = entityManager.find(Medico.class, 2L);
+		log.info("Medico cargado: " + m);
+		entityManager.remove(m);
+		log.info("Medico eliminado: " + m);
+		return "ok";
+/*		
 	//	log.info(principal.getName() + " de tipo " + principal.getClass());	
 		model.addAttribute("control", new Codigo());
 		return "index";
-	}
+*/	}
 	@RequestMapping("/login")
 	public String login(HttpSession sesion, Principal principal) {
 		return "/login";

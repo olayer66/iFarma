@@ -136,18 +136,20 @@ public class AdminController {
 	//Denegar peticiones
 	@Transactional
 	@RequestMapping(value="denegarPeticion/{tipo}/{id}", method=RequestMethod.GET)
-	public String denegarPeticionAction(@PathVariable("tipo") String tipo,@PathVariable("id") long id, HttpSession sesion) {
-		
+	public String denegarPeticionAction(@PathVariable("tipo") String tipo,
+			@PathVariable("id") long id, HttpSession sesion) {
+		log.info("piden denegar con id " + id);
 		switch(tipo)
 		{
 		case "FARMA":
-			entityManager.remove(entityManager.getReference(Farmacia.class, id));
+			entityManager.remove(entityManager.find(Farmacia.class, id));
 			return "redirect:/admin/altasFarmacias";
 		case "MED":
-			entityManager.remove(entityManager.getReference(Medico.class, id));
+			Medico medico=entityManager.find(Medico.class, id);
+			entityManager.remove(medico);
 			return "redirect:/admin/altasMedicos";
 		case "FAR":
-			entityManager.remove(entityManager.getReference(Farmaceutico.class, id));
+			entityManager.remove(entityManager.find(Farmaceutico.class, id));
 			return "redirect:/admin/altasFarmaceuticos";
 		default:
 			return "redirect:/admin/admin";		

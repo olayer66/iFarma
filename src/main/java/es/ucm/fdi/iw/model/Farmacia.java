@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -52,16 +53,17 @@ public class Farmacia implements Serializable {
 	@Column(name = "estado", nullable = false)
 	private int estado;
 	
-	
 	//Dueño de la farmacia (N/1)
+	@ManyToOne(targetEntity=Farmaceutico.class)
 	private Farmaceutico duenio;
 	
 	//Listado de clientes // la farmacia no tiene un listado de pacientes, solo tiene pedidos
-	@OneToMany(mappedBy="farmacia")
+	@OneToMany(targetEntity=Pedidos.class)
+	@JoinColumn(name="farmacia_id")
 	private List<Pedidos> listaPedidos;
 	
 	//Stock de la farmacia (N/1)
-	@OneToMany(mappedBy="farmacia")
+	@OneToMany(targetEntity=ExistenciaMedicamento.class)
 	private List<ExistenciaMedicamento> stock;
 
 	//getters y setters
@@ -121,7 +123,6 @@ public class Farmacia implements Serializable {
 		this.provincia = provincia;
 	}
 
-	@ManyToOne(targetEntity=Farmaceutico.class)
 	public Farmaceutico getDuenio() {
 		return duenio;
 	}

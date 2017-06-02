@@ -20,10 +20,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "pedidos",
-	   uniqueConstraints = {
-		   @UniqueConstraint(columnNames = "id_pedido")
-	})
 public class Pedidos implements Serializable {
 
 	
@@ -32,13 +28,14 @@ public class Pedidos implements Serializable {
 	@Column(name = "id_pedido", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@ManyToOne
+	@ManyToOne(targetEntity=Farmacia.class)
 	@JoinColumn(name="farmacia")
 	private Farmacia farmacia;
-	@ManyToOne
+	@ManyToOne(targetEntity=Paciente.class)
 	@JoinColumn(name="paciente")
 	private Paciente paciente;
-	@OneToMany(mappedBy="pedido")
+	@OneToMany(targetEntity=ExistenciaPedido.class)
+	@JoinColumn(name="existencia_pedido_id")
 	private List<ExistenciaPedido> existenciasPedido;
 	@Column(name = "fecha_Pedido", nullable = false)
 	private Date fechaPedido;
