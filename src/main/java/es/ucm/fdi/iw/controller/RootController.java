@@ -25,15 +25,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
+import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
-import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
 import es.ucm.fdi.iw.validation.Codigo;
-import es.ucm.fdi.iw.validation.Farmaceutico;
 import es.ucm.fdi.iw.validation.MedicoForm;
 import es.ucm.fdi.iw.validation.ValidarPaciente;
+
 
 @Controller	
 public class RootController {
@@ -44,35 +44,11 @@ public class RootController {
 	private EntityManager entityManager;
 
 	@RequestMapping({"","/", "/index"})
-	@Transactional
-	@ResponseBody
 	public String root(Model model, Principal principal) {
-		Medico m = new Medico();
-/*
- * 		m.setUsuario("m1");
-		m.setContrasenia("c1");
-		m.setNombre("p");
-		m.setApellidos("a");
-		m.setCentroTrabajo("c");
-		m.setEstado(0);
-		m.setEmail("e");
-		m.setNumColMedico("123");
-		m.setRole("R");
-		m.setTelefono("123");
-		entityManager.persist(m);
-				
-		entityManager.flush();
- */
-		m = entityManager.find(Medico.class, 2L);
-		log.info("Medico cargado: " + m);
-		entityManager.remove(m);
-		log.info("Medico eliminado: " + m);
-		return "ok";
-/*		
-	//	log.info(principal.getName() + " de tipo " + principal.getClass());	
+
 		model.addAttribute("control", new Codigo());
 		return "index";
-*/	}
+	}
 	@RequestMapping("/login")
 	public String login(HttpSession sesion, Principal principal) {
 		return "/login";

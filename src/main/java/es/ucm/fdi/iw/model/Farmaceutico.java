@@ -1,5 +1,6 @@
 package es.ucm.fdi.iw.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,7 +19,7 @@ public class Farmaceutico extends Usuario {
 	
 	@OneToMany(targetEntity=Farmacia.class, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="duenio_id")
-	private List<Farmacia> farmaciasPropias;
+	private List<Farmacia> farmaciasPropias=new ArrayList<>();
 	
 	//getters y setters
 	public String getNumColFarmaceutico() {
@@ -36,4 +37,5 @@ public class Farmaceutico extends Usuario {
 	public void setFarmaciasPropias(List<Farmacia> farmaciasPropias) {
 		this.farmaciasPropias = farmaciasPropias;
 	}
+	
 }
