@@ -14,8 +14,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table
-@OnDelete(action = OnDeleteAction.CASCADE)
 public class Medico extends Usuario {
 	private static final long serialVersionUID = 9190127841629484829L;
 	
@@ -25,7 +23,7 @@ public class Medico extends Usuario {
 	private String centroTrabajo;
 	
 	//Lista de pacientes del medico
-	@OneToMany(targetEntity=Paciente.class, cascade=CascadeType.REMOVE)
+	@OneToMany(targetEntity=Paciente.class, cascade=CascadeType.DETACH)
 	@JoinColumn(name="med_cabecera_id")
 	private List<Paciente> pacientes = new ArrayList<>();
 	

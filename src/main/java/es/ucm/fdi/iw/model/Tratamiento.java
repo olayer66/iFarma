@@ -3,6 +3,7 @@ package es.ucm.fdi.iw.model;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @NamedQueries({
@@ -28,7 +32,7 @@ public class Tratamiento implements Serializable {
 	private Paciente paciente;
 	
 	//Medicamento
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(optional = false, fetch = FetchType.LAZY)
 	private Medicamento medicamento;
 	@Column(name = "fecha_inicio", nullable = false)
 	private Date fechaInicio;

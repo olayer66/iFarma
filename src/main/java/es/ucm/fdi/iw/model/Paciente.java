@@ -2,6 +2,7 @@ package es.ucm.fdi.iw.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 //Imports basicos para JPA
 import javax.persistence.Entity;
@@ -15,7 +16,6 @@ import org.hibernate.annotations.OnDeleteAction;
 
 
 @Entity
-@OnDelete(action = OnDeleteAction.CASCADE)
 //Peticiones a la tabla
 @NamedQueries({	
 })
@@ -43,13 +43,13 @@ public class Paciente extends Usuario {
 	private Medico medCabecera;
 	
 	//Lista de medicamentos del tratamiento (1/N)
-	@OneToMany(targetEntity=Tratamiento.class)
+	@OneToMany(targetEntity=Tratamiento.class, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="paciente_id")
 	private List<Tratamiento> tratamiento;
 	
 
 	//Lista de pedidos
-	@OneToMany(targetEntity=Pedidos.class)
+	@OneToMany(targetEntity=Pedidos.class, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="paciente_id")
 	private List<Pedidos> listaPedidos;
 	

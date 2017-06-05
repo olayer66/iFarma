@@ -15,6 +15,9 @@ import javax.persistence.NamedQueries;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 @Entity
 public class Mensaje implements Serializable {
 	private static final long serialVersionUID = -5547637084846310049L;

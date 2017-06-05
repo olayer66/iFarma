@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 @Entity
@@ -30,6 +31,8 @@ public class Medicamento implements Serializable{
 	private String laboratorio;
 	@Column(name = "precio", nullable = false)
 	private double precio;
+	@Column(name="estado",nullable=false)
+	private boolean estado=true;
 	
 	//getters y setters
 	public long getId() {
@@ -64,5 +67,11 @@ public class Medicamento implements Serializable{
 	}
 	public String toString() {
 		return this.nombre + " - " + this.descripcion + " [" + this.laboratorio + "]";
+	}
+	public boolean isEstado() {
+		return estado;
+	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
 }

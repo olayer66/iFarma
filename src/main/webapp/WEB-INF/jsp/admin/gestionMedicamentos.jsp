@@ -25,6 +25,7 @@
 	                                  <th>Laboratorio</th>
 	                                  <th>Descripcion</th>
 	                                  <th>Precio</th>
+	                                  <th>Estado</th>
 	                                  <th>Accion</th>
 	                                </tr>
 	                            </thead>
@@ -36,8 +37,16 @@
 		                                <td>${medicamento.descripcion}</td>
 		                                <td>${medicamento.precio}€</td>
 		                                <td>
+		                                	<c:if test="${medicamento.estado==true}">
+		                                		<span class="label label-success">Activo</span>
+		                                	</c:if>
+		                                	<c:if test="${medicamento.estado==false}">
+		                                		<span class="label label-danger">Descatalogado</span>
+		                                	</c:if>
+		                                </td>
+		                                <td>
 											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().remove()">Eliminar</a>
+											<a href="descatalogarMedicamento/${medicamento.id}" class="btn btn-sm btn-danger">Eliminar</a>
 										</td>
 	                                </tr>
 	                              </c:forEach>  

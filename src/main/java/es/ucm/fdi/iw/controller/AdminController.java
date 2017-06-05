@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
@@ -16,7 +17,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,6 +31,7 @@ import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Usuario;
+import es.ucm.fdi.iw.validation.ValidarMedicamento;
 import es.ucm.fdi.parser.MedicamentosParser;
 
 @Controller
@@ -49,8 +54,6 @@ public class AdminController {
 		Long petFarmaceutico;
 		Long petMedico;
 		Long petFarmacia;
-		boolean estado=estadoValido();
-		log.warn("Estado de salida: " + estado);
 		if(estadoValido())
 		{
 			petFarmaceutico=(Long) entityManager.createNamedQuery("Usuario.count").setParameter("tiporole", "FAR").getSingleResult();
@@ -176,9 +179,10 @@ public class AdminController {
 		sesion.setAttribute("listaMed", listaMed);
 		return "admin/gestionMedicamentos";
 	}
-	//Añadir un nuevo medicamento
+	//Ventana Añadir un nuevo medicamento
 	@RequestMapping("nuevoMedicamento")
-	public String nuevoMedicamentoAction() {
+	public String nuevoMedicamentoAction(Model model) {
+		model.addAttribute("validar", new ValidarMedicamento());
 		return "admin/nuevoMedicamento";
 	}
 	//Importar los medicamntos de la BBDD
@@ -191,14 +195,37 @@ public class AdminController {
 				entityManager);
 		return "redirect:/admin/gestionMedicamentos";
 	}
-	/*//Modificar un medicamento
+	//Ventana Añadir un nuevo medicamento
 	@Transactional
-	@RequestMapping(value="denegarPeticion/{tipo}/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="nuevoMedicamentoSubmit", method = RequestMethod.POST)
+	public String nuevoMedicamentoSubmitAction(@ModelAttribute("validar") @Valid ValidarMedicamento validar, BindingResult bindingResult, Model model,
+			HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			log.warn("Temenos errores");
+			return "admin/nuevoMedicamento";
+		} else {
+			entityManager.persist(validar.getMedicamento());
+			return "redirect:/admin/gestionMedicamentos";
+		}
+	}
+	//Modificar un medicamento
+	@Transactional
+	@RequestMapping(value="modificarMedicamento", method=RequestMethod.GET)
 	public String modificarMedicamentoAction()
 	{
 		
 		return "redirect:/admin/gestionMedicamentos";
-	}*/
+	}
+	//Eliminar un medicamento
+	@Transactional
+	@RequestMapping(value="descatalogarMedicamento/{id}", method=RequestMethod.GET)
+	public String descatalogarMedicamentoAction(@PathVariable Long id)
+	{
+		Medicamento medicamento=entityManager.find(Medicamento.class, id);
+		medicamento.setEstado(false);
+		entityManager.persist(medicamento);
+		return "redirect:/admin/gestionMedicamentos";
+	}
 	
 	/*-----Control estado------*/
 	private boolean estadoValido()
@@ -206,7 +233,6 @@ public class AdminController {
 		Usuario usuario;
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		usuario=entityManager.createNamedQuery("Usuario.findByUsuario", Usuario.class).setParameter("usuario", auth.getName()).getSingleResult();
-		log.warn("Estado: "+usuario.getEstado());
 		if(usuario.getEstado()!=1)
 			return false;
 		else

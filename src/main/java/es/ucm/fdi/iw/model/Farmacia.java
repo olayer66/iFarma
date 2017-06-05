@@ -3,6 +3,7 @@ package es.ucm.fdi.iw.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @NamedQueries({
@@ -56,12 +59,12 @@ public class Farmacia implements Serializable {
 	private Farmaceutico duenio;
 	
 	//Listado de clientes // la farmacia no tiene un listado de pacientes, solo tiene pedidos
-	@OneToMany(targetEntity=Pedidos.class)
+	@OneToMany(targetEntity=Pedidos.class, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="farmacia_id")
 	private List<Pedidos> listaPedidos;
 	
 	//Stock de la farmacia (N/1)
-	@OneToMany(targetEntity=ExistenciaMedicamento.class)
+	@OneToMany(targetEntity=ExistenciaMedicamento.class, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="farmacia_id")
 	private List<ExistenciaMedicamento> stock;
 
