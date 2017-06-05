@@ -15,6 +15,7 @@ import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,7 @@ import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
+import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.validation.Codigo;
 import es.ucm.fdi.iw.validation.MedicoForm;
 import es.ucm.fdi.iw.validation.ValidarPaciente;
@@ -51,6 +53,7 @@ public class RootController {
 	}
 	@RequestMapping("/login")
 	public String login(HttpSession sesion, Principal principal) {
+		
 		return "/login";
 	}
 
@@ -59,6 +62,12 @@ public class RootController {
 		sesion.invalidate();
 		log.info("Sesion finalizada");
 		return "redirect:/index";
+	}
+	@RequestMapping("/estadoDenegado")
+	public String estadoDenegado(HttpSession sesion) {
+		sesion.invalidate();
+		log.warn("Sesion finalizada por estado no valido");
+		return "estadoDenegado";
 	}
 	@RequestMapping("/volverdenegado")
 	public String denegadovolver(HttpSession sesion) {

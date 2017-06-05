@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,7 @@ import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Medico;
+import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.parser.MedicamentosParser;
 
 @Controller
@@ -46,15 +49,21 @@ public class AdminController {
 		Long petFarmaceutico;
 		Long petMedico;
 		Long petFarmacia;
-		
-		petFarmaceutico=(Long) entityManager.createNamedQuery("Usuario.count").setParameter("tiporole", "FAR").getSingleResult();
-		petMedico=(Long) entityManager.createNamedQuery("Usuario.count").setParameter("tiporole", "MED").getSingleResult();
-		petFarmacia=(Long) entityManager.createNamedQuery("Farmacia.countFARMA").getSingleResult();
-		
-		sesion.setAttribute("petFarmaceutico", petFarmaceutico);
-		sesion.setAttribute("petMedico", petMedico);
-		sesion.setAttribute("petFarmacia", petFarmacia);
-		return "admin/admin";
+		boolean estado=estadoValido();
+		log.warn("Estado de salida: " + estado);
+		if(estadoValido())
+		{
+			petFarmaceutico=(Long) entityManager.createNamedQuery("Usuario.count").setParameter("tiporole", "FAR").getSingleResult();
+			petMedico=(Long) entityManager.createNamedQuery("Usuario.count").setParameter("tiporole", "MED").getSingleResult();
+			petFarmacia=(Long) entityManager.createNamedQuery("Farmacia.countFARMA").getSingleResult();
+			
+			sesion.setAttribute("petFarmaceutico", petFarmaceutico);
+			sesion.setAttribute("petMedico", petMedico);
+			sesion.setAttribute("petFarmacia", petFarmacia);
+			return "admin/admin";
+		}
+		else
+			return "/estadoDenegado";
 	}
 	
 	/*-----PETICIONES DE MEDICOS-----*/
@@ -145,8 +154,8 @@ public class AdminController {
 			entityManager.remove(entityManager.find(Farmacia.class, id));
 			return "redirect:/admin/altasFarmacias";
 		case "MED":
-			Medico medico=entityManager.find(Medico.class, id);
-			entityManager.remove(medico);
+			//Medico medico=entityManager.find(Medico.class, id);
+			entityManager.remove(entityManager.find(Medico.class, id));
 			return "redirect:/admin/altasMedicos";
 		case "FAR":
 			entityManager.remove(entityManager.find(Farmaceutico.class, id));
@@ -181,5 +190,26 @@ public class AdminController {
 		MedicamentosParser.carga(new String(IOUtils.toByteArray(dataStream)),
 				entityManager);
 		return "redirect:/admin/gestionMedicamentos";
+	}
+	/*//Modificar un medicamento
+	@Transactional
+	@RequestMapping(value="denegarPeticion/{tipo}/{id}", method=RequestMethod.GET)
+	public String modificarMedicamentoAction()
+	{
+		
+		return "redirect:/admin/gestionMedicamentos";
+	}*/
+	
+	/*-----Control estado------*/
+	private boolean estadoValido()
+	{
+		Usuario usuario;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		usuario=entityManager.createNamedQuery("Usuario.findByUsuario", Usuario.class).setParameter("usuario", auth.getName()).getSingleResult();
+		log.warn("Estado: "+usuario.getEstado());
+		if(usuario.getEstado()!=1)
+			return false;
+		else
+			return true;
 	}
 }

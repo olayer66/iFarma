@@ -3,6 +3,8 @@ package es.ucm.fdi.iw;
 import java.io.IOException;
 import java.util.Collection;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,16 +12,22 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import es.ucm.fdi.iw.controller.RootController;
+import es.ucm.fdi.iw.model.Usuario;
 
 public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 	private static final Logger log = Logger.getLogger(RootController.class);
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-	 
+	
+	@PersistenceContext
+	private EntityManager entityManager;
+	
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, 
       HttpServletResponse response, Authentication authentication)
@@ -34,14 +42,14 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
       throws IOException {
   
         String targetUrl = determineTargetUrl(authentication);
- 
         if (response.isCommitted()) {
             log.debug(
               "Response has already been committed. Unable to redirect to "
               + targetUrl);
             return;
         }
- 
+        
+        //response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
  
