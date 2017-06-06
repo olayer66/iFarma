@@ -17,6 +17,7 @@
                     
                     <s:url var="formUrl" value="/admin/modificarMedicamentoSubmit" />
      				<sf:form modelAttribute="validar" action="${formUrl}">
+     					<sf:hidden path="id" value="${modMedicamento.id}"/>
                         <div class="col-md-4 portfolio-item">
                             <div class="form-group">
                                 <label for="nombre">Nombre del medicamento: </label>
@@ -33,6 +34,13 @@
                                 <sf:input path="laboratorio" class="form-control" value="${modMedicamento.laboratorio}" id="laboratorio"/>
                                 <sf:errors path="laboratorio" cssClass="error"/>
                             </div>
+                            <c:if test="${modMedicamento.laboratorio==false}">
+	                            <div class="form-group">
+	                                <label for="estado">Catalogar: </label>
+	                                <sf:checkbox path="estado" id="estado"/>
+	                                <sf:errors path="estado" cssClass="error"/>
+	                            </div>
+	                        </c:if>
                             <div class="form-group">
                                 <label for="precio">Precio: </label>
                                 <div class="hide-inputbtns">

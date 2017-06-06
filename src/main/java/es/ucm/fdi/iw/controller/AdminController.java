@@ -90,12 +90,18 @@ public class AdminController {
 	/*-----PETICIONES DE UN FARMACEUTICO------*/
 	//Lista de peticiones de farmaceuticos
 	@RequestMapping("altasFarmaceuticos")
-	public String altasFarmaceuticosAction() {
+	public String altasFarmaceuticosAction(HttpSession sesion) {
+		List<Farmaceutico> listaFarmaceutico;
+		TypedQuery<Farmaceutico> query= entityManager.createNamedQuery("Farmaceutico.findValidar", Farmaceutico.class);
+		listaFarmaceutico=query.getResultList();
+		sesion.setAttribute("listaFarmaceutico", listaFarmaceutico);
 		return "admin/altasFarmaceuticos";
 	}
 	//Detalle de la peticion de un farmaceutico
-	@RequestMapping("detalleAltaFarmaceutico")
-	public String detalleAltaFarmaciaAction(@RequestParam("id") Long id) {
+	@RequestMapping(value="detalleAltaFarmaceutico/{id}", method=RequestMethod.GET )
+	public String detalleAltaFarmaciaAction(@PathVariable Long id,HttpSession sesion) {
+		Farmaceutico farmaceutico= entityManager.find(Farmaceutico.class, id);
+		sesion.setAttribute("detalleFarmaceutico", farmaceutico);
 		return "admin/detalleAltaFarmaceutico";
 	}
 	
@@ -201,7 +207,6 @@ public class AdminController {
 	public String nuevoMedicamentoSubmitAction(@ModelAttribute("validar") @Valid ValidarMedicamento validar, BindingResult bindingResult, Model model,
 			HttpSession sesion) {
 		if (bindingResult.hasErrors()) {
-			log.warn("Temenos errores");
 			return "admin/nuevoMedicamento";
 		} else {
 			entityManager.persist(validar.getMedicamento());
@@ -227,7 +232,14 @@ public class AdminController {
 			log.warn("Temenos errores");
 			return "admin/modificarMedicamento";
 		} else {
-			entityManager.persist(validar.getMedicamento());
+			Medicamento med= entityManager.find(Medicamento.class, validar.getId());
+			Medicamento modMed=validar.getMedicamentoMod();
+			med.setEstado(modMed.isEstado());
+			med.setNombre(modMed.getNombre());
+			med.setDescripcion(modMed.getDescripcion());
+			med.setLaboratorio(modMed.getLaboratorio());
+			med.setPrecio(modMed.getPrecio());
+			entityManager.persist(med);
 			return "redirect:/admin/gestionMedicamentos";
 		}
 	}

@@ -10,7 +10,7 @@
 			<h1 class="page-header">Detalle alta medico</h1>
             <div class="panel panel-default">
 				<div class="panel-body">
-					<h2>Datos Medico</h2>
+					<h2>Datos Personales</h2>
 					<h4><strong>Nombre:</strong> ${detalleMedico.nombre}</h4>
 					<h4><strong>Apellidos:</strong> ${detalleMedico.apellidos}</h4>
 					<h4><strong>Telefono:</strong> ${detalleMedico.telefono}</h4>

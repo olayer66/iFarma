@@ -89,6 +89,14 @@ $(function () {
           "info": true,
           "autoWidth": false
         });
+      $('#tablaAltaFarmaceuticos').DataTable({
+          "paging": true,
+          "lengthChange": true,
+          "searching": true,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false
+        });
       $('#tablaMedicamento').DataTable({
           "paging": true,
           "lengthChange": true,

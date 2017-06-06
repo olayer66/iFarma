@@ -9,8 +9,9 @@ import es.ucm.fdi.iw.model.Medicamento;
 
 public class ValidarMedicamento {
 	
+	private long id;
 	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "El nombre no puede contener caracteres especiales")
+	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "El nombre no puede contener caracteres especiales")
 	private String nombre;
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "La descripcion no puede contener caracteres especiales")
@@ -18,6 +19,7 @@ public class ValidarMedicamento {
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "El laboratorio no puede contener caracteres especiales")
 	private String laboratorio;
+	private boolean estado;
 	@DecimalMax("1000.0")
 	private Double precio;
 	
@@ -31,7 +33,30 @@ public class ValidarMedicamento {
 		medicamento.setPrecio(precio);
 		return medicamento;	
 	}
+	public Medicamento getMedicamentoMod()
+	{
+		Medicamento medicamento= new Medicamento();
+		medicamento.setId(id);
+		medicamento.setNombre(nombre);
+		medicamento.setDescripcion(descripcion);
+		medicamento.setLaboratorio(laboratorio);
+		medicamento.setEstado(estado);
+		medicamento.setPrecio(precio);
+		return medicamento;	
+	}
 	
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public boolean isEstado() {
+		return estado;
+	}
+	public void setEstado(boolean estado) {
+		this.estado = estado;
+	}
 	public String getNombre() {
 		return nombre;
 	}

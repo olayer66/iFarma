@@ -17,6 +17,9 @@
                     <a href="/admin/altasMedicos">Altas medicos</a>
                 </li>
                 <li>
+                    <a href="/admin/altasFarmaceuticos">Altas farmaceuticos</a>
+                </li>
+                <li>
                     <a href="/admin/altasFarmacias">Altas farmacias</a>
                 </li>
                 <li>

@@ -28,6 +28,8 @@ import org.springframework.util.StringUtils;
                 query="SELECT COUNT(u) FROM Usuario u WHERE u.estado=0 AND u.role=:tiporole"),
     @NamedQuery(name="Medico.findValidar",
     			query="SELECT m FROM Medico m WHERE m.estado=0"),
+    @NamedQuery(name="Farmaceutico.findValidar",
+				query="SELECT f FROM Farmaceutico f WHERE f.estado=0"),
     @NamedQuery(name="Usuario.findByUsuario",
 				query="SELECT u FROM Usuario u WHERE u.usuario=:usuario")
 

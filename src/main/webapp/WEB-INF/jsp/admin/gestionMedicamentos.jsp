@@ -36,7 +36,7 @@
 		                                <td>${medicamento.laboratorio}</td>
 		                                <td>${medicamento.descripcion}</td>
 		                                <td>${medicamento.precio}€</td>
-		                                <td>
+		                                <td class="text-center">
 		                                	<c:if test="${medicamento.estado==true}">
 		                                		<span class="label label-success">Activo</span>
 		                                	</c:if>
