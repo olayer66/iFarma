@@ -10,38 +10,38 @@
     <div class="row">
          <!--FEEDBACK-->
     
-                <div id="nuevoMedicamento">
+                <div id="modificarMedicamento">
                     <div>    
-                    <h2 class="page-header">Nuevo medicamento</h2>
+                    <h2 class="page-header">Modificar medicamento</h2>
                     </div>
                     
-                    <s:url var="formUrl" value="/admin/nuevoMedicamentoSubmit" />
+                    <s:url var="formUrl" value="/admin/modificarMedicamentoSubmit" />
      				<sf:form modelAttribute="validar" action="${formUrl}">
                         <div class="col-md-4 portfolio-item">
                             <div class="form-group">
                                 <label for="nombre">Nombre del medicamento: </label>
-	                            <sf:input path="nombre" class="form-control" id="nombre"/>
+	                            <sf:input path="nombre" class="form-control" value="${modMedicamento.nombre}" id="nombre"/>
 	                            <sf:errors path="nombre" cssClass="error"/>
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripcion: </label>
-                                <sf:input path="descripcion" class="form-control" id="descripcion"/>
+                                <sf:input path="descripcion" class="form-control" value="${modMedicamento.descripcion}" id="descripcion"/>
                                 <sf:errors path="descripcion" cssClass="error"/>
                             </div>
                             <div class="form-group">
                                 <label for="laboratorio">Laboratorio: </label>
-                                <sf:input path="laboratorio" class="form-control" id="laboratorio"/>
+                                <sf:input path="laboratorio" class="form-control" value="${modMedicamento.laboratorio}" id="laboratorio"/>
                                 <sf:errors path="laboratorio" cssClass="error"/>
                             </div>
                             <div class="form-group">
                                 <label for="precio">Precio: </label>
                                 <div class="hide-inputbtns">
-                                	<sf:input path="precio" type="number" value="1" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class=" form-control currency"  id="precio"/>
+                                	<sf:input path="precio" type="number"  value="${modMedicamento.precio}" min="0" step="0.01" data-number-to-fixed="2" data-number-stepfactor="100" class=" form-control currency"  id="precio"/>
                                 	<sf:errors path="precio" cssClass="error"/>
                             	</div>
                             </div>
-                            <div class="form-group">
-                             	<input type="submit" value="Añadir" class="btn btn-default">
+                            <div class="form-group text-center">
+                             	<input type="submit" value="Modificar" class="btn btn-default">
                             </div>
                         </div>
                     </sf:form>     

@@ -179,12 +179,6 @@ public class AdminController {
 		sesion.setAttribute("listaMed", listaMed);
 		return "admin/gestionMedicamentos";
 	}
-	//Ventana Añadir un nuevo medicamento
-	@RequestMapping("nuevoMedicamento")
-	public String nuevoMedicamentoAction(Model model) {
-		model.addAttribute("validar", new ValidarMedicamento());
-		return "admin/nuevoMedicamento";
-	}
 	//Importar los medicamntos de la BBDD
 	@Transactional
 	@RequestMapping("insMedicamentos")
@@ -196,6 +190,12 @@ public class AdminController {
 		return "redirect:/admin/gestionMedicamentos";
 	}
 	//Ventana Añadir un nuevo medicamento
+	@RequestMapping("nuevoMedicamento")
+	public String nuevoMedicamentoAction(Model model) {
+		model.addAttribute("validar", new ValidarMedicamento());
+		return "admin/nuevoMedicamento";
+	}
+	//Añadir un nuevo medicamento
 	@Transactional
 	@RequestMapping(value="nuevoMedicamentoSubmit", method = RequestMethod.POST)
 	public String nuevoMedicamentoSubmitAction(@ModelAttribute("validar") @Valid ValidarMedicamento validar, BindingResult bindingResult, Model model,
@@ -208,13 +208,28 @@ public class AdminController {
 			return "redirect:/admin/gestionMedicamentos";
 		}
 	}
+	//Ventana modificar un medicamento
+	@Transactional
+	@RequestMapping(value="modificarMedicamento/{id}", method=RequestMethod.GET)
+	public String modificarMedicamentoAction(@PathVariable Long id,HttpSession sesion,Model model)
+	{
+		Medicamento medicamento=entityManager.find(Medicamento.class, id);
+		sesion.setAttribute("modMedicamento", medicamento);
+		model.addAttribute("validar", new ValidarMedicamento());
+		return "admin/modificarMedicamento";
+	}
 	//Modificar un medicamento
 	@Transactional
-	@RequestMapping(value="modificarMedicamento", method=RequestMethod.GET)
-	public String modificarMedicamentoAction()
-	{
-		
-		return "redirect:/admin/gestionMedicamentos";
+	@RequestMapping(value="modificarMedicamentoSubmit", method = RequestMethod.POST)
+	public String modificarMedicamentoSubmitAction(@ModelAttribute("validar") @Valid ValidarMedicamento validar, BindingResult bindingResult, Model model,
+			HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			log.warn("Temenos errores");
+			return "admin/modificarMedicamento";
+		} else {
+			entityManager.persist(validar.getMedicamento());
+			return "redirect:/admin/gestionMedicamentos";
+		}
 	}
 	//Eliminar un medicamento
 	@Transactional

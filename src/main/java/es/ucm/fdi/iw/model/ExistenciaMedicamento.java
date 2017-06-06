@@ -13,9 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 @Entity
 public class ExistenciaMedicamento implements Serializable {
 	private static final long serialVersionUID = 4000356623437817386L;

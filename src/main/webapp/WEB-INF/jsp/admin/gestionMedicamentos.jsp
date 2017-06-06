@@ -13,7 +13,7 @@
                      <div id="medicamentos">
                    
 	                 	<h2 class="page-header">Medicamentos    
-	                 	<a href="/admin/nuevoMedicamento" class="btn btn-default">Añadir</a>
+	                 	<a href="/admin/nuevoMedicamento" class="btn btn-default" >Añadir</a>
 	                 	<a href="/admin/insMedicamentos" class="btn btn-default">Cargar fichero</a>
 	                 	</h2>
 	                    
@@ -45,8 +45,8 @@
 		                                	</c:if>
 		                                </td>
 		                                <td>
-											<a href="#" class="btn btn-sm btn-primary">Modificar</a>
-											<a href="descatalogarMedicamento/${medicamento.id}" class="btn btn-sm btn-danger">Eliminar</a>
+											<a href="modificarMedicamento/${medicamento.id}" class="btn btn-sm btn-primary">Modificar</a>
+											<a href="descatalogarMedicamento/${medicamento.id}" class="btn btn-sm btn-danger">Descatalogar</a>
 										</td>
 	                                </tr>
 	                              </c:forEach>  
