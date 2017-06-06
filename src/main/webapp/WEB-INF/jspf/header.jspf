@@ -7,8 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>iFarma</title>
-    <link rel="shortcut icon" type="image/x-icon"  href="static/img/favicon.ico">
-    <link rel="icon" type="image/x-icon"  href="static/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon"  href="/static/img/favicon.ico">
+    <link rel="icon" type="image/x-icon"  href="/static/img/favicon.ico">
     <!-- Bootstrap Core CSS -->
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
