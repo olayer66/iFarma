@@ -69,12 +69,12 @@
 
 						<div class="collapse" id="response" data-collapse-show-on-error="${error}">
 							<div class="well">
-								<sf:form method="POST" modelAttribute="mensaje">
+								<sf:form method="POST" modelAttribute="form">
 									<div class="box-body">
-										<sf:input type="hidden" path="destinatario" value="${mensaje.remitente}" />
+										<sf:input type="hidden" path="destinatario" value="${mensaje.remitente.id}" />
 
 										<div class="form-group">
-											<sf:input path="asunto" class="form-control" placeholder="Asunto:" value="" />
+											<sf:input path="asunto" class="form-control" placeholder="Asunto:" value="Re: ${mensaje.asunto}" />
 											<p><sf:errors path="asunto" cssClass="error"/></p>
 										</div>
 										<div class="form-group">

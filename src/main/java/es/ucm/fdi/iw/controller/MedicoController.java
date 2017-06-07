@@ -112,7 +112,7 @@ public class MedicoController {
 	}
 
 	@RequestMapping("feedback/{id}")
-	String verFeedbackAction(@PathVariable("id") final Long id, @ModelAttribute("mensaje") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
+	String verFeedbackAction(@PathVariable("id") final Long id, @ModelAttribute("form") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
 		Medico medico = this.getLoggedUser(sesion);
 		Mensaje mensaje = entityManager.find(Mensaje.class, id);
 
@@ -125,6 +125,25 @@ public class MedicoController {
 
 		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
 			model.addAttribute("form", new MensajeForm());
+		}
+
+		if (request.getMethod().equals("POST")) {
+			if (bindingResult.hasErrors()) {
+				model.addAttribute("error", true);
+			} else {
+				Mensaje nuevoMensaje = new Mensaje();
+				nuevoMensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
+				nuevoMensaje.setDestinatario(entityManager.find(Paciente.class, Long.parseLong(form.getDestinatario())));
+				nuevoMensaje.setRemitente(medico);
+				nuevoMensaje.setAsunto(form.getAsunto());
+				nuevoMensaje.setMensaje(form.getMensaje());
+
+				medico.getMensajesEnviados().add(nuevoMensaje);
+
+				entityManager.persist(medico);
+
+				return "redirect:/medico/feedback";
+			}
 		}
 
 		return "medico/detalleFeedback";
