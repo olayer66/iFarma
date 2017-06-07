@@ -88,9 +88,11 @@ public class MedicoController {
 				tratamiento.setFechaFin(form.getFechaFinFormateada());
 				tratamiento.setPerioicidad(form.getPeriodicidad());
 				tratamiento.setNumDosis(form.getNumDosis());
+				tratamiento.setNumDosisDia(form.getNumDosis());
 				tratamiento.setPaciente(paciente);
-
 				paciente.getTratamiento().add(tratamiento);
+
+				entityManager.persist(tratamiento);
 				entityManager.persist(paciente);
 			}
 		}
