@@ -1,7 +1,9 @@
-<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 
 <%@ include file="../../jspf/header.jspf" %>
 
@@ -42,74 +44,74 @@
                 </tbody>
               </table>
               <!-- fin tabla stock -->
-                <div>
-                    <h2>Añadir nuevos productos:</h2>
-                  <ul class="nav nav-pills">
-                    <li><a data-toggle="pill" href="#añadirMedicamentoManual">Añadir Medicamento Manualmente</a></li>
-                    <li><a data-toggle="pill" href="#añadirMedicamentoarchivo">Añadir medicamentos desde archivo</a></li>
-                  </ul>
+ 
+				<button class="btn btn-default btn-block" data-toggle="modal" data-target="#añadirMedicamentoManual">
+									Añadir Stock Manualmente
+				</button>
 
-                  <div class="tab-content">  
-                    <div id="añadirMedicamentoManual" class="tab-pane fade">
-                      <h3>Añadir Medicamento Manualmente</h3>
-                        <!-- nuevo producto-->
-                        <div>
-                            <div class="col-lg-12">
-                                <h3 class="page-header">Nuevo Producto:</h3>
-                                <h3><small>Rellene el siguiente formulario.</small></h3>
-                            </div>
-                            <form>
-                                <!--Datos del usuario-->
-                                <div class="col-md-6 portfolio-item">
-                                    <div class="form-group">
-                                        <label for="nombreMedicamento">Nombre del medicamento:</label>
-                                        <input type="text" class="form-control" id="nombreMedicamento">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="descripcionMedicamento">Descripcion</label>
-                                        <input type="text" class="form-control" id="descripcionMedicamento">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="dosisMedicamento">Numero de dosis por caja:</label>
-                                        <input type="text" class="form-control" id="dosisMedicamento">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="cantidadMedicamento">Cantidad en stock:</label>
-                                        <input type="text" class="form-control" id="cantidadMedicamento">
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="precioMedicamento">Precio:</label>
-                                        <input type="text" class="form-control" id="precioMedicamento">
-                                    </div>
-                                </div>              
-                                <div class="col-md-12 portfolio-item">
-                                    <input type="submit" class="btn-lg btn-default center-block" value="Añadir">
-                                </div>
-                            </form>        
-                        </div>
-                    </div>
-                    <div id="añadirMedicamentoarchivo" class="tab-pane fade">
-                      <h3>Añadir Stock desde archivo</h3>
-                      <!-- importar desde archivo -->
-                        <div class="form-group">
-                          <label for="exampleInputFile">Importar:</label>
-                          <input type="file" id="exampleInputFile">
-
-                          <p class="help-block">Importar stock desde archivo, 
-                           este stock sustituirá por completo al actual</p>
-                        </div>
-                    </div>
-                  </div>
-                </div>
-               <!-- fin añadir prpductos -->
-            </div>
-            <!-- /.box-body -->
-           </div>
-          <!-- tab -->
-          </div>
-          <!--row-->
-         </div>
-		</div>
+                	<div>
+	                    <h2>Añadir nuevos productos:</h2>
+	                  <ul class="nav nav-pills">
+	                    <li><a data-toggle="pill" href="#añadirMedicamentoarchivo">Añadir medicamentos desde archivo</a></li>
+	                  </ul>
+	                  <div class="tab-content">  
+	                    <div id="añadirMedicamentoarchivo" class="tab-pane fade">
+	                      <h3>Añadir Stock desde archivo</h3>
+	                      <!-- importar desde archivo -->
+	                        <div class="form-group">
+	                          <label for="exampleInputFile">Importar:</label>
+	                          <input type="file" id="exampleInputFile">
+	
+	                          <p class="help-block">Importar stock desde archivo, 
+	                           este stock sustituirá por completo al actual</p>
+	                        </div>
+	                    </div>
+	                  </div>
+	                </div>
+	               <!-- fin añadir prpductos -->
+	            </div>
+	            <!-- /.box-body -->
+	           </div>
+	          <!-- tab -->
+	          </div>
+			 <div id="añadirMedicamentoManual" class="modal fade" role="dialog" data-modal-show-on-error="${error}">
+						<div class="modal-dialog modal-md">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Añadir stock</h4>
+								</div>
+					
+								<div class="modal-body">
+									<sf:form method="POST" modelAttribute="form">
+										<div class="box-body">
+											<div class="form-group">
+												<sf:select  path="medicamento" class="form-control">
+													<sf:option value="">medicamento</sf:option>
+													<sf:options items="${medicamentos}" itemValue="id"></sf:options>
+												</sf:select>
+												<p><sf:errors path="medicamento" cssClass="error"/></p>
+											</div>
+											<div class="form-group">
+												<sf:input path="cantidad" class="form-control" placeholder="Cantidad" />
+												<p><sf:errors path="cantidad" cssClass="error"/></p>
+											</div>											
+											<div class="form-group">
+												<sf:input path="fechaCaducidad" type="date" class="form-control" placeholder="Fecha de caducidad" value="" />
+												<p><sf:errors path="fechaCaducidad" cssClass="error"/></p>
+											</div>
+										</div>
+					
+										<button type="submit" class="btn btn-success">Guardar tratamiento</button>
+									</sf:form>
+								</div>
+					
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								</div>
+							</div>
+						</div>
+					</div>
         
            <!-- ________________TABLE: STOOOOOOCKS END___________________________ -->
         

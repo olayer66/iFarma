@@ -19,7 +19,6 @@ public class ExistenciaPedido implements Serializable {
 
 	private static final long serialVersionUID = -305492674073684798L;
 	@Id
-	@Column(name = "id_existencia", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(name = "cantidad", nullable = false)

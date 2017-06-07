@@ -6,14 +6,19 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,8 +26,12 @@ import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
 import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
+import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
+import es.ucm.fdi.iw.model.Tratamiento;
+import es.ucm.fdi.iw.validation.StockForm;
+import es.ucm.fdi.iw.validation.TratamientoForm;
 
 
 @Controller
@@ -50,9 +59,9 @@ public class FarmaciaController {
                             .setParameter("usuario", username)
                             .getSingleResult();
 		
-		//no estoy seguro de que id necesito
-		//List<Farmacia> listaFar = farmaceutico.getFarmaciasActivas();
-		List<Farmacia> listaFar = new ArrayList<>();
+		
+		List<Farmacia> listaFar = farmaceutico.getFarmaciasActivas();
+
 		
 		log.info("tamaño salida:" + listaFar.size());
 		model.addAttribute("listaFar", listaFar);
@@ -89,8 +98,10 @@ public class FarmaciaController {
 		return "farmacia/pedidos";
 	}
 	
-	@RequestMapping("stock") //lo voy a probar primero con medicamentos, luego con inventarios
-	public String stockAction(@RequestParam long id, HttpSession sesion, Model model) {
+	
+	@Transactional
+	@RequestMapping("stock") 
+	public String stockAction(@RequestParam long id, HttpSession sesion,HttpServletRequest request, Model model,@ModelAttribute("form") @Valid StockForm form, BindingResult bindingResult) {
 		model.addAttribute("idFarmacia", id);
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		
@@ -101,12 +112,44 @@ public class FarmaciaController {
 		
 
 		Farmacia farmacia = entityManager.find(Farmacia.class, id);
+
+
 		if (farmacia == null || farmacia.getDuenio()!=farmaceutico){
 			log.info("Acceso denegado");
 		}else{
+
 			List<ExistenciaMedicamento> miStock= farmacia.getStock();
+			
+
 			log.info("tamaño salida mistock:" + miStock.size());
+			
+			if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
+				model.addAttribute("form", new StockForm());
+			}
+
+			if (request.getMethod().equals("POST")) {
+				if (bindingResult.hasErrors()) {
+					model.addAttribute("error", true);
+				} else {//Da error por la relacion ONE TO ONE con medicamento. Hay que cambiar esa relacion
+					ExistenciaMedicamento existenciaStock = new ExistenciaMedicamento();
+
+					existenciaStock.setMedicamento(entityManager.find(Medicamento.class, Long.parseLong(form.getMedicamento())));
+					existenciaStock.setCantidad(form.getCantidad());	
+					existenciaStock.setFechaCaducidad(form.getFechaFormateada());
+					existenciaStock.setFarmacia(farmacia);
+					entityManager.persist(existenciaStock);
+					miStock.add(existenciaStock);
+					farmacia.setStock(miStock);
+					entityManager.persist(farmacia);
+
+				}
+			}
+			
+			
 			model.addAttribute("miStock", miStock);
+			model.addAttribute("medicamentos", entityManager.createQuery("FROM Medicamento").getResultList());
+
+
 
 		}
 		

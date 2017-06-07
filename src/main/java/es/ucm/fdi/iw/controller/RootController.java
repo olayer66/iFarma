@@ -169,7 +169,7 @@ public class RootController {
 		@RequestMapping("mm")//PARA PRUEBAS. NO BORRAR.
 		public @ResponseBody String mm() throws IOException{
 			Farmacia f= entityManager.find(Farmacia.class, (long)2);
-			Paciente pac= entityManager.find(Paciente.class, (long)1);
+			Paciente pac= entityManager.find(Paciente.class, (long)5);
 			Medicamento m= entityManager.find(Medicamento.class, (long)7024491);
 			Medicamento m2= entityManager.find(Medicamento.class, (long)9676384);
 			Medicamento m3= entityManager.find(Medicamento.class, (long)7098249);

@@ -17,7 +17,6 @@ import javax.persistence.OneToOne;
 public class ExistenciaMedicamento implements Serializable {
 	private static final long serialVersionUID = 4000356623437817386L;
 	@Id
-	@Column(name = "id_existencia", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)

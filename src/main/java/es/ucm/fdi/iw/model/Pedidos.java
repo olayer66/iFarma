@@ -22,7 +22,6 @@ public class Pedidos implements Serializable {
 	
 	private static final long serialVersionUID = 9079583133750628192L;
 	@Id
-	@Column(name = "id_pedido", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	

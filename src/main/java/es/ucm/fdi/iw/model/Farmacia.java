@@ -32,7 +32,6 @@ public class Farmacia implements Serializable {
 	
 	//Datos de una farmacia
 	@Id
-	@Column(name = "id_farmacia", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(name = "nombre", nullable = false)

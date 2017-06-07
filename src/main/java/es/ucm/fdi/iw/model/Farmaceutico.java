@@ -40,5 +40,18 @@ public class Farmaceutico extends Usuario {
 	public void setFarmaciasPropias(List<Farmacia> farmaciasPropias) {
 		this.farmaciasPropias = farmaciasPropias;
 	}
+	public List<Farmacia> getFarmaciasActivas() {
+		 List<Farmacia> activas = new ArrayList<Farmacia>();
+		for(Farmacia f :farmaciasPropias ){
+			
+			if(f.getEstado()==1){
+				activas.add(f);
+			}
+		}
+		
+		
+		
+		return activas;
+	}
 	
 }

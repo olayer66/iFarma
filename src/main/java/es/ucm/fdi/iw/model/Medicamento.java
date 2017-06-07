@@ -20,7 +20,6 @@ public class Medicamento implements Serializable{
 	private static final long serialVersionUID = -5418658586012238577L;
 	
 	@Id
-	@Column(name = "id_medicamento", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	@Column(name = "nombre", nullable = false)
