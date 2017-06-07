@@ -1,13 +1,9 @@
 package es.ucm.fdi.iw.controller;
 
 import java.sql.Date;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
-import javax.persistence.TypedQuery;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -19,26 +15,23 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import es.ucm.fdi.iw.model.Farmacia;
-import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.model.Paciente;
+import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.validation.MensajeForm;
-import es.ucm.fdi.iw.validation.ValidarPaciente;
 
 @Controller
 @RequestMapping("/paciente")
 public class PacienteController {
-	
+
 	private static final Logger log = Logger.getLogger(PacienteController.class);
-	
+
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
-	
+
 	@GetMapping("")
 	public String pantallaLoginAction(Model model) {
 		return "paciente/tratamiento";
@@ -89,23 +82,28 @@ public class PacienteController {
 			model.addAttribute("error", true);
 			model.addAttribute("mensaje", form);
 
-			return "medico/feedback";
+			return "paciente/feedbackDR";
 		}
 
 		Mensaje mensaje = new Mensaje();
+		Paciente paciente = this.getLoggedUser(sesion);
+		Medico medico = paciente.getMedCabecera();
+
+		mensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
+		mensaje.setRemitente(paciente);
+		mensaje.setDestinatario(medico);
 		mensaje.setAsunto(form.getAsunto());
 		mensaje.setMensaje(form.getMensaje());
-		mensaje.setDestinatario(entityManager.find(Medico.class, Long.parseLong(form.getDestinatario())));
-		mensaje.setRemitente(this.getLoggedUser(sesion));
-		mensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
 
-		Paciente paciente = this.getLoggedUser(sesion);
+		medico.getMensajesRecibidos().add(mensaje);
 		paciente.getMensajesEnviados().add(mensaje);
 
+		entityManager.persist(mensaje);
 		entityManager.persist(paciente);
 
 		return "redirect:/paciente/feedbackDR";
 	}
+
 	private Paciente getLoggedUser(HttpSession sesion) {
 		Paciente paciente;
 
@@ -122,5 +120,5 @@ public class PacienteController {
 
 		return paciente;
 	}
-	
+
 }
