@@ -1,12 +1,18 @@
 /*
+
  * Funciones basicas para la web
  */
 //Funcion principal
 $(function () {
     console.log("DOM inicializado");
 
-    $('[data-modal-show-on-error="true"]').each(function () {
-        $(this).modal('show');
+    $('[data-modal-show-on-error="true"]').modal('show');
+
+    $('[data-collapse-show-on-error="true"]').collapse('show');
+
+    $('[data-ui-back]').on('click', function (e) {
+    	e.preventDefault();
+    	history.back()
     });
 
     $("#pagoEfectivo").hide();

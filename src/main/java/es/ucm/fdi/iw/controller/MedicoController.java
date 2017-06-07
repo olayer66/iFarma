@@ -111,6 +111,25 @@ public class MedicoController {
 		return "medico/feedback";
 	}
 
+	@RequestMapping("feedback/{id}")
+	String verFeedbackAction(@PathVariable("id") final Long id, @ModelAttribute("mensaje") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
+		Medico medico = this.getLoggedUser(sesion);
+		Mensaje mensaje = entityManager.find(Mensaje.class, id);
+
+		if (!medico.getMensajesEnviados().contains(mensaje) && !medico.getMensajesRecibidos().contains(mensaje)) {
+			return "redirect:/denegado";
+		}
+
+		model.addAttribute("medico", medico);
+		model.addAttribute("mensaje", mensaje);
+
+		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
+			model.addAttribute("form", new MensajeForm());
+		}
+
+		return "medico/detalleFeedback";
+	}
+
 	@Transactional
 	@RequestMapping(value = "/feedback/nuevo", method = RequestMethod.POST)
 	String nuevoFeedbackAction(@ModelAttribute("mensaje") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion) {
