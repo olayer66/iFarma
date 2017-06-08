@@ -28,7 +28,7 @@
 					<fieldset>
 						<label>Codigo:</label>
 						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-	               			<sf:input path="codigo" type="number" value="011452247" class="form-control" id="codigo"/>  	
+	               			<sf:input path="codigo" type="number" class="form-control" id="codigo"/>  	
                			</div>
                			<div class="input-group mb-2 mr-sm-2 mb-sm-0">
                				<input type="submit" class="btn btn-primary" value="Validar">
