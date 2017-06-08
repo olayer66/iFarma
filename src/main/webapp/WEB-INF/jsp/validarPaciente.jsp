@@ -18,6 +18,7 @@
      </div>
      <s:url var="formUrl" value="/validarPacienteSubmit" />
      <sf:form modelAttribute="validar" action="${formUrl}">
+     <sf:hidden path="id" value="${paciente.id}"/>
 	 <fieldset>
      <div class="row">   
         <div class="col-lg-12">
@@ -26,19 +27,19 @@
                 	<h3>Datos personales</h3>
 	                <div class="form-group">
 	                    <label for="nombre">Nombre:</label>
-	                    <sf:input path="nombre" value="paco" class="form-control" id="nombre" readonly="true"/>
+	                    <sf:input path="nombre" value="${paciente.nombre}" class="form-control" id="nombre" readonly="true"/>
 	                </div>
 	                <div class="form-group">
 	                    <label for="apellidos">Apellidos:</label>
-	                    <sf:input path="apellidos" value="sanchez" class="form-control" id="apellidos" readonly="true"/>
+	                    <sf:input path="apellidos" value="${paciente.nombre}" class="form-control" id="apellidos" readonly="true"/>
 	                </div>
 	                <div class="form-group">
                         <label for="email">Email:</label>
-                        <sf:input path="email" class="form-control" id="email" readonly="true"/>
+                        <sf:input path="email" value="${paciente.email}" class="form-control" id="email" readonly="true"/>
                    </div>
                     <div class="form-group">
                         <label for="Telefono">Telefono:</label>
-                        <sf:input path="telefono" class="form-control" id="Telefono" readonly="true"/>
+                        <sf:input path="telefono" type="number" value="${paciente.telefono}" class="form-control" id="Telefono" readonly="true"/>
                    </div>   
             	</div>
             	<!-- Direccion -->
@@ -46,33 +47,38 @@
                 	<h3>Datos personales</h3>
 	                <div class="form-group">
 	                    <label for="direccion">Direccion:</label>
-	                    <sf:input path="direccion" value="" class="form-control" id="nombre" disabled="disabled"/>
+	                    <sf:input path="direccion" value="${paciente.direccion}" class="form-control" id="nombre" disabled="disabled"/>
 	                    <p><sf:errors path="direccion" cssClass="error"/></p>
 	                </div>
 	                <div class="form-group">
 	                    <label for="ciudad">Ciudad:</label>
-	                    <sf:input path="ciudad" value="" class="form-control" id="nombre" disabled="disabled"/>
+	                    <sf:input path="ciudad" value="${paciente.ciudad}" class="form-control" id="nombre" disabled="disabled"/>
 	                	<p><sf:errors path="ciudad" cssClass="error"/></p>
 	                </div>
 	                <div class="form-group">
 	                    <label for="codPostal">Codigo postal:</label>
-	                    <sf:input path="codPostal" value="" class="form-control" id="nombre" disabled="disabled"/>
+	                    <sf:input path="codPostal" value="${paciente.codPostal}" class="form-control" id="nombre" disabled="disabled"/>
 	                	<p><sf:errors path="codPostal" cssClass="error"/></p>
 	                </div>
 	                <div class="form-group">
 	                    <label for="comAutonoma">Comunidad autonoma:</label>
-	                    <sf:input path="comAutonoma" value="" class="form-control" id="nombre" disabled="disabled"/>
+	                    <sf:select path="comAutonoma"  class="form-control" id="comboComunidades"  items="${comunidades}"/>
 	                	<p><sf:errors path="comAutonoma" cssClass="error"/></p>
 	                </div>
 	                <div class="form-group">
 	                    <label for="provincia">Provincia:</label>
-	                    <sf:input path="provincia" value="" class="form-control" id="nombre" disabled="disabled"/>
+	                    <sf:select path="provincia"  class="form-control" id="comboProvincia" items="${provIncio}"/>
 	                	<p><sf:errors path="provincia" cssClass="error"/></p>
 	                </div>
             	</div>
 	            <!--contraseña-->
 	            <div class="col-md-4 portfolio-item">
-	                <h3>Contraseña</h3>
+	                <h3>Datos del usuario</h3>
+	                <div class="form-group">
+	                    <label for="usuario">Usuario:</label>
+	                    <sf:password path="usuario" class="form-control" id="usuario"/>
+	               		<p><sf:errors path="usuario" cssClass="error"/></p>
+	                </div>
 	                <div class="form-group">
 	                    <label for="contrasenia">Contraseña:</label>
 	                    <sf:password path="contrasenia" class="form-control" id="contrasenia"/>
@@ -95,18 +101,24 @@
 	                <div id="pagoTarjeta">
 	                     <div class="form-group">
                         	<label for="numTarjeta">Numero tarjeta:</label>
-                        	<sf:input path="numTarjeta" class="form-control" id="numTarjeta"/>
+                        	<sf:input type="number" path="numTarjeta" class="form-control" id="numTarjeta"/>
 	                     	<p><sf:errors path="numTarjeta" cssClass="error"/></p>
 	                     </div>
 	                     <div class="form-group">
 	                        <label for="codSegTarjeta">CVC:</label>
-	                        <sf:input path="codSegTarjeta" class="form-control" id="codSegTarjeta"/>
+	                        <sf:input type="number" path="codSegTarjeta" class="form-control" id="codSegTarjeta"/>
 	                     	<p><sf:errors path="codSegTarjeta" cssClass="error"/></p>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="fechaCadTarjeta">Fecha Cad::</label>
-	                        <sf:input path="fechaCadTarjeta" class="form-control" id="fechaCadTarjeta"/>
-	                    	<p><sf:errors path="fechaCadTarjeta" cssClass="error"/></p>
+	                    	<label for="fechaCadTarjeta">Fecha Caducidad:</label>	                    	
+	                    	<div class="input-group input-append date datePicker" id="datePickerPaciente">
+                                <sf:input path="fechaCadTarjeta" class="form-control date-picker" id="fechaCadTarjeta"/>
+                                <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                <p><sf:errors path="fechaCadTarjeta" cssClass="error"/></p>
+							</div>
+	                        
+	                       
+	                    	
 	                    </div>
 	                </div>
 	                <div id="pagoEfectivo">

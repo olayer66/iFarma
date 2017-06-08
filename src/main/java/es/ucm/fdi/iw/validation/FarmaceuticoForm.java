@@ -7,74 +7,63 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import es.ucm.fdi.iw.model.Medico;
+import es.ucm.fdi.iw.model.Farmaceutico;
 
-public class MedicoForm {
+public class FarmaceuticoForm {
 	
-	//Estado inicial 0 (Validacion)
+	//variables de insercion
+	private final String role="FAR";
 	private final int estado=0;
-	//Role del usuario
-	private final String role="MED";
 	
-	//Variables de entrada que validar	
+	//Varuables de usuario
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "^[a-zA-Z ]+$",message = "El nombre no puede contener numeros ni caracteres especiales")
 	private String nombre;
-	
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "^[a-zA-Z ]+$",message = "los apellidos no pueden contener numeros ni caracteres especiales")	
 	private String apellidos;
-	
 	@NotEmpty(message = "El campo esta vacio")
 	@Email(message = "La direccion email no es correcta")
 	private String email;
-	
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "[0-9]*",message = "El telefono ha de ser numerico")
 	@Size(min=9,max=9,message = "El telefono debe de tener 9 digitos")
 	private String telefono;
-	
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "[A-Za-z0-9]*",message = "El usuario no puede contener numeros ni caracteres especiales")
 	private String usuario;
-	
 	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
 	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraseña no puede contener caracteres especiales")
 	private String contrasenia;
-	
 	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
 	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraseña no puede contener caracteres especiales")
 	private String contraseniaRep;
 	
+	//Variables especificas
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "\\d{2}/\\d{2}/\\d{6}",message = "El numero de colegiado no es valido, debe de seguir el formato nn/mm/pppppp")
-	private String numColMedico;
+	private String numColFarmaceutico;
 	
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "El centro de trabajo no puede contener numeros ni caracteres especiales")
-	private String centroTrabajo;
-	
-	//Devuelve un medico con los datos extraidos del form
-	public Medico getMedico()
+	//Devuelve un farmaceutico con los datos extraidos del form
+	public Farmaceutico getFarmaceutico()
 	{
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		Medico medico= new Medico();
+		Farmaceutico farmaceutico= new Farmaceutico();
 		//Datos genericos
-		medico.setNombre(nombre);
-		medico.setApellidos(apellidos);
-		medico.setTelefono(telefono);
-		medico.setEmail(email);
+		farmaceutico.setNombre(nombre);
+		farmaceutico.setApellidos(apellidos);
+		farmaceutico.setTelefono(telefono);
+		farmaceutico.setEmail(email);
 		//Datos usuario y estado y role
-		medico.setRole(role);
-		medico.setEstado(estado);
-		medico.setUsuario(usuario);
-		medico.setContrasenia(passwordEncoder.encode(contrasenia));
+		farmaceutico.setRole(role);
+		farmaceutico.setEstado(estado);
+		farmaceutico.setUsuario(usuario);
+		farmaceutico.setContrasenia(passwordEncoder.encode(contrasenia));
 		//Datos especificos
-		medico.setNumColMedico(numColMedico);
-		medico.setCentroTrabajo(centroTrabajo);
-		return medico;
+		farmaceutico.setNumColFarmaceutico(numColFarmaceutico);
+		return farmaceutico;
 	}
-	
+
 	//Getters y setters
 	public String getNombre() {
 		return nombre;
@@ -112,22 +101,16 @@ public class MedicoForm {
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
 	}
-	public String getcontraseniaRep() {
+	public String getContraseniaRep() {
 		return contraseniaRep;
 	}
-	public void setcontraseniaRep(String contraseniaRep) {
+	public void setContraseniaRep(String contraseniaRep) {
 		this.contraseniaRep = contraseniaRep;
 	}
-	public String getNumColMedico() {
-		return numColMedico;
+	public String getNumColFarmaceutico() {
+		return numColFarmaceutico;
 	}
-	public void setNumColMedico(String numColMedico) {
-		this.numColMedico = numColMedico;
+	public void setNumColFarmaceutico(String numColFarmaceutico) {
+		this.numColFarmaceutico = numColFarmaceutico;
 	}
-	public String getCentroTrabajo() {
-		return centroTrabajo;
-	}
-	public void setCentroTrabajo(String centroTrabajo) {
-		this.centroTrabajo = centroTrabajo;
-	}	
 }

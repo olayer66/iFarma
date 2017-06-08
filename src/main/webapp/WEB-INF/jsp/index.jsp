@@ -28,8 +28,7 @@
 					<fieldset>
 						<label>Codigo:</label>
 						<div class="input-group mb-2 mr-sm-2 mb-sm-0">
-	               			<sf:input path="codigo" class="form-control" id="codigo"/>  	
-	               					
+	               			<sf:input path="codigo" type="number" value="011452247" class="form-control" id="codigo"/>  	
                			</div>
                			<div class="input-group mb-2 mr-sm-2 mb-sm-0">
                				<input type="submit" class="btn btn-primary" value="Validar">
@@ -48,7 +47,7 @@
            </div>
            <div class="col-md-4 portfolio-item">
                <img class="img-responsive" src="/static/img/banner-far.jpg">
-               <h3>Farmacias</h3>
+               <h3>Farmaceuticos</h3>
                <p>
                    Bienvenido si eres farmaceutico y quieres unirte a nuestra red de suministradores pulsa en el siguiente boton.
                </p>

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.OnDelete;
@@ -18,6 +19,8 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 //Peticiones a la tabla
 @NamedQueries({	
+	@NamedQuery(name="Paciente.findByCodAut",
+				query="SELECT p FROM Paciente p WHERE p.codigoAut=:codigo AND p.estado=0")
 })
 public class Paciente extends Usuario {
 	private static final long serialVersionUID = 2117067448004216461L;

@@ -4,10 +4,13 @@ import java.io.IOException;
 import java.security.Principal;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -15,24 +18,26 @@ import org.apache.log4j.Logger;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
 import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
+import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
-import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.validation.Codigo;
+import es.ucm.fdi.iw.validation.FarmaceuticoForm;
 import es.ucm.fdi.iw.validation.MedicoForm;
 import es.ucm.fdi.iw.validation.ValidarPaciente;
 
@@ -42,27 +47,31 @@ public class RootController {
 	
 	private static final Logger log = Logger.getLogger(RootController.class);
 	
-	@PersistenceContext
+	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
-
+	
+	/*-----INDEX-----*/
 	@RequestMapping({"","/", "/index"})
 	public String root(Model model, Principal principal) {
 
 		model.addAttribute("control", new Codigo());
 		return "index";
 	}
+	
+	/*----LOGIN Y LOGOUT-----*/
 	@RequestMapping("/login")
 	public String login(HttpSession sesion, Principal principal) {
 		
 		return "/login";
 	}
-
 	@RequestMapping("/logout")
 	public String login(HttpSession sesion) {
 		sesion.invalidate();
 		log.info("Sesion finalizada");
 		return "redirect:/index";
 	}
+	
+	/*----FALLOS DE ACCESO----*/
 	@RequestMapping("/estadoDenegado")
 	public String estadoDenegado(HttpSession sesion) {
 		sesion.invalidate();
@@ -93,6 +102,106 @@ public class RootController {
 		log.warn("Acceso no permitido");
 		return "/denegado";
 	}
+	
+	/*----VALIDAR PACIENTE----*/
+	//Validar el codigo de acceso del paciente
+	@RequestMapping(value = "/validarCodigo", method = RequestMethod.POST)
+	public String validarCodigo(@ModelAttribute("control") @Valid Codigo codigo, BindingResult bindingResult,Model model, HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			log.warn("Codigo no Valido");
+			return "index";
+		} else {
+			Paciente paciente;
+			TypedQuery<Paciente> query= entityManager.createNamedQuery("Paciente.findByCodAut", Paciente.class).setParameter("codigo", codigo.getCodigo());		
+			if(!query.getResultList().isEmpty()){
+				paciente=query.getSingleResult();
+				model.addAttribute("validar", new ValidarPaciente());
+				sesion.setAttribute("paciente", paciente);
+				sesion.setAttribute("comunidades", getComunidades());
+				sesion.setAttribute("provIncio", getProvincias());
+				return"validarPaciente";
+			}else{
+				log.warn("Codigo no encontrado");
+				bindingResult.addError(new ObjectError("codigo","El codigo no se existe, compruebe que esta bien escrito o contacte con su medico"));
+				return "index";
+			}
+		}
+	}
+	//Validar el paciente
+	@Transactional
+	@RequestMapping(value = "/validarPacienteSubmit", method = RequestMethod.POST)
+	public 	String validarPacienteSubmit(@ModelAttribute("validar") @Valid ValidarPaciente validar, BindingResult bindingResult, Model model,
+			HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			log.warn("Errores en la validacion");
+			return "validarPaciente";
+		} else {
+			Paciente paciente=entityManager.find(Paciente.class, validar.getId());
+			Paciente modPac= validar.getPaciente();
+			paciente.setDireccion(modPac.getDireccion());
+			paciente.setCiudad(modPac.getCiudad());
+			paciente.setCodPostal(modPac.getCodPostal());
+			paciente.setComAutonona(modPac.getComAutonoma());
+			paciente.setProvincia(modPac.getProvincia());
+			paciente.setUsuario(modPac.getUsuario());
+			paciente.setContrasenia(modPac.getContrasenia());
+			paciente.setFormaPago(modPac.getFormaPago());
+			paciente.setEstado(1);
+			if(modPac.getFormaPago()==1)
+			{
+				paciente.setCodSegTarjeta(modPac.getCodSegTarjeta());
+				paciente.setNumTarjeta(modPac.getNumTarjeta());
+				paciente.setFechaCadTarjeta(modPac.getFechaCadTarjeta());		
+			}		
+			entityManager.persist(paciente);
+			return "redirect:/index";
+		}
+	}
+	
+	/*------NUEVO MEDICO------*/
+	//crear un nuevo medico
+	@RequestMapping("nuevoMedico")
+	public 	String nuevoMedicoAction(Model model) {
+		model.addAttribute("nuevo", new MedicoForm());
+		return "nuevoMedico";
+	}
+	//Insertar nuevo medico
+	@Transactional
+	@RequestMapping(value = "/nuevoMedicoSubmit", method = RequestMethod.POST)
+	public String nuevoMedicoSubmit(@ModelAttribute("nuevo") @Valid MedicoForm nuevo, BindingResult bindingResult, Model model,
+			HttpSession sesion) {
+		if (bindingResult.hasErrors()) {
+			log.warn("Datos no validos en el form de entrada");
+			return "nuevoMedico";
+		} else {
+			Medico medico=nuevo.getMedico();
+			entityManager.persist(medico);
+			return "redirect:/index";
+		}
+	}
+	
+	/*------NUEVO FARMACEUTICO-------*/
+	//Crear nuevo farmaceutico
+	@RequestMapping("/nuevoFarmaceutico")
+	public String nuevoFarmaceuticoAction(Model model) {
+		model.addAttribute("nuevofarma", new FarmaceuticoForm());
+		return "nuevoFarmaceutico";
+	}
+	//Insertar nuevo farmaceutico
+	@Transactional
+	@RequestMapping(value = "/nuevoFarmaceuticoSubmit", method = RequestMethod.POST)
+	public 	String nuevoFarmacueticoSubmit(@ModelAttribute("nuevofarma") @Valid FarmaceuticoForm nuevo, BindingResult bindingResult, Model model) {
+		if (bindingResult.hasErrors()) {
+			log.warn("Datos no validos en el form de entrada");
+			return "nuevoFarmaceutico";
+		} else {
+			Farmaceutico farmaceutico= nuevo.getFarmaceutico();
+			entityManager.persist(farmaceutico);
+			return "redirect:/index";
+		}
+	}
+	
+	/*----FUNCIONES----*/
 	private String getRole(){
 		String role;
         Authentication auth = SecurityContextHolder.getContext().getAuthentication(); 
@@ -100,71 +209,19 @@ public class RootController {
         role=role.substring(0, role.length()-1);
         return role;
     }
-	//Validar el codigo de acceso del paciente
-	@RequestMapping(value = "/validarCodigo", method = RequestMethod.POST)
-	public String validarCodigo(@ModelAttribute("control") @Valid Codigo codigo, BindingResult bindingResult,Model model) {
-		if (bindingResult.hasErrors()) {
-			log.error("Paso por aqui");
-			return "index";
-		} else {
-			log.info("Paciente validado");
-			return "redirect:/index";
-		}
+	//Devuelve la comunidades autonomas
+	private List<String> getComunidades()
+	{
+		String [] comu={"Andalucia", "Aragon", "Canarias", "Cantabria", "Castilla y Leon", "Castilla-La Mancha", "Catalunya", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "Pais Vasco", "Principado de Asturias", "Region de Murcia"};
+		return Arrays.asList(comu);
 	}
-	
-	//validacion del paciente
-		@RequestMapping("validarPaciente")
-		public 	String validarPacienteAction(Model model) {
-			model.addAttribute("validar", new ValidarPaciente());
-			return "validarPaciente";
-		}
-		@RequestMapping(value = "/validarPacienteSubmit", method = RequestMethod.POST)
-		public 	String login(@ModelAttribute("validar") @Valid ValidarPaciente validar, BindingResult bindingResult, Model model,
-				HttpSession sesion) {
-			if (bindingResult.hasErrors()) {
-				log.error("Paso por aqui");
-				return "validarPaciente";
-			} else {
-				log.info("Paciente validado");
-				return "redirect:/index";
-			}
-		}
-		
-		//crear un nuevo medico
-		@RequestMapping("nuevoMedico")
-		public 	String nuevoMedicoAction(Model model) {
-			model.addAttribute("nuevo", new MedicoForm());
-			return "nuevoMedico";
-		}
-		@RequestMapping(value = "/nuevoMedicoSubmit", method = RequestMethod.POST)
-		public String login(@ModelAttribute("nuevo") @Valid MedicoForm nuevo, BindingResult bindingResult, Model model,
-				HttpSession sesion) {
-			if (bindingResult.hasErrors()) {
-				log.error("Paso por aqui");
-				return "nuevoMedico";
-			} else {
-				log.info("Paciente validado");
-				return "redirect:/index";
-			}
-		}
-		
-		//nuevo farmaceutico
-		@RequestMapping("/nuevoFarmaceutico")
-		public String nuevoFarmaceuticoAction(Model model) {
-			model.addAttribute("nuevo", new Farmaceutico());
-			return "nuevoFarmaceutico";
-		}
-		@RequestMapping(value = "/nuevoFarmacueticosubmit", method = RequestMethod.POST)
-		public 	String login(@ModelAttribute("nuevo") @Valid Farmaceutico nuevo, BindingResult bindingResult, Model model,
-				HttpSession sesion) {
-			if (bindingResult.hasErrors()) {
-				log.error("Paso por aqui");
-				return "nuevoFermaceutico";
-			} else {
-				log.info("Paciente validado");
-				return "redirect:/index";
-			}
-		}	
+	//Devuelve la provicias inicales a mostrar(Andalucia)
+	private List<String> getProvincias()
+	{
+		String [] prov={"Almería", "Granada","Córdoba","Jaén","Sevilla","Málaga","Cádiz","Huelva"};
+		return Arrays.asList(prov);
+	}
+	/*---PRUEBAS----*/
 		@Transactional
 		@RequestMapping("mm")//PARA PRUEBAS. NO BORRAR.
 		public @ResponseBody String mm() throws IOException{

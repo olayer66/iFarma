@@ -27,9 +27,9 @@ public class ValidarMedicamento {
 	public Medicamento getMedicamento()
 	{
 		Medicamento medicamento= new Medicamento();
-		medicamento.setNombre(nombre);
-		medicamento.setDescripcion(descripcion);
-		medicamento.setLaboratorio(laboratorio);
+		medicamento.setNombre(nombre.toUpperCase());
+		medicamento.setDescripcion(descripcion.toUpperCase());
+		medicamento.setLaboratorio(laboratorio.toUpperCase());
 		medicamento.setPrecio(precio);
 		return medicamento;	
 	}
@@ -37,9 +37,9 @@ public class ValidarMedicamento {
 	{
 		Medicamento medicamento= new Medicamento();
 		medicamento.setId(id);
-		medicamento.setNombre(nombre);
-		medicamento.setDescripcion(descripcion);
-		medicamento.setLaboratorio(laboratorio);
+		medicamento.setNombre(nombre.toUpperCase());
+		medicamento.setDescripcion(descripcion.toUpperCase());
+		medicamento.setLaboratorio(laboratorio.toUpperCase());
 		medicamento.setEstado(estado);
 		medicamento.setPrecio(precio);
 		return medicamento;	
