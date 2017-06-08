@@ -73,7 +73,6 @@ public class MedicoController {
 				medico.getPacientes().add(paciente);
 
 				entityManager.persist(paciente);
-				entityManager.persist(medico);
 
 				sesion.setAttribute("codigoAut", paciente.getCodigoAut());
 
@@ -116,7 +115,6 @@ public class MedicoController {
 				paciente.getTratamiento().add(tratamiento);
 
 				entityManager.persist(tratamiento);
-				entityManager.persist(paciente);
 			}
 		}
 
@@ -124,7 +122,7 @@ public class MedicoController {
 	}
 
 	@RequestMapping("feedback")
-	String feedbackAction(Model model, HttpSession sesion) {
+	public String feedbackAction(Model model, HttpSession sesion) {
 		Medico medico = this.getLoggedUser(sesion);
 		MensajeForm mensaje = new MensajeForm();
 
@@ -136,7 +134,7 @@ public class MedicoController {
 
 	@Transactional
 	@RequestMapping("feedback/{id}")
-	String verFeedbackAction(@PathVariable("id") final Long id, @ModelAttribute("form") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
+	public String verFeedbackAction(@PathVariable("id") final Long id, @ModelAttribute("form") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
 		Medico medico = this.getLoggedUser(sesion);
 		Mensaje mensaje = entityManager.find(Mensaje.class, id);
 
@@ -163,11 +161,8 @@ public class MedicoController {
 				nuevoMensaje.setRemitente(medico);
 				nuevoMensaje.setAsunto(form.getAsunto());
 				nuevoMensaje.setMensaje(form.getMensaje());
-				medico.getMensajesEnviados().add(nuevoMensaje);
 
 				entityManager.persist(nuevoMensaje);
-				entityManager.persist(paciente);
-				entityManager.persist(medico);
 
 				return "redirect:/medico/feedback";
 			}
@@ -178,7 +173,7 @@ public class MedicoController {
 
 	@Transactional
 	@RequestMapping(value = "/feedback/nuevo", method = RequestMethod.POST)
-	String nuevoFeedbackAction(@ModelAttribute("mensaje") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion) {
+	public String nuevoFeedbackAction(@ModelAttribute("mensaje") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion) {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("error", true);
 			model.addAttribute("mensaje", form);
@@ -196,11 +191,8 @@ public class MedicoController {
 		mensaje.setAsunto(form.getAsunto());
 		mensaje.setMensaje(form.getMensaje());
 		medico.getMensajesEnviados().add(mensaje);
-		paciente.getMensajesRecibidos().add(mensaje);
 
 		entityManager.persist(mensaje);
-		entityManager.persist(paciente);
-		entityManager.persist(medico);
 
 		return "redirect:/medico/feedback";
 	}

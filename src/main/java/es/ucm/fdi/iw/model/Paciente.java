@@ -151,6 +151,6 @@ public class Paciente extends Usuario {
 	}
 
 	String generarCodigoAut() {
-		return new BigInteger(130, new SecureRandom()).toString(5);
+		return new BigInteger(130, new SecureRandom()).toString().substring(0, 6);
 	}
 }
