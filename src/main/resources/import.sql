@@ -21,5 +21,5 @@ INSERT INTO TRATAMIENTO VALUES (1, '2017-05-28', '2018-04-04', 3, 1, '8 horas', 
 INSERT INTO TRATAMIENTO VALUES (2, '2017-05-28', '2018-04-04', 4, 2, '6 horas', 9676384, 5);
 INSERT INTO TRATAMIENTO VALUES (3, '2017-05-28', '2018-04-04', 6, 1, '4 horas', 7098249, 5);
 
-INSERT INTO MENSAJE VALUES ( 1, 'EnfermedadDsdPaciente', '2017-05-28', true, 'Esto es una prueba de mensaje de 1 a 2',2,1)
-INSERT INTO MENSAJE VALUES ( 2, 'EnfermedadDsdMedico', '2017-05-28', true, 'Esto es una prueba de mensaje de 2 a 1',1,2)
+INSERT INTO MENSAJE VALUES ( 1, 'EnfermedadDsdPaciente', '2017-05-28', true, 'Esto es una prueba de mensaje de 1 a 2',2,5)
+INSERT INTO MENSAJE VALUES ( 2, 'EnfermedadDsdMedico', '2017-05-28', true, 'Esto es una prueba de mensaje de 2 a 1',5,2)

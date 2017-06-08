@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ include file="../../jspf/header.jspf"%>
 
 <%@ include file="../../jspf/navbarPaciente.jspf"%>
@@ -18,17 +20,12 @@
 
             <li class="active">
                 <a data-toggle="tab" href="#inbox">
-                    Recibidos <span class="badge pull-right">4</span>
+                    Recibidos <span class="badge pull-right">${fn:length(paciente.mensajesRecibidos)}</span>
                 </a>
             </li>
             <li>
                 <a data-toggle="tab" href="#sent">
                     Enviados
-                </a>
-            </li>
-            <li>
-                <a data-toggle="tab" href="#trash">
-                    Papelera
                 </a>
             </li>
         </ul>
@@ -44,7 +41,7 @@
                        <tr>
                             <td><input type="checkbox"></td>
                             <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
-                            <td class="mailbox-name"><a href="#">${mensaje.remitente.nombre}</a></td>
+                            <td class="mailbox-name"><a href="#">Dr. ${mensaje.remitente.apellidos}</a></td>
                             <td class="mailbox-subject"><b>${mensaje.asunto}</b>${mensaje.mensaje}</td>
                             <td class="mailbox-attachment"></td>
                             <td class="mailbox-date">${mensaje.fechaMensaje}</td>
@@ -62,7 +59,7 @@
 	                		<tr>
 	                            <td><input type="checkbox"></td>
 	                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
-	                            <td class="mailbox-name"><a href="#">${mensaje.destinatario.nombre}</a></td>
+	                            <td class="mailbox-name"><a href="#">Dr. ${mensaje.destinatario.apellidos}</a></td>
 	                            <td class="mailbox-subject">${mensaje.asunto}</td>
 	                            <td class="mailbox-attachment"></td>
 	                            <td class="mailbox-date">${mensaje.fechaMensaje}</td>
@@ -71,18 +68,11 @@
 					</tbody>
                 </table>
             </div>
-
-			<!-- Eliminados -->
-            <div id="trash" class="tab-pane fade">
-                <table class="table table-hover table-striped">
-                </table>
-            </div>
-            <!-- Final -->
         </div>
     </div>
 </div>
 
-<div id="redactarMensaje" class="modal fade" role="dialog">
+<div id="redactarMensaje" class="modal fade" role="dialog" data-modal-show-on-error="${error}">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
@@ -91,13 +81,10 @@
             </div>
 
             <div class="modal-body">
-                <sf:form method="POST" modelAttribute="mensaje" action="/medico/feedback/nuevo">
+                <sf:form method="POST" modelAttribute="mensaje" action="/paciente/feedbackDR/nuevo">
                     <div class="box-body">
                         <div class="form-group">
-							<sf:select  path="destinatario" class="form-control">
-								<sf:option value="">Destinatario...</sf:option>
-								<sf:options items="${paciente.medCabecera}" itemValue="id"></sf:options>
-							</sf:select>
+                        	<sf:input path="destinatario" class="form-control" value="Dr. ${paciente.medCabecera.apellidos}" readonly="true" />
                             <p><sf:errors path="destinatario" cssClass="error"/></p>
                         </div>
                         <div class="form-group">
@@ -122,12 +109,3 @@
 </div>
 
 <%@ include file="../../jspf/footer.jspf" %>
-
-
-<c:if test="${error}">
-	<script>
-		 $(function () {
-			 $('#redactarMensaje').modal('show'); 
-		 });
-	</script>
-</c:if>

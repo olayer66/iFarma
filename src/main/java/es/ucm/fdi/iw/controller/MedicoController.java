@@ -88,9 +88,11 @@ public class MedicoController {
 				tratamiento.setFechaFin(form.getFechaFinFormateada());
 				tratamiento.setPerioicidad(form.getPeriodicidad());
 				tratamiento.setNumDosis(form.getNumDosis());
+				tratamiento.setNumDosisDia(form.getNumDosis());
 				tratamiento.setPaciente(paciente);
-
 				paciente.getTratamiento().add(tratamiento);
+
+				entityManager.persist(tratamiento);
 				entityManager.persist(paciente);
 			}
 		}
@@ -107,6 +109,44 @@ public class MedicoController {
 		model.addAttribute("medico", medico);
 
 		return "medico/feedback";
+	}
+
+	@RequestMapping("feedback/{id}")
+	String verFeedbackAction(@PathVariable("id") final Long id, @ModelAttribute("form") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
+		Medico medico = this.getLoggedUser(sesion);
+		Mensaje mensaje = entityManager.find(Mensaje.class, id);
+
+		if (!medico.getMensajesEnviados().contains(mensaje) && !medico.getMensajesRecibidos().contains(mensaje)) {
+			return "redirect:/denegado";
+		}
+
+		model.addAttribute("medico", medico);
+		model.addAttribute("mensaje", mensaje);
+
+		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
+			model.addAttribute("form", new MensajeForm());
+		}
+
+		if (request.getMethod().equals("POST")) {
+			if (bindingResult.hasErrors()) {
+				model.addAttribute("error", true);
+			} else {
+				Mensaje nuevoMensaje = new Mensaje();
+				nuevoMensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
+				nuevoMensaje.setDestinatario(entityManager.find(Paciente.class, Long.parseLong(form.getDestinatario())));
+				nuevoMensaje.setRemitente(medico);
+				nuevoMensaje.setAsunto(form.getAsunto());
+				nuevoMensaje.setMensaje(form.getMensaje());
+
+				medico.getMensajesEnviados().add(nuevoMensaje);
+
+				entityManager.persist(medico);
+
+				return "redirect:/medico/feedback";
+			}
+		}
+
+		return "medico/detalleFeedback";
 	}
 
 	@Transactional
