@@ -11,6 +11,11 @@
 	<h2>Listado de Pacientes</h2>
 	<hr>
 
+	<div class="alert alert-success alert-dismissible${ codigoAut != null ? '' : ' hidden' }" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<strong>¡Paciente dado de alta correctamente!</strong> Código: ${codigoAut}
+	</div>
+
 	<table class="table table-hover">
 		<thead>
 			<tr>

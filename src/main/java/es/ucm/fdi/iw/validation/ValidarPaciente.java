@@ -11,14 +11,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import es.ucm.fdi.iw.model.Paciente;
 
 public class ValidarPaciente {
-	
+
 	//Datos que no se tocan
 	private long id;
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "El nombre no puede contener numeros ni caracteres especiales")
 	private String nombre;
 	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "los apellidos no pueden contener numeros ni caracteres especiales")	
+	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "los apellidos no pueden contener numeros ni caracteres especiales")
 	private String apellidos;
 	@NotEmpty(message = "El campo esta vacio")
 	@Email(message = "La direccion email no es correcta")
@@ -39,7 +39,7 @@ public class ValidarPaciente {
 	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
 	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraseña no puede contener caracteres especiales")
 	private String contraseniaRep;
-	
+
 	//Datos de paciente
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "La direccion no puede contener caracteres especiales")
@@ -55,11 +55,11 @@ public class ValidarPaciente {
 	private String provincia;
 	@NotEmpty(message = "El campo esta vacio")
 	private String comAutonoma;
-	
+
 	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)
 	@NotEmpty(message = "El campo esta vacio")
-	private String formaPago;	
-	
+	private String formaPago;
+
 	//datos tarjeta (si forma de pago es tarjeta)
 	@Pattern(regexp = "[0-9]*",message = "El nº de tarjeta ha de ser numerico")
 	private String numTarjeta;
@@ -68,7 +68,7 @@ public class ValidarPaciente {
 	private String codSegTarjeta;
 	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String fechaCadTarjeta;
-	
+
 	//Devuleve los datos capturados.
 	public Paciente getPaciente()
 	{
@@ -86,9 +86,9 @@ public class ValidarPaciente {
 		{
 			pac.setCodSegTarjeta(Integer.parseInt(codSegTarjeta));
 			pac.setNumTarjeta(Integer.parseInt(numTarjeta));
-			pac.setFechaCadTarjeta(fechaCadTarjeta);		
-		}		
-		return pac;	
+			pac.setFechaCadTarjeta(fechaCadTarjeta);
+		}
+		return pac;
 	}
 	//Getters y setters
 	public long getId() {
@@ -101,7 +101,7 @@ public class ValidarPaciente {
 	public String getUsuario() {
 		return usuario;
 	}
-	
+
 	public String getNombre() {
 		return nombre;
 	}

@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
-import javax.persistence.OneToOne;
 
 @Entity
 @NamedQueries({
@@ -26,9 +25,9 @@ public class Tratamiento implements Serializable {
 	//Paciente al que pertenece
 	@ManyToOne(targetEntity=Paciente.class)
 	private Paciente paciente;
-	
+
 	//Medicamento
-	@OneToOne(optional = false, fetch = FetchType.LAZY)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Medicamento medicamento;
 	@Column(name = "fecha_inicio", nullable = false)
 	private Date fechaInicio;

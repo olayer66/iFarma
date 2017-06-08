@@ -25,7 +25,7 @@ import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Tratamiento;
-import es.ucm.fdi.iw.validation.MedicoForm;
+import es.ucm.fdi.iw.validation.CrearPaciente;
 import es.ucm.fdi.iw.validation.MensajeForm;
 import es.ucm.fdi.iw.validation.TratamientoForm;
 
@@ -42,23 +42,46 @@ public class MedicoController {
 		return "redirect:/medico/listado-pacientes";
 	}
 
-	@GetMapping({"listado-pacientes"})
+	@GetMapping({"/listado-pacientes"})
 	public String listadoPacientesAction(Model model, HttpSession sesion) {
 		model.addAttribute("medico", this.getLoggedUser(sesion));
 
 		return "medico/listadoPacientes";
 	}
 
-	@RequestMapping("nuevo-paciente")
-	public String nuevoPacienteAction() {
+	@Transactional
+	@RequestMapping("/nuevo-paciente")
+	public String nuevoPacienteAction(@ModelAttribute("form") @Valid CrearPaciente form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
+		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
+			model.addAttribute("form", new CrearPaciente());
+		}
+
+		if (request.getMethod().equals("POST")) {
+			if (bindingResult.hasErrors()) {
+				model.addAttribute("error", true);
+			} else {
+				Medico medico = this.getLoggedUser(sesion);
+				Paciente paciente = new Paciente();
+
+				paciente.setNombre(form.getNombre());
+				paciente.setApellidos(form.getApellidos());
+				paciente.setTelefono(form.getTelefono());
+				paciente.setEmail(form.getEmail());
+				paciente.setRole("PAC");
+				paciente.setUsuario("");
+				paciente.setMedCabecera(medico);
+				medico.getPacientes().add(paciente);
+
+				entityManager.persist(paciente);
+				entityManager.persist(medico);
+
+				sesion.setAttribute("codigoAut", paciente.getCodigoAut());
+
+				return "redirect:/medico/listado-pacientes";
+			}
+		}
+
 		return "medico/nuevoPaciente";
-	}
-
-	@RequestMapping("nuevoMedico")
-	public String nuevoMedicoAction(Model model) {
-		model.addAttribute("nuevo", new MedicoForm());
-
-		return "medico/nuevoMedico";
 	}
 
 	@Transactional
@@ -111,6 +134,7 @@ public class MedicoController {
 		return "medico/feedback";
 	}
 
+	@Transactional
 	@RequestMapping("feedback/{id}")
 	String verFeedbackAction(@PathVariable("id") final Long id, @ModelAttribute("form") @Valid MensajeForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
 		Medico medico = this.getLoggedUser(sesion);
@@ -131,15 +155,18 @@ public class MedicoController {
 			if (bindingResult.hasErrors()) {
 				model.addAttribute("error", true);
 			} else {
+				Paciente paciente = entityManager.find(Paciente.class, Long.parseLong(form.getDestinatario()));
 				Mensaje nuevoMensaje = new Mensaje();
+
 				nuevoMensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
-				nuevoMensaje.setDestinatario(entityManager.find(Paciente.class, Long.parseLong(form.getDestinatario())));
+				nuevoMensaje.setDestinatario(paciente);
 				nuevoMensaje.setRemitente(medico);
 				nuevoMensaje.setAsunto(form.getAsunto());
 				nuevoMensaje.setMensaje(form.getMensaje());
-
 				medico.getMensajesEnviados().add(nuevoMensaje);
 
+				entityManager.persist(nuevoMensaje);
+				entityManager.persist(paciente);
 				entityManager.persist(medico);
 
 				return "redirect:/medico/feedback";
@@ -160,37 +187,22 @@ public class MedicoController {
 		}
 
 		Mensaje mensaje = new Mensaje();
+		Medico medico = this.getLoggedUser(sesion);
+		Paciente paciente = entityManager.find(Paciente.class, Long.parseLong(form.getDestinatario()));
+
+		mensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
+		mensaje.setDestinatario(paciente);
+		mensaje.setRemitente(medico);
 		mensaje.setAsunto(form.getAsunto());
 		mensaje.setMensaje(form.getMensaje());
-		mensaje.setDestinatario(entityManager.find(Paciente.class, Long.parseLong(form.getDestinatario())));
-		mensaje.setRemitente(this.getLoggedUser(sesion));
-		mensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
-
-		Medico medico = this.getLoggedUser(sesion);
 		medico.getMensajesEnviados().add(mensaje);
+		paciente.getMensajesRecibidos().add(mensaje);
 
+		entityManager.persist(mensaje);
+		entityManager.persist(paciente);
 		entityManager.persist(medico);
 
 		return "redirect:/medico/feedback";
-	}
-
-	@RequestMapping(value = "/nuevo", method = RequestMethod.POST)
-	String login(@ModelAttribute("nuevo") @Valid MedicoForm nuevo, BindingResult bindingResult, Model model,
-		HttpSession sesion) {
-		if (bindingResult.hasErrors()) {
-			log.error("Paso por aqui");
-			return "medico/nuevoMedico";
-		} else {
-			log.info("Paciente validado");
-			return "redirect:/index";
-		}
-	}
-
-	@GetMapping("/logout")
-	public String login(HttpSession sesion) {
-		sesion.invalidate();
-		log.info("Sesion finalizada");
-		return "redirect:/index";
 	}
 
 	private Medico getLoggedUser(HttpSession sesion) {

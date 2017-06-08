@@ -1,5 +1,9 @@
+
 package es.ucm.fdi.iw.model;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,13 +16,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
 
 @Entity
 //Peticiones a la tabla
-@NamedQueries({	
+@NamedQueries({
 	@NamedQuery(name="Paciente.findByCodAut",
 				query="SELECT p FROM Paciente p WHERE p.codigoAut=:codigo AND p.estado=0")
 })
@@ -36,30 +37,30 @@ public class Paciente extends Usuario {
 	private String provincia;
 	@Column(name = "com_Autonoma", nullable = true)
 	private String comAutonoma;
-	
+
 	//Codigo para la confirmacion del paciente
 	@Column(name = "codigo_aut", nullable = false)
 	private String codigoAut;
-	
+
 	//medico de cabecera (N/1)
 	@ManyToOne(targetEntity=Medico.class)
 	private Medico medCabecera;
-	
+
 	//Lista de medicamentos del tratamiento (1/N)
 	@OneToMany(targetEntity=Tratamiento.class, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="paciente_id")
 	private List<Tratamiento> tratamiento;
-	
+
 
 	//Lista de pedidos
 	@OneToMany(targetEntity=Pedidos.class, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="paciente_id")
 	private List<Pedidos> listaPedidos;
-	
+
 	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)
 	@Column(name = "forma_pago", nullable = true)
 	private int formaPago;
-	
+
 	//datos tarjeta (si forma de pago es tarjeta)
 	@Column(name = "num_tarjeta", nullable = true)
 	private long numTarjeta;
@@ -67,7 +68,17 @@ public class Paciente extends Usuario {
 	private int codSegTarjeta;
 	@Column(name = "fecha_cad_tarjeta", nullable = true)
 	private String fechaCadTarjeta;
-	
+
+	public Paciente() {
+		super();
+
+		this.role = "PAC";
+		this.usuario = "";
+		this.codigoAut = this.generarCodigoAut();
+		this.listaPedidos = new ArrayList<Pedidos>();
+		this.tratamiento = new ArrayList<Tratamiento>();
+	}
+
 	//Getters y Setters de los campos de la tabla
 	public String getDireccion() {
 		return direccion;
@@ -134,5 +145,12 @@ public class Paciente extends Usuario {
 	}
 	public void setFechaCadTarjeta(String fechaCadTarjeta) {
 		this.fechaCadTarjeta = fechaCadTarjeta;
-	}	
+	}
+	public String getCodigoAut() {
+		return this.codigoAut;
+	}
+
+	String generarCodigoAut() {
+		return new BigInteger(130, new SecureRandom()).toString(5);
+	}
 }
