@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
 
 @Entity
 public class ExistenciaMedicamento implements Serializable {
@@ -19,7 +19,7 @@ public class ExistenciaMedicamento implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	@OneToOne(optional = false, fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
 	private Medicamento medicamento;
 	
 	@ManyToOne(targetEntity=Farmacia.class)

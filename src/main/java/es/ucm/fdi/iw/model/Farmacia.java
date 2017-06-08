@@ -175,6 +175,18 @@ public class Farmacia implements Serializable {
 		
 		return n;
 	}
+
+	public int contieneMedicamento(ExistenciaMedicamento existenciaStock) {
+		
+		for (ExistenciaMedicamento e : stock){
+			if(e.getMedicamento()==existenciaStock.getMedicamento()){
+				
+				return stock.indexOf(e);
+			}
+		}
+		
+		return -1;
+	}
 	
 	
 }

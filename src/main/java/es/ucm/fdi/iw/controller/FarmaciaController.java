@@ -137,10 +137,20 @@ public class FarmaciaController {
 					existenciaStock.setCantidad(form.getCantidad());	
 					existenciaStock.setFechaCaducidad(form.getFechaFormateada());
 					existenciaStock.setFarmacia(farmacia);
+					
+					int indexExiste=farmacia.contieneMedicamento(existenciaStock);
+					//si existe actualiza la cantidad
+					if(indexExiste!=-1){
+						existenciaStock.setCantidad(existenciaStock.getCantidad()+miStock.get(indexExiste).getCantidad());
+						miStock.remove(indexExiste);
+					}
+				
+					
 					entityManager.persist(existenciaStock);
 					miStock.add(existenciaStock);
 					farmacia.setStock(miStock);
 					entityManager.persist(farmacia);
+					
 
 				}
 			}

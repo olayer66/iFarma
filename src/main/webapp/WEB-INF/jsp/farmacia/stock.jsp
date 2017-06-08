@@ -45,7 +45,7 @@
               </table>
               <!-- fin tabla stock -->
  
-				<button class="btn btn-default btn-block" data-toggle="modal" data-target="#añadirMedicamentoManual">
+				<button class="btn btn-success" data-toggle="modal" data-target="#añadirMedicamentoManual">
 									Añadir Stock Manualmente
 				</button>
 
@@ -102,7 +102,7 @@
 											</div>
 										</div>
 					
-										<button type="submit" class="btn btn-success">Guardar tratamiento</button>
+										<button type="submit" class="btn btn-success">Añadir stock</button>
 									</sf:form>
 								</div>
 					
