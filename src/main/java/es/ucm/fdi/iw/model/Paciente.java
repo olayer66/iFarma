@@ -15,7 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 
 @Entity
@@ -170,7 +169,7 @@ public class Paciente extends Usuario {
 		// TODO Auto-generated method stub
 		return farmacia;
 	}
-	void setFarmacia(Farmacia far){
+	public void setFarmacia(Farmacia far){
 		farmacia=far;
 	}
 
@@ -189,4 +188,5 @@ public class Paciente extends Usuario {
 	public void setCodigoAut(String codigoAut) {
 		this.codigoAut = codigoAut;
 	}
+	
 }

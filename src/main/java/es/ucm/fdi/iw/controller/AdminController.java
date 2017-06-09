@@ -110,7 +110,7 @@ public class AdminController {
 	@RequestMapping("altasFarmacias")
 	public String altaFarmaciasAction(HttpSession sesion) {
 		List<Farmacia> listaFarmacia;
-		TypedQuery<Farmacia> query= entityManager.createNamedQuery("Farmacia.findValidar", Farmacia.class);
+		TypedQuery<Farmacia> query= entityManager.createNamedQuery("Farmacia.findValidar", Farmacia.class).setParameter("estado", 0);
 		listaFarmacia=query.getResultList();
 		log.warn("contador de farmacias: "+listaFarmacia.size());
 		sesion.setAttribute("listaFarmacia", listaFarmacia);

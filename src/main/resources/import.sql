@@ -1,6 +1,6 @@
 INSERT INTO USUARIO VALUES(2, 'gordo porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',0, 'paco', 'MED', '91685336', 'medico')
 INSERT INTO USUARIO VALUES(1, 'gordo porras1', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com1',0, 'paco1', 'MED', '916853361', 'medico1')
-INSERT INTO USUARIO VALUES(5, 'Gordo Porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',0, 'Paco', 'PAC', '91685336', 'paciente')
+INSERT INTO USUARIO VALUES(5, 'Gordo Porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',0, 'Paco', 'PAC', '912574635', 'paciente')
 INSERT INTO USUARIO VALUES(4, 'Sanchez Perez', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'antonio@algo.com',0, 'Antonio', 'FAR', '916587441', 'farma')
 INSERT INTO USUARIO VALUES(8, 'gordo porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',1, 'paco', 'ADMIN', '91685336', 'admin')
 INSERT INTO USUARIO VALUES(14, 'Sancghez Perez', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'anton6io@algo.com',0, 'Anto6nio', 'FAR', '916527441', 'farma2')

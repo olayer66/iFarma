@@ -55,6 +55,8 @@ public class ValidarPaciente {
 	private String provincia;
 	@NotEmpty(message = "El campo esta vacio")
 	private String comAutonoma;
+	
+	private long farmacia;
 
 	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)
 	@NotEmpty(message = "El campo esta vacio")
@@ -64,7 +66,7 @@ public class ValidarPaciente {
 	@Pattern(regexp = "[0-9]*",message = "El nº de tarjeta ha de ser numerico")
 	private String numTarjeta;
 	@Pattern(regexp = "[0-9]*",message = "El codigo de seguridad ha de ser numerico")
-	@Size(min=3,max=3,message="El codigo de seguridad ha de tener tres digitos")
+	@Size(max=3,message="El codigo de seguridad ha de tener tres digitos")
 	private String codSegTarjeta;
 	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String fechaCadTarjeta;
@@ -209,4 +211,11 @@ public class ValidarPaciente {
 	public void setFechaCadTarjeta(String fechaCadTarjeta) {
 		this.fechaCadTarjeta = fechaCadTarjeta;
 	}
+	public long getFarmacia() {
+		return farmacia;
+	}
+	public void setFarmacia(long farmacia) {
+		this.farmacia = farmacia;
+	}
+	
 }

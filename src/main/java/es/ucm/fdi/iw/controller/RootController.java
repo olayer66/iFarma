@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
+import es.ucm.fdi.iw.customValidation.ValidarContrasenia;
 import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
 import es.ucm.fdi.iw.model.Farmaceutico;
@@ -50,6 +51,9 @@ public class RootController {
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	private EntityManager entityManager;
 	
+	@Autowired
+	private ValidarContrasenia valContra;
+	 
 	/*-----INDEX-----*/
 	@RequestMapping({"","/", "/index"})
 	public String root(Model model, Principal principal) {
@@ -117,12 +121,13 @@ public class RootController {
 				paciente=query.getSingleResult();
 				model.addAttribute("validar", new ValidarPaciente());
 				sesion.setAttribute("paciente", paciente);
+				sesion.setAttribute("listaFarmacias", getFarmacias());
 				sesion.setAttribute("comunidades", getComunidades());
 				sesion.setAttribute("provIncio", getProvincias());
 				return"validarPaciente";
 			}else{
 				log.warn("Codigo no encontrado");
-				bindingResult.addError(new ObjectError("codigo","El codigo no se existe, compruebe que esta bien escrito o contacte con su medico"));
+				bindingResult.rejectValue("codigo","messageCode","El codigo no se existe, compruebe que esta bien escrito o contacte con su medico");
 				return "index";
 			}
 		}
@@ -132,6 +137,7 @@ public class RootController {
 	@RequestMapping(value = "/validarPacienteSubmit", method = RequestMethod.POST)
 	public 	String validarPacienteSubmit(@ModelAttribute("validar") @Valid ValidarPaciente validar, BindingResult bindingResult, Model model,
 			HttpSession sesion) {
+		valContra.validate(validar, bindingResult);
 		if (bindingResult.hasErrors()) {
 			log.warn("Errores en la validacion");
 			return "validarPaciente";
@@ -146,6 +152,7 @@ public class RootController {
 			paciente.setUsuario(modPac.getUsuario());
 			paciente.setContrasenia(modPac.getContrasenia());
 			paciente.setFormaPago(modPac.getFormaPago());
+			paciente.setFarmacia(entityManager.find(Farmacia.class, validar.getFarmacia()));
 			paciente.setEstado(1);
 			if(modPac.getFormaPago()==1)
 			{
@@ -221,7 +228,22 @@ public class RootController {
 		String [] prov={"Almería", "Granada","Córdoba","Jaén","Sevilla","Málaga","Cádiz","Huelva"};
 		return Arrays.asList(prov);
 	}
-	/*---PRUEBAS----*/
+	//Devuleve un listado con la farmacias refereciables por el paciente(estado=1)
+	private List<Farmacia> getFarmacias()
+	{
+		TypedQuery<Farmacia> query= entityManager.createNamedQuery("Farmacia.findValidar", Farmacia.class).setParameter("estado", 1);
+		return query.getResultList();
+	}
+	
+	public ValidarContrasenia getValContra() {
+		return valContra;
+	}
+
+	public void setValContra(ValidarContrasenia valContra) {
+		this.valContra = valContra;
+	}
+
+		/*---PRUEBAS----*/
 		@Transactional
 		@RequestMapping("mm")//PARA PRUEBAS. NO BORRAR.
 		public @ResponseBody String mm() throws IOException{

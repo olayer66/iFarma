@@ -15,15 +15,13 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @NamedQueries({
     @NamedQuery(name="Farmacia.countFARMA",
                 query="SELECT COUNT(f) FROM Farmacia f WHERE f.estado=0"),
     @NamedQuery(name="Farmacia.findValidar",
-    query="SELECT f FROM Farmacia f WHERE f.estado=0"),
+    			query="SELECT f FROM Farmacia f WHERE f.estado=:estado"),
     @NamedQuery(name="Farmacia.updateEstado", 
     			query="UPDATE Farmacia f SET f.estado=1 WHERE f.id=:id")
 })
