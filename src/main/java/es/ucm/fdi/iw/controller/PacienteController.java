@@ -1,3 +1,4 @@
+
 package es.ucm.fdi.iw.controller;
 
 import java.util.Date;
@@ -26,11 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
+import es.ucm.fdi.iw.model.Tratamiento;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
-import es.ucm.fdi.iw.model.Farmaceutico;
-import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.validation.MensajeForm;
+import es.ucm.fdi.iw.validation.TomaForm;
 
 @Controller
 @RequestMapping("/paciente")
@@ -42,99 +43,118 @@ public class PacienteController {
 	private EntityManager entityManager;
 
 	@GetMapping("")
-	public String pantallaLoginAction() {
+	public String pantallaLoginAction(Model model) {
 		return "redirect:/paciente/tratamiento";
 	}
+
 	@RequestMapping("modificarPaciente")
 	public String modificarpacienteAction() {
 		return "paciente/modificarPaciente";
 	}
+
 	@RequestMapping("cambiarPassword")
 	public String cambiarPasswordAction() {
 		return "paciente/cambiarPassword";
 	}
+
 	@RequestMapping("modificarPago")
 	public String modificarpagoAction() {
 		return "paciente/modificarPago";
 	}
 
-	@RequestMapping("tratamiento")
-	public String tratamientoAction() {
+	@Transactional
+	@RequestMapping("/tratamiento")
+	public String tratamientoAction(@ModelAttribute("form") @Valid TomaForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
+		Paciente paciente = this.getLoggedUser(sesion);
+
+		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
+			model.addAttribute("form", new TomaForm());
+		}
+
+		if (request.getMethod().equals("POST")) {
+			Tratamiento tratamiento = entityManager.find(Tratamiento.class, Long.parseLong(form.getTratamiento()));
+
+			if (paciente.getTratamiento().contains(tratamiento)) {
+				if (form.getAccion().equals("add")) {
+					tratamiento.registraToma();
+				} else if (form.getAccion().equals("sub")) {
+					tratamiento.eliminaToma();
+				}
+
+				entityManager.persist(tratamiento);
+			}
+		}
+
 		return "paciente/tratamiento";
 	}
+
 	@RequestMapping("perfil")
 	public String perfilAction( HttpSession sesion) {
 		Paciente paciente = this.getLoggedUser(sesion);
-		
+
 		sesion.setAttribute("paciente", paciente);
 		return "paciente/perfil";
 	}
-	
+
 	@RequestMapping({"pedidosPc"})
 	public String pedidosPcAction() {
-		
-		
+
+
 		return "paciente/pedidosPc";
 	}
-	
+
 	@Transactional
 	@GetMapping("pedidosPc")
 	public String pedidosAction( HttpSession sesion,Model model) {
-		
+
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Paciente paciente = entityManager.createQuery(
         		"FROM Paciente WHERE usuario = :usuario", Paciente.class)
                             .setParameter("usuario", username)
                             .getSingleResult();
-		
-		
-				
+
 			List<Pedidos> listaped = paciente.getListaPedidos();
 
 			log.info("tamaño salida:" + listaped.size());
 			model.addAttribute("listaPed", listaped);
-			
-		
-		
-			
+
 		return "paciente/pedidosPc";
-	}	
-	
-	
+	}
+
+
 	@RequestMapping("verPedido")
 	public String pedidoAction(HttpSession sesion,@RequestParam long id, Model model) {
-
 		model.addAttribute("idPedido", id);
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		Paciente paciente = entityManager.createQuery(
         		"FROM Paciente WHERE usuario = :usuario", Paciente.class)
                             .setParameter("usuario", username)
                             .getSingleResult();
-		
-		
+
+
 
 		Pedidos pedidos =entityManager.find(Pedidos.class, id);
 		List<ExistenciaPedido> listEx = pedidos.getExistenciasPedido();
-		
-				
+
+
 		if (paciente == null || pedidos.getPaciente() != paciente){
 			log.info("Acceso denegado");
 		}else{
 			log.info("tamaño salida de Existencias:" +listEx.size());
 			Date date= new Date();//fecha actual
-			
+
 			model.addAttribute("fecha",date.toString());
 			model.addAttribute("total", pedidos.getPrecioTotal());
 			model.addAttribute("listEx", listEx);
 			model.addAttribute("pedido", pedidos);
 			model.addAttribute("farmacia", paciente.getFarmacia());
 			model.addAttribute("paciente",paciente);
-			
+
 		}
-	
+
 		return "paciente/verPedido";
 	}
-	
+
 	@RequestMapping("feedbackDR")
 	public String feedbackDRAction(Model model, HttpSession sesion) {
 		Paciente paciente = this.getLoggedUser(sesion);

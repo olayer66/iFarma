@@ -11,7 +11,7 @@
 				<div class="col-lg-12">
 					<h2>Tratamientos<img class ="help" data-toggle="modal" data-target="#ayuda" src="/static/img/help.png" ></h2>
 					<hr>
-									
+
 					<div class="row">
 						<div class="col-lg-2">
 							<br>
@@ -45,11 +45,20 @@
 														</div>
 
 														<div class="col-xs-4 text-right">
-															<p class="treatment__dose">
-																<c:forEach var="i" begin="1" end="${tratamiento.numDosis}">
-																	<i class="glyphicon glyphicon-ok-circle${ i <= tratamiento.numDosisDia ? ' empty' : '' }"></i>
-																</c:forEach>
-															</p>
+															<sf:form method="POST" modelAttribute="form">
+																<sf:input type="hidden" path="tratamiento" value="${tratamiento.id}" />
+																<sf:input type="hidden" path="accion" id="accion" value="" />
+
+																<p class="treatment__dose">
+																	<c:forEach var="i" begin="1" end="${tratamiento.numDosis}">
+																		<i
+																			data-submit
+																			data-action="${ i <= tratamiento.numDosisDia ? 'add' : 'sub' }"
+																			class="glyphicon glyphicon-ok-circle${ i <= tratamiento.numDosisDia ? ' empty' : '' }"
+																		></i>
+																	</c:forEach>
+																</p>
+															</sf:form>
 
 															<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().parent().parent().remove()">Eliminar</a>
 														</div>
@@ -102,10 +111,23 @@
 
 			<div class="modal-body">
 				<h5>AYUDAAAAAA</h5>
+			</div>
 		</div>
 	</div>
 </div>
 
 
 <%@ include file="../../jspf/footer.jspf" %>
-</html>
+
+
+<script>
+	$('[data-submit]').on('click', function () {
+		var $this = $(this);
+		var $form = $this.parent().parent();
+		var $input = $form.find('#accion');
+		var action = $this.data('action');
+
+		$input.val(action);
+		$form.submit();
+	})
+</script>

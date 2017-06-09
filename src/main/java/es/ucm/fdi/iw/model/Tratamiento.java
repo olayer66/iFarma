@@ -92,4 +92,14 @@ public class Tratamiento implements Serializable {
 	public void setMedicamento(Medicamento medicamento) {
 		this.medicamento = medicamento;
 	}
+	public void registraToma() {
+		if (this.numDosisDia > 0) {
+			this.numDosisDia -= 1;
+		}
+	}
+	public void eliminaToma() {
+		if (this.numDosisDia <= this.numDosis) {
+			this.numDosisDia += 1;
+		}
+	}
 }
