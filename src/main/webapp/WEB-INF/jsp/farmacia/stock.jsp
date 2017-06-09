@@ -6,8 +6,6 @@
 
 
 <%@ include file="../../jspf/header.jspf" %>
-
-
 <%@ include file="../../jspf/navbarFarmacia.jspf" %>
 
   <div class="container">     
@@ -68,7 +66,6 @@
 	                    </div>
 	                  </div>
 	                </div>
-	               <!-- fin añadir prpductos -->
 	            </div>
 	            <!-- /.box-body -->
 	           </div>

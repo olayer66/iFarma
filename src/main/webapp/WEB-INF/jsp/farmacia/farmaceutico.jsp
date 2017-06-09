@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ include file="../../jspf/header.jspf"%>
-
-
 <%@ include file="../../jspf/navbarFarmaceutico.jspf"%>
 
 <div class="container">
@@ -32,60 +33,64 @@
 					</table>
 					</div>
 					<!-- fin tabla farmacias -->
+					<button class="btn btn-success" data-toggle="modal" data-target="#solicitarFarmacia">
+									Solicitar nueva farmacia
+					</button>
 					<!-- form nueva farmacia -->
-					<div>
-						<h2>Añadir nueva Farmacia:</h2>
-						<ul class="nav nav-pills">
-							<li><a data-toggle="pill" href="#añadirFarmacia">Añadir
-									nueva farmacia</a></li>
-						</ul>
+			 <div id="solicitarFarmacia" class="modal fade" role="dialog" data-modal-show-on-error="${error}">
+						<div class="modal-dialog modal-md">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Solicitar farmacia</h4>
+								</div>
+					
+								<div class="modal-body">
+									<sf:form method="POST" modelAttribute="form">
+										<div class="box-body">
 
-						<div class="tab-content">
-							<div id="añadirFarmacia" class="tab-pane fade">
-								<div>
-									<div class="col-lg-12">
-										<h3 class="page-header">Nueva Farmacia:</h3>
-										<h3>
-											<small>Rellene el siguiente formulario.</small>
-										</h3>
-									</div>
-									<form>
-										<!--Datos del usuario-->
-										<div class="col-md-6 portfolio-item">
 											<div class="form-group">
-												<label for="nombreFarmacia">Nombre de la Farmacia:</label> <input
-													type="text" class="form-control" id="nombreFarmacia">
-											</div>
+												<sf:input path="nombre" class="form-control" placeholder="Nombre" />
+												<p><sf:errors path="nombre" cssClass="error"/></p>
+											</div>											
 											<div class="form-group">
-												<label for="telefonoFarmacia">Telefono</label> <input
-													type="text" class="form-control" id="telefonoFarmacia">
-											</div>
+												<sf:input path="telefono" class="form-control" placeholder="Telefono" />
+												<p><sf:errors path="telefono" cssClass="error"/></p>
+											</div>	
 											<div class="form-group">
-												<label for="direccionFarmacia">Direccion:</label> <input
-													type="text" class="form-control" id="direccionFarmacia">
-											</div>
+												<sf:input path="direccion" class="form-control" placeholder="Direccion" />
+												<p><sf:errors path="direccion" cssClass="error"/></p>
+											</div>	
 											<div class="form-group">
-												<label for="codigopostalFarmacia">Codigo postal:</label> <input
-													type="text" class="form-control" id="codigopostalFarmacia">
-											</div>
+												<sf:input path="codPostal" class="form-control" placeholder="Codigo Postal" />
+												<p><sf:errors path="codPostal" cssClass="error"/></p>
+											</div>	
 											<div class="form-group">
-												<label for="ciudadFarmacia">Ciudad:</label> <input
-													type="text" class="form-control" id="ciudadFarmacia">
-											</div>
-											<div class="form-group">
-												<label for="provinciaFarmacia">Provincia:</label> <input
-													type="text" class="form-control" id="provinciaFarmacia">
-											</div>
+												<sf:input path="ciudad" class="form-control" placeholder="Ciudad" />
+												<p><sf:errors path="ciudad" cssClass="error"/></p>
+											</div>	
+							                <div class="form-group" >
+							                    <sf:select path="comAutonoma" placeholder="Comunidad Autonoma" class="form-control" id="comboComunidades"  items="${comunidades}"/>
+							                	<p><sf:errors path="comAutonoma" cssClass="error"/></p>
+							                </div>
+							                <div class="form-group">
+							                    <sf:select path="provincia" placeholder="Provincia" class="form-control" id="comboProvincia" items="${provincias}"/>
+							                	<p><sf:errors path="provincia" cssClass="error"/></p>
+							                </div>
+							                
+							                
 										</div>
-										<div class="col-md-12 portfolio-item">
-											<input type="submit" class="btn-lg btn-default center-block"
-												value="Añadir">
-										</div>
-									</form>
+
+										<button type="submit" class="btn btn-success">Enviar Solicitud</button>
+									</sf:form>
+								</div>				
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 								</div>
 							</div>
 						</div>
 					</div>
+        		<!-- Fin formulario nueva farmacia  -->
 				</div>
 				<!-- /.box-body -->
 			</div>

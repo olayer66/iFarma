@@ -1,6 +1,7 @@
 package es.ucm.fdi.iw.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -49,8 +50,9 @@ public class FarmaciaController {
 		return "redirect:/farmacia/farmaceutico";
 	}
 	
+	@Transactional
 	@RequestMapping("farmaceutico")
-	public String farmaceuticoAction(HttpSession sesion, Model model) {
+	public String farmaceuticoAction(HttpSession sesion, Model model,HttpServletRequest request,@ModelAttribute("form") @Valid es.ucm.fdi.iw.validation.FarmaciaForm form, BindingResult bindingResult) {
 		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		
@@ -62,42 +64,43 @@ public class FarmaciaController {
 		
 		List<Farmacia> listaFar = farmaceutico.getFarmaciasActivas();
 
-		
 		log.info("tamaño salida:" + listaFar.size());
 		model.addAttribute("listaFar", listaFar);
+		model.addAttribute("comunidades", getComunidades());
+		model.addAttribute("provincias", getProvincias());
+		
+		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
+			model.addAttribute("form", new Farmacia());
+		}
+		
+		//solicitar farmacia
+		if (request.getMethod().equals("POST")) {
+			if (bindingResult.hasErrors()) {
+				model.addAttribute("error", true);
+			} else {
+				Farmacia farmacia = new Farmacia();
+
+				farmacia.setNombre(form.getNombre());
+				farmacia.setTelefono(form.getTelefono());
+				farmacia.setDireccion(form.getDireccion());
+				farmacia.setCodPostal(form.getCodPostal());
+				farmacia.setCiudad(form.getCiudad());
+				farmacia.setProvincia(form.getProvincia());
+				farmacia.setComAutonoma(form.getComAutonoma());
+				farmacia.setEstado(0);//pendiente de validacion estado=0
+				farmacia.setDuenio(farmaceutico);
+				
+				entityManager.persist(farmacia);
+				
+
+			}
+		}
+		
 
 		return "farmacia/farmaceutico";
 	}
-	@RequestMapping("modificarFarmaceutico")
-	public String modificarfarmaceuticoAction() {
-		return "farmacia/modificarFarmaceutico";
-	}
-	
-	@GetMapping({"farmacia", "pedidos"})
-	public String pedidosAction( HttpSession sesion,@RequestParam long id,Model model) {
-		model.addAttribute("idFarmacia", id);
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		Farmaceutico farmaceutico = entityManager.createQuery(
-        		"FROM Farmaceutico WHERE usuario = :usuario", Farmaceutico.class)
-                            .setParameter("usuario", username)
-                            .getSingleResult();
-		
-		Farmacia f = entityManager.find(Farmacia.class, id);
-				
-		if (f == null || f.getDuenio()!=farmaceutico){
-			log.info("Acceso denegado");
-		}else{
-			List<Pedidos> listaped = f.getListaPedidos();
 
-			log.info("tamaño salida:" + listaped.size());
-			model.addAttribute("listaPed", listaped);
-			
-		}
-		
-			
-		return "farmacia/pedidos";
-	}
-	
+
 	
 	@Transactional
 	@RequestMapping("stock") 
@@ -165,6 +168,32 @@ public class FarmaciaController {
 		
 		return "farmacia/stock";
 	}
+	
+	@GetMapping({"farmacia", "pedidos"})
+	public String pedidosAction( HttpSession sesion,@RequestParam long id,Model model) {
+		model.addAttribute("idFarmacia", id);
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Farmaceutico farmaceutico = entityManager.createQuery(
+        		"FROM Farmaceutico WHERE usuario = :usuario", Farmaceutico.class)
+                            .setParameter("usuario", username)
+                            .getSingleResult();
+		
+		Farmacia f = entityManager.find(Farmacia.class, id);
+				
+		if (f == null || f.getDuenio()!=farmaceutico){
+			log.info("Acceso denegado");
+		}else{
+			List<Pedidos> listaped = f.getListaPedidos();
+
+			log.info("tamaño salida:" + listaped.size());
+			model.addAttribute("listaPed", listaped);
+			
+		}
+		
+			
+		return "farmacia/pedidos";
+	}
+	
 	@RequestMapping("pedido")
 	public String pedidoAction(HttpSession sesion,@RequestParam long id,@RequestParam long idFarmacia, Model model) {
 		model.addAttribute("idPedido", id);
@@ -220,9 +249,27 @@ public class FarmaciaController {
 	
 		return "redirect:/farmacia/pedidos?id="+p.getFarmacia().getId();
 	}
+	//Devuelve la comunidades autonomas
+	private List<String> getComunidades()
+	{
+		String [] comu={"Andalucia", "Aragon", "Canarias", "Cantabria", "Castilla y Leon", "Castilla-La Mancha", "Catalunya", "Ceuta", "Comunidad Valenciana", "Comunidad de Madrid", "Extremadura", "Galicia", "Islas Baleares", "La Rioja", "Melilla", "Navarra", "Pais Vasco", "Principado de Asturias", "Region de Murcia"};
+		return Arrays.asList(comu);
+	}
+	//Devuelve la provicias inicales a mostrar(Andalucia)
+	private List<String> getProvincias()
+	{
+		String [] prov={"Almería", "Granada","Córdoba","Jaén","Sevilla","Málaga","Cádiz","Huelva"};
+		return Arrays.asList(prov);
+	}
+	//para futuras versiones
 	@RequestMapping("modificarFarmacia")
 	public String modificarfarmaciaAction() {
 		return "farmacia/modificarFarmacia";
 	}
+	@RequestMapping("modificarFarmaceutico")
+	public String modificarfarmaceuticoAction() {
+		return "farmacia/modificarFarmaceutico";
+	}
+	
 	
 }

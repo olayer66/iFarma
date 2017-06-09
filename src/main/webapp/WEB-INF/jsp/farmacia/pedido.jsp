@@ -89,7 +89,7 @@
       <div class="row">
         <!-- accepted payments column -->
         <div class="col-xs-6">
-          <p class="lead">Payment Methods:</p>
+          <p class="lead">Metodos de pago:</p>
           <img src="/static/img/credit/visa.png" alt="Visa"/>
           <img src="/static/img/credit/mastercard.png" alt="Mastercard">
           <img src="/static/img/credit/american-express.png" alt="American Express">
