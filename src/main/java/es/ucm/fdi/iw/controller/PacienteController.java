@@ -88,6 +88,7 @@ public class PacienteController {
 				}
 
 				entityManager.persist(tratamiento);
+				entityManager.persist(paciente);
 			}
 		}
 
