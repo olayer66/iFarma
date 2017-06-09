@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../../jspf/header.jspf"%>
 
 <%@ include file="../../jspf/navbarPaciente.jspf"%>
@@ -23,11 +23,13 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            <c:forEach var="stock" items="${misPedidos}">
                                 <tr>
                                     <td><a href="/paciente/verPedidos">751140</a></td>
                                     <td>21/04/2017</td>
                                     <td><span class="label label-warning" >PENDIENTE</span></td>
                                 </tr>
+                             </c:forEach>
                                 <tr>
                                     <td><a href="/paciente/verPedidos">015102</a></td>
                                     <td>22/03/2017</td>

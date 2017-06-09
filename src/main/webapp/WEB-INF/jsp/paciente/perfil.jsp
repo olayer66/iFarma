@@ -21,24 +21,24 @@
                         <div class="col-lg-10">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Nombre: Saturnino</h4>
+                                    <h4>Nombre: ${paciente.nombre}</h4>
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Apellidos: Diaz</h4>
+                                    <h4>Apellidos: ${paciente.apellidos}</h4>
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Numero Seg. Social: 28054185200</h4>
+                                    <h4>Email: ${paciente.email}</h4>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <h4>Edad: 84</h4>
+                                            <h4>Direccion: ${paciente.direccion}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                 <div class="col-xs-4">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <h4>Peso: 102</h4>
+                                            <h4>Ciudad: ${paciente.ciudad}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +54,7 @@
                                 <div class="col-xs-4">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <h4>Altura: 1,76</h4>
+                                            <h4>Codigo Postal: ${paciente.codPostal}</h4>
                                         </div>
                                     </div>
                                 </div>
@@ -64,13 +64,15 @@
                                     <div class="panel panel-default">
                                         <div class="panel-body">
                                             <h4> Forma de pago: 
-                                                <select class="btn btn-default" name="opt">
-                                                    <option value="fut">Efectivo</option>
-                                                    <option value="bal">VISA</option>
-                                                    <option value="nat">MASTERCARD</option>
-                                                    <option value="ten">American Express</option>
-                                                    <option value="pad">PayPal</option>
-                                                </select>
+                                            <c:if test="${paciente.formaPago}==0">
+                                            PayPal
+                                            </c:if>
+                                            <c:if test="${paciente.formaPago}==1">
+                                            Con tarjeta
+                                            </c:if>
+                                            <c:if test="${paciente.formaPago}==2">
+                                            Contrareembolso
+                                            </c:if>
                                             </h4>  
                                         </div>
                                     </div>
@@ -87,26 +89,26 @@
                         <div class="col-lg-10">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Nombre: La Soledad</h4>
+                                    <h4>Nombre: ${paciente.farmacia.nombre}</h4>
                                 </div>
                             </div>
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    <h4>Direccion: C/ La Fontana nº10</h4>
+                                    <h4>Direccion: ${paciente.farmacia.direccion}</h4>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xs-4">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <h4>Codigo Postal: 28035</h4>
+                                            <h4>Codigo Postal: ${paciente.farmacia.codPostal}</h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-4">
                                     <div class="panel panel-default">
                                         <div class="panel-body">
-                                            <h4>Ciudad: Madrid</h4>
+                                            <h4>Ciudad: ${paciente.farmacia.ciudad}</h4>
                                         </div>
                                     </div>
                                 </div>

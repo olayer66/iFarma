@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
@@ -45,7 +46,11 @@ public class Paciente extends Usuario {
 	//medico de cabecera (N/1)
 	@ManyToOne(targetEntity=Medico.class)
 	private Medico medCabecera;
-
+	
+	//farmacia (N/1)
+	@ManyToOne(targetEntity=Farmacia.class)
+	private Farmacia farmacia;
+	
 	//Lista de medicamentos del tratamiento (1/N)
 	@OneToMany(targetEntity=Tratamiento.class, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="paciente_id")
@@ -149,7 +154,14 @@ public class Paciente extends Usuario {
 	public String getCodigoAut() {
 		return this.codigoAut;
 	}
-
+	@Override
+	public String toString() {
+		return "Paciente [medico=" + medCabecera
+				+ ", id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", telefono="
+				+ telefono + ", estado=" + estado + ", role=" + role + ", usuario=" + usuario + ", contrasenia="
+				+ contrasenia + ", mensajesRecibidos=" + mensajesRecibidos + ", mensajesEnviados=" + mensajesEnviados
+				+ "]";
+	}
 	String generarCodigoAut() {
 		return new BigInteger(130, new SecureRandom()).toString().substring(0, 6);
 	}
