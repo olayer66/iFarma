@@ -4,64 +4,52 @@
 
 <%@ include file="../../jspf/navbarPaciente.jspf"%>
 
-<div class="container">
-    <div class="row">
-        <!--PEDIDOS-->
-    
-    
-                <div id="pedidosPc">
-                    <div>
-                        <h2 class="page-header">Ultimos Pedidos</h2>
-                    </div>
-                    <div>
-                        <table id="tablaPedidosPc" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID pedido</th>
-                                    <th>Fecha</th>
-                                    <th>Estado</th>         
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach var="stock" items="${misPedidos}">
-                                <tr>
-                                    <td><a href="/paciente/verPedidos">751140</a></td>
-                                    <td>21/04/2017</td>
-                                    <td><span class="label label-warning" >PENDIENTE</span></td>
-                                </tr>
-                             </c:forEach>
-                                <tr>
-                                    <td><a href="/paciente/verPedidos">015102</a></td>
-                                    <td>22/03/2017</td>
-                                    <td><span class="label label-success" >EN RUTA</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="/paciente/verPedidos">501485</a></td>
-                                    <td>20/02/2017</td>
-                                    <td><span class="label label-primary" >ENTREGADO</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="/paciente/verPedidos">369852</a></td>
-                                    <td>15/02/2017</td>
-                                    <td><span class="label label-danger" >CANCELADO</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="/paciente/verPedidos">151545</a></td>
-                                    <td>22/01/2017</td>
-                                    <td><span class="label label-primary" >ENTREGADO</span></td>
-                                </tr>
-                                <tr>
-                                    <td><a href="/paciente/verPedidos">985632</a></td>
-                                    <td>18/12/2016</td>
-                                    <td><span class="label label-primary" >ENTREGADO</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-       
-               
-	</div>
-</div>
+
+  <div class="container">
+        <div class="row">
+           <div id="pedidos">
+               <div>
+                  <h2>Tabla de pedidos</h2>
+               </div>
+            <div>
+              <table id="tablaPedidos" class="table table-bordered table-striped">
+               <thead>
+                  <tr>
+                    <th>ID pedido</th>
+                    <th>Pedido</th>
+                    <th>Fecha</th>
+                    <th>Estado</th>
+                    <th>Realizar pedido</th>         
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <c:forEach var="pedidos" items="${listaPed}">
+                  <tr>
+					<td><a href=/paciente/verPedido?id=${pedidos.id}>${pedidos.id}</a></td>
+                    <td>${pedidos.id}</td>
+                    <td>${pedidos.fechaPedido}</td>
+                    <td><span class="label label-success">${pedidos.estadoPedido==0 ? 'Pendiente' : 'Entrergado'}</span></td>
+                    <td> <div class="btn-group">
+                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Action <span class="caret"></span>
+                         </button>
+                          <ul class="dropdown-menu">
+                          <li><a href="#">Pendiente</a></li>
+                          <li><a href="#">Entregado</a></li>
+                        </ul>
+                      </div>
+                    </td>
+                  	</tr>
+           		  </c:forEach>
+                  </tbody>
+                </table>
+              </div>
+               <!-- fin tabla -->
+              </div>
+            </div>
+     	   </div>
+        
+        <hr>
+
+
 <%@ include file="../../jspf/footer.jspf" %>
-</html>

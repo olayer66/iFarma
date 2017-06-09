@@ -165,4 +165,28 @@ public class Paciente extends Usuario {
 	String generarCodigoAut() {
 		return new BigInteger(130, new SecureRandom()).toString().substring(0, 6);
 	}
+
+	public Farmacia  getFarmacia() {
+		// TODO Auto-generated method stub
+		return farmacia;
+	}
+	void setFarmacia(Farmacia far){
+		farmacia=far;
+	}
+
+	public List<Pedidos> getListaPedidos() {
+		return listaPedidos;
+	}
+
+	public void setListaPedidos(List<Pedidos> listaPedidos) {
+		this.listaPedidos = listaPedidos;
+	}
+
+	public void setComAutonoma(String comAutonoma) {
+		this.comAutonoma = comAutonoma;
+	}
+
+	public void setCodigoAut(String codigoAut) {
+		this.codigoAut = codigoAut;
+	}
 }

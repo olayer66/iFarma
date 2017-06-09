@@ -42,8 +42,8 @@ public class PacienteController {
 	private EntityManager entityManager;
 
 	@GetMapping("")
-	public String pantallaLoginAction(Model model) {
-		return "paciente/tratamiento";
+	public String pantallaLoginAction() {
+		return "redirect:/paciente/tratamiento";
 	}
 	@RequestMapping("modificarPaciente")
 	public String modificarpacienteAction() {
@@ -57,10 +57,7 @@ public class PacienteController {
 	public String modificarpagoAction() {
 		return "paciente/modificarPago";
 	}
-	@RequestMapping({"pedidosPc"})
-	public String pedidosPcAction() {
-		return "paciente/pedidosPc";
-	}
+
 	@RequestMapping("tratamiento")
 	public String tratamientoAction() {
 		return "paciente/tratamiento";
@@ -73,20 +70,50 @@ public class PacienteController {
 		return "paciente/perfil";
 	}
 	
-	@RequestMapping("verPedidos")
-	public String pedidoAction(HttpSession sesion,@RequestParam long id,@RequestParam long idFarmacia, Model model) {
-		Paciente paciente = this.getLoggedUser(sesion);
-		model.addAttribute("idPedido", id);
-		model.addAttribute("idFarmacia", idFarmacia);
+	@RequestMapping({"pedidosPc"})
+	public String pedidosPcAction() {
+		
+		
+		return "paciente/pedidosPc";
+	}
+	
+	@Transactional
+	@GetMapping("pedidosPc")
+	public String pedidosAction( HttpSession sesion,Model model) {
+		
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		/*Paciente paciente = entityManager.createQuery(
+		Paciente paciente = entityManager.createQuery(
         		"FROM Paciente WHERE usuario = :usuario", Paciente.class)
                             .setParameter("usuario", username)
                             .getSingleResult();
-		*/
+		
+		
+				
+			List<Pedidos> listaped = paciente.getListaPedidos();
+
+			log.info("tamaño salida:" + listaped.size());
+			model.addAttribute("listaPed", listaped);
+			
+		
+		
+			
+		return "paciente/pedidosPc";
+	}	
+	
+	
+	@RequestMapping("verPedido")
+	public String pedidoAction(HttpSession sesion,@RequestParam long id, Model model) {
+
+		model.addAttribute("idPedido", id);
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Paciente paciente = entityManager.createQuery(
+        		"FROM Paciente WHERE usuario = :usuario", Paciente.class)
+                            .setParameter("usuario", username)
+                            .getSingleResult();
+		
+		
 
 		Pedidos pedidos =entityManager.find(Pedidos.class, id);
-		Farmacia farmacia =entityManager.find(Farmacia.class, idFarmacia); 
 		List<ExistenciaPedido> listEx = pedidos.getExistenciasPedido();
 		
 				
@@ -100,12 +127,12 @@ public class PacienteController {
 			model.addAttribute("total", pedidos.getPrecioTotal());
 			model.addAttribute("listEx", listEx);
 			model.addAttribute("pedido", pedidos);
-			model.addAttribute("farmacia", farmacia);
+			model.addAttribute("farmacia", paciente.getFarmacia());
 			model.addAttribute("paciente",paciente);
 			
 		}
 	
-		return "paciente/verPedidos";
+		return "paciente/verPedido";
 	}
 	
 	@RequestMapping("feedbackDR")
