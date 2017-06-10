@@ -1,9 +1,6 @@
 package es.ucm.fdi.iw.controller;
 
-import java.io.IOException;
 import java.security.Principal;
-import java.sql.Date;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,19 +22,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import es.ucm.fdi.iw.customValidation.ValidarContrasenia;
 import es.ucm.fdi.iw.customValidation.ValidarContraseniaFarma;
 import es.ucm.fdi.iw.customValidation.ValidarContraseniaMedico;
-import es.ucm.fdi.iw.model.ExistenciaMedicamento;
-import es.ucm.fdi.iw.model.ExistenciaPedido;
 import es.ucm.fdi.iw.model.Farmaceutico;
 import es.ucm.fdi.iw.model.Farmacia;
-import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Paciente;
-import es.ucm.fdi.iw.model.Pedidos;
 import es.ucm.fdi.iw.validation.Codigo;
 import es.ucm.fdi.iw.validation.FarmaceuticoForm;
 import es.ucm.fdi.iw.validation.MedicoForm;
@@ -71,6 +62,11 @@ public class RootController {
 	public String avisoAction()
 	{
 		return"avisoLegal";
+	}
+	@RequestMapping("/conocenos")
+	public String conocenosAction()
+	{
+		return"conocenos";
 	}
 	/*----LOGIN Y LOGOUT-----*/
 	@RequestMapping("/login")
@@ -254,118 +250,4 @@ public class RootController {
 	public void setValContra(ValidarContrasenia valContra) {
 		this.valContra = valContra;
 	}
-
-		/*---PRUEBAS----*/
-		@Transactional
-		@RequestMapping("mm")//PARA PRUEBAS. NO BORRAR.
-		public @ResponseBody String mm() throws IOException{
-			Farmacia f= entityManager.find(Farmacia.class, (long)2);
-			Paciente pac= entityManager.find(Paciente.class, (long)5);
-			Medicamento m= entityManager.find(Medicamento.class, (long)7024491);
-			Medicamento m2= entityManager.find(Medicamento.class, (long)9676384);
-			Medicamento m3= entityManager.find(Medicamento.class, (long)7098249);
-			//EXISTENCIAS PEDIDO //NO PUEDE HABER DOS EXISTENCIAS CON EL MISMO MEDICAMENTO EN EL MISMO PEDIDO, PERO SI EN DISTINTOS
-			ExistenciaPedido ex = new ExistenciaPedido() ;
-			ex.setCantidad(5);
-			ex.setMedicamento(m);
-			ex.setFechaCaducidad(new Date(5, 12, 2017));
-			
-			ExistenciaPedido ex2 = new ExistenciaPedido() ;
-			ex2.setCantidad(5);
-			ex2.setMedicamento(m2);
-			ex2.setFechaCaducidad(new Date(5, 12, 2017));
-			
-			ExistenciaPedido ex3 = new ExistenciaPedido() ;
-			ex3.setCantidad(5);
-			ex3.setMedicamento(m3);
-			ex3.setFechaCaducidad(new Date(5, 12, 2017));
-			
-			ExistenciaPedido ex4 = new ExistenciaPedido() ;
-			ex4.setCantidad(15);
-			ex4.setMedicamento(m2);
-			ex4.setFechaCaducidad(new Date(5, 12, 2017));
-			
-			ExistenciaPedido ex5 = new ExistenciaPedido() ;
-			ex5.setCantidad(2);
-			ex5.setMedicamento(m3);
-			ex5.setFechaCaducidad(new Date(5, 12, 2017));
-			
-			entityManager.persist(ex);
-			entityManager.persist(ex2);
-			entityManager.persist(ex3);
-			entityManager.persist(ex4);
-			entityManager.persist(ex5);
-
-			
-			ExistenciaMedicamento exm = new ExistenciaMedicamento() ;
-			exm.setCantidad(10);
-			exm.setMedicamento(m);
-			exm.setFechaCaducidad(new Date(5, 12, 2017));
-			exm.setFarmacia(f);
-			
-			ExistenciaMedicamento exm2 = new ExistenciaMedicamento() ;
-			exm2.setCantidad(10);
-			exm2.setMedicamento(m2);
-			exm2.setFechaCaducidad(new Date(5, 12, 2017));
-			exm2.setFarmacia(f);
-			
-			ExistenciaMedicamento exm3 = new ExistenciaMedicamento() ;
-			exm3.setCantidad(10);
-			exm3.setMedicamento(m3);
-			exm3.setFarmacia(f);
-			exm3.setFechaCaducidad(new Date(5, 12, 2017));
-			entityManager.persist(exm);
-			entityManager.persist(exm2);
-			entityManager.persist(exm3);
-			
-			
-			
-			
-			
-
-			List<ExistenciaPedido> listaExis = new ArrayList<ExistenciaPedido>();
-			List<ExistenciaPedido> listaExis2 = new ArrayList<ExistenciaPedido>();
-			listaExis.add(ex);
-			listaExis.add(ex2);
-			listaExis.add(ex3);
-			listaExis2.add(ex4);
-			listaExis2.add(ex5);
-			
-			Pedidos p = new Pedidos();
-			p.setEstadoPedido(0);
-			p.setExistenciasPedido(listaExis);
-			p.setFarmacia(f);
-			p.setFechaPedido(new Date(5, 12, 2017));
-			p.setPaciente(pac);
-			
-			Pedidos p2 = new Pedidos();
-			p2.setEstadoPedido(0);
-			p2.setExistenciasPedido(listaExis2);
-			p2.setFarmacia(f);
-			p2.setFechaPedido(new Date(9, 12, 2017));
-			p2.setPaciente(pac);
-			
-			entityManager.persist(p);
-			entityManager.persist(p2);
-			
-			ex.setPedido(p);
-			ex2.setPedido(p);
-			ex3.setPedido(p);
-			ex4.setPedido(p2);
-			ex5.setPedido(p2);
-			
-			entityManager.persist(ex);
-			entityManager.persist(ex2);
-			entityManager.persist(ex3);
-			entityManager.persist(ex4);
-			entityManager.persist(ex5);
-			
-		
-				
-			
-			
-			return "redirect:/index";
-			
-		}	
-
 }
