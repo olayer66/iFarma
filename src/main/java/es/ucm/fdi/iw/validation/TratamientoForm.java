@@ -63,7 +63,7 @@ public class TratamientoForm {
 	}
 
 	public Date getFechaInicioFormateada() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
 		try {
 			return new Date(format.parse(this.fechaInicio).getTime());
@@ -83,7 +83,7 @@ public class TratamientoForm {
 	}
 
 	public Date getFechaFinFormateada() {
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 
 		try {
 			return new Date(format.parse(this.fechaFin).getTime());

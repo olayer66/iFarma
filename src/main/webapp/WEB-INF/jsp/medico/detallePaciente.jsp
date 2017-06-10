@@ -190,11 +190,17 @@
 							<p><sf:errors path="medicamento" cssClass="error"/></p>
 						</div>
 						<div class="form-group">
-							<sf:input path="fechaInicio" type="date" class="form-control" placeholder="Fecha inicio tratamiento" value="" />
+							<div class="input-group input-append date datePicker" id="datePickerPaciente">
+								<sf:input path="fechaInicio" class="form-control date-picker" placeholder="Fecha inicio tratamiento" />
+								<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+							</div>
 							<p><sf:errors path="fechaInicio" cssClass="error"/></p>
 						</div>
 						<div class="form-group">
-							<sf:input path="fechaFin" type="date" class="form-control" placeholder="Fecha fin tratamiento" value="" />
+							<div class="input-group input-append date datePicker" id="datePickerPaciente">
+								<sf:input path="fechaFin" class="form-control date-picker" placeholder="Fecha fin tratamiento" />
+								<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+							</div>
 							<p><sf:errors path="fechaFin" cssClass="error"/></p>
 						</div>
 						<div class="form-group">

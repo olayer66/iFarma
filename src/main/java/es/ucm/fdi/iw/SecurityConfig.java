@@ -22,6 +22,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
         		.antMatchers("/static/**", "/logout", "/403","/index","/",
         				"/estadoDenegado",
+        				"/avisoLegal",
         				"/nuevoFarmaceutico",
         				"/nuevoMedico",
         				"/validarPaciente",
