@@ -59,8 +59,6 @@
 																	</c:forEach>
 																</p>
 															</sf:form>
-
-															<a href="#" class="btn btn-sm btn-danger" onclick="$(this).parent().parent().parent().parent().remove()">Eliminar</a>
 														</div>
 													</div>
 												</div>
@@ -121,7 +119,11 @@
 			</div>
 
 			<div class="modal-body">
-				<h5>AYUDAAAAAA</h5>
+				<h4>A continuacion se le explica el funcionamiento del control de tratamientos.</h4>
+				<p>Para poder marcar la toma debera hacer click en el boton <i class="glyphicon glyphicon-ok-circle"></i>, esto añadira una toma al sistema.</p>
+				<p>Si el nivel de medicamento es reducido el sistema realizara un pedido del mismo que usted podra consultar en la ventana de <a href="/paciente/pedidosPc">Pedidos</a>.</p>
+				<p>Una vez finalize el tratamiento este se eliminara del su pantalla.</p>
+				
 			</div>
 		</div>
 	</div>

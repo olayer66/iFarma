@@ -89,6 +89,7 @@ public class PacienteController {
 				if (form.getAccion().equals("add")) {
 					tratamiento.registraToma();
 				} else if (form.getAccion().equals("sub")) {
+					nuevoPedido(tratamiento.getMedicamento(), 1);
 					tratamiento.eliminaToma();
 				}
 
