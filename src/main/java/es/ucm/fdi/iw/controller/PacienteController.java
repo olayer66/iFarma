@@ -287,11 +287,12 @@ public class PacienteController {
 				Medico medico = entityManager.find(Medico.class, Long.parseLong(form.getDestinatario()));
 				Mensaje nuevoMensaje = new Mensaje();
 
-				mensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
+				nuevoMensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
 				nuevoMensaje.setDestinatario(medico);
 				nuevoMensaje.setRemitente(paciente);
 				nuevoMensaje.setAsunto(form.getAsunto());
 				nuevoMensaje.setMensaje(form.getMensaje());
+				paciente.getMensajesEnviados().add(nuevoMensaje);
 
 				entityManager.persist(nuevoMensaje);
 
@@ -309,7 +310,7 @@ public class PacienteController {
 			model.addAttribute("error", true);
 			model.addAttribute("mensaje", form);
 
-			return "paciente/feedback";
+			return "paciente/feedbackDR";
 		}
 
 		Mensaje mensaje = new Mensaje();
@@ -322,7 +323,6 @@ public class PacienteController {
 		mensaje.setAsunto(form.getAsunto());
 		mensaje.setMensaje(form.getMensaje());
 		paciente.getMensajesEnviados().add(mensaje);
-		medico.getMensajesRecibidos().add(mensaje);
 
 		entityManager.persist(mensaje);
 

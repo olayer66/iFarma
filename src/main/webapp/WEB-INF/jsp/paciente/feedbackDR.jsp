@@ -41,7 +41,7 @@
                        <tr>
                             <td><input type="checkbox"></td>
                             <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
-                            <td class="mailbox-name"><a href="#">Dr. ${mensaje.remitente.apellidos}</a></td>
+                            <td class="mailbox-name"><a href="/paciente/feedbackDR/${mensaje.id}">Dr. ${mensaje.remitente.apellidos}</a></td>
                             <td class="mailbox-subject"><b>${mensaje.asunto}</b>${mensaje.mensaje}</td>
                             <td class="mailbox-attachment"></td>
                             <td class="mailbox-date">${mensaje.fechaMensaje}</td>
