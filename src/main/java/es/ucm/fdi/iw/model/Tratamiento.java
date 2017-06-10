@@ -11,9 +11,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQueries({
+	@NamedQuery(
+			name="Tratamiento.enCurso",
+			query="FROM Tratamiento WHERE fechaFin > sysdate AND paciente = :paciente"
+	),
+	@NamedQuery(
+			name="Tratamiento.finalizados",
+			query="FROM Tratamiento WHERE fechaFin < sysdate AND paciente = :paciente"
+	),
 })
 public class Tratamiento implements Serializable {
 	private static final long serialVersionUID = -8662915238597958222L;

@@ -3,6 +3,7 @@ package es.ucm.fdi.iw.model;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -190,7 +191,18 @@ public class Paciente extends Usuario {
 				encontrado=true;
 			}
 		}
-		
+
 	}
-	
+
+	public Boolean existeTratamientoEnCurso(Long medicamentoID) {
+		Date fecha = new Date(System.currentTimeMillis());
+
+		for (Tratamiento tratamiento: tratamiento) {
+			if (tratamiento.getMedicamento().getId() == medicamentoID && tratamiento.getFechaFin().after(fecha)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 }

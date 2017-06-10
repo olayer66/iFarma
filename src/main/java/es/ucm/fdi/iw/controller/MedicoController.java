@@ -92,9 +92,6 @@ public class MedicoController {
 			return "redirect:/denegado";
 		}
 
-		model.addAttribute("paciente", paciente);
-		model.addAttribute("medicamentos", entityManager.createQuery("FROM Medicamento").getResultList());
-
 		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
 			model.addAttribute("form", new TratamientoForm());
 		}
@@ -102,6 +99,8 @@ public class MedicoController {
 		if (request.getMethod().equals("POST")) {
 			if (bindingResult.hasErrors()) {
 				model.addAttribute("error", true);
+			} else if (paciente.existeTratamientoEnCurso(Long.parseLong(form.getMedicamento()))) {
+				model.addAttribute("tratamientoDuplicado", true);
 			} else {
 				Tratamiento tratamiento = new Tratamiento();
 
@@ -117,6 +116,11 @@ public class MedicoController {
 				entityManager.persist(tratamiento);
 			}
 		}
+
+		model.addAttribute("paciente", paciente);
+		model.addAttribute("medicamentos", entityManager.createQuery("FROM Medicamento").getResultList());
+		model.addAttribute("tratamientosEnCurso", entityManager.createNamedQuery("Tratamiento.enCurso").setParameter("paciente", paciente).getResultList());
+		model.addAttribute("tratamientosFinalizados", entityManager.createNamedQuery("Tratamiento.finalizados").setParameter("paciente", paciente).getResultList());
 
 		return "/medico/detallePaciente";
 	}

@@ -69,9 +69,14 @@ public class PacienteController {
 	@Transactional
 	@RequestMapping("/tratamiento")
 	public String tratamientoAction(@ModelAttribute("form") @Valid TomaForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
-		if(estadoValido())
-		{
+		if(!estadoValido()) {
+			return "/estadoDenegado";
+		}
+
 		Paciente paciente = this.getLoggedUser(sesion);
+		model.addAttribute("tratamientosEnCurso", entityManager.createNamedQuery("Tratamiento.enCurso").setParameter("paciente", paciente).getResultList());
+		model.addAttribute("tratamientosFinalizados", entityManager.createNamedQuery("Tratamiento.finalizados").setParameter("paciente", paciente).getResultList());
+
 
 		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
 			model.addAttribute("form", new TomaForm());
@@ -93,9 +98,6 @@ public class PacienteController {
 		}
 
 		return "paciente/tratamiento";
-		}else{
-			return "/estadoDenegado";
-		}
 	}
 
 	@RequestMapping("perfil")
