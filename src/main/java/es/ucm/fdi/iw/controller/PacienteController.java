@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,7 @@ import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
 import es.ucm.fdi.iw.model.Tratamiento;
+import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
 import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Medico;
@@ -67,6 +69,8 @@ public class PacienteController {
 	@Transactional
 	@RequestMapping("/tratamiento")
 	public String tratamientoAction(@ModelAttribute("form") @Valid TomaForm form, BindingResult bindingResult, Model model, HttpSession sesion, HttpServletRequest request) {
+		if(estadoValido())
+		{
 		Paciente paciente = this.getLoggedUser(sesion);
 
 		if (request.getMethod().equals("GET") || !bindingResult.hasErrors()) {
@@ -88,6 +92,9 @@ public class PacienteController {
 		}
 
 		return "paciente/tratamiento";
+		}else{
+			return "/estadoDenegado";
+		}
 	}
 
 	@RequestMapping("perfil")
@@ -336,6 +343,16 @@ public class PacienteController {
 		}
 
 		return paciente;
+	}
+	private boolean estadoValido()
+	{
+		Usuario usuario;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		usuario=entityManager.createNamedQuery("Usuario.findByUsuario", Usuario.class).setParameter("usuario", auth.getName()).getSingleResult();
+		if(usuario.getEstado()!=1)
+			return false;
+		else
+			return true;
 	}
 
 }

@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class FarmaciaForm {
 	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[A-Za-z]*",message = "El nombre no puede contener numeros ni caracteres especiales")
+	@Pattern(regexp = "^[a-zA-Z ]+$",message = "El nombre no puede contener numeros ni caracteres especiales")
 	private String nombre;
 	@NotEmpty(message = "El campo esta vacio")
 	@Pattern(regexp = "[0-9]*",message = "El telefono solo puede contener caracteres numericos")

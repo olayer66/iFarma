@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +32,7 @@ import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
 import es.ucm.fdi.iw.model.Tratamiento;
+import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.validation.StockForm;
 import es.ucm.fdi.iw.validation.TratamientoForm;
 
@@ -53,7 +55,8 @@ public class FarmaciaController {
 	@Transactional
 	@RequestMapping("farmaceutico")
 	public String farmaceuticoAction(HttpSession sesion, Model model,HttpServletRequest request,@ModelAttribute("form") @Valid es.ucm.fdi.iw.validation.FarmaciaForm form, BindingResult bindingResult) {
-		
+		if(estadoValido())
+		{
 		String username = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		Farmaceutico farmaceutico = entityManager.createQuery(
@@ -98,6 +101,9 @@ public class FarmaciaController {
 		
 
 		return "farmacia/farmaceutico";
+		}else{
+			return "/estadoDenegado";
+		}
 	}
 
 
@@ -269,6 +275,16 @@ public class FarmaciaController {
 	@RequestMapping("modificarFarmaceutico")
 	public String modificarfarmaceuticoAction() {
 		return "farmacia/modificarFarmaceutico";
+	}
+	private boolean estadoValido()
+	{
+		Usuario usuario;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		usuario=entityManager.createNamedQuery("Usuario.findByUsuario", Usuario.class).setParameter("usuario", auth.getName()).getSingleResult();
+		if(usuario.getEstado()!=1)
+			return false;
+		else
+			return true;
 	}
 	
 	
