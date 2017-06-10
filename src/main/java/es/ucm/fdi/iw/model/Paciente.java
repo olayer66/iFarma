@@ -188,5 +188,17 @@ public class Paciente extends Usuario {
 	public void setCodigoAut(String codigoAut) {
 		this.codigoAut = codigoAut;
 	}
+
+	public void actualizaListaPedidos(long id) {
+		int i=0;
+		boolean encontrado = false;
+		while (i<listaPedidos.size()&&!encontrado){
+			if(listaPedidos.get(i).getId()==id){
+				listaPedidos.get(i).setEstadoPedido(1);
+				encontrado=true;
+			}
+		}
+		
+	}
 	
 }

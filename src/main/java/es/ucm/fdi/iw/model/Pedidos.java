@@ -114,6 +114,7 @@ public class Pedidos implements Serializable {
 	
 		private void realizo(){
 			List<ExistenciaMedicamento> listaStock =  farmacia.getStock();
+			paciente.actualizaListaPedidos(id);
 			
 				for(ExistenciaPedido ePed :existenciasPedido){
 					for (ExistenciaMedicamento eMed :listaStock) {

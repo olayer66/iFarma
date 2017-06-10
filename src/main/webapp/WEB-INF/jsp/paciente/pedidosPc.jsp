@@ -16,29 +16,18 @@
                <thead>
                   <tr>
                     <th>ID pedido</th>
-                    <th>Pedido</th>
+                    <th>Farmacia del pedido</th>
                     <th>Fecha</th>
-                    <th>Estado</th>
-                    <th>Realizar pedido</th>         
+                    <th>Estado</th>      
                   </tr>
                   </thead>
                   <tbody>
                   <c:forEach var="pedidos" items="${listaPed}">
                   <tr>
 					<td><a href=/paciente/verPedido?id=${pedidos.id}>${pedidos.id}</a></td>
-                    <td>${pedidos.id}</td>
+                    <td>${pedidos.farmacia.nombre}</td>
                     <td>${pedidos.fechaPedido}</td>
                     <td><span class="label label-success">${pedidos.estadoPedido==0 ? 'Pendiente' : 'Entrergado'}</span></td>
-                    <td> <div class="btn-group">
-                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Action <span class="caret"></span>
-                         </button>
-                          <ul class="dropdown-menu">
-                          <li><a href="#">Pendiente</a></li>
-                          <li><a href="#">Entregado</a></li>
-                        </ul>
-                      </div>
-                    </td>
                   	</tr>
            		  </c:forEach>
                   </tbody>

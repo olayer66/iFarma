@@ -1,6 +1,7 @@
 
 package es.ucm.fdi.iw.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,7 @@ import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
 import es.ucm.fdi.iw.model.Tratamiento;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
+import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.validation.MensajeForm;
 import es.ucm.fdi.iw.validation.TomaForm;
@@ -91,7 +93,10 @@ public class PacienteController {
 	@RequestMapping("perfil")
 	public String perfilAction( HttpSession sesion) {
 		Paciente paciente = this.getLoggedUser(sesion);
-
+		
+		//Medicamento m= entityManager.find(Medicamento.class, (long)7024491); 
+		//nuevoPedido(m,20); //para probar funcion, funciona perfecta
+		
 		sesion.setAttribute("paciente", paciente);
 		return "paciente/perfil";
 	}
@@ -120,7 +125,92 @@ public class PacienteController {
 
 		return "paciente/pedidosPc";
 	}
+	
+	@Transactional
+	private void nuevoPedido( Medicamento medicamento, int cantidad) {
+		boolean continuar=true;
+		int i=0;
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Paciente paciente = entityManager.createQuery(
+        		"FROM Paciente WHERE usuario = :usuario", Paciente.class)
+                            .setParameter("usuario", username)
+                            .getSingleResult();
 
+			List<Pedidos> listaPed = paciente.getListaPedidos();
+			ExistenciaPedido nuevaExis = new ExistenciaPedido();
+			
+			
+			
+			
+			while(i< listaPed.size() && continuar){
+				if(listaPed.get(i).getEstadoPedido()==0){
+					continuar=false;	
+				}
+				i++;
+			}
+			if(continuar){//si no hay ningun pedido estado 0 crea el pedido
+				List<ExistenciaPedido> listaExis = new ArrayList<ExistenciaPedido>();
+				Pedidos nuevoPedido = new Pedidos();
+				nuevoPedido.setEstadoPedido(0);
+				nuevoPedido.setFarmacia(paciente.getFarmacia());
+				nuevoPedido.setPaciente(paciente);
+				nuevoPedido.setFechaPedido((new java.sql.Date(new Date().getDate())));
+								
+				nuevaExis.setCantidad(cantidad);
+				nuevaExis.setFechaCaducidad(new java.sql.Date(9, 12, 2020));
+				nuevaExis.setMedicamento(medicamento);
+				nuevaExis.setPedido(nuevoPedido);
+				listaExis.add(nuevaExis);
+				
+				nuevoPedido.setExistenciasPedido(listaExis);
+				listaPed.add(nuevoPedido);
+				paciente.setListaPedidos(listaPed);
+				
+				entityManager.persist(nuevaExis);
+				entityManager.persist(nuevoPedido);
+				entityManager.persist(paciente);
+			
+				
+				
+			}else{//si he encontrado un pedido estado 0 (i-1)
+				boolean existenciaencontrada=false;
+				int j=0;
+				Pedidos nuevoPedido = listaPed.get(i-1);
+				listaPed.remove(i-1);
+				List<ExistenciaPedido> listaExis =nuevoPedido.getExistenciasPedido();
+				
+				while(j < listaExis.size() && !existenciaencontrada){
+					if(listaExis.get(j).getMedicamento()==medicamento){
+						existenciaencontrada=true;;	
+					}
+					j++;
+				}
+				
+				if(existenciaencontrada){
+					nuevaExis = listaExis.get(j-1);
+					listaExis.remove(j-1);
+					nuevaExis.setCantidad(nuevaExis.getCantidad()+cantidad);
+					
+				}else{
+					nuevaExis.setCantidad(cantidad);
+					nuevaExis.setFechaCaducidad(new java.sql.Date(9, 12, 2020));
+					nuevaExis.setMedicamento(medicamento);
+					nuevaExis.setPedido(nuevoPedido);
+				}
+				
+				
+				listaExis.add(nuevaExis);
+				
+				nuevoPedido.setExistenciasPedido(listaExis);
+				listaPed.add(nuevoPedido);
+				paciente.setListaPedidos(listaPed);
+				
+				entityManager.persist(nuevaExis);
+				entityManager.persist(nuevoPedido);
+				entityManager.persist(paciente);
+			}
+	
+	}
 
 	@RequestMapping("verPedido")
 	public String pedidoAction(HttpSession sesion,@RequestParam long id, Model model) {

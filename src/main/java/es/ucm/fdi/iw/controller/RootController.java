@@ -355,7 +355,12 @@ public class RootController {
 			entityManager.persist(ex4);
 			entityManager.persist(ex5);
 			
+		
+				
+			
+			
 			return "redirect:/index";
 			
 		}	
+
 }
