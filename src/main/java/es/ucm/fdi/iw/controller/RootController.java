@@ -295,20 +295,20 @@ public class RootController {
 			ExistenciaMedicamento exm = new ExistenciaMedicamento() ;
 			exm.setCantidad(10);
 			exm.setMedicamento(m);
-			exm.setFechaCaducidad(new Date(5, 12, 2017));
+			exm.setFechaCaducidad(new Date(5, 12, 2017).toString());
 			exm.setFarmacia(f);
 			
 			ExistenciaMedicamento exm2 = new ExistenciaMedicamento() ;
 			exm2.setCantidad(10);
 			exm2.setMedicamento(m2);
-			exm2.setFechaCaducidad(new Date(5, 12, 2017));
+			exm2.setFechaCaducidad(new Date(5, 12, 2017).toString());
 			exm2.setFarmacia(f);
 			
 			ExistenciaMedicamento exm3 = new ExistenciaMedicamento() ;
 			exm3.setCantidad(10);
 			exm3.setMedicamento(m3);
 			exm3.setFarmacia(f);
-			exm3.setFechaCaducidad(new Date(5, 12, 2017));
+			exm3.setFechaCaducidad(new Date(5, 12, 2017).toString());
 			entityManager.persist(exm);
 			entityManager.persist(exm2);
 			entityManager.persist(exm3);

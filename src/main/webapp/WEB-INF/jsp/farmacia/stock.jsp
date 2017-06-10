@@ -88,10 +88,14 @@
 												<sf:input path="cantidad" class="form-control" placeholder="Cantidad" />
 												<p><sf:errors path="cantidad" cssClass="error"/></p>
 											</div>											
-											<div class="form-group">
-												<sf:input path="fechaCaducidad" type="date" class="form-control" placeholder="Fecha de caducidad" value="" />
-												<p><sf:errors path="fechaCaducidad" cssClass="error"/></p>
-											</div>
+										 <div class="form-group">
+						                   	<label for="fechaCaducidad">Fecha Caducidad:</label>	                    	
+						                   	<div class="input-group input-append date datePicker" id="datePickerPaciente">
+						                              <sf:input path="fechaCaducidad" class="form-control date-picker" id="fechaCaducidad"/>
+						                              <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+						                              <p><sf:errors path="fechaCaducidad" cssClass="error"/></p>
+											</div>    	
+						                   </div>
 										</div>
 					
 										<button type="submit" class="btn btn-success">Añadir stock</button>

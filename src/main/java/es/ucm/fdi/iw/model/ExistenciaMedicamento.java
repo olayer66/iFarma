@@ -28,7 +28,7 @@ public class ExistenciaMedicamento implements Serializable {
 	@Column(name = "cantidad", nullable = false)
 	private int cantidad;
 	@Column(name = "fecha_caducidad", nullable = false)
-	private Date fechaCaducidad;
+	private String fechaCaducidad;
 	
 	
 	//getters y setters
@@ -48,10 +48,10 @@ public class ExistenciaMedicamento implements Serializable {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
-	public Date getFechaCaducidad() {
+	public String getFechaCaducidad() {
 		return fechaCaducidad;
 	}
-	public void setFechaCaducidad(Date fechaCaducidad) {
+	public void setFechaCaducidad(String fechaCaducidad) {
 		this.fechaCaducidad = fechaCaducidad;
 	}
 	public void setFarmacia(Farmacia f){

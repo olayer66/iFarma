@@ -144,7 +144,7 @@ public class FarmaciaController {
 
 					existenciaStock.setMedicamento(entityManager.find(Medicamento.class, Long.parseLong(form.getMedicamento())));
 					existenciaStock.setCantidad(form.getCantidad());	
-					existenciaStock.setFechaCaducidad(form.getFechaFormateada());
+					existenciaStock.setFechaCaducidad(form.getFechaCaducidad());
 					existenciaStock.setFarmacia(farmacia);
 					
 					int indexExiste=farmacia.contieneMedicamento(existenciaStock);
