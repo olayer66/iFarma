@@ -66,7 +66,12 @@ public class RootController {
 		model.addAttribute("control", new Codigo());
 		return "index";
 	}
-	
+	/*---FOOTER---*/
+	@RequestMapping("/avisoLegal")
+	public String avisoAction()
+	{
+		return"avisoLegal";
+	}
 	/*----LOGIN Y LOGOUT-----*/
 	@RequestMapping("/login")
 	public String login(HttpSession sesion, Principal principal) {
