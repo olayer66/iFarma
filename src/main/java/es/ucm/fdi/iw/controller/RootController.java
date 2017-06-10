@@ -250,10 +250,4 @@ public class RootController {
 	public void setValContra(ValidarContrasenia valContra) {
 		this.valContra = valContra;
 	}
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 0f33a36fe736c04ccead8e60f92656f1adbb99cc
 }
