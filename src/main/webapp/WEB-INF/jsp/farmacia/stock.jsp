@@ -22,7 +22,6 @@
                   <th>Cant. en stock</th>
 				  <th>Precio</th>
                   <th>Fecha de Caducidad</th>
-                  <th>Acciones</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,10 +32,6 @@
 	                  <td> ${stock.cantidad}</td>
 	                  <td> ${stock.medicamento.precio}</td>
 	                  <td> ${stock.fechaCaducidad}</td>
-	                  <td>
-	                  	<div id="btnAnadirStock" data-id="1" class="btn btn-success">Añadir</div>
-	                  	<div id="btnEliminarMed" data-id="1" class="btn btn-danger">Eliminar</div>
-	                  </td>
 	                </tr>
                 </c:forEach>
                 </tbody>
