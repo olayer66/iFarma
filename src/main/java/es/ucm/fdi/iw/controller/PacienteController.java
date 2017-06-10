@@ -2,7 +2,7 @@
 package es.ucm.fdi.iw.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -88,6 +88,7 @@ public class PacienteController {
 				}
 
 				entityManager.persist(tratamiento);
+				entityManager.persist(paciente);
 			}
 		}
 
@@ -100,10 +101,10 @@ public class PacienteController {
 	@RequestMapping("perfil")
 	public String perfilAction( HttpSession sesion) {
 		Paciente paciente = this.getLoggedUser(sesion);
-		
-		//Medicamento m= entityManager.find(Medicamento.class, (long)7024491); 
+
+		//Medicamento m= entityManager.find(Medicamento.class, (long)7024491);
 		//nuevoPedido(m,20); //para probar funcion, funciona perfecta
-		
+
 		sesion.setAttribute("paciente", paciente);
 		return "paciente/perfil";
 	}
@@ -132,7 +133,7 @@ public class PacienteController {
 
 		return "paciente/pedidosPc";
 	}
-	
+
 	@Transactional
 	private void nuevoPedido( Medicamento medicamento, int cantidad) {
 		boolean continuar=true;
@@ -145,13 +146,13 @@ public class PacienteController {
 
 			List<Pedidos> listaPed = paciente.getListaPedidos();
 			ExistenciaPedido nuevaExis = new ExistenciaPedido();
-			
-			
-			
-			
+
+
+
+
 			while(i< listaPed.size() && continuar){
 				if(listaPed.get(i).getEstadoPedido()==0){
-					continuar=false;	
+					continuar=false;
 				}
 				i++;
 			}
@@ -161,62 +162,62 @@ public class PacienteController {
 				nuevoPedido.setEstadoPedido(0);
 				nuevoPedido.setFarmacia(paciente.getFarmacia());
 				nuevoPedido.setPaciente(paciente);
-				nuevoPedido.setFechaPedido((new java.sql.Date(new Date().getDate())));
-								
+				nuevoPedido.setFechaPedido(new Date(System.currentTimeMillis()));
+
 				nuevaExis.setCantidad(cantidad);
-				nuevaExis.setFechaCaducidad(new java.sql.Date(9, 12, 2020));
+				nuevaExis.setFechaCaducidad(new Date(9, 12, 2020));
 				nuevaExis.setMedicamento(medicamento);
 				nuevaExis.setPedido(nuevoPedido);
 				listaExis.add(nuevaExis);
-				
+
 				nuevoPedido.setExistenciasPedido(listaExis);
 				listaPed.add(nuevoPedido);
 				paciente.setListaPedidos(listaPed);
-				
+
 				entityManager.persist(nuevaExis);
 				entityManager.persist(nuevoPedido);
 				entityManager.persist(paciente);
-			
-				
-				
+
+
+
 			}else{//si he encontrado un pedido estado 0 (i-1)
 				boolean existenciaencontrada=false;
 				int j=0;
 				Pedidos nuevoPedido = listaPed.get(i-1);
 				listaPed.remove(i-1);
 				List<ExistenciaPedido> listaExis =nuevoPedido.getExistenciasPedido();
-				
+
 				while(j < listaExis.size() && !existenciaencontrada){
 					if(listaExis.get(j).getMedicamento()==medicamento){
-						existenciaencontrada=true;;	
+						existenciaencontrada=true;;
 					}
 					j++;
 				}
-				
+
 				if(existenciaencontrada){
 					nuevaExis = listaExis.get(j-1);
 					listaExis.remove(j-1);
 					nuevaExis.setCantidad(nuevaExis.getCantidad()+cantidad);
-					
+
 				}else{
 					nuevaExis.setCantidad(cantidad);
-					nuevaExis.setFechaCaducidad(new java.sql.Date(9, 12, 2020));
+					nuevaExis.setFechaCaducidad(new Date(9, 12, 2020));
 					nuevaExis.setMedicamento(medicamento);
 					nuevaExis.setPedido(nuevoPedido);
 				}
-				
-				
+
+
 				listaExis.add(nuevaExis);
-				
+
 				nuevoPedido.setExistenciasPedido(listaExis);
 				listaPed.add(nuevoPedido);
 				paciente.setListaPedidos(listaPed);
-				
+
 				entityManager.persist(nuevaExis);
 				entityManager.persist(nuevoPedido);
 				entityManager.persist(paciente);
 			}
-	
+
 	}
 
 	@RequestMapping("verPedido")
@@ -238,9 +239,8 @@ public class PacienteController {
 			log.info("Acceso denegado");
 		}else{
 			log.info("tamaño salida de Existencias:" +listEx.size());
-			Date date= new Date();//fecha actual
 
-			model.addAttribute("fecha",date.toString());
+			model.addAttribute("fecha", new Date(System.currentTimeMillis()));
 			model.addAttribute("total", pedidos.getPrecioTotal());
 			model.addAttribute("listEx", listEx);
 			model.addAttribute("pedido", pedidos);
@@ -287,11 +287,12 @@ public class PacienteController {
 				Medico medico = entityManager.find(Medico.class, Long.parseLong(form.getDestinatario()));
 				Mensaje nuevoMensaje = new Mensaje();
 
-				nuevoMensaje.setFechaMensaje(new java.sql.Date(new Date().getDate()));
+				nuevoMensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
 				nuevoMensaje.setDestinatario(medico);
 				nuevoMensaje.setRemitente(paciente);
 				nuevoMensaje.setAsunto(form.getAsunto());
 				nuevoMensaje.setMensaje(form.getMensaje());
+				paciente.getMensajesEnviados().add(nuevoMensaje);
 
 				entityManager.persist(nuevoMensaje);
 
@@ -309,19 +310,19 @@ public class PacienteController {
 			model.addAttribute("error", true);
 			model.addAttribute("mensaje", form);
 
-			return "medico/feedback";
+			return "paciente/feedbackDR";
 		}
 
 		Mensaje mensaje = new Mensaje();
 		Paciente paciente = this.getLoggedUser(sesion);
-		Medico medico = entityManager.find(Medico.class, Long.parseLong(form.getDestinatario()));
+		Medico medico = paciente.getMedCabecera();
 
-		mensaje.setFechaMensaje(new java.sql.Date(new Date().getDate()));
+		mensaje.setFechaMensaje(new Date(System.currentTimeMillis()));
 		mensaje.setDestinatario(medico);
 		mensaje.setRemitente(paciente);
 		mensaje.setAsunto(form.getAsunto());
 		mensaje.setMensaje(form.getMensaje());
-		medico.getMensajesEnviados().add(mensaje);
+		paciente.getMensajesEnviados().add(mensaje);
 
 		entityManager.persist(mensaje);
 
