@@ -22,13 +22,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import es.ucm.fdi.iw.customValidation.ValidarContrasenia;
+import es.ucm.fdi.iw.customValidation.ValidarContraseniaFarma;
+import es.ucm.fdi.iw.customValidation.ValidarContraseniaMedico;
 import es.ucm.fdi.iw.model.ExistenciaMedicamento;
 import es.ucm.fdi.iw.model.ExistenciaPedido;
 import es.ucm.fdi.iw.model.Farmaceutico;
@@ -53,6 +54,10 @@ public class RootController {
 	
 	@Autowired
 	private ValidarContrasenia valContra;
+	@Autowired
+	private ValidarContraseniaMedico valContraMedico;
+	@Autowired
+	private ValidarContraseniaFarma valContraFarma;
 	 
 	/*-----INDEX-----*/
 	@RequestMapping({"","/", "/index"})
@@ -177,6 +182,7 @@ public class RootController {
 	@RequestMapping(value = "/nuevoMedicoSubmit", method = RequestMethod.POST)
 	public String nuevoMedicoSubmit(@ModelAttribute("nuevo") @Valid MedicoForm nuevo, BindingResult bindingResult, Model model,
 			HttpSession sesion) {
+		valContraMedico.validate(nuevo, bindingResult);
 		if (bindingResult.hasErrors()) {
 			log.warn("Datos no validos en el form de entrada");
 			return "nuevoMedico";
@@ -198,6 +204,7 @@ public class RootController {
 	@Transactional
 	@RequestMapping(value = "/nuevoFarmaceuticoSubmit", method = RequestMethod.POST)
 	public 	String nuevoFarmacueticoSubmit(@ModelAttribute("nuevofarma") @Valid FarmaceuticoForm nuevo, BindingResult bindingResult, Model model) {
+		valContraFarma.validate(nuevo, bindingResult);
 		if (bindingResult.hasErrors()) {
 			log.warn("Datos no validos en el form de entrada");
 			return "nuevoFarmaceutico";

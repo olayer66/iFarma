@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <h1>iFarma</h1>
-<h2>Integrantes</h2>
+<h2>Integrantes:</h2>
 <ul>
     <li>Jose Luis Sanchez Garcia</li>
     <li>Alvaro Navas Sanchez</li>
@@ -16,9 +16,17 @@
 <h2>Proyecto</h2>
 
 <h3>¿Que es?</h3>
-<p>Una aplicación web que permite la realización de pedidos farmacéuticos de manera autónoma también permitiendo el seguimiento del paciente por el médico de cabecera.</p>
+<p>Una aplicación web que facilita la atencion medica, dando herramientas a los participantes en la misma(Medicos, pacientes, farmacias) para mejorar tanto la comunicacion entre los mismo, como descongestionar el sistema sanitario.</p>
 <h3>¿Por qué es útil?</h3>
-<p>Con esta aplicación se facilita la compra de los medicamentos a los usuarios y el seguimiento de las tomas del medicamento. También es útil ya que facilita un método de consulta con el medico si la necesidad de ir a la consulta.</p>
+<p>Con esta aplicación se facilita:
+	<ul>
+		<li>La comunicacion entre paciente y medico.</li>
+		<li>La realizacion de pedidos de medicamentos asi como su gestion.</li>
+		<li>El seguimiento del tratamiento asignado a un paciente por parte del mismo y del medico.</li>
+		<li>La gestion de los pedidos por parte de la farmacia.</li>
+		<li>La gestion del Stock de la farmacia por parte del farmaceutico.</li>
+	</ul>
+</p>
 <h3>¿A quién está destinada?</h3>
 <p>Los principales usuarios a los que está destinada la aplicación son.</p>
 <ul>
@@ -28,26 +36,47 @@
 </ul>
 <h3>¿Cómo Funciona?</h3>
 <ul>
-	<li>El médico es el encargado de dar de alta un paciente, y el que rellena su ficha para encargar su medicación, a la cual tendrán acceso, tanto farmacéuticos como el propio paciente, pero sólo podrá ser modificada por el médico.</li>
-	<li>La farmacia que tramitará el pedido será elegida a la hora de dar de alta al paciente, entre las existentes en el sistema, se pondrán de acuerdo el médico y el paciente para elegir la más conveniente. El farmacéutico será el encargado de tener listas las medicinas del pedido y de proporcionarle al paciente el día que le toque.</li>
-	<li>El usuario verá la medicación que debe tomar, y aunque esta se actualice automáticamente con el paso del tiempo, podrá modificarla en el caso de que se le haya olvidado alguna toma. También tendrá a su disposición un sistema de feedback con su médico pudiendo decirle cómo está reaccionando al tratamiento sin necesidad de ir a consulta.</li>
-	<li>El administrador/es de la web serán los encargados de administrar la base de datos de los medicamentos (añadir nuevos, borrar aquellos que estén descalagodados, etc). también tiene la función de comprobar y dar el ok a las altas de farmacias (comprobar el nº de farmacéutico del titular de la misma, así como el resto de datos) y de los médicos (comprobar el nº de colegiado y los datos del mismo en el colegio de médicos).</li>
+	<li>El médico es el encargado de dar de alta un paciente, ademas le asignara un tratamiento compuesto por medicamentos que tendran una periodicidad un numero de tomas y una fecha de finalizacion</li>
+	<li>La farmacia que tramitará el pedido será elegida a la hora de dar de alta al paciente(La seleccionara el paciente al validar sus datos), entre las existentes en el sistema. El farmacéutico será el encargado de tener listas las medicinas del pedido y de proporcionarselas al paciente.</li>
+	<li>El paciente verá la medicación que debe tomar y marcara las tomas que ha echo de la misma.</li>
 	<li>Los pedidos de medicamentos se realizarán de forma automática cuando este esté por debajo de porcentaje mínimo (24 horas de tratamiento, por ejemplo).</li>
-	<li>Los medicamentos estarán detallados en una BBDD con su información (contenido, prospecto, etc).</li>
+	<li>Tanto el medico como el paciente tendran un sistema de feedback mediante un cliente de mensajeria que les permitira comunicarse sin necesidad de acudir a cosulta</li>
+	<li>El administrador/es de la web serán los encargados de administrar la base de datos de los medicamentos (añadir nuevos, descalagodarlos en caso necesario, etc). También tiene la función de comprobar y validar las altas de:
+		Farmacias:
+		<ul>
+			<li>Comprobar el nº de colegiado del titular.</li>
+			<li>Resto de datos (direccion, telefono, etc).</li>
+		</ul>
+		Medicos:
+		<ul>
+			<li>Comprobar el nº de colegiado.</li>
+			<li>Datos personales y de contacto.</li>
+			<li>El centro de trabajo(Hospital, centro de salud, cosulta propia,etc).</li>
+		</ul>
+		Farmaceutico:
+		<ul>
+			<li>Comprobar el nº de colegiado.</li>
+			<li>Datos personales y de contacto.</li>
+		</ul>
+		Una vez validados se activara el acceso a la seccion que corresponde.
+	</li>
+	<li>Los medicamentos estarán detallados en una BBDD con su información (contenido, laboratorio, etc).</li>
+	<li>Los farmaceuticos tendran un listado con todas las farmacias de las que son titular, en las cuales podran realizar las siguientes acciones:
+		<ul>
+			<li>Comprobar los pedidos de medicamentos por parte de los pacientes que tengan esa farmacia con referente.</li>
+			<li>Confirmar (Entregar) los pedidos al paciente.</li>
+			<li>Añadir el Stock de la farmacia manualmente o con un fichero.</li>
+		</ul>
+	</li>
 </ul>
 <h2>Comentarios al profesor</h2>
-	<p> La contarseña es:</p>
-		<ul>
-			<li><strong>Usuario:</strong> admin</li>
-			<li><strong>Contraseña:</strong> 1234</li>
-		</ul>
-	<p> Es la misma para todos los tipos de usuario, esto se debe al tipo de validacion general que se usa en la aplicacion.</p>
+	<p> La incializacion de la aplicacion contiene un "import.sql" que contiene la insercion del usuario administrador.</p>
 <h2>Vistas</h2>
 <ul>
     <li><a href="http://localhost:8080" target="_blank">vista principal</a> - Vista principal de la web</li>
     <li><a href="http://localhost:8080/paciente" target="_blank">vista paciente</a> - Vista espcifica para el paciente </li>
     <li><a href="http://localhost:8080/medico" target="_blank">vista medico</a> - Vista espcifica para el medico</li>
-    <li><a href="http://localhost:8080/farmacia" target="_blank">vista farmacia</a> - Vista espcifica para la farmacia</li>
+    <li><a href="http://localhost:8080/farmacia" target="_blank">vista farmacia</a> - Vista espcifica para la farmaceutico</li>
     <li><a href="http://localhost:8080/admin" target="_blank">vista administrador</a> - Vista para la administracion del sitio</li>
 </ul>
 
