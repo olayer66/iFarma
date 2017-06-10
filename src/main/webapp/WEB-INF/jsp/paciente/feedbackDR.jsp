@@ -8,7 +8,7 @@
 <%@ include file="../../jspf/navbarPaciente.jspf"%>
 
 <div class="container">
-    <h2>Feedback Medico</h2>
+    <h2>Feedback Pacientes</h2>
     <hr>
 
     <div class="col-lg-2">
@@ -33,39 +33,39 @@
 
     <div class="col-lg-10">
         <div class="tab-content">
-			<!-- Recibidos -->
+            <!-- Recibidos -->
             <div id="inbox" class="tab-pane fade in active">
                 <table class="table table-hover table-striped">
                     <tbody>
-                    	<c:forEach items="${paciente.mensajesRecibidos}" var="mensaje">
-	                		<tr>
-	                            <td><input type="checkbox"></td>
-	                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
-	                            <td class="mailbox-name"><a href="/paciente/feedbackDR/${mensaje.id}">${mensaje.remitente}</a></td>
-	                            <td class="mailbox-subject">${mensaje.asunto}</td>
-	                            <td class="mailbox-attachment"></td>
-	                            <td class="mailbox-date">${mensaje.fechaMensaje}</td>
-	                        </tr>
-						</c:forEach>
+                       <c:forEach var = "mensaje" items="${paciente.mensajesRecibidos}"  >
+                       <tr>
+                            <td><input type="checkbox"></td>
+                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
+                            <td class="mailbox-name"><a href="#">Dr. ${mensaje.remitente.apellidos}</a></td>
+                            <td class="mailbox-subject"><b>${mensaje.asunto}</b>${mensaje.mensaje}</td>
+                            <td class="mailbox-attachment"></td>
+                            <td class="mailbox-date">${mensaje.fechaMensaje}</td>
+                        </tr>
+                      </c:forEach>
                     </tbody>
                 </table>
             </div>
 
-			<!-- Enviados -->
+            <!-- Enviados -->
             <div id="sent" class="tab-pane fade">
                 <table class="table table-hover table-striped">
-					<tbody>
-	                	<c:forEach items="${paciente.mensajesEnviados}" var="mensaje">
-	                		<tr>
-	                            <td><input type="checkbox"></td>
-	                            <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
-	                            <td class="mailbox-name"><a href="/paciente/feedbackDR/${mensaje.id}">${mensaje.destinatario}</a></td>
-	                            <td class="mailbox-subject">${mensaje.asunto}</td>
-	                            <td class="mailbox-attachment"></td>
-	                            <td class="mailbox-date">${mensaje.fechaMensaje}</td>
-	                        </tr>
-						</c:forEach>
-					</tbody>
+                    <tbody>
+                        <c:forEach var="mensaje" items="${paciente.mensajesEnviados}" >
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td class="mailbox-star"><a href="#"><i class="glyphicon glyphicon-star" style="color:#f39c12"></i></a></td>
+                                <td class="mailbox-name"><a href="#">Dr. ${mensaje.destinatario.apellidos}</a></td>
+                                <td class="mailbox-subject">${mensaje.asunto}</td>
+                                <td class="mailbox-attachment"></td>
+                                <td class="mailbox-date">${mensaje.fechaMensaje}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -84,10 +84,7 @@
                 <sf:form method="POST" modelAttribute="mensaje" action="/paciente/feedbackDR/nuevo">
                     <div class="box-body">
                         <div class="form-group">
-							<sf:select  path="destinatario" class="form-control">
-								<sf:option value="">Destinatario...</sf:option>
-								<sf:options items="${paciente.medCabecera}" itemValue="id"></sf:options>
-							</sf:select>
+                            <sf:input path="destinatario" class="form-control" value="Dr. ${paciente.medCabecera.apellidos}" readonly="true" />
                             <p><sf:errors path="destinatario" cssClass="error"/></p>
                         </div>
                         <div class="form-group">
@@ -110,6 +107,5 @@
         </div>
     </div>
 </div>
-
 
 <%@ include file="../../jspf/footer.jspf" %>
