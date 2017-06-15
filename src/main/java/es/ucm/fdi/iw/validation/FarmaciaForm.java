@@ -6,25 +6,26 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class FarmaciaForm {
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z ]+$",message = "El nombre no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String nombre;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[0-9]*",message = "El telefono solo puede contener caracteres numericos")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.numero ,message = Patrones.menNumero)
+	@Size(min=9,max=9,message = Patrones.menTelefono)
 	private String telefono;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "La direccion no puede contener caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.direccion ,message = Patrones.menDireccion)
 	private String direccion;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[A-Za-z]*",message = "La ciudad no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String ciudad;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[0-9]*",message = "El codigo postal ha de ser numerico")
-	@Size(min=5,max=5,message="El codigo postal ha de tener 5 digitos")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.numero ,message = Patrones.menNumero)
+	@Size(min=5,max=5,message=Patrones.menCodPostal)
 	private String codPostal;
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String provincia;
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String comAutonoma;
 	public String getNombre() {
 		return nombre;

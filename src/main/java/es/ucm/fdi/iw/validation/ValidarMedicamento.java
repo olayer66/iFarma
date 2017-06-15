@@ -10,14 +10,14 @@ import es.ucm.fdi.iw.model.Medicamento;
 public class ValidarMedicamento {
 	
 	private long id;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "El nombre no puede contener caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.texto,message = Patrones.menTexto)
 	private String nombre;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "La descripcion no puede contener caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.texto,message = Patrones.menTexto)
 	private String descripcion;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "El laboratorio no puede contener caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.texto,message = Patrones.menTexto)
 	private String laboratorio;
 	private boolean estado;
 	@DecimalMax("1000.0")

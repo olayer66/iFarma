@@ -8,24 +8,21 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
-
-import org.apache.log4j.Logger;
-import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class StockForm {
 	
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String medicamento;
-	@NotNull(message = "El campo esta vacio")
+	@NotNull(message = Patrones.menVacio)
 	@Min(value = 0)
 	@Max(value = 1000)
-	@Digits(message = "El campo debe ser un valor numérico", fraction = 0, integer = 1000)
+	@Digits(message = Patrones.menNumero, fraction = 0, integer = 1000)
 	private int cantidad;
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
+	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String fechaCaducidad;
 	public String getMedicamento() {
 		return medicamento;

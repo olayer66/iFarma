@@ -1,18 +1,19 @@
 package es.ucm.fdi.iw.validation;
 
-import org.apache.log4j.Logger;
+import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class MensajeForm {
-	private static final Logger log = Logger.getLogger(Login.class);
 	
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String destinatario;
 	
-	@NotEmpty(message = "El campo esta vacio")	
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String asunto;
 	
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String mensaje;
 
 	public String getDestinatario() {

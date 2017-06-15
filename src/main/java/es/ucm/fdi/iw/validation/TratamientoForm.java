@@ -7,29 +7,30 @@ import java.text.SimpleDateFormat;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
-import org.apache.log4j.Logger;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class TratamientoForm {
-	private static final Logger log = Logger.getLogger(Login.class);
 
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String paciente;
 
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String medicamento;
 
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
+	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String fechaInicio;
 
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
+	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String fechaFin;
 
-	@NotNull(message = "El campo esta vacio")
-	@Digits(message = "El cambio debe ser un valor numérico", fraction = 0, integer = 1)
+	@NotNull(message = Patrones.menVacio)
+	@Digits(message = Patrones.menNumero, fraction = 0, integer = 1)
 	private Integer numDosis;
 
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String periodicidad;
 
 	private String comentario;

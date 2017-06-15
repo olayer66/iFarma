@@ -4,15 +4,17 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.apache.log4j.Logger;
+import org.hibernate.validator.constraints.NotEmpty;
 
 
 public class Login {
 
-	@Size(min=1,message = "El campo esta vacio")
-	@Pattern(regexp = "[A-Za-z]*",message = "El usuario no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.usuario ,message = Patrones.menUsuario)
 	private String usuario;
-	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraseña no puede contener caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Size(min=4,max=8,message = Patrones.menContrasenia)
+	@Pattern(regexp = Patrones.usuario ,message = Patrones.menUsuario)
 	private String contrasenia;
 	private static final Logger log = Logger.getLogger(Login.class);
 

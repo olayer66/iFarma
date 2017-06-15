@@ -5,8 +5,8 @@ import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class Codigo {
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[0-9]*",message = "El codigo ha de ser numerico")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.numero ,message = Patrones.menNumero)
 	private String codigo;
 
 	public String getCodigo() {

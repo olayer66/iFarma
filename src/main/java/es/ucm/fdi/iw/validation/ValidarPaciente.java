@@ -14,59 +14,59 @@ public class ValidarPaciente {
 
 	//Datos que no se tocan
 	private long id;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "El nombre no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String nombre;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "los apellidos no pueden contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String apellidos;
-	@NotEmpty(message = "El campo esta vacio")
-	@Email(message = "La direccion email no es correcta")
+	@NotEmpty(message = Patrones.menVacio)
+	@Email(message = Patrones.menEmail)
 	private String email;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[0-9]*",message = "El telefono ha de ser numerico")
-	@Size(min=9,max=9,message = "El telefono debe de tener 9 digitos")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.numero ,message = Patrones.menNumero)
+	@Size(min=9,max=9,message = Patrones.menTelefono)
 	private String telefono;
 
 	//Datos de usuario
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	@Size(min=3)
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "El usuario no puede contener caracteres especiales")
+	@Pattern(regexp = Patrones.usuario ,message = Patrones.menUsuario)
 	private String usuario;
-	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraseña no puede contener caracteres especiales")
+	@Size(min=4,max=8,message = Patrones.menContrasenia)
+	@Pattern(regexp = Patrones.usuario ,message = Patrones.menUsuario)
 	private String contrasenia;
-	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraseña no puede contener caracteres especiales")
+	@Size(min=4,max=8,message = Patrones.menContrasenia)
+	@Pattern(regexp = Patrones.usuario ,message = Patrones.menUsuario)
 	private String contraseniaRep;
 
 	//Datos de paciente
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "La direccion no puede contener caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.direccion ,message = Patrones.menDireccion)
 	private String direccion;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$*",message = "La ciudad no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String ciudad;
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[0-9]*",message = "El codigo postal ha de ser numerico")
-	@Size(min=5,max=5,message="El codigo postal ha de tener 5 digitos")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.numero ,message = Patrones.numero)
+	@Size(min=5,max=5,message=Patrones.menCodPostal)
 	private String codPostal;
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String provincia;
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String comAutonoma;
 	
 	private long farmacia;
 
 	//forma de pago(0=paypal ,1=tarjeta, 2= contrareembolso)
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String formaPago;
 
 	//datos tarjeta (si forma de pago es tarjeta)
-	@Pattern(regexp = "[0-9]*",message = "El nº de tarjeta ha de ser numerico")
+	@Pattern(regexp = Patrones.numero ,message = Patrones.numero)
 	private String numTarjeta;
-	@Pattern(regexp = "[0-9]*",message = "El codigo de seguridad ha de ser numerico")
-	@Size(max=3,message="El codigo de seguridad ha de tener tres digitos")
+	@Pattern(regexp = Patrones.numero ,message = Patrones.numero)
+	@Size(max=3,message=Patrones.menCodSeg)
 	private String codSegTarjeta;
 	@DateTimeFormat(pattern="MM/dd/yyyy")
 	private String fechaCadTarjeta;

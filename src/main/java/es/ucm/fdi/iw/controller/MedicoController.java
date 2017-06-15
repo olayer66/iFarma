@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ import es.ucm.fdi.iw.model.Medico;
 import es.ucm.fdi.iw.model.Mensaje;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Tratamiento;
+import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.validation.CrearPaciente;
 import es.ucm.fdi.iw.validation.MensajeForm;
 import es.ucm.fdi.iw.validation.TratamientoForm;
@@ -39,7 +41,10 @@ public class MedicoController {
 
 	@GetMapping("")
 	public String indexAction() {
-		return "redirect:/medico/listado-pacientes";
+		if(estadoValido())
+			return "redirect:/medico/listado-pacientes";
+		else
+			return "/estadoDenegado";
 	}
 
 	@GetMapping({"/listado-pacientes"})
@@ -216,5 +221,16 @@ public class MedicoController {
 		}
 
 		return medico;
+	}
+	/*-----Control estado------*/
+	private boolean estadoValido()
+	{
+		Usuario usuario;
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		usuario=entityManager.createNamedQuery("Usuario.findByUsuario", Usuario.class).setParameter("usuario", auth.getName()).getSingleResult();
+		if(usuario.getEstado()!=1)
+			return false;
+		else
+			return true;
 	}
 }

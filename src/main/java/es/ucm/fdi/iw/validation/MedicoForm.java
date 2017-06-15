@@ -17,41 +17,41 @@ public class MedicoForm {
 	private final String role="MED";
 	
 	//Variables de entrada que validar	
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z ]+$",message = "El nombre no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String nombre;
 	
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z ]+$",message = "los apellidos no pueden contener numeros ni caracteres especiales")	
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String apellidos;
 	
-	@NotEmpty(message = "El campo esta vacio")
-	@Email(message = "La direccion email no es correcta")
+	@NotEmpty(message = Patrones.menVacio)
+	@Email(message = Patrones.menEmail)
 	private String email;
 	
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[0-9]*",message = "El telefono ha de ser numerico")
-	@Size(min=9,max=9,message = "El telefono debe de tener 9 digitos")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = "[0-9]*",message = Patrones.menNumero)
+	@Size(min=9,max=9,message = Patrones.menTelefono)
 	private String telefono;
 	
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "El usuario no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.usuario ,message = Patrones.menUsuario)
 	private String usuario;
 	
-	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraseña no puede contener caracteres especiales")
+	@Size(min=4,max=8,message = Patrones.menContrasenia)
+	@Pattern(regexp = Patrones.usuario ,message = Patrones.menUsuario)
 	private String contrasenia;
 	
-	@Size(min=4,max=8,message = "La contraseña debe de tener entre 4 y 8 caracteres alfanumericos")
-	@Pattern(regexp = "[A-Za-z0-9]*",message = "La contraseña no puede contener caracteres especiales")
+	@Size(min=4,max=8,message = Patrones.menContrasenia)
+	@Pattern(regexp = Patrones.usuario ,message = Patrones.menUsuario)
 	private String contraseniaRep;
 	
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "\\d{2}/\\d{2}/\\d{6}",message = "El numero de colegiado no es valido, debe de seguir el formato nn/mm/pppppp")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.numColegiado,message = Patrones.menNumColegiado)
 	private String numColMedico;
 	
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "^[a-zA-Z0-9 ]+$",message = "El centro de trabajo no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String centroTrabajo;
 	
 	//Devuelve un medico con los datos extraidos del form

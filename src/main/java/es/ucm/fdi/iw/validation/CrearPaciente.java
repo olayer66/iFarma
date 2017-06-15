@@ -1,29 +1,29 @@
 package es.ucm.fdi.iw.validation;
 
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.apache.log4j.Logger;
 
 public class CrearPaciente {
-	//logger
-	private static final Logger log = Logger.getLogger(Login.class);
 
 	//variables a validar
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[A-Za-z]*",message = "El nombre no puede contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String nombre;
 
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[A-Za-z\n]*",message = "los apellidos no pueden contener numeros ni caracteres especiales")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.textoEspecial ,message = Patrones.menTextoEspecial)
 	private String apellidos;
 
-	@NotEmpty(message = "El campo esta vacio")
-	@Email(message = "La direccion email no es correcta")
+	@NotEmpty(message = Patrones.menVacio)
+	@Email(message = Patrones.menEmail)
 	private String email;
 
-	@NotEmpty(message = "El campo esta vacio")
-	@Pattern(regexp = "[0-9]*",message = "El telefono ha de ser numerico")
+	@NotEmpty(message = Patrones.menVacio)
+	@Pattern(regexp = Patrones.numero ,message = Patrones.menNumero)
+	@Size(min=9,max=9,message = Patrones.menTelefono)
 	private String telefono;
 
 	//Getters y setters

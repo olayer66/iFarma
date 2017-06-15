@@ -2,10 +2,10 @@ package es.ucm.fdi.iw.validation;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class TomaForm {
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String tratamiento;
 
-	@NotEmpty(message = "El campo esta vacio")
+	@NotEmpty(message = Patrones.menVacio)
 	private String accion;
 
 	public String getTratamiento() {

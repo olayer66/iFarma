@@ -1,20 +1,20 @@
-INSERT INTO USUARIO VALUES(2, 'gordo porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',0, 'paco', 'MED', '91685336', 'medico')
-INSERT INTO USUARIO VALUES(1, 'gordo porras1', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com1',0, 'paco1', 'MED', '916853361', 'medico1')
-INSERT INTO USUARIO VALUES(5, 'Gordo Porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',1, 'Paco', 'PAC', '912574635', 'paciente')
-INSERT INTO USUARIO VALUES(4, 'Sanchez Perez', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'antonio@algo.com',1, 'Antonio', 'FAR', '916587441', 'farma')
-INSERT INTO USUARIO VALUES(8, 'gordo porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'paco@algo.com',1, 'paco', 'ADMIN', '91685336', 'admin')
-INSERT INTO USUARIO VALUES(14, 'Sancghez Perez', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'anton6io@algo.com',0, 'Anto6nio', 'FAR', '916527441', 'farma2')
+INSERT INTO USUARIO VALUES(2, 'Sanchez Garcia', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'fran@algo.com',0, 'Francisco', 'MED', '9165742887', 'medico')
+INSERT INTO USUARIO VALUES(1, 'Arias Navarro', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'ana@algo.com',0, 'Ana', 'MED', '9163524775', 'medico1')
+INSERT INTO USUARIO VALUES(5, 'Gordo Porras', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'sagrario@algo.com',1, 'Sagrario', 'PAC', '9163547895', 'paciente')
+INSERT INTO USUARIO VALUES(4, 'Sagres Pintada', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'antonio@algo.com',1, 'Antonio', 'FAR', '9168745882', 'farma')
+INSERT INTO USUARIO VALUES(8, 'Rendondo Anular', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'jesus@algo.com',1, 'Jesus', 'ADMIN', '9163745887', 'admin')
+INSERT INTO USUARIO VALUES(14, 'Gorka Irasola', '$2a$04$Uqd2b/WV0DHif1RdiXSPqeTkT79pT6ezLSQ6JJ6zosk0OXDwm9jjC', 'sara@algo.com',0, 'sara', 'FAR', '9163589775', 'farma2')
 
 INSERT INTO MEDICO VALUES ( 'C.S La alameda', '12/12/200057', 2)
 INSERT INTO MEDICO VALUES ( 'C.S La alameda', '12/12/200057', 1)
 INSERT INTO FARMACEUTICO VALUES ( '12/15/20007', 4)
 INSERT INTO FARMACEUTICO VALUES ( '12/15/20002', 14)
 
-INSERT INTO FARMACIA VALUES ( 1, 'Madrid', '28045', 'Madrid', 'calle falsa 1234', 1 , 'farmacia Bonita' , 'madrid', '916752335', 4)
-INSERT INTO FARMACIA VALUES ( 2, 'Pinto', '28475', 'Madrid', 'calle nueva 1234', 1 , 'farmacia Fea' , 'madrid', '916321447', 4)
-INSERT INTO FARMACIA VALUES ( 3, 'Madrid', '28045', 'Madrid', 'calle falsa 1234', 1 , 'farmacia Bonita' , 'madrid', '916752335', 14)
+INSERT INTO FARMACIA VALUES ( 1, 'Madrid', '28045', 'Madrid', 'calle Andrade 12', 1 , 'farmacia Andrade' , 'madrid', '916152335', 4)
+INSERT INTO FARMACIA VALUES ( 2, 'Pinto', '28475', 'Madrid', 'calle Santos 34', 1 , 'farmacia Pedro Piqueras' , 'madrid', '916321447', 4)
+INSERT INTO FARMACIA VALUES ( 3, 'Coslada', '28822', 'Madrid', 'calle Mejico 22', 1 , 'farmacia Mejico' , 'madrid', '916745886', 14)
 
-INSERT INTO PACIENTE VALUES ( 'Coslada', '28822',324, '011452247', 'Madrid', 'Calle falsa 1234', '05/19', 0, 47558226334,'Madrid', 5, 2, 2)
+INSERT INTO PACIENTE VALUES ( 'Coslada', '28822',324, '11452247', 'Madrid', 'Calle Mejico 31 8º A', '05/19', 0, 47558226334,'Madrid', 5, 2, 2)
 
 INSERT INTO MEDICAMENTO VALUES (6527634, '400 MG 30 SOBRES', 1, 'ZAMBON', 'ESPIDIFEN', 4.62);
 INSERT INTO MEDICAMENTO VALUES (7024491, '500 MG 20 COMPRIMIDOS', 1, 'BAYER', 'ASPIRINA', 3.36);

@@ -1,6 +1,5 @@
 package es.ucm.fdi.iw.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,10 +29,8 @@ import es.ucm.fdi.iw.model.Farmacia;
 import es.ucm.fdi.iw.model.Medicamento;
 import es.ucm.fdi.iw.model.Paciente;
 import es.ucm.fdi.iw.model.Pedidos;
-import es.ucm.fdi.iw.model.Tratamiento;
 import es.ucm.fdi.iw.model.Usuario;
 import es.ucm.fdi.iw.validation.StockForm;
-import es.ucm.fdi.iw.validation.TratamientoForm;
 
 
 @Controller
